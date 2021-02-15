@@ -1,13 +1,15 @@
 # webapp12
 
 **FASE 0**
-1.Ideas
+1. Ideas
 
-2.Elementos
+2. Elementos
 
- -Perfil
- -Foto
- -Likes?
+ - Perfil
+ 
+ - Foto
+ 
+ - Likes?
  
  __Usuarios y empresas__
  
