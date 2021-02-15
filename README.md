@@ -4,6 +4,7 @@
 1.Ideas
 
 2.Elementos
+
  -Perfil
  -Foto
  -Likes?
