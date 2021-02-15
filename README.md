@@ -2,6 +2,7 @@
 
 **FASE 0**
 1.Ideas
+
 2.Elementos
  -Perfil
  -Foto
@@ -9,4 +10,4 @@
  
  __Usuarios y empresas__
  
- **####Fase1**
+ ####Fase1
