@@ -24,10 +24,10 @@ https://trello.com/b/cdL2Eo7t/daw-g12
 
 ### Entidades
 
-Usuarios
-Post
-Producto
-Mensaje
+* Usuarios
+* Post
+* Producto
+* Mensaje
 
 ### Permisos de los usuarios
 
@@ -35,14 +35,14 @@ Los usuarios pueden registrarse, postear, poner a la venta productos y mandar me
 
 ### Imágenes
 
-Los usuarios registrados podrán establecer una imagen de perfil.
-Los usuarios podrán subir imagenes a los post y a los productos en venta.
+* Los usuarios registrados podrán establecer una imagen de perfil.
+* Los usuarios podrán subir imagenes a los post y a los productos en venta.
 
 ### Tecnología complementaria
 
-Envío de correos a los usuarios.
-Creación de usuario y login con Google, Facebook o Twitter.
-Algoritmo de filtrado y de recomendados.
+* Envío de correos a los usuarios.
+* Creación de usuario y login con Google, Facebook o Twitter.
+* Algoritmo de filtrado y de recomendados.
 
 # Fase 0
 
