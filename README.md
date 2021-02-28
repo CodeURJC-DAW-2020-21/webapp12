@@ -73,6 +73,11 @@ de la compañia a si como sus productos.
 
 ![image](https://user-images.githubusercontent.com/61882320/109435792-7ffea580-7a1c-11eb-923a-3b65503e8444.png)
 
+Profiles- En esta pantalla se muestran todos los perfiles de los usuarios de la pagina ademas de poder darles "like" o enivarles un mensaje
+![image](https://user-images.githubusercontent.com/39275798/109435879-fbf8ed80-7a1c-11eb-9a59-c4d206b898b7.png)
+
+Companies- En esta pantalla se muestran todos los perfiles de las compañias de la pagina ademas de poder darles "like" o enivarles un mensaje
+![image](https://user-images.githubusercontent.com/39275798/109435873-f56a7600-7a1c-11eb-8018-5cbff0f2b6c0.png)
 
 ### Diagrama de navegación
 
