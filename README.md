@@ -50,9 +50,9 @@ Los usuarios pueden registrarse, postear, poner a la venta productos y mandar me
 # Fase 1
 
 ### Capturas de pantalla
-Store
+Store- En esta pantalla permitirá al usuario ver todos los productos que están a la venta así como aplicar una serie de filtros para una busqueda más concreta de los productos que desea el usuario.
 ![store](https://user-images.githubusercontent.com/63242688/109434197-6bb6aa80-7a14-11eb-8c22-5ab0df0c10f5.PNG)
-Profile-Feed
+Profile-Feed- En esta pantalla permite al usuario logueado poder cambiar algunos aspectos de su perfil como por ejemplo su foto de perfil, encabezado o cambiar la información que se encuentra en su perfil.
 ![profile-feed](https://user-images.githubusercontent.com/63242688/109434248-a91b3800-7a14-11eb-8597-f6fa0574b82a.PNG)
 
 
