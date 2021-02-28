@@ -55,7 +55,17 @@ Store- En esta pantalla permitirá al usuario ver todos los productos que están
 Profile-Feed- En esta pantalla permite al usuario logueado poder cambiar algunos aspectos de su perfil como por ejemplo su foto de perfil, encabezado o cambiar la información que se encuentra en su perfil.
 ![profile-feed](https://user-images.githubusercontent.com/63242688/109434248-a91b3800-7a14-11eb-8597-f6fa0574b82a.PNG)
 
+Messages- En esta pantalla se permitirá al usuario ver las notificaciones de los mensajes de los distintos perfiles, así como poder responderlos o rechazarlos.
+![image](https://user-images.githubusercontent.com/58060461/109435663-c1db1c00-7a1b-11eb-8f7d-a60eff0c89ea.png)
 
+User Profile Settings- En estas pantallas podemos apreciar las distintas funcionalidades y opciones que tenemos a la hora de modificar nuestros datos de perfil y de la cuenta.
+![image](https://user-images.githubusercontent.com/58060461/109435693-f5b64180-7a1b-11eb-9bd9-3d78cad5c89e.png)
+
+![image](https://user-images.githubusercontent.com/58060461/109435695-fcdd4f80-7a1b-11eb-9c94-58eab0d14f80.png)
+
+![image](https://user-images.githubusercontent.com/58060461/109435699-01a20380-7a1c-11eb-876c-f60f5486f996.png)
+
+![image](https://user-images.githubusercontent.com/58060461/109435701-06ff4e00-7a1c-11eb-933b-9972d277a52d.png)
 
 ### Diagrama de navegación
 
