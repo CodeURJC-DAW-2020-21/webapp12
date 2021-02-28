@@ -53,7 +53,8 @@ Los usuarios pueden registrarse, postear, poner a la venta productos y mandar me
 Store
 ![store](https://user-images.githubusercontent.com/63242688/109434197-6bb6aa80-7a14-11eb-8c22-5ab0df0c10f5.PNG)
 Profile-Feed
-![profile-feed](https://user-images.githubusercontent.com/63242688/109434202-6f4a3180-7a14-11eb-9a11-fd7d61254902.PNG)
+![profile-feed](https://user-images.githubusercontent.com/63242688/109434248-a91b3800-7a14-11eb-8597-f6fa0574b82a.PNG)
+
 
 
 ### Diagrama de navegación
