@@ -264,7 +264,7 @@ nav ul li:hover > ul,
 header {
 	float: left;
 	width: 100%;
-	background-color: #e44d3a;
+	background-color: #E3584D;
 }
 .header-data {
 	float: left;
@@ -1093,6 +1093,7 @@ main {
 .usy-name {
 	float: left;
 	margin-left: 10px;
+	margin-top: 16px;
 }
 .usy-name h3 {
 	color: #000000;
@@ -1961,7 +1962,7 @@ select {
 /* ================= sign-in ================ */
 
 .sign-in {
-	background-color: #e75348;
+	background-color: #E3584D;
 }
 .sign-in-page {
 	float: left;
@@ -2547,6 +2548,24 @@ footer {
 	text-align: center;
 	margin-top: -40px;
 }
+
+.user-post-icon {
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+
+}
+.user-post-icon > img {
+	float: none;
+	border: 5px solid #fff;
+	-webkit-border-radius: 80px;
+	-moz-border-radius: 80px;
+	-ms-border-radius: 80px;
+	-o-border-radius: 80px;
+	border-radius: 80px;
+	width: 100%;
+}
+
 .user-pro-img {
 	float: left;
 	width: 100%;
