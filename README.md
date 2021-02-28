@@ -67,6 +67,13 @@ User Profile Settings- En estas pantallas podemos apreciar las distintas funcion
 
 ![image](https://user-images.githubusercontent.com/58060461/109435701-06ff4e00-7a1c-11eb-933b-9972d277a52d.png)
 
+Company Profile- En esta pantalla podemos observar el perfil de la compañia elegida en la anterior ventana:"Company". En este perfil se observa la información
+de la compañia a si como sus productos.
+![image](https://user-images.githubusercontent.com/61882320/109435780-77a66a80-7a1c-11eb-9a77-4f2620ddbfee.png)
+
+![image](https://user-images.githubusercontent.com/61882320/109435792-7ffea580-7a1c-11eb-923a-3b65503e8444.png)
+
+
 ### Diagrama de navegación
 
 
