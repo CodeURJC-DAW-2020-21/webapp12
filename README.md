@@ -79,6 +79,16 @@ Profiles- En esta pantalla se muestran todos los perfiles de los usuarios de la 
 Companies- En esta pantalla se muestran todos los perfiles de las compañias de la pagina ademas de poder darles "like" o enivarles un mensaje
 ![image](https://user-images.githubusercontent.com/39275798/109435873-f56a7600-7a1c-11eb-8018-5cbff0f2b6c0.png)
 
+sign-in- En esta pantalla se puede realizar el login con el usuario y contraseña.
+![image](https://user-images.githubusercontent.com/45694504/109436231-d7057a00-7a1e-11eb-8164-70694070b9ca.png)
+
+sign-up- En esta pantalla se puede realizar el registro del usuario o empresa según se elija.
+![image](https://user-images.githubusercontent.com/45694504/109436301-2481e700-7a1f-11eb-8d8d-4a003bc5d728.png)
+
+index- En esta pantalla veremos el perfil basico del usuario o la empresa, y algunos post y y post de compras que se muestren. Desde esta pantalla crearemos los post y los post de compras.
+![image](https://user-images.githubusercontent.com/45694504/109436400-a4a84c80-7a1f-11eb-90a9-fbd1bade9614.png)
+
+
 ### Diagrama de navegación
 
 
