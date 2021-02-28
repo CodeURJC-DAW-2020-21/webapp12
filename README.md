@@ -1,4 +1,5 @@
 # webapp12
+# Fase 0
 
 ### Nombre de la aplicación web
 
@@ -44,9 +45,16 @@ Los usuarios pueden registrarse, postear, poner a la venta productos y mandar me
 * Creación de usuario y login con Google, Facebook o Twitter.
 * Algoritmo de filtrado y de recomendados.
 
-# Fase 0
+
 
 # Fase 1
+
+### Capturas de pantalla
+
+
+### Diagrama de navegación
+
+
 
 # Fase 2
 
