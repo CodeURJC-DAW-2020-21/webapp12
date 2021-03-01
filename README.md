@@ -91,7 +91,9 @@ index- En esta pantalla veremos el perfil basico del usuario o la empresa, y alg
 
 
 ### Diagrama de navegación
-![image](https://user-images.githubusercontent.com/61882320/109483001-fa601180-7a7e-11eb-8e96-94c3e0001723.png)
+![image](https://user-images.githubusercontent.com/61882320/109484014-321b8900-7a80-11eb-8e62-035badc29783.png)
+
+
 
 
 
