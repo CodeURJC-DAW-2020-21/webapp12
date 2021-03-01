@@ -17,7 +17,7 @@ Es una aplicación red social en la que se puede comprar y vender todo tipo de s
 | Enrique Martín Santorcaz	| e.martins.2018@alumnos.urjc.es	| kikmar |
 | Cristian Nicu Terci	| cn.terci.2018@alumno.urjc.es	| Cette88 |
 | Guillermo Martín García	| g.martingarcia@alumnos.urjc.es	| Wilhelm-mar |
-| Guillermo Martín García	| aj.pajuelo.2018@alumnos.urjc.es	| Antoniopc21z |
+| Antonio Jesus Pajuelo Chavez	| aj.pajuelo.2018@alumnos.urjc.es	| Antoniopc21z |
 
 
 ### Trello
@@ -91,7 +91,8 @@ index- En esta pantalla veremos el perfil basico del usuario o la empresa, y alg
 
 
 ### Diagrama de navegación
-![image](https://user-images.githubusercontent.com/61882320/109436447-db7e6280-7a1f-11eb-926c-05dd9fe70e6a.png)
+![image](https://user-images.githubusercontent.com/61882320/109483001-fa601180-7a7e-11eb-8e96-94c3e0001723.png)
+
 
 
 
