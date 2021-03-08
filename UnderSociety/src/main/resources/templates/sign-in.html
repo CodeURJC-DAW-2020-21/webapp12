@@ -47,7 +47,7 @@
 								<div class="sign_in_sec current" id="tab-1">
 									
 									<h3>Sign in</h3>
-									<form>
+									<form action="/sign-in" method="POST">
 										<div class="row">
 											<div class="col-lg-12 no-pdd">
 												<div class="sn-field">
@@ -82,39 +82,36 @@
 								<div class="sign_in_sec" id="tab-2">
 									<div class="signup-tab">
 										<i class="fa fa-long-arrow-left"></i>
-										<h2>johndoe@example.com</h2>
+
 										<ul>
 											<li data-tab="tab-3" class="current"><a href="#" title="">User</a></li>
 											<li data-tab="tab-4"><a href="#" title="">Company</a></li>
 										</ul>
 									</div><!--signup-tab end-->	
 									<div class="dff-tab current" id="tab-3">
-										<form>
+										<form action="/registerUser" method="POST">
 											<div class="row">
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="name" placeholder="Full Name">
+														<input type="text" placeholder="johndoe@example.com" name="email" />
 														<i class="la la-user"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="country" placeholder="Country">
+														<input type="text" name="user_name" placeholder="Username">
+														<i class="la la-user"></i>
+													</div>
+												</div>
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="text" name="name" placeholder="Fullname (optional)">
 														<i class="la la-globe"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<select>
-															<option>Category</option>
-														</select>
-														<i class="la la-dropbox"></i>
-														<span><i class="fa fa-ellipsis-h"></i></span>
-													</div>
-												</div>
-												<div class="col-lg-12 no-pdd">
-													<div class="sn-field">
-														<input type="password" name="password" placeholder="Password">
+														<input type="password" name="pass" placeholder="Password">
 														<i class="la la-lock"></i>
 													</div>
 												</div>
@@ -142,23 +139,23 @@
 										</form>
 									</div><!--dff-tab end-->
 									<div class="dff-tab" id="tab-4">
-										<form>
+										<form action="/registerCompany" method="POST">
 											<div class="row">
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="company-name" placeholder="Company Name">
+														<input type="text" name="user_name" placeholder="Company Name">
 														<i class="la la-building"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="country" placeholder="Country">
+														<input type="text" name="name" placeholder="Fullname (optional)">
 														<i class="la la-globe"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="password" name="password" placeholder="Password">
+														<input type="password" name="pass" placeholder="Password">
 														<i class="la la-lock"></i>
 													</div>
 												</div>

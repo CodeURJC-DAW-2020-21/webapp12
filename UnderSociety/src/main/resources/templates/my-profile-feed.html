@@ -31,7 +31,7 @@
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
-						<a href="index.html" title=""><img src="images/logo.png" alt=""></a>
+						<a href="index" title=""><img src="images/logo.png" alt=""></a>
 					</div><!--logo end-->
 					<div class="search-bar">
 						<form>
@@ -42,23 +42,23 @@
 					<nav>
 						<ul>
 							<li>
-								<a href="index.html" title="">
+								<a href="index" title="">
 									<span><img src="images/icon1.png" alt=""></span>
 									Home
 								</a>
 							</li>
 							<li>
-								<a href="profiles.html" title="">
+								<a href="profiles" title="">
 									<span><img src="images/icon4.png" alt=""></span>
 									Profiles
 								</a>
 								<ul>
-									<li><a href="profiles.html" title="">User Profile</a></li>
-									<li><a href="companies.html" title="">Company Profile</a></li>
+									<li><a href="profiles" title="">User Profile</a></li>
+									<li><a href="companies" title="">Company Profile</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="store.html" title="">
+								<a href="store" title="">
 									<span><img src="images/icon5.png" alt=""></span>
 									Store
 								</a>
@@ -79,7 +79,7 @@
 												  <img src="images/resources/ny-img1.png" alt="">
 											  </div>
 											  <div class="notification-info">
-												  <h3><a href="messages.html" title="">Jassica William</a> </h3>
+												  <h3><a href="messages" title="">Jassica William</a> </h3>
 												  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
 												  <span>2 min ago</span>
 											  </div><!--notification-info -->
@@ -89,7 +89,7 @@
 												  <img src="images/resources/ny-img2.png" alt="">
 											  </div>
 											  <div class="notification-info">
-												  <h3><a href="messages.html" title="">Jassica William</a></h3>
+												  <h3><a href="messages" title="">Jassica William</a></h3>
 												  <p>Lorem ipsum dolor sit amet.</p>
 												  <span>2 min ago</span>
 											  </div><!--notification-info -->
@@ -99,13 +99,13 @@
 												  <img src="images/resources/ny-img3.png" alt="">
 											  </div>
 											  <div class="notification-info">
-												  <h3><a href="messages.html" title="">Jassica William</a></h3>
+												  <h3><a href="messages" title="">Jassica William</a></h3>
 												  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
 												  <span>2 min ago</span>
 											  </div><!--notification-info -->
 										  </div>
 										  <div class="view-all-nots">
-											  <a href="messages.html" title="">View All Messsages</a>
+											  <a href="messages" title="">View All Messsages</a>
 										  </div>
 									</div><!--nott-list end-->
 								</div><!--notification-box end-->
@@ -152,25 +152,30 @@
 							</div><!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="profile-account-setting" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
-							<h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+							<h3 class="tc"><a href="sign-in" title="">Logout</a></h3>
 						</div><!--user-account-settingss end-->
 					</div>
 				</div><!--header-data end-->
 			</div>
 		</header><!--header end-->	
 
-
+		
 		<section class="cover-sec">
-			<img src="images/servicio-multimamntenimiemto-edificios-752x369.jpg" alt="">
-			<a href="#" title=""><i class="fa fa-camera"></i> Change Image</a>
+			<form class="cover-sec" method="POST" action="/0/image" enctype="multipart/form-data">
+				<img src="images/servicio-multimamntenimiemto-edificios-752x369.jpg" alt="">
+				<a>
+					<i class="fa fa-camera"></i>
+					<label for="files" class="btn">Changed Image</label>
+  					<input id="files" style="visibility:hidden; width: 7px; height: 5px;" type="file" name="imageFile" accept=".jpg">
+					<input type="submit" value="Save">
+				</a>
+			</form>
 		</section>
-
-
 		<main>
 			<div class="main-section">
 				<div class="container">

@@ -1,0 +1,60 @@
+package undersociety.configurations;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import undersociety.services.RepositoryUserDetailsService;
+
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	public RepositoryUserDetailsService userDetailServices;
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(10);
+	}
+
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		auth.userDetailsService(userDetailServices).passwordEncoder(passwordEncoder());
+	 }
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		
+		 http.authorizeRequests().antMatchers( "/css/**").permitAll();
+		 http.authorizeRequests().antMatchers( "/js/**").permitAll();
+		 http.authorizeRequests().antMatchers( "/lib/**").permitAll();
+		 http.authorizeRequests().antMatchers( "/images/**").permitAll();
+		 http.authorizeRequests().antMatchers( "/fonts/**").permitAll();
+		 http.authorizeRequests().antMatchers("/sign-in").permitAll();
+		 http.authorizeRequests().antMatchers("/registerUser").permitAll();
+		 
+		 
+		 http.authorizeRequests().anyRequest().authenticated();
+		 
+		 http.formLogin().loginPage("/sign-in");
+		 http.formLogin().usernameParameter("username");
+		 http.formLogin().passwordParameter("password");
+		 http.formLogin().defaultSuccessUrl("/index");
+		 http.formLogin().failureUrl("/sign-in");
+
+		 http.logout().logoutUrl("/logout");
+		 http.logout().logoutSuccessUrl("/sign-in");
+		 
+		 // Disable CSRF at the moment
+		 http.csrf().disable();
+	}
+
+}

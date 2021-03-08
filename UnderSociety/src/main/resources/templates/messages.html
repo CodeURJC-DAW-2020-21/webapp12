@@ -17,10 +17,19 @@
 <link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/responsive.css">
+<link href="css/style.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+<!--    libs for stomp and sockjs-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<!--    end libs for stomp and sockjs-->
 </head>
 
 
-<body>
+<body onload="connectToChat('{{name}}')"> 
 	
 
 	<div class="wrapper">
@@ -31,7 +40,7 @@
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
-						<a href="index.html" title=""><img src="images/logo.png" alt=""></a>
+						<a href="index" title=""><img src="images/logo.png" alt=""></a>
 					</div><!--logo end-->
 					<div class="search-bar">
 						<form>
@@ -42,23 +51,23 @@
 					<nav>
 						<ul>
 							<li>
-								<a href="index.html" title="">
+								<a href="index" title="">
 									<span><img src="images/icon1.png" alt=""></span>
 									Home
 								</a>
 							</li>
 							<li>
-								<a href="profiles.html" title="">
+								<a href="profiles" title="">
 									<span><img src="images/icon4.png" alt=""></span>
 									Profiles
 								</a>
 								<ul>
-									<li><a href="profiles.html" title="">User Profile</a></li>
-									<li><a href="companies.html" title="">Company Profile</a></li>
+									<li><a href="profiles" title="">User Profile</a></li>
+									<li><a href="companies" title="">Company Profile</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="jobs.html" title="">
+								<a href="jobs" title="">
 									<span><img src="images/icon5.png" alt=""></span>
 									Store
 								</a>
@@ -79,7 +88,7 @@
 												  <img src="images/resources/ny-img1.png" alt="">
 											  </div>
 											  <div class="notification-info">
-												  <h3><a href="messages.html" title="">Jassica William</a> </h3>
+												  <h3><a href="messages" title="">Jassica William</a> </h3>
 												  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
 												  <span>2 min ago</span>
 											  </div><!--notification-info -->
@@ -89,7 +98,7 @@
 												  <img src="images/resources/ny-img2.png" alt="">
 											  </div>
 											  <div class="notification-info">
-												  <h3><a href="messages.html" title="">Jassica William</a></h3>
+												  <h3><a href="messages" title="">Jassica William</a></h3>
 												  <p>Lorem ipsum dolor sit amet.</p>
 												  <span>2 min ago</span>
 											  </div><!--notification-info -->
@@ -99,13 +108,13 @@
 												  <img src="images/resources/ny-img3.png" alt="">
 											  </div>
 											  <div class="notification-info">
-												  <h3><a href="messages.html" title="">Jassica William</a></h3>
+												  <h3><a href="messages" title="">Jassica William</a></h3>
 												  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
 												  <span>2 min ago</span>
 											  </div><!--notification-info -->
 										  </div>
 										  <div class="view-all-nots">
-											  <a href="messages.html" title="">View All Messsages</a>
+											  <a href="messages" title="">View All Messsages</a>
 										  </div>
 									</div><!--nott-list end-->
 								</div><!--notification-box end-->
@@ -118,30 +127,24 @@
 					<div class="user-account">
 						<div class="user-info">
 							<img src="http://via.placeholder.com/30x30" alt="">
-							<a href="#" title="">John</a>
+							<a id="userName" href="#">{{name}}</a>
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss">
 							<h3>Online Status</h3>
 							<ul class="on-off-status">
+			
 								<li>
 									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c5">
-										<label for="c5">
-											<span></span>
-										</label>
-										<small>Online</small>
+										<button id="connect" class="btn btn-default" type="submit">Connect</button>
 									</div>
 								</li>
 								<li>
 									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c6">
-										<label for="c6">
-											<span></span>
-										</label>
-										<small>Offline</small>
+										<button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
 									</div>
 								</li>
+
 							</ul>
 							<h3>Custom Status</h3>
 							<div class="search_form">
@@ -152,13 +155,13 @@
 							</div><!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="my-profile-feed.html" title="">Profile Setting</a></li>
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="my-profile-feed" title="">Profile Setting</a></li>
+								<li><a href="profile-account-setting" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
-							<h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+							<h3 class="tc"><a href="sign-in" title="">Logout</a></h3>
 						</div><!--user-account-settingss end-->
 					</div>
 				</div><!--header-data end-->
@@ -168,51 +171,47 @@
 
 
 		<section class="profile-account-setting">
-			<div class="container">
-				<div class="account-tabs-setting">
-					<div class="row">	
-						<div class="col-lg-9">
-							<div class="tab-content" id="nav-tabContent">
-								<div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
-									<div class="acc-setting">
-										<h3>Messages</h3>
-										<form>
-											<div class="notbar">
-												<h4>Mark Hill</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id</p>
-												<div class="toggle-btn">
-													
-												</div>
-											</div><!--notbar end-->
-											<div class="notbar">
-												<h4>Emily</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id</p>
-												<div class="toggle-btn">
-													
-												</div>
-											</div><!--notbar end-->
-											<div class="notbar">
-												<h4>Ghost S.A</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id</p>
-												<div class="toggle-btn">
-													
-												</div>
-											</div><!--notbar end-->
-											<div class="save-stngs">
-												<ul>
-													<li><button type="submit">Respond</button></li>
-													<li><button type="submit">Refuse</button></li>
-												</ul>
-											</div><!--save-stngs end-->
-										</form>
-									</div><!--acc-setting end-->
-								</div>						  
-							  	</div>
-							</div>
+			<div class="containerchat clearfix">
+				<div class="people-list" id="people-list">
+					<ul class="list" id="usersList">
+			
+			
+					</ul>
+				</div>
+			
+				<div class="chat">
+					<div class="chat-header clearfix">
+						<img alt="avatar" height="55px"
+							 src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg"
+							 width="55px"/>
+			
+						<div class="chat-about">
+							<div class="chat-with" id="selectedUserId"></div>
+							<div class="chat-num-messages"></div>
 						</div>
-					</div>
-				</div><!--account-tabs-setting end-->
-			</div>
+						<i class="fa fa-star"></i>
+					</div> <!-- end chat-header -->
+			
+					<div class="chat-history">
+						<ul>
+			
+						</ul>
+			
+					</div> <!-- end chat-history -->
+			
+					<div class="chat-message clearfix">
+						<textarea id="message-to-send" name="message-to-send" placeholder="Type your message" rows="3"></textarea>
+			
+						<i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+						<i class="fa fa-file-image-o"></i>
+			
+						<button id="sendBtn">Send</button>
+			
+					</div> <!-- end chat-message -->
+			
+				</div> <!-- end chat -->
+			
+			</div> <!-- end container -->
 		</section>
 
 
@@ -249,6 +248,31 @@
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/chat.js"></script>
 
+	<script id="message-template" type="text/x-handlebars-template">
+		<li class="clearfix">
+			<div class="message-data align-right">
+				<span class="message-data-time">{{time}}, Today</span> &nbsp; &nbsp;
+				<span class="message-data-name">You</span> <i class="fa fa-circle me"></i>
+			</div>
+			<div class="message other-message float-right">
+				{{messageOutput}}
+			</div>
+		</li>
+	</script>
+
+	<script id="message-response-template" type="text/x-handlebars-template">
+		<li>
+			<div class="message-data">
+				<span class="message-data-name"><i class="fa fa-circle online"></i> {{userName}}</span>
+				<span class="message-data-time">{{time}}, Today</span>
+			</div>
+			<div class="message my-message">
+				{{response}}
+			</div>
+		</li>
+</script>
 </body>
 </html>
