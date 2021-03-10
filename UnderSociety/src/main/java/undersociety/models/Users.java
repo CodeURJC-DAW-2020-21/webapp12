@@ -43,8 +43,13 @@ public class Users {
 	public int getId_users() {
 		return idusers;
 	}
+<<<<<<< develop
 	public void setId_users(int id_users) {
 		this.idusers = id_users;
+=======
+	public void setId_users(int idusers) {
+		this.idusers = idusers;
+>>>>>>> Implemented chat function
 	}
 	public String getEmail() {
 		return email;

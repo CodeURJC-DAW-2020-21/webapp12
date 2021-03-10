@@ -73,7 +73,11 @@ public class NavigationController {
 	
 	@GetMapping("/messages")
 	private String getMessages(Model model,HttpServletRequest request) {
+<<<<<<< develop
 		model.addAttribute("name",request.getUserPrincipal().getName());
+=======
+		model.addAttribute("username",request.getUserPrincipal().getName());
+>>>>>>> Implemented chat function
 		model.addAttribute("time","{{time}}");
 		model.addAttribute("messageOutput","{{messageOutput}}");
 		model.addAttribute("userName","{{userName}}");
