@@ -26,6 +26,10 @@ public class PostsController {
 	
 	@GetMapping("/my-profile-feed")
 	private String getMyProfileFeed(Model model, HttpServletRequest request) {
+<<<<<<< develop
+=======
+		model.addAttribute("username",request.getUserPrincipal().getName());
+>>>>>>> fixes to posts and product
 		List<Post> p = posts.findAll();
 		model.addAttribute("posts",p);
 		model.addAttribute("username",request.getUserPrincipal().getName());
@@ -34,6 +38,7 @@ public class PostsController {
 	
 	@PostMapping("/uploadPost")
 	private String uploadPost(Model model, HttpServletRequest request,Post post) {
+<<<<<<< develop
 		System.out.println(post.getTitle());
 		System.out.println(post.getDescription());
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
@@ -41,6 +46,14 @@ public class PostsController {
 		post.setId_user(s);
 		posts.save(post);
 		System.out.println(post.getId_user().getId_users());
+=======
+		model.addAttribute("username",request.getUserPrincipal().getName());
+		System.out.println(post.getTitle());
+		System.out.println(post.getDescription());
+		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
+		post.setIduser(s);
+		posts.save(post);
+>>>>>>> fixes to posts and product
 		return "index";
 	}
 }

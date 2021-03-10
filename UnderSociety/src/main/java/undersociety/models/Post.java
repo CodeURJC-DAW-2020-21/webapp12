@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< develop
+=======
+import javax.persistence.JoinColumn;
+>>>>>>> fixes to posts and product
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,6 +19,7 @@ public class Post {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< develop
 	private int id_post;
 	@OneToOne
 	private Users id_user;
@@ -31,6 +36,25 @@ public class Post {
 	}
 	public void setId_user(Users id_user) {
 		this.id_user = id_user;
+=======
+	private int idpost;
+	@OneToOne
+	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
+	private Users iduser;
+	private String title;
+	private String description;
+	public int getIdpost() {
+		return idpost;
+	}
+	public void setIdpost(int idpost) {
+		this.idpost = idpost;
+	}
+	public Users getIduser() {
+		return iduser;
+	}
+	public void setIduser(Users iduser) {
+		this.iduser = iduser;
+>>>>>>> fixes to posts and product
 	}
 	public String getTitle() {
 		return title;
