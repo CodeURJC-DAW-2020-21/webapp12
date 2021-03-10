@@ -40,7 +40,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers( "/fonts/**").permitAll();
 		 http.authorizeRequests().antMatchers("/sign-in").permitAll();
 		 http.authorizeRequests().antMatchers("/registerUser").permitAll();
+<<<<<<< develop
 		 
+=======
+		 http.authorizeRequests().antMatchers("/forgotPassword").permitAll();
+		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
+
+>>>>>>> Implemented Email functions in App
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
 		 
