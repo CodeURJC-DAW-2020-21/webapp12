@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Users {
 	@Id
 	@Column
-	private int id_users;
+	private int idusers;
 	@Column
 	private String email;
 	@Column
@@ -41,10 +41,10 @@ public class Users {
 	private String link_instagram;
 	
 	public int getId_users() {
-		return id_users;
+		return idusers;
 	}
 	public void setId_users(int id_users) {
-		this.id_users = id_users;
+		this.idusers = id_users;
 	}
 	public String getEmail() {
 		return email;
