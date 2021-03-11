@@ -3,12 +3,14 @@ package undersociety.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import undersociety.models.Users;
 import undersociety.services.UserService;
@@ -16,7 +18,7 @@ import undersociety.services.UserService;
 
 @Controller
 @CrossOrigin
-public class NavigationController {
+public class NavigationController implements ErrorController{
 	
 	@Autowired
 	private PasswordEncoder encoder;
@@ -55,6 +57,7 @@ public class NavigationController {
 	
 	@GetMapping("/index")
 	private String getIndex(Model model,HttpServletRequest request) {
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "index";
 	}
@@ -120,5 +123,31 @@ public class NavigationController {
 		return "forgotPassword";
 	}
 	
+<<<<<<< develop
 >>>>>>> fixes to posts and product
+=======
+	@GetMapping("/admin")
+	private String getAdminpage(Model model) {
+		return "admin";
+	}
+	
+	@GetMapping("/errorpage")
+	private String errorpage(Model model) {
+		return "error";
+	}
+	
+	 @RequestMapping("/error")
+	    public String handleError() {
+	        //do something like logging
+	        return "error";
+	 }
+
+	
+	@Override
+	public String getErrorPath() {
+		// TODO Auto-generated method stub
+		return "error";
+	}
+	
+>>>>>>> Posts and Products forms
 }

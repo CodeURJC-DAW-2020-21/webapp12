@@ -1,8 +1,6 @@
 package undersociety.controller;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +16,6 @@ import undersociety.models.Message;
 import undersociety.models.MessageModel;
 import undersociety.models.Users;
 import undersociety.repositories.MessageRepository;
-import undersociety.repositories.PostRepository;
 import undersociety.services.UserService;
 
 

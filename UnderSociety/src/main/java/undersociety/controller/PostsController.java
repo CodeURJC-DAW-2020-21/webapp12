@@ -36,7 +36,7 @@ public class PostsController {
 		return "my-profile-feed";
 	}
 	
-	@PostMapping("/uploadPost")
+	@PostMapping("/uploadPot")
 	private String uploadPost(Model model, HttpServletRequest request,Post post) {
 <<<<<<< develop
 		System.out.println(post.getTitle());

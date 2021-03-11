@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import undersociety.models.Roles;
 import undersociety.models.Users;
+import undersociety.repositories.RolesRepository;
 import undersociety.repositories.UserRepository;
 
 
@@ -19,12 +21,17 @@ import undersociety.repositories.UserRepository;
 public class RepositoryUserDetailsService implements UserDetailsService {
  @Autowired
  private UserRepository userRepository;
+ @Autowired
+ private RolesRepository rolesRepository;
  @Override
  public UserDetails loadUserByUsername(String username)
  throws UsernameNotFoundException {
 	 Users user =  (userRepository.findByusername(username).orElseThrow(() -> new UsernameNotFoundException("User not found")));
+	 List<Roles> r = rolesRepository.findByiduser(user);
 	 List<GrantedAuthority> roles = new ArrayList<>();
-	 roles.add(new SimpleGrantedAuthority("ROLE_USER"));
+	 for (Roles rol : r) {
+		 roles.add(new SimpleGrantedAuthority("ROLE_"+rol.getRol()));
+	}
 	 return new org.springframework.security.core.userdetails.User(user.getUser_name(), 
 	 user.getPass(), roles);
  }

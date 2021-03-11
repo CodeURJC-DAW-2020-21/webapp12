@@ -45,11 +45,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 =======
 		 http.authorizeRequests().antMatchers("/forgotPassword").permitAll();
 		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
+		 http.authorizeRequests().antMatchers("/errorpage").permitAll();
+		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
 
 >>>>>>> fixes to posts and product
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
-		 
+
 		 http.formLogin().loginPage("/sign-in");
 		 http.formLogin().usernameParameter("username");
 		 http.formLogin().passwordParameter("password");
