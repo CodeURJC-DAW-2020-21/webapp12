@@ -1,5 +1,6 @@
 package undersociety.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,16 @@ public class NavigationController implements ErrorController{
 	}
 	
 <<<<<<< develop
+<<<<<<< develop
 =======
+=======
+	@GetMapping("/my-profile-feed")
+	private String getMyProfileFeed(Model model, HttpServletRequest request) {
+		model.addAttribute("username",request.getUserPrincipal().getName());
+		return "myprofilefeed";
+	}
+	
+>>>>>>> Created all database models
 	@GetMapping("/forgotPassword")
 	private String getForgotPassword() {
 		return "forgotPassword";

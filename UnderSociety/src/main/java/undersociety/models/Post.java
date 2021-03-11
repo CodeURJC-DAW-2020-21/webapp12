@@ -1,6 +1,9 @@
 package undersociety.models;
 
 
+import java.sql.Blob;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,9 +11,15 @@ import javax.persistence.Id;
 <<<<<<< develop
 =======
 import javax.persistence.JoinColumn;
+<<<<<<< develop
 >>>>>>> fixes to posts and product
+=======
+import javax.persistence.Lob;
+>>>>>>> Created all database models
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -41,9 +50,13 @@ public class Post {
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
 	private Users iduser;
+	@Column
 	private String title;
+	@Column
 	private String description;
-	private String image0;
+	@Lob
+	@JsonIgnore
+	private Blob image;
 	
 	public int getIdpost() {
 		return idpost;
@@ -70,10 +83,20 @@ public class Post {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getImage0() {
-		return image0;
+	public Blob getImage() {
+		return image;
 	}
-	public void setImage0(String image0) {
-		this.image0 = image0;
+	public void setImage(Blob image) {
+		this.image = image;
+	}
+	
+	
+	public void view() {
+		System.out.println();
+		System.out.println(iduser);
+		System.out.println(title);
+		System.out.println(description);
+		System.out.println(image);
+		System.out.println();
 	}
 }

@@ -1,16 +1,14 @@
 package undersociety.controller;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.List;
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import undersociety.models.Post;
 import undersociety.models.Product;
+import undersociety.models.Tags;
 import undersociety.models.Users;
 import undersociety.repositories.PostRepository;
 import undersociety.repositories.ProductRepository;
@@ -28,7 +27,7 @@ import undersociety.services.UserService;
 public class PostsController {
 		
 	@Autowired
-	private PostRepository posts;
+	private PostRepository postsrepo;
 	
 	@Autowired
 	private TagsRepository tagsrepo;
@@ -39,6 +38,7 @@ public class PostsController {
 	@Autowired
 	private UserService userservice;
 	
+<<<<<<< develop
 	@GetMapping("/my-profile-feed")
 	private String getMyProfileFeed(Model model, HttpServletRequest request) {
 <<<<<<< develop
@@ -62,22 +62,33 @@ public class PostsController {
 		posts.save(post);
 		System.out.println(post.getId_user().getId_users());
 =======
+=======
+	
+	@PostMapping("/uploadPost")
+	private String uploadPost(Model model, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
+>>>>>>> Created all database models
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
-		System.out.println("image0: "+post.getImage0());
+		if(imag0 != null) {
+			post.setImage(BlobProxy.generateProxy(imag0.getInputStream(), imag0.getSize()));
+		}
 		post.setIduser(s);
+<<<<<<< develop
 <<<<<<< develop
 		posts.save(post);
 >>>>>>> fixes to posts and product
 =======
+=======
+		postsrepo.save(post);
+>>>>>>> Created all database models
 		return "index";
 	}
 	
 	@PostMapping("/uploadProduct")
-	private String uploadProduct(Model model, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2) throws IOException {
+	private String uploadProduct(Model model, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree) throws IOException {
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
-		URI location = fromCurrentRequest().build().toUri();
+		List<Tags> listag = tagsrepo.findAll();
 		if(imag0 != null) {
 			product.setImage0(BlobProxy.generateProxy(imag0.getInputStream(), imag0.getSize()));
 		}
@@ -88,8 +99,22 @@ public class PostsController {
 			product.setImage2(BlobProxy.generateProxy(imag2.getInputStream(), imag2.getSize()));
 		}
 		product.setIduser(s);
+<<<<<<< develop
 		product.view();
 >>>>>>> Porduct form
+=======
+		if(tag) {
+			product.setIdtag(listag.get(0));
+		}
+		if(tagtwo) {
+			product.setIdtagtwo(listag.get(1));		
+		}
+		if(tagthree) {
+			product.setIdtagthree(listag.get(2));
+		}
+		product.setStatus("in stock");
+		productrepo.save(product);
+>>>>>>> Created all database models
 		return "index";
 	}
 }
