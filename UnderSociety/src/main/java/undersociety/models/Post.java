@@ -43,6 +43,8 @@ public class Post {
 	private Users iduser;
 	private String title;
 	private String description;
+	private String image0;
+	
 	public int getIdpost() {
 		return idpost;
 	}
@@ -68,7 +70,10 @@ public class Post {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-		
+	public String getImage0() {
+		return image0;
+	}
+	public void setImage0(String image0) {
+		this.image0 = image0;
+	}
 }
