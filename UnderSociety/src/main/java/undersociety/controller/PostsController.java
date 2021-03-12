@@ -47,7 +47,7 @@ public class PostsController {
 	private UserService userservice;
 	
 	
-	@PostMapping("/uploadPost")
+	@PostMapping("/api/uploadPost")
 	private void uploadPost(Model model,HttpServletResponse response, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
@@ -56,10 +56,10 @@ public class PostsController {
 		}
 		post.setIduser(s);
 		postsrepo.save(post);
-		response.sendRedirect("index");
+		response.sendRedirect("/index");
 	}
 	
-	@PostMapping("/uploadProduct")
+	@PostMapping("/api/uploadProduct")
 	private void uploadProduct(Model model,HttpServletResponse response, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree) throws IOException {
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
@@ -85,10 +85,10 @@ public class PostsController {
 		}
 		product.setStatus("in stock");
 		productrepo.save(product);
-		response.sendRedirect("index");
+		response.sendRedirect("/index");
 	}
 	
-	@GetMapping("/imagepost/{username}")
+	@GetMapping("/api/imagepost/{username}")
     private ResponseEntity<Object> downloadImagePost( @PathVariable String username) throws SQLException{
     	Users s = (Users) userservice.findByUser_name(username);
     	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());

@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,17 +50,17 @@ public class UsersController {
 	@Autowired
 	private PasswordEncoder encoder;
 	
-    @GetMapping("/fetchAllUsers")
+    @GetMapping("/api/fetchAllUsers")
     public Page<Users> fetchAll() {
         return userRepository.findAll(PageRequest.of(0, 10,Sort.by("username").ascending()));
     }
     
-    @GetMapping("/getUserPage")
+    @GetMapping("/api/getUserPage")
     public Page<Users> getUserPage(Pageable page) {
         return userRepository.findAll(page);
     }
     
-    @PostMapping("/registerUser")
+    @PostMapping("/api/registerUser")
 	private void registerUser(Users user,HttpServletResponse response , HttpServletRequest sesion, @RequestParam(required = false) MultipartFile imagen) throws IOException, SQLException {
     	if(imagen != null) {
     		user.setUserimg(BlobProxy.generateProxy(imagen.getInputStream(), imagen.getSize()));
@@ -73,10 +74,10 @@ public class UsersController {
 		r.setIduser(use);
 		r.setRol("USER");
 		rolesRepository.save(r);
-		response.sendRedirect("sign-in");
+		response.sendRedirect("/sign-in");
 	}
     
-    @PostMapping("/registerCompany")
+    @PostMapping("/api/registerCompany")
 	private void registerCompany(Users user,HttpServletResponse response, HttpServletRequest sesion, @RequestParam(required = false) MultipartFile imagen) throws IOException {
     	if(imagen != null) {
     		user.setUserimg(BlobProxy.generateProxy(imagen.getInputStream(), imagen.getSize()));
@@ -92,10 +93,10 @@ public class UsersController {
 		r.setIduser(use);
 		r.setRol("USER");
 		rolesRepository.save(r);
-		response.sendRedirect("sign-in");
+		response.sendRedirect("s/ign-in");
 	}
     
-    @GetMapping("/imageprofile")
+    @GetMapping("/api/imageprofile")
     private ResponseEntity<Object> downloadImage(HttpServletRequest sesion) throws SQLException{
     	Users s = (Users) userservice.findByUser_name(sesion.getUserPrincipal().getName());
     	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
@@ -105,12 +106,22 @@ public class UsersController {
 				.body(file);
     }
     
-    @GetMapping("/moreUsers")
+    @GetMapping("/api/imageprofile/{username}")
+    private ResponseEntity<Object> downloadImageProfile(@PathVariable String username) throws SQLException{
+    	Users s = (Users) userservice.findByUser_name(username);
+    	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
+    	return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+				.contentLength(s.getUserimg().length())
+				.body(file);
+    }
+    
+    @GetMapping("/api/moreUsers")
     public Page<Users> getMoreUsers(Pageable page){    	
     	return userRepository.findByuserprofile(true,page);
     }
     
-    @GetMapping("/moreCompany")
+    @GetMapping("/api/moreCompany")
     public Page<Users> getMoreCompany(Pageable page){    	
     	return userRepository.findBycompanyprofile(true,page);
     }

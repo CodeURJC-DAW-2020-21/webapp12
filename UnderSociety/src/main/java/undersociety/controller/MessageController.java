@@ -50,7 +50,7 @@ public class MessageController {
         }
     }
     
-    @GetMapping("getChad")
+    @GetMapping("/api/getChad")
     public List<Message> getChat(@RequestParam String from, @RequestParam String to) {
     	Users f = (Users) userservice.findByUser_name(from);
     	Users t = (Users) userservice.findByUser_name(to);
