@@ -29,7 +29,7 @@
 </head>
 
 
-<body onload="connectToChat('{{name}}')"> 
+<body onload="connectToChat('{{username}}')"> 
 	
 
 	<div class="wrapper">
@@ -127,7 +127,7 @@
 					<div class="user-account">
 						<div class="user-info">
 							<img src="http://via.placeholder.com/30x30" alt="">
-							<a id="userName" href="#">{{name}}</a>
+							<a id="userName" href="#">{{username}}</a>
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss">
@@ -193,7 +193,7 @@
 					</div> <!-- end chat-header -->
 			
 					<div class="chat-history">
-						<ul>
+						<ul id="messageList">
 			
 						</ul>
 			

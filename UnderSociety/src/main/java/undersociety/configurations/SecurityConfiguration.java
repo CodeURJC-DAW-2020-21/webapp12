@@ -40,10 +40,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers( "/fonts/**").permitAll();
 		 http.authorizeRequests().antMatchers("/sign-in").permitAll();
 		 http.authorizeRequests().antMatchers("/registerUser").permitAll();
-		 
+		 http.authorizeRequests().antMatchers("/forgotPassword").permitAll();
+		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
+		 http.authorizeRequests().antMatchers("/errorpage").permitAll();
+		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
+
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
-		 
+
 		 http.formLogin().loginPage("/sign-in");
 		 http.formLogin().usernameParameter("username");
 		 http.formLogin().passwordParameter("password");

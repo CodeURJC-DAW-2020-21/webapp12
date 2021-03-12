@@ -11,6 +11,7 @@ function connectToChat(userName) {
         console.log("connected to: " + frame);
         stompClient.subscribe("/topic/messages/" + userName, function (response) {
             let data = JSON.parse(response.body);
+            console.log(response.body);
             if (selectedUser === data.fromLogin) {
                 render(data.message, data.fromLogin);
             } else {
@@ -58,4 +59,31 @@ function selectUser(userName) {
     }
     $('#selectedUserId').html('');
     $('#selectedUserId').append('Chat with ' + userName);
+    var ul = document.getElementById("messageList");
+    ul.innerHTML = "";
+    $.get("getChad",{from: $('#userName').text(), to: userName},function(data){
+        data.forEach(element => {
+            console.log("FROM:"+element.iduser.username+" TO: "+element.iduserto.username+" message: "+element.message);
+            if (selectedUser === element.iduser.username) {
+                console.log("jhon");
+                var templateResponse = Handlebars.compile($("#message-response-template").html());
+                var contextResponse = {
+                    response: element.message,
+                    time: getCurrentTime(),
+                    userName: element.iduser.username
+                };
+                $chatHistoryList.append(templateResponse(contextResponse));
+            } else {
+                console.log("no jhon");
+                var template = Handlebars.compile($("#message-template").html());
+                var context = {
+                    messageOutput: element.message,
+                    time: getCurrentTime(),
+                    toUserName: element.iduser.username
+                };
+
+                $chatHistoryList.append(template(context));
+            }
+        });
+    });
 }
