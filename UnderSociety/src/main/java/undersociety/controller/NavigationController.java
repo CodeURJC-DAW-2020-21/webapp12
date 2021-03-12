@@ -43,8 +43,18 @@ public class NavigationController implements ErrorController{
 		return "index";
 	}
 	
+	@GetMapping("/profiles")
+	private String getProfiles(Model model, HttpServletRequest request) {
+		List<Users> users = userRepository.findByuserprofile(true);
+		model.addAttribute("users",users);
+		model.addAttribute("username",request.getUserPrincipal().getName());
+		return "profiles";
+	}
+	
 	@GetMapping("/companies")
 	private String getCompanies(Model model, HttpServletRequest request) {
+		List<Users> companies = userRepository.findBycompanyprofile(true);
+		model.addAttribute("companies",companies);
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "companies";
 	}
@@ -69,14 +79,6 @@ public class NavigationController implements ErrorController{
 	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "profile-account-setting";
-	}
-	
-	@GetMapping("/profiles")
-	private String getProfiles(Model model, HttpServletRequest request) {
-		List<Users> users = userRepository.findAll();
-		model.addAttribute("users",users);
-		model.addAttribute("username",request.getUserPrincipal().getName());
-		return "profiles";
 	}
 	
 	@GetMapping("/store")

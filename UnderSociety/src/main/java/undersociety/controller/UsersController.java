@@ -76,9 +76,14 @@ public class UsersController {
 	}
     
     @PostMapping("/registerCompany")
-	private void registerCompany(Users user,HttpServletResponse response, HttpServletRequest sesion) throws IOException {
+	private void registerCompany(Users user,HttpServletResponse response, HttpServletRequest sesion, @RequestParam(required = false) MultipartFile imagen) throws IOException {
+    	if(imagen != null) {
+    		user.setUserimg(BlobProxy.generateProxy(imagen.getInputStream(), imagen.getSize()));
+    	}
 		user.setUserprofile(false);
 		user.setCompanyprofile(true);
+		System.out.println(user.getUserprofile());
+		System.out.println(user.getCompanyprofile());
 		user.setPass(encoder.encode(user.getPass()));
 		userservice.save(user);
 		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found")));
