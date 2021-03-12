@@ -32,7 +32,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 	 for (Roles rol : r) {
 		 roles.add(new SimpleGrantedAuthority("ROLE_"+rol.getRol()));
 	}
-	 return new org.springframework.security.core.userdetails.User(user.getUser_name(), 
+	 return new org.springframework.security.core.userdetails.User(user.getUsername(), 
 	 user.getPass(), roles);
  }
 }

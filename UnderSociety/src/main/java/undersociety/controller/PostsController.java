@@ -1,14 +1,21 @@
 package undersociety.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -117,4 +124,15 @@ public class PostsController {
 >>>>>>> Created all database models
 		return "index";
 	}
+	
+	@GetMapping("/imagepost/{username}")
+    private ResponseEntity<Object> downloadImagePost( @PathVariable String username) throws SQLException{
+    	Users s = (Users) userservice.findByUser_name(username);
+    	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
+    	return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+				.contentLength(s.getUserimg().length())
+				.body(file);
+    }
+	
 }

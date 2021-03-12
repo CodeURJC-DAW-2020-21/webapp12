@@ -16,7 +16,7 @@ import java.util.Set;
 
 @RestController
 @CrossOrigin
-public class UsersController {
+public class DataController {
 	
 	@Autowired
 	private UserService userservice;
@@ -26,7 +26,7 @@ public class UsersController {
     	List<Users> users = userservice.load();
     	Set<String> set = new HashSet<String>();
     	for (Users u : users) {
-			set.add(u.getUser_name());
+			set.add(u.getUsername());
 		}
         return set;
     }

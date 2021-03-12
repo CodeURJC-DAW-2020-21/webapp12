@@ -37,7 +37,7 @@ public class MessageController {
         System.out.println("handling send message: " + message + " to: " + to);
         Users f = (Users) userservice.findByUser_name(message.getFromLogin());
     	Users t = (Users) userservice.findByUser_name(to);
-    	System.out.println("from: "+ f.getId_users()+" to: " + t.getId_users());
+    	System.out.println("from: "+ f.getIdusers()+" to: " + t.getIdusers());
     	Message m = new Message();
     	m.setIduser(f);
     	m.setIduserto(t);
@@ -58,7 +58,7 @@ public class MessageController {
     	m.addAll(m2);
     	Collections.sort(m);
     	for (Message message : m) {
-			System.out.println(message.getIdmessage());
+			System.out.println(message.getIdmessage()+" from: "+message.getIduser().getUsername()+"  to: "+message.getIduserto().getUsername());
 		}
     	System.out.println(m);
     	return m;
