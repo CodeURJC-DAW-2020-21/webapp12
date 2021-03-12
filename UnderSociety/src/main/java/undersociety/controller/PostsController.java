@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,12 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -30,7 +31,7 @@ import undersociety.repositories.ProductRepository;
 import undersociety.repositories.TagsRepository;
 import undersociety.services.UserService;
 
-@Controller
+@RestController
 public class PostsController {
 		
 	@Autowired
@@ -47,7 +48,7 @@ public class PostsController {
 	
 	
 	@PostMapping("/uploadPost")
-	private String uploadPost(Model model, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
+	private void uploadPost(Model model,HttpServletResponse response, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
 		if(imag0 != null) {
@@ -55,11 +56,11 @@ public class PostsController {
 		}
 		post.setIduser(s);
 		postsrepo.save(post);
-		return "index";
+		response.sendRedirect("index");
 	}
 	
 	@PostMapping("/uploadProduct")
-	private String uploadProduct(Model model, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree) throws IOException {
+	private void uploadProduct(Model model,HttpServletResponse response, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree) throws IOException {
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
 		List<Tags> listag = tagsrepo.findAll();
@@ -84,7 +85,7 @@ public class PostsController {
 		}
 		product.setStatus("in stock");
 		productrepo.save(product);
-		return "index";
+		response.sendRedirect("index");
 	}
 	
 	@GetMapping("/imagepost/{username}")
