@@ -24,6 +24,8 @@ public class Message  implements Comparable<Message>{
 	private Users iduserto;
 	@Column
 	private String message;
+	@Column
+	private String time;
 	
 	
 	public int getIdmessage() {
@@ -49,6 +51,13 @@ public class Message  implements Comparable<Message>{
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}
 	@Override
 	public int compareTo(Message u) {

@@ -4,6 +4,7 @@ public class MessageModel {
 
     private String message;
     private String fromLogin;
+    private String time;
 
     public String getMessage() {
         return message;
@@ -20,12 +21,21 @@ public class MessageModel {
     public void setFromLogin(String fromLogin) {
         this.fromLogin = fromLogin;
     }
+    
+    public String getTime() {
+		return time;
+	}
 
-    @Override
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	@Override
     public String toString() {
         return "MessageModel{" +
                 "message='" + message + '\'' +
                 ", fromLogin='" + fromLogin + '\'' +
+                ", time='" + time + '\'' +
                 '}';
     }
 }

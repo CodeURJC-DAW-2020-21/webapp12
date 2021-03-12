@@ -4,6 +4,10 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,9 +27,6 @@ import undersociety.services.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,13 +50,13 @@ public class UsersController {
 	private PasswordEncoder encoder;
 	
     @GetMapping("/fetchAllUsers")
-    public Set<String> fetchAll() {
-    	List<Users> users = userservice.load();
-    	Set<String> set = new HashSet<String>();
-    	for (Users u : users) {
-			set.add(u.getUsername());
-		}
-        return set;
+    public Page<Users> fetchAll() {
+        return userRepository.findAll(PageRequest.of(0, 10,Sort.by("username").ascending()));
+    }
+    
+    @GetMapping("/getUserPage")
+    public Page<Users> getUserPage(Pageable page) {
+        return userRepository.findAll(page);
     }
     
     @PostMapping("/registerUser")
@@ -102,5 +103,15 @@ public class UsersController {
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
 				.contentLength(s.getUserimg().length())
 				.body(file);
+    }
+    
+    @GetMapping("/moreUsers")
+    public Page<Users> getMoreUsers(Pageable page){    	
+    	return userRepository.findByuserprofile(true,page);
+    }
+    
+    @GetMapping("/moreCompany")
+    public Page<Users> getMoreCompany(Pageable page){    	
+    	return userRepository.findBycompanyprofile(true,page);
     }
 }

@@ -347,3 +347,39 @@ $(window).on("load", function() {
        $(".file-upload").click();
     });
 });
+
+
+var pageprofile = 1;
+var pagecompany = 1;
+
+$(".profile").on("click", function(){
+    size = 10;
+    sort = 'username';
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: ('/moreUsers?page=' + pageprofile + '&size=' + size +'&sort='+sort+'&direction=asc'),
+        success: function(result) {
+            $.each(result.content, function(index,value){
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/imagepost/"+value.username+"' alt=''><h3>"+value.username+"</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+            });
+        }
+    });
+    pageprofile++;
+});
+
+$(".company").on("click", function(){
+    size = 10;
+    sort = 'username';
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: ('/moreCompany?page=' + pagecompany + '&size=' + size +'&sort='+sort+'&direction=asc'),
+        success: function(result) {
+            $.each(result.content, function(index,value){
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/imagepost/"+value.username+"' alt=''><h3>"+value.username+"</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+            });
+        }
+    });
+    pagecompany++;
+});

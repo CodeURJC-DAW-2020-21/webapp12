@@ -1,12 +1,14 @@
 package undersociety.controller;
 
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -45,16 +47,16 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/profiles")
 	private String getProfiles(Model model, HttpServletRequest request) {
-		List<Users> users = userRepository.findByuserprofile(true);
-		model.addAttribute("users",users);
+		Page<Users> users = userRepository.findByuserprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
+		model.addAttribute("users",users.getContent());
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "profiles";
 	}
 	
 	@GetMapping("/companies")
 	private String getCompanies(Model model, HttpServletRequest request) {
-		List<Users> companies = userRepository.findBycompanyprofile(true);
-		model.addAttribute("companies",companies);
+		Page<Users> companies = userRepository.findBycompanyprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
+		model.addAttribute("companies",companies.getContent());
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "companies";
 	}

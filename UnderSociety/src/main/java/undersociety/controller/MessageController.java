@@ -37,11 +37,12 @@ public class MessageController {
         System.out.println("handling send message: " + message + " to: " + to);
         Users f = (Users) userservice.findByUser_name(message.getFromLogin());
     	Users t = (Users) userservice.findByUser_name(to);
-    	System.out.println("from: "+ f.getIdusers()+" to: " + t.getIdusers());
+    	System.out.println("from: "+ f.getIdusers()+" to: " + t.getIdusers()+" time: "+message.getTime());
     	Message m = new Message();
     	m.setIduser(f);
     	m.setIduserto(t);
     	m.setMessage(message.getMessage());
+    	m.setTime(message.getTime());
     	messagedb.save(m);
         boolean isExists = userservice.findByUser_nameExists(to);
         if (isExists) {
