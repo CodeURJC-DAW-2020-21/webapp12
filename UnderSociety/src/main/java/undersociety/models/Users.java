@@ -1,10 +1,16 @@
 package undersociety.models;
 
 
+
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -21,30 +27,31 @@ public class Users {
 	private String pass;
 	@Column
 	private String name;
+	@Lob
+	@JsonIgnore
+	private Blob userimg;
 	@Column
-	private String user_img;
+	private boolean companyprofile;
 	@Column
-	private boolean company_profile;
-	@Column
-	private boolean user_profile;
+	private boolean userprofile;
 	@Column
 	private String city;
 	@Column
-	private String user_port_img;
+	private String userportimg;
 	@Column
-	private String user_info;
+	private String userinfo;
 	@Column
-	private String link_facebook;
+	private String linkfacebook;
 	@Column
-	private String link_twitter;
+	private String linktwitter;
 	@Column
-	private String link_instagram;
+	private String linkinstagram;
 	
-	public int getId_users() {
+	public int getIdusers() {
 		return idusers;
 	}
-	public void setId_users(int id_users) {
-		this.idusers = id_users;
+	public void setIdusers(int idusers) {
+		this.idusers = idusers;
 	}
 	public String getEmail() {
 		return email;
@@ -52,11 +59,11 @@ public class Users {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUser_name() {
+	public String getUsername() {
 		return username;
 	}
-	public void setUser_name(String user_name) {
-		this.username = user_name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPass() {
 		return pass;
@@ -70,23 +77,23 @@ public class Users {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getUser_img() {
-		return user_img;
+	public Blob getUserimg() {
+		return userimg;
 	}
-	public void setUser_img(String user_img) {
-		this.user_img = user_img;
+	public void setUserimg(Blob userimg) {
+		this.userimg = userimg;
 	}
-	public boolean getCompany_profile() {
-		return company_profile;
+	public boolean getCompanyprofile() {
+		return companyprofile;
 	}
-	public void setCompany_profile(boolean company_profile) {
-		this.company_profile = company_profile;
+	public void setCompanyprofile(boolean companyprofile) {
+		this.companyprofile = companyprofile;
 	}
-	public boolean getUser_profile() {
-		return user_profile;
+	public boolean getUserprofile() {
+		return userprofile;
 	}
-	public void setUser_profile(boolean user_profile) {
-		this.user_profile = user_profile;
+	public void setUserprofile(boolean userprofile) {
+		this.userprofile = userprofile;
 	}
 	public String getCity() {
 		return city;
@@ -94,34 +101,34 @@ public class Users {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getUser_port_img() {
-		return user_port_img;
+	public String getUserportimg() {
+		return userportimg;
 	}
-	public void setUser_port_img(String user_port_img) {
-		this.user_port_img = user_port_img;
+	public void setUserportimg(String userportimg) {
+		this.userportimg = userportimg;
 	}
-	public String getUser_info() {
-		return user_info;
+	public String getUserinfo() {
+		return userinfo;
 	}
-	public void setUser_info(String user_info) {
-		this.user_info = user_info;
+	public void setUserinfo(String userinfo) {
+		this.userinfo = userinfo;
 	}
-	public String getLink_facebook() {
-		return link_facebook;
+	public String getLinkfacebook() {
+		return linkfacebook;
 	}
-	public void setLink_facebook(String link_facebook) {
-		this.link_facebook = link_facebook;
+	public void setLinkfacebook(String linkfacebook) {
+		this.linkfacebook = linkfacebook;
 	}
-	public String getLink_twitter() {
-		return link_twitter;
+	public String getLinktwitter() {
+		return linktwitter;
 	}
-	public void setLink_twitter(String link_twitter) {
-		this.link_twitter = link_twitter;
+	public void setLinktwitter(String linktwitter) {
+		this.linktwitter = linktwitter;
 	}
-	public String getLink_instagram() {
-		return link_instagram;
+	public String getLinkinstagram() {
+		return linkinstagram;
 	}
-	public void setLink_instagram(String link_instagram) {
-		this.link_instagram = link_instagram;
+	public void setLinkinstagram(String linkinstagram) {
+		this.linkinstagram = linkinstagram;
 	}
 }

@@ -1,12 +1,19 @@
 package undersociety.models;
 
 
+import java.sql.Blob;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -15,22 +22,29 @@ public class Post {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_post;
+	private int idpost;
 	@OneToOne
-	private Users id_user;
+	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
+	private Users iduser;
+	@Column
 	private String title;
+	@Column
 	private String description;
-	public int getId_post() {
-		return id_post;
+	@Lob
+	@JsonIgnore
+	private Blob image;
+	
+	public int getIdpost() {
+		return idpost;
 	}
-	public void setId_post(int id_post) {
-		this.id_post = id_post;
+	public void setIdpost(int idpost) {
+		this.idpost = idpost;
 	}
-	public Users getId_user() {
-		return id_user;
+	public Users getIduser() {
+		return iduser;
 	}
-	public void setId_user(Users id_user) {
-		this.id_user = id_user;
+	public void setIduser(Users iduser) {
+		this.iduser = iduser;
 	}
 	public String getTitle() {
 		return title;
@@ -44,7 +58,20 @@ public class Post {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public Blob getImage() {
+		return image;
+	}
+	public void setImage(Blob image) {
+		this.image = image;
+	}
 	
 	
-		
+	public void view() {
+		System.out.println();
+		System.out.println(iduser);
+		System.out.println(title);
+		System.out.println(description);
+		System.out.println(image);
+		System.out.println();
+	}
 }

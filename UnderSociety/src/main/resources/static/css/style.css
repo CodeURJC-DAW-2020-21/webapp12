@@ -544,8 +544,8 @@ nav > ul > li > a:hover {
 }
 .user-info {
 	float: left;
-	width: 100%;
-	padding: 13px 10px;
+	width: 50%;
+	padding: 13px 7px;
 	position: relative;
 }
 .user-account-settingss {
@@ -616,6 +616,7 @@ nav > ul > li > a:hover {
 	position: relative;
 }
 .search_form form input {
+	text-align: center; 
 	width: 100%;
 	height: 35px;
 	padding: 0 15px;
@@ -680,10 +681,11 @@ nav > ul > li > a:hover {
 	border-radius: 100px;
 }
 .user-info a {
+	visibility:hidden;
 	color: #fff;
-	font-size: 14px;
+	font-size: 13px;
 	float: left;
-	margin-top: 8px;
+	margin-top: 4px;
 }
 .user-info a:hover {
 	color: #fff;
@@ -1870,7 +1872,6 @@ main {
 	width: 100%;
 	color: #b2b2b2;
 	font-size: 14px;
-	border: 1px solid #e5e5e5;
 	margin-bottom: 20px;
 	font-weight: 500;
 }
@@ -2220,7 +2221,6 @@ select {
 	padding: 0 15px 0 40px;
 	color: #b2b2b2;
 	font-size: 14px;
-	border:1px solid #e5e5e5;
 }
 .sign_in_sec form select {
 	line-height: 40px;
@@ -5696,3 +5696,187 @@ ul {
     clear: both;
     height: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.imagePreview {
+    width: 100%;
+    height: 180px;
+    background-position: center center;
+  	background-color:#fff;
+    background-size: cover;
+  	background-repeat:no-repeat;
+    display: inline-block;
+  	box-shadow:0px -3px 6px 2px rgba(0,0,0,0.2);
+}
+.btn-primary
+{
+  display:block;
+  border-radius:0px;
+  box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+  margin-top:-5px;
+}
+.imgUp
+{
+  margin-left: 0px;	
+  margin-bottom:15px;
+}
+.del
+{
+  position:absolute;
+  top:0px;
+  right:15px;
+  width:30px;
+  height:30px;
+  text-align:center;
+  line-height:30px;
+  background-color:rgba(255,255,255,0.6);
+  cursor:pointer;
+}
+.imgAdd
+{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background-color:#4bd7ef;
+  color:#fff;
+  box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
+  text-align:center;
+  line-height:30px;
+  margin-top:0px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .profile-pic {
+	  max-width: 200px;
+	  max-height: 200px;
+	  display: block;
+  }
+  
+  .file-upload {
+	  display: none;
+  }
+  .circle {
+	  border-radius: 1000px !important;
+	  overflow: hidden;
+	  width: 128px;
+	  height: 128px;
+	  border: 8px solid rgba(255, 255, 255, 0.7);
+	  position: absolute;
+	  top: 72px;
+  }
+  img {
+	  max-width: 100%;
+	  height: auto;
+  }
+  .p-image {
+	position: absolute;
+	top: 167px;
+	right: 30px;
+	color: #666666;
+	transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  }
+  .p-image:hover {
+	transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  }
+  .upload-button {
+	font-size: 1.2em;
+  }
+  
+  .upload-button:hover {
+	transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+	color: #999;
+  }
+
+
+
+  .previous {
+	text-decoration: none;
+	display: inline-block;
+	padding: 8px 16px;
+  }
+  
+  .previous:hover {
+	background-color: #ddd;
+	color: black;
+  }
+
+  .next {
+	text-decoration: none;
+	display: inline-block;
+	padding: 8px 16px;
+  }
+  
+  .next:hover {
+	background-color: #ddd;
+	color: black;
+  }
+  
+  .previous {
+	background-color: #f1f1f1;
+	color: black;
+  }
+  
+  .next {
+	background-color: #4CAF50;
+	color: white;
+  }
+  
+  .round {
+	border-radius: 50%;
+  }

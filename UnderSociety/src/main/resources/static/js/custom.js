@@ -23,8 +23,6 @@ function cacheDOM() {
 function render(message, userName) {
     scrollToBottom();
     // responses
-    console.log("Message: "+message);
-    console.log("From to: "+userName);
     var templateResponse = Handlebars.compile($("#message-response-template").html());
     var contextResponse = {
         response: message,
@@ -39,7 +37,7 @@ function render(message, userName) {
 }
 
 function sendMessage(message) {
-    let username = $('#userName').text();
+    let username = $('#userName').attr("placeholder");
     console.log(username);
     sendMsg(username, message);
     scrollToBottom();
