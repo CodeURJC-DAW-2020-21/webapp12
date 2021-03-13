@@ -15,14 +15,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import undersociety.models.Post;
+import undersociety.models.Product;
 import undersociety.models.Users;
 import undersociety.repositories.PostRepository;
+import undersociety.repositories.ProductRepository;
 import undersociety.repositories.UserRepository;
 
 
 @Controller
 @CrossOrigin
 public class NavigationController implements ErrorController{
+	
+	@Autowired
+	private ProductRepository productrepo;
 	
 	@Autowired
 	private PostRepository postsrepo;
@@ -67,12 +72,6 @@ public class NavigationController implements ErrorController{
 		return "companies";
 	}
 	
-	@GetMapping("/company-profile")
-	private String getCompanyProfile(Model model, HttpServletRequest request) {
-		model.addAttribute("username",request.getUserPrincipal().getName());
-		return "company-profile";
-	}
-	
 	@GetMapping("/messages")
 	private String getMessages(Model model,HttpServletRequest request) {
 		model.addAttribute("username",request.getUserPrincipal().getName());
@@ -82,6 +81,20 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("response","{{response}}");
 		return "messages";
 	}
+
+	@GetMapping("/store")
+	private String getStore(Model model, HttpServletRequest request) {
+		Page<Product> products = productrepo.findAll( PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
+		model.addAttribute("products", products);
+		model.addAttribute("username",request.getUserPrincipal().getName());
+		return "store";
+	}
+	
+	@GetMapping("/company-profile")
+	private String getCompanyProfile(Model model, HttpServletRequest request) {
+		model.addAttribute("username",request.getUserPrincipal().getName());
+		return "company-profile";
+	}
 	
 	@GetMapping("/profile-account-setting")
 	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
@@ -89,11 +102,6 @@ public class NavigationController implements ErrorController{
 		return "profile-account-setting";
 	}
 	
-	@GetMapping("/store")
-	private String getStore(Model model, HttpServletRequest request) {
-		model.addAttribute("username",request.getUserPrincipal().getName());
-		return "store";
-	}
 	
 	@GetMapping("/user-profile")
 	private String getUserProfile(Model model, HttpServletRequest request) {

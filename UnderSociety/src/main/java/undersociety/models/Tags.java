@@ -12,15 +12,15 @@ import javax.persistence.Table;
 public class Tags {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idtag;
+	private int idtags;
 	@Column
 	private String description;
 	
 	public int getIdtag() {
-		return idtag;
+		return idtags;
 	}
 	public void setIdtag(int idtag) {
-		this.idtag = idtag;
+		this.idtags = idtag;
 	}
 	public String getDescription() {
 		return description;

@@ -37,13 +37,13 @@ public class Product {
 	@Column
 	private int price;
 	@OneToOne
-	@JoinColumn(name = "idtag", referencedColumnName = "idtag")
-	private Tags idtag;
+	@JoinColumn(name = "idtagone", referencedColumnName = "idtags")
+	private Tags idtagone;
 	@OneToOne
-	@JoinColumn(name = "idtagtwo", referencedColumnName = "idtag")
+	@JoinColumn(name = "idtagtwo", referencedColumnName = "idtags")
 	private Tags idtagtwo;
 	@OneToOne
-	@JoinColumn(name = "idtagthree", referencedColumnName = "idtag")
+	@JoinColumn(name = "idtagthree", referencedColumnName = "idtags")
 	private Tags idtagthree;
 	@Column
 	private String status;
@@ -98,10 +98,10 @@ public class Product {
 		this.price = price;
 	}
 	public Tags getIdtag() {
-		return idtag;
+		return idtagone;
 	}
 	public void setIdtag(Tags idtag) {
-		this.idtag = idtag;
+		this.idtagone = idtag;
 	}
 	public Tags getIdtagtwo() {
 		return idtagtwo;
@@ -130,7 +130,7 @@ public class Product {
 		System.out.println(image1);
 		System.out.println(image2);
 		System.out.println(price);
-		System.out.println(idtag);
+		System.out.println(idtagone);
 		System.out.println(idtagtwo);
 		System.out.println(idtagthree);
 		System.out.println(status);
