@@ -291,8 +291,11 @@ $(window).on("load", function() {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> SpringAppUserAndCompanyPage
   $(document).on("click", "i.del" , function() {
         var input = $(this).parent().children('label').children();
         var imagepreview = $(this).parent().children('div');
@@ -322,10 +325,17 @@ $(window).on("load", function() {
 
 
 
+<<<<<<< HEAD
 
 
 
 
+=======
+
+
+
+
+>>>>>>> SpringAppUserAndCompanyPage
   $(document).ready(function() {
 
     
@@ -350,4 +360,47 @@ $(window).on("load", function() {
        $(".file-upload").click();
     });
 });
+<<<<<<< HEAD
 >>>>>>> SpringAppPostsAndProducts
+=======
+
+
+var pageprofile = 1;
+var pagecompany = 1;
+
+$(".profile").on("click", function(){
+    size = 10;
+    sort = 'username';
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: ('/api/moreUsers?page=' + pageprofile + '&size=' + size +'&sort='+sort+'&direction=asc'),
+        success: function(result) {
+            $.each(result.content, function(index,value){
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/"+value.username+"' alt=''><h3>"+value.username+"</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+            });
+            if(pageprofile+1 <= result.totalPages){
+                pageprofile++;
+            }
+        }
+    });
+});
+
+$(".company").on("click", function(){
+    size = 10;
+    sort = 'username';
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: ('/api/moreCompany?page=' + pagecompany + '&size=' + size +'&sort='+sort+'&direction=asc'),
+        success: function(result) {
+            $.each(result.content, function(index,value){
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/"+value.username+"' alt=''><h3>"+value.username+"</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+            });
+            if(pagecompany+1 <= result.totalPages){
+                pagecompany++;
+            }
+        }
+    });
+});
+>>>>>>> SpringAppUserAndCompanyPage

@@ -32,13 +32,15 @@
 				<div class="header-data">
 					<div class="logo">
 						<a href="index" title=""><img src="images/logo.png" alt=""></a>
-					</div><!--logo end-->
+					</div>
+					<!--logo end-->
 					<div class="search-bar">
 						<form>
 							<input type="text" name="search" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
-					</div><!--search-bar end-->
+					</div>
+					<!--search-bar end-->
 					<nav>
 						<ul>
 							<li>
@@ -71,57 +73,76 @@
 								<div class="notification-box msg">
 									<div class="nt-title">
 										<h4>Setting</h4>
-										<a href="#" title="">Clear all</a>
+										<a id="clearbutton" href="#" title="">Clear all</a>
 									</div>
 									<div class="nott-list">
 										<div class="notfication-details">
-											  <div class="noty-user-img">
-												  <img src="images/resources/ny-img1.png" alt="">
-											  </div>
-											  <div class="notification-info">
-												  <h3><a href="messages" title="">Jassica William</a> </h3>
-												  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-												  <span>2 min ago</span>
-											  </div><!--notification-info -->
-										  </div>
-										  <div class="notfication-details">
-											  <div class="noty-user-img">
-												  <img src="images/resources/ny-img2.png" alt="">
-											  </div>
-											  <div class="notification-info">
-												  <h3><a href="messages" title="">Jassica William</a></h3>
-												  <p>Lorem ipsum dolor sit amet.</p>
-												  <span>2 min ago</span>
-											  </div><!--notification-info -->
-										  </div>
-										  <div class="notfication-details">
-											  <div class="noty-user-img">
-												  <img src="images/resources/ny-img3.png" alt="">
-											  </div>
-											  <div class="notification-info">
-												  <h3><a href="messages" title="">Jassica William</a></h3>
-												  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
-												  <span>2 min ago</span>
-											  </div><!--notification-info -->
-										  </div>
-										  <div class="view-all-nots">
-											  <a href="messages" title="">View All Messsages</a>
-										  </div>
-									</div><!--nott-list end-->
-								</div><!--notification-box end-->
+											<div class="noty-user-img">
+												<img src="images/resources/ny-img1.png" alt="">
+											</div>
+											<div class="notification-info">
+												<h3><a href="messages" title="">Jassica William</a> </h3>
+												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
+												<span>2 min ago</span>
+											</div>
+											<!--notification-info -->
+										</div>
+										<div class="notfication-details">
+											<div class="noty-user-img">
+												<img src="images/resources/ny-img2.png" alt="">
+											</div>
+											<div class="notification-info">
+												<h3><a href="messages" title="">Jassica William</a></h3>
+												<p>Lorem ipsum dolor sit amet.</p>
+												<span>2 min ago</span>
+											</div>
+											<!--notification-info -->
+										</div>
+										<div class="notfication-details">
+											<div class="noty-user-img">
+												<img src="images/resources/ny-img3.png" alt="">
+											</div>
+											<div class="notification-info">
+												<h3><a href="messages" title="">Jassica William</a></h3>
+												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+													eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
+												<span>2 min ago</span>
+											</div>
+											<!--notification-info -->
+										</div>
+										<div class="view-all-nots">
+											<a href="messages" title="">View All Messsages</a>
+										</div>
+									</div>
+									<!--nott-list end-->
+								</div>
+								<!--notification-box end-->
 							</li>
 						</ul>
-					</nav><!--nav end-->
+					</nav>
+					<!--nav end-->
 					<div class="menu-btn">
 						<a href="#" title=""><i class="fa fa-bars"></i></a>
-					</div><!--menu-btn end-->
+					</div>
+					<!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
+<<<<<<< HEAD
 							<img src="http://via.placeholder.com/30x30" alt="">
 							<a href="#" title="">{{username}}</a>
+=======
+							<img src="http://localhost:8080/api/imageprofile" alt="">
+							<a href="#" title=""></a>
+>>>>>>> SpringAppUserAndCompanyPage
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss">
+							<h3>Username</h3>
+							<div class="search_form">
+								<form>
+									<input type="text" name="search" placeholder="{{username}}" readonly>
+								</form>
+							</div>
 							<h3>Online Status</h3>
 							<ul class="on-off-status">
 								<li>
@@ -143,27 +164,30 @@
 									</div>
 								</li>
 							</ul>
-							<h3>Custom Status</h3>
-							<div class="search_form">
-								<form>
-									<input type="text" name="search">
-									<button type="submit">Ok</button>
-								</form>
-							</div><!--search_form end-->
+							
+							<!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
+								{{#admin}}
+								<li><a href="/admin">Admin Page</a></li>
+								{{/admin}}
 								<li><a href="my-profile-feed" title="">Profile Setting</a></li>
 								<li><a href="profile-account-setting" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
-							<h3 class="tc"><a href="sign-in" title="">Logout</a></h3>
-						</div><!--user-account-settingss end-->
+							<form action="/logout" method="POST">
+								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /></h3>
+							</form>
+						</div>
+						<!--user-account-settingss end-->
 					</div>
-				</div><!--header-data end-->
+				</div>
+				<!--header-data end-->
 			</div>
-		</header><!--header end-->
+		</header>
+		<!--header end-->
 
 
 
@@ -174,6 +198,7 @@
 				</div><!--company-title end-->
 				<div class="companies-list">
 					<div class="row">
+<<<<<<< HEAD
 <<<<<<< HEAD
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="company_profile_info">
@@ -353,6 +378,14 @@
 									<img src="http://localhost:8080/imagepost/{{username}}" alt="">
 									<h3>{{username}}</h3>
 >>>>>>> SpringAppPostsAndProducts
+=======
+						{{#users}}
+						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+							<div class="company_profile_info">
+								<div class="company-up-info">
+									<img src="http://localhost:8080/api/imageprofile/{{username}}" alt="">
+									<h3>{{username}}</h3>
+>>>>>>> SpringAppUserAndCompanyPage
 									
 									<ul>
 										<li><a href="#" title="" class="follow">Follow</a></li>
@@ -364,13 +397,17 @@
 							</div><!--company_profile_info end-->
 						</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 						{{/users}}
 >>>>>>> SpringAppPostsAndProducts
+=======
+						{{/users}}
+>>>>>>> SpringAppUserAndCompanyPage
 					</div>
 				</div><!--companies-list end-->
 				<div class="process-comm">
-					<div class="spinner">
+					<div class="spinner profile">
 						<div class="bounce1"></div>
 						<div class="bounce2"></div>
 						<div class="bounce3"></div>

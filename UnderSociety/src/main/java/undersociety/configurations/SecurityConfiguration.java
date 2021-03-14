@@ -40,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers( "/fonts/**").permitAll();
 		 http.authorizeRequests().antMatchers("/sign-in").permitAll();
 		 http.authorizeRequests().antMatchers("/registerUser").permitAll();
+<<<<<<< HEAD
 <<<<<<< develop
 		 
 =======
@@ -54,13 +55,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 >>>>>>> fixes to posts and product
 >>>>>>> SpringAppPostsAndProducts
+=======
+		 http.authorizeRequests().antMatchers("/registerCompany").permitAll();
+		 http.authorizeRequests().antMatchers("/forgotPassword").permitAll();
+		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
+		 http.authorizeRequests().antMatchers("/errorpage").permitAll();
+		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
+
+>>>>>>> SpringAppUserAndCompanyPage
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
 
 		 http.formLogin().loginPage("/sign-in");
 		 http.formLogin().usernameParameter("username");
 		 http.formLogin().passwordParameter("password");
-		 http.formLogin().defaultSuccessUrl("/index");
+		 http.formLogin().defaultSuccessUrl("/index",true);
 		 http.formLogin().failureUrl("/sign-in");
 
 		 http.logout().logoutUrl("/logout");

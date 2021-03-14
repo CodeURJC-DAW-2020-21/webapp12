@@ -23,6 +23,7 @@ function cacheDOM() {
 function render(message, userName) {
     scrollToBottom();
     // responses
+<<<<<<< HEAD
 <<<<<<< develop
 <<<<<<< develop
     console.log("Message: "+message);
@@ -35,6 +36,8 @@ function render(message, userName) {
 =======
 >>>>>>> fixes to posts and product
 >>>>>>> SpringAppPostsAndProducts
+=======
+>>>>>>> SpringAppUserAndCompanyPage
     var templateResponse = Handlebars.compile($("#message-response-template").html());
     var contextResponse = {
         response: message,
@@ -49,7 +52,7 @@ function render(message, userName) {
 }
 
 function sendMessage(message) {
-    let username = $('#userName').text();
+    let username = $('#userName').attr("placeholder");
     console.log(username);
     sendMsg(username, message);
     scrollToBottom();

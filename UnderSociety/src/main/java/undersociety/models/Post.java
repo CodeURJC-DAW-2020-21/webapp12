@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
 <<<<<<< develop
 =======
 import javax.persistence.JoinColumn;
@@ -16,6 +17,10 @@ import javax.persistence.JoinColumn;
 =======
 import javax.persistence.Lob;
 >>>>>>> Created all database models
+=======
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+>>>>>>> SpringAppUserAndCompanyPage
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,21 +33,33 @@ public class Post {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
 <<<<<<< develop
 	private int id_post;
+=======
+	private int idpost;
+>>>>>>> SpringAppUserAndCompanyPage
 	@OneToOne
-	private Users id_user;
+	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
+	private Users iduser;
+	@Column
 	private String title;
+	@Column
 	private String description;
-	public int getId_post() {
-		return id_post;
+	@Lob
+	@JsonIgnore
+	private Blob image;
+	
+	public int getIdpost() {
+		return idpost;
 	}
-	public void setId_post(int id_post) {
-		this.id_post = id_post;
+	public void setIdpost(int idpost) {
+		this.idpost = idpost;
 	}
-	public Users getId_user() {
-		return id_user;
+	public Users getIduser() {
+		return iduser;
 	}
+<<<<<<< HEAD
 	public void setId_user(Users id_user) {
 		this.id_user = id_user;
 =======
@@ -70,6 +87,10 @@ public class Post {
 	public void setIduser(Users iduser) {
 		this.iduser = iduser;
 >>>>>>> fixes to posts and product
+=======
+	public void setIduser(Users iduser) {
+		this.iduser = iduser;
+>>>>>>> SpringAppUserAndCompanyPage
 	}
 	public String getTitle() {
 		return title;

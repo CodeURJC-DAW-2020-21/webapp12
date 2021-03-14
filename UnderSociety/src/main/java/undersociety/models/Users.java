@@ -50,6 +50,7 @@ public class Users {
 	public int getIdusers() {
 		return idusers;
 	}
+<<<<<<< HEAD
 <<<<<<< develop
 <<<<<<< develop
 <<<<<<< HEAD
@@ -73,6 +74,10 @@ public class Users {
 =======
 >>>>>>> fixes to posts and product
 >>>>>>> SpringAppPostsAndProducts
+=======
+	public void setIdusers(int idusers) {
+		this.idusers = idusers;
+>>>>>>> SpringAppUserAndCompanyPage
 	}
 	public String getEmail() {
 		return email;

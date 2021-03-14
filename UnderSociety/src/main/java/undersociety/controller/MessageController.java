@@ -37,11 +37,19 @@ public class MessageController {
         System.out.println("handling send message: " + message + " to: " + to);
         Users f = (Users) userservice.findByUser_name(message.getFromLogin());
     	Users t = (Users) userservice.findByUser_name(to);
+<<<<<<< HEAD
     	System.out.println("from: "+ f.getIdusers()+" to: " + t.getIdusers());
+=======
+    	System.out.println("from: "+ f.getIdusers()+" to: " + t.getIdusers()+" time: "+message.getTime());
+>>>>>>> SpringAppUserAndCompanyPage
     	Message m = new Message();
     	m.setIduser(f);
     	m.setIduserto(t);
     	m.setMessage(message.getMessage());
+<<<<<<< HEAD
+=======
+    	m.setTime(message.getTime());
+>>>>>>> SpringAppUserAndCompanyPage
     	messagedb.save(m);
         boolean isExists = userservice.findByUser_nameExists(to);
         if (isExists) {
@@ -49,7 +57,11 @@ public class MessageController {
         }
     }
     
+<<<<<<< HEAD
     @GetMapping("getChad")
+=======
+    @GetMapping("/api/getChad")
+>>>>>>> SpringAppUserAndCompanyPage
     public List<Message> getChat(@RequestParam String from, @RequestParam String to) {
     	Users f = (Users) userservice.findByUser_name(from);
     	Users t = (Users) userservice.findByUser_name(to);
