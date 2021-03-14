@@ -5880,3 +5880,60 @@ ul {
   .round {
 	border-radius: 50%;
   }
+
+
+  .carousel-item,
+  .carousel-inner,
+  .carousel-inner img {
+	height: 400px;
+	width: inherit;
+	
+	min-height: 400px;
+	min-width: inherit;
+  	
+	max-height: 400px;	
+	max-width: inherit;
+}
+  
+  .carousel-item {
+	text-align: center;
+  }
+
+  .carousel {
+	width: 99%;
+	height: 400px;
+  }
+
+
+
+  .description-store{
+	  margin-top: 10px;
+	  max-width: 100%;
+	  height: 70px;
+	  overflow-y: hidden;
+  }
+
+  .description-store li p{
+	  max-width: inherit;
+	  overflow-x: hidden;
+  }
+
+  .description-store.show{
+	  height: auto;
+	  overflow-y: visible;
+  }
+
+  .job_descp a{
+	  float: right;
+  }
+
+  .image-store{
+	  min-width: 100%;
+  }
+  .image-store li{
+	  min-width: 100%;
+  }
+  .image-store li img{
+	  height: 280px;
+	  min-width: inherit;
+  }
