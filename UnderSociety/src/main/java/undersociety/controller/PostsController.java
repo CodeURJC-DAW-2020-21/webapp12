@@ -58,7 +58,7 @@ public class PostsController {
 	
 	
 	@GetMapping("/api/imagepost/{idpost}")
-    private ResponseEntity<Object> downloadImagePost( @PathVariable int idpost) throws SQLException{
+    private ResponseEntity<Object> downloadImagePost( @PathVariable int idpost) throws SQLException, IOException{
 		Optional<Post> p = postsrepo.findById(idpost);
     	Resource file = new InputStreamResource(p.get().getImage().getBinaryStream());
     	return ResponseEntity.ok()

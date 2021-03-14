@@ -22,12 +22,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import undersociety.models.Roles;
 import undersociety.models.Users;
+import undersociety.models.UsersRelations;
 import undersociety.repositories.RolesRepository;
 import undersociety.repositories.UserRepository;
+import undersociety.repositories.UsersRelationsRepository;
 import undersociety.services.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +40,9 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @CrossOrigin
 public class UsersController {
+	
+	@Autowired
+	private UsersRelationsRepository relationrepo;
 	
 	@Autowired
 	 private UserRepository userRepository;
@@ -124,5 +130,23 @@ public class UsersController {
     @GetMapping("/api/moreCompany")
     public Page<Users> getMoreCompany(Pageable page){    	
     	return userRepository.findBycompanyprofile(true,page);
+    }
+    
+    @PostMapping("/api/follow")
+    public boolean follow(HttpServletRequest request, @RequestParam String username) {
+    	Optional<Users> follow = userRepository.findByusername(username);
+    	Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
+    	UsersRelations save = new UsersRelations();
+    	save.setUserone(actual.get());
+    	save.setUsertwo(follow.get());
+    	UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual.get(), follow.get());
+    	if(s != null) {
+    		save.setIduserrelation(s.getIduserrelation());
+    		relationrepo.delete(save);
+    		return false;
+    	}else {
+    		relationrepo.save(save);
+    		return true;
+    	}
     }
 }

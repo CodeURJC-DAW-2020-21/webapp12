@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>WorkWise Html Template</title>
+	<title>UnderSociety</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
@@ -17,10 +17,18 @@
 	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+	<!--    libs for stomp and sockjs-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<!--    end libs for stomp and sockjs-->
 </head>
 
 
-<body>
+<body onload="connectToChat('{{username}}')">
 
 
 	<div class="wrapper">
@@ -36,7 +44,7 @@
 					<!--logo end-->
 					<div class="search-bar">
 						<form>
-							<input type="text" name="search" placeholder="Search...">
+							<input id="myInput" onkeyup="searchBarPosts()" type="text" name="search" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div>
@@ -76,40 +84,7 @@
 										<a id="clearbutton" href="#" title="">Clear all</a>
 									</div>
 									<div class="nott-list">
-										<div class="notfication-details">
-											<div class="noty-user-img">
-												<img src="images/resources/ny-img1.png" alt="">
-											</div>
-											<div class="notification-info">
-												<h3><a href="messages" title="">Jassica William</a> </h3>
-												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-												<span>2 min ago</span>
-											</div>
-											<!--notification-info -->
-										</div>
-										<div class="notfication-details">
-											<div class="noty-user-img">
-												<img src="images/resources/ny-img2.png" alt="">
-											</div>
-											<div class="notification-info">
-												<h3><a href="messages" title="">Jassica William</a></h3>
-												<p>Lorem ipsum dolor sit amet.</p>
-												<span>2 min ago</span>
-											</div>
-											<!--notification-info -->
-										</div>
-										<div class="notfication-details">
-											<div class="noty-user-img">
-												<img src="images/resources/ny-img3.png" alt="">
-											</div>
-											<div class="notification-info">
-												<h3><a href="messages" title="">Jassica William</a></h3>
-												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-													eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
-												<span>2 min ago</span>
-											</div>
-											<!--notification-info -->
-										</div>
+										
 										<div class="view-all-nots">
 											<a href="messages" title="">View All Messsages</a>
 										</div>
@@ -208,14 +183,14 @@
 										<ul class="user-fw-status">
 											<li>
 												<h4>Following</h4>
-												<span>34</span>
+												<span>{{following}}</span>
 											</li>
 											<li>
 												<h4>Followers</h4>
-												<span>155</span>
+												<span>{{followers}}</span>
 											</li>
 											<li>
-												<a href="#" title="">View Profile</a>
+												<a href="{{url}}" title="">View Profile</a>
 											</li>
 										</ul>
 									</div>
@@ -311,7 +286,7 @@
 										<!--post-st end-->
 									</div>
 									<!--post-topbar end-->
-									<div class="posts-section">
+									<div class="posts-section" id="myUL">
 										{{#posts}}
 										<div class="post-bar">
 											<div class="post_topbar">
@@ -331,7 +306,7 @@
 													<li><img src="images/icon9.png" alt=""><span>Madrid</span></li>
 												</ul>
 												<ul class="bk-links">
-													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
+													<li><a id="{{idpost}}" title=""><i onclick="like('{{idpost}}')" class="la la-heart-o"></i></a></li>
 													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
 												</ul>
 											</div>
@@ -339,19 +314,17 @@
 												<h3>{{title}}</h3>
 												<div class="row">
 													<ul class="image-store">
-														<li><img src="http://localhost:8080/api/imagepost/{{idpost}}"
-																alt=""></li>
+														<li><img src="http://localhost:8080/api/imagepost/{{idpost}}" alt=""></li>
 													</ul>
 												</div>
 												<div class="row">
 													<ul class="description-store">
 														<li>
-															<p>{{description}}
-																<a href="#" title="">view more</a>
-															</p>
+															<p>{{description}}</p>
 														</li>
-													</ul>
-												</div>
+													</ul>													
+												</div><br>
+												<a id="readmore{{idpost}}" class="btn btn-primary stretched-link" onclick="readmore('{{idpost}}')" title="">view more</a>
 											</div>
 										</div>
 										{{/posts}}
@@ -560,9 +533,6 @@
 		<!--post-project-popup end-->
 	</div>
 	<!--theme-layout end-->
-
-
-
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/popper.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -570,6 +540,8 @@
 	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
 	<script type="text/javascript" src="js/scrollbar.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/chat.js"></script>
 </body>
 
 </html>
