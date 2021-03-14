@@ -131,6 +131,7 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("products", products);
 		model.addAttribute("username",s.get().getUsername());
+		model.addAttribute("usernameview", request.getUserPrincipal().getName());
 		if(s.get().getImageprofile() != null) {
 			model.addAttribute("imageProfile","");
 			
@@ -151,7 +152,8 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("followers", followers.size());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("products", products);
-		model.addAttribute("username",s.get().getUsername());
+		model.addAttribute("username", s.get().getUsername());
+		model.addAttribute("usernameview", request.getUserPrincipal().getName());
 		if(s.get().getImageprofile() != null) {
 			model.addAttribute("imageProfile","");
 			
@@ -163,7 +165,12 @@ public class NavigationController implements ErrorController{
 	
 	
 	@GetMapping("/messages")
-	private String getMessages(Model model,HttpServletRequest request) {
+	private String getMessages(Model model,HttpServletRequest request,@RequestParam(required = false) String to) {
+		if(to != null) {
+			model.addAttribute("to",to);
+		}else {
+			model.addAttribute("to","null");
+		}
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		model.addAttribute("time","{{time}}");
