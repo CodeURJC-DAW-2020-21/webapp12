@@ -12,9 +12,13 @@ function connectToChat(userName) {
         stompClient.subscribe("/topic/messages/" + userName, function (response) {
             let data = JSON.parse(response.body);
 <<<<<<< develop
+<<<<<<< develop
 =======
             console.log(response.body);
 >>>>>>> Implemented chat function
+=======
+            console.log(response.body);
+>>>>>>> Implemented Email functions in App
             if (selectedUser === data.fromLogin) {
                 render(data.message, data.fromLogin);
             } else {
@@ -63,7 +67,10 @@ function selectUser(userName) {
     $('#selectedUserId').html('');
     $('#selectedUserId').append('Chat with ' + userName);
 <<<<<<< develop
+<<<<<<< develop
 =======
+=======
+>>>>>>> Implemented Email functions in App
     var ul = document.getElementById("messageList");
     ul.innerHTML = "";
     $.get("getChad",{from: $('#userName').text(), to: userName},function(data){
@@ -91,5 +98,8 @@ function selectUser(userName) {
             }
         });
     });
+<<<<<<< develop
 >>>>>>> Implemented chat function
+=======
+>>>>>>> Implemented Email functions in App
 }

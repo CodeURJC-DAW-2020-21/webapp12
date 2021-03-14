@@ -74,10 +74,14 @@ public class NavigationController {
 	@GetMapping("/messages")
 	private String getMessages(Model model,HttpServletRequest request) {
 <<<<<<< develop
+<<<<<<< develop
 		model.addAttribute("name",request.getUserPrincipal().getName());
 =======
 		model.addAttribute("username",request.getUserPrincipal().getName());
 >>>>>>> Implemented chat function
+=======
+		model.addAttribute("username",request.getUserPrincipal().getName());
+>>>>>>> Implemented Email functions in App
 		model.addAttribute("time","{{time}}");
 		model.addAttribute("messageOutput","{{messageOutput}}");
 		model.addAttribute("userName","{{userName}}");
@@ -109,4 +113,12 @@ public class NavigationController {
 		return "user-profile";
 	}
 	
+<<<<<<< develop
+=======
+	@GetMapping("/forgotPassword")
+	private String getForgotPassword() {
+		return "forgotPassword";
+	}
+	
+>>>>>>> Implemented Email functions in App
 }

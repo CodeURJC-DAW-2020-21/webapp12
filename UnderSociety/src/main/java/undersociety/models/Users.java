@@ -44,12 +44,17 @@ public class Users {
 		return idusers;
 	}
 <<<<<<< develop
+<<<<<<< develop
 	public void setId_users(int id_users) {
 		this.idusers = id_users;
 =======
 	public void setId_users(int idusers) {
 		this.idusers = idusers;
 >>>>>>> Implemented chat function
+=======
+	public void setId_users(int idusers) {
+		this.idusers = idusers;
+>>>>>>> Implemented Email functions in App
 	}
 	public String getEmail() {
 		return email;

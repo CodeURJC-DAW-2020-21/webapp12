@@ -24,10 +24,13 @@ function render(message, userName) {
     scrollToBottom();
     // responses
 <<<<<<< develop
+<<<<<<< develop
     console.log("Message: "+message);
     console.log("From to: "+userName);
 =======
 >>>>>>> Implemented chat function
+=======
+>>>>>>> Implemented Email functions in App
     var templateResponse = Handlebars.compile($("#message-response-template").html());
     var contextResponse = {
         response: message,
