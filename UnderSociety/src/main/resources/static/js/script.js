@@ -363,7 +363,7 @@ $(".profile").on("click", function () {
         success: function (result) {
             $(".process-comm").remove();
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages?to="+value.username+"' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages?to=" + value.username + "' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pageprofile + 1 <= result.totalPages) {
                 $(".posts-section").append("<div class='process-comm'><div class='spinner profile'><div class='bounce1'></div><div class='bounce2'></div><div class='bounce3'></div></div></div>");
@@ -383,7 +383,7 @@ $(".company").on("click", function () {
         success: function (result) {
             $(".process-comm").remove();
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages?to="+value.username+"' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages?to=" + value.username + "' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pagecompany + 1 <= result.totalPages) {
                 $(".posts-section").append("<div class='process-comm'><div class='spinner company'><div class='bounce1'></div><div class='bounce2'></div><div class='bounce3'></div></div></div>");
@@ -403,7 +403,7 @@ $(".posts").on("click", function () {
         success: function (result) {
             $(".process-comm").remove();
             $.each(result.content, function (index, value) {
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a href='#' title=''><i class='la la-bookmark'></i></a></li><li><a href='./messages?to="+value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost +"' class='btn btn-primary stretched-link' onclick='readmore("+ value.idpost +")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a href='#' title=''><i class='la la-bookmark'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepost + 1 <= result.totalPages) {
                 $(".posts-section").append("<div class='process-comm'><div class='spinner posts'><div class='bounce1'></div><div class='bounce2'></div><div class='bounce3'></div></div></div>");
@@ -412,23 +412,6 @@ $(".posts").on("click", function () {
         }
     });
 });
-
-$("#follow").on("click", function () {
-    let follow = $("#usernameto").text();
-    $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: ('/api/follow?username=' + follow),
-        success: function (response) {
-            if (response) {
-                $(".flww").css("background-color", "#e44d3a");
-            } else {
-                $(".flww").css("background-color", "#53D690");
-            }
-        }
-    });
-});
-
 
 function like(idpost) {
     var s = $("#" + idpost);
@@ -549,3 +532,24 @@ function searchBarCompany() {
         }
     }
 }
+
+function colorFollow(color) {
+    console.log("HOLAS");
+    $(".flww").css("background-color", color);
+}
+
+$("#follow").on("click", function () {
+    let follow = $("#usernameto").text();
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: ('/api/follow?username=' + follow),
+        success: function (response) {
+            if (response) {
+                $(".flww").css("background-color", "#e44d3a");
+            } else {
+                $(".flww").css("background-color", "#53D690");
+            }
+        }
+    });
+});

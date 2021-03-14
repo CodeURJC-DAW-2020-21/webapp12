@@ -121,45 +121,65 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/pageProfileUser")
 	private String getPageProfileUser(Model model,HttpServletRequest request, @RequestParam String username){
-		Optional<Users> s = userRepository.findByusername(username);
-		Page<Post> p = postsrepo.findByiduser(s.get(),PageRequest.of(0, 10,Sort.by("idpost").ascending()));
-		Page<Product> products = productrepo.findByiduser(s.get(),PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
-		List<UsersRelations> following = relationrepo.findByuserone(s.get());
-		List<UsersRelations> followers = relationrepo.findByusertwo(s.get());
+		Optional<Users> follow = userRepository.findByusername(username);
+		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
+		Page<Post> p = postsrepo.findByiduser(follow.get(),PageRequest.of(0, 10,Sort.by("idpost").ascending()));
+		Page<Product> products = productrepo.findByiduser(follow.get(),PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
+		List<UsersRelations> following = relationrepo.findByuserone(follow.get());
+		List<UsersRelations> followers = relationrepo.findByusertwo(follow.get());
 		model.addAttribute("following", following.size());
 		model.addAttribute("followers", followers.size());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("products", products);
-		model.addAttribute("username",s.get().getUsername());
+		model.addAttribute("username",follow.get().getUsername());
 		model.addAttribute("usernameview", request.getUserPrincipal().getName());
-		if(s.get().getImageprofile() != null) {
+		if(follow.get().getImageprofile() != null) {
 			model.addAttribute("imageProfile","");
 			
 		}else {
 			model.addAttribute("imageProfile","http://via.placeholder.com/1600x400");
 		}
 		model.addAttribute("postlist",p.getContent());
+    	UsersRelations save = new UsersRelations();
+    	save.setUserone(actual.get());
+    	save.setUsertwo(follow.get());
+    	UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual.get(), follow.get());
+    	if(s != null) {
+    		model.addAttribute("follow","#e44d3a");
+    	}else {
+    		model.addAttribute("follow","#53D690");
+    	}
 		return "user-profile";
 	}
 	
 	@GetMapping("/company-profile")
 	private String getCompanyProfile(Model model, HttpServletRequest request, @RequestParam String username) {
-		Optional<Users> s = userRepository.findByusername(username);
-		Page<Product> products = productrepo.findByiduser(s.get(),PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
-		List<UsersRelations> following = relationrepo.findByuserone(s.get());
-		List<UsersRelations> followers = relationrepo.findByusertwo(s.get());
+		Optional<Users> follow = userRepository.findByusername(username);
+		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
+		Page<Product> products = productrepo.findByiduser(follow.get(),PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
+		List<UsersRelations> following = relationrepo.findByuserone(follow.get());
+		List<UsersRelations> followers = relationrepo.findByusertwo(follow.get());
 		model.addAttribute("following", following.size());
 		model.addAttribute("followers", followers.size());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("products", products);
-		model.addAttribute("username", s.get().getUsername());
+		model.addAttribute("username", follow.get().getUsername());
 		model.addAttribute("usernameview", request.getUserPrincipal().getName());
-		if(s.get().getImageprofile() != null) {
+		if(follow.get().getImageprofile() != null) {
 			model.addAttribute("imageProfile","");
 			
 		}else {
 			model.addAttribute("imageProfile","images/servicio-multimamntenimiemto-edificios-752x369.jpg");
 		}
+		UsersRelations save = new UsersRelations();
+    	save.setUserone(actual.get());
+    	save.setUsertwo(follow.get());
+    	UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual.get(), follow.get());
+    	if(s != null) {
+    		model.addAttribute("follow","#e44d3a");
+    	}else {
+    		model.addAttribute("follow","#53D690");
+    	}
 		return "company-profile";
 	}
 	
