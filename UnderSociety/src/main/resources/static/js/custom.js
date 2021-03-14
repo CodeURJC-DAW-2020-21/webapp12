@@ -30,7 +30,11 @@ function render(message, userName) {
 =======
 >>>>>>> Implemented chat function
 =======
+<<<<<<< HEAD
 >>>>>>> Implemented Email functions in App
+=======
+>>>>>>> fixes to posts and product
+>>>>>>> SpringAppPostsAndProducts
     var templateResponse = Handlebars.compile($("#message-response-template").html());
     var contextResponse = {
         response: message,

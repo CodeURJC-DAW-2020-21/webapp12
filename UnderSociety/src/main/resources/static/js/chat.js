@@ -18,7 +18,11 @@ function connectToChat(userName) {
 >>>>>>> Implemented chat function
 =======
             console.log(response.body);
+<<<<<<< HEAD
 >>>>>>> Implemented Email functions in App
+=======
+>>>>>>> fixes to posts and product
+>>>>>>> SpringAppPostsAndProducts
             if (selectedUser === data.fromLogin) {
                 render(data.message, data.fromLogin);
             } else {
@@ -70,19 +74,23 @@ function selectUser(userName) {
 <<<<<<< develop
 =======
 =======
+<<<<<<< HEAD
 >>>>>>> Implemented Email functions in App
+=======
+>>>>>>> fixes to posts and product
+>>>>>>> SpringAppPostsAndProducts
     var ul = document.getElementById("messageList");
     ul.innerHTML = "";
     $.get("getChad",{from: $('#userName').text(), to: userName},function(data){
         data.forEach(element => {
-            console.log("FROM:"+element.iduser.user_name+" TO: "+element.iduserto.user_name+" message: "+element.message);
-            if (selectedUser === element.iduser.user_name) {
+            console.log("FROM:"+element.iduser.username+" TO: "+element.iduserto.username+" message: "+element.message);
+            if (selectedUser === element.iduser.username) {
                 console.log("jhon");
                 var templateResponse = Handlebars.compile($("#message-response-template").html());
                 var contextResponse = {
                     response: element.message,
                     time: getCurrentTime(),
-                    userName: element.iduser.user_name
+                    userName: element.iduser.username
                 };
                 $chatHistoryList.append(templateResponse(contextResponse));
             } else {
@@ -91,7 +99,7 @@ function selectUser(userName) {
                 var context = {
                     messageOutput: element.message,
                     time: getCurrentTime(),
-                    toUserName: element.iduser.user_name
+                    toUserName: element.iduser.username
                 };
 
                 $chatHistoryList.append(template(context));
@@ -101,5 +109,9 @@ function selectUser(userName) {
 <<<<<<< develop
 >>>>>>> Implemented chat function
 =======
+<<<<<<< HEAD
 >>>>>>> Implemented Email functions in App
+=======
+>>>>>>> fixes to posts and product
+>>>>>>> SpringAppPostsAndProducts
 }
