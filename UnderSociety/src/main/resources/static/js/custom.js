@@ -24,6 +24,7 @@ function render(message, userName) {
     scrollToBottom();
     // responses
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< develop
 <<<<<<< develop
     console.log("Message: "+message);
@@ -38,6 +39,8 @@ function render(message, userName) {
 >>>>>>> SpringAppPostsAndProducts
 =======
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+>>>>>>> SpringAppIndexPage
     var templateResponse = Handlebars.compile($("#message-response-template").html());
     var contextResponse = {
         response: message,

@@ -2,7 +2,11 @@ package undersociety.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.util.Optional;
+>>>>>>> SpringAppIndexPage
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,21 +15,32 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+<<<<<<< HEAD
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 <<<<<<< HEAD
 import org.springframework.stereotype.Controller;
 =======
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+>>>>>>> SpringAppIndexPage
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import org.springframework.web.bind.annotation.RestController;
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> SpringAppIndexPage
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -41,6 +56,7 @@ import undersociety.services.UserService;
 @RestController
 public class PostsController {
 		
+<<<<<<< HEAD
 	@Autowired
 	private PostRepository postsrepo;
 	
@@ -49,10 +65,15 @@ public class PostsController {
 	
 	@Autowired
 	private ProductRepository productrepo;
+=======
+	@Autowired
+	private PostRepository postsrepo;
+>>>>>>> SpringAppIndexPage
 
 	@Autowired
 	private UserService userservice;
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< develop
 	@GetMapping("/my-profile-feed")
@@ -68,6 +89,11 @@ public class PostsController {
 	@PostMapping("/api/uploadPost")
 	private void uploadPost(Model model,HttpServletResponse response, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+	
+	@PostMapping("/api/uploadPost")
+	private void uploadPost(Model model,HttpServletResponse response, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
+>>>>>>> SpringAppIndexPage
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
 		if(imag0 != null) {
@@ -78,6 +104,7 @@ public class PostsController {
 		response.sendRedirect("/index");
 	}
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 	@PostMapping("/uploadPost")
 	private String uploadPost(Model model, HttpServletRequest request,Post post) {
@@ -185,6 +212,21 @@ public class PostsController {
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
 				.contentLength(s.getUserimg().length())
+=======
+	@GetMapping("/api/getMorePosts")
+	private Page<Post> getMorePost(Pageable page){
+		return postsrepo.findAll(page);
+	}
+	
+	
+	@GetMapping("/api/imagepost/{idpost}")
+    private ResponseEntity<Object> downloadImagePost( @PathVariable int idpost) throws SQLException{
+		Optional<Post> p = postsrepo.findById(idpost);
+    	Resource file = new InputStreamResource(p.get().getImage().getBinaryStream());
+    	return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+				.contentLength(p.get().getImage().length())
+>>>>>>> SpringAppIndexPage
 				.body(file);
     }
 	

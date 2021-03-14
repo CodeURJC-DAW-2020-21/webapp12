@@ -37,6 +37,7 @@ public class Product {
 	@Column
 	private int price;
 	@OneToOne
+<<<<<<< HEAD
 	@JoinColumn(name = "idtag", referencedColumnName = "idtag")
 	private Tags idtag;
 	@OneToOne
@@ -44,6 +45,15 @@ public class Product {
 	private Tags idtagtwo;
 	@OneToOne
 	@JoinColumn(name = "idtagthree", referencedColumnName = "idtag")
+=======
+	@JoinColumn(name = "idtagone", referencedColumnName = "idtags")
+	private Tags idtagone;
+	@OneToOne
+	@JoinColumn(name = "idtagtwo", referencedColumnName = "idtags")
+	private Tags idtagtwo;
+	@OneToOne
+	@JoinColumn(name = "idtagthree", referencedColumnName = "idtags")
+>>>>>>> SpringAppIndexPage
 	private Tags idtagthree;
 	@Column
 	private String status;
@@ -98,10 +108,17 @@ public class Product {
 		this.price = price;
 	}
 	public Tags getIdtag() {
+<<<<<<< HEAD
 		return idtag;
 	}
 	public void setIdtag(Tags idtag) {
 		this.idtag = idtag;
+=======
+		return idtagone;
+	}
+	public void setIdtag(Tags idtag) {
+		this.idtagone = idtag;
+>>>>>>> SpringAppIndexPage
 	}
 	public Tags getIdtagtwo() {
 		return idtagtwo;
@@ -130,7 +147,11 @@ public class Product {
 		System.out.println(image1);
 		System.out.println(image2);
 		System.out.println(price);
+<<<<<<< HEAD
 		System.out.println(idtag);
+=======
+		System.out.println(idtagone);
+>>>>>>> SpringAppIndexPage
 		System.out.println(idtagtwo);
 		System.out.println(idtagthree);
 		System.out.println(status);

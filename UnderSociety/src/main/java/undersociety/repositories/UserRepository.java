@@ -14,10 +14,15 @@ public interface UserRepository extends JpaRepository<Users, Integer>{
 	
 	public Optional<Users> findByusername(String username);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public List<Users> findByuserprofile(boolean userprofile);
 	public List<Users> findBycompanyprofile(boolean companyprofile);
 =======
 	public Page<Users> findByuserprofile(boolean userprofile, Pageable page);
 	public Page<Users> findBycompanyprofile(boolean companyprofile, Pageable page);
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+	public Page<Users> findByuserprofile(boolean userprofile, Pageable page);
+	public Page<Users> findBycompanyprofile(boolean companyprofile, Pageable page);
+>>>>>>> SpringAppIndexPage
 }

@@ -18,6 +18,7 @@ function connectToChat(userName) {
         stompClient.subscribe("/topic/messages/" + userName, function (response) {
             let data = JSON.parse(response.body);
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< develop
 <<<<<<< develop
 =======
@@ -33,6 +34,9 @@ function connectToChat(userName) {
 =======
             console.log(response.body);
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+            console.log(response.body);
+>>>>>>> SpringAppIndexPage
             if (selectedUser === data.fromLogin) {
                 render(data.message, data.fromLogin);
             } else {
@@ -92,6 +96,7 @@ function selectUser(userName) {
     $('#selectedUserId').html('');
     $('#selectedUserId').append('Chat with ' + userName);
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< develop
 <<<<<<< develop
 =======
@@ -109,6 +114,11 @@ function selectUser(userName) {
     ul.innerHTML = "";
     $.get("api/getChad",{from: $('#userName').attr("placeholder"), to: userName},function(data){
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+    var ul = document.getElementById("messageList");
+    ul.innerHTML = "";
+    $.get("api/getChad",{from: $('#userName').attr("placeholder"), to: userName},function(data){
+>>>>>>> SpringAppIndexPage
         data.forEach(element => {
             console.log("FROM:"+element.iduser.username+" TO: "+element.iduserto.username+" message: "+element.message);
             if (selectedUser === element.iduser.username) {
@@ -117,10 +127,14 @@ function selectUser(userName) {
                 var contextResponse = {
                     response: element.message,
 <<<<<<< HEAD
+<<<<<<< HEAD
                     time: getCurrentTime(),
 =======
                     time: element.time,
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+                    time: element.time,
+>>>>>>> SpringAppIndexPage
                     userName: element.iduser.username
                 };
                 $chatHistoryList.append(templateResponse(contextResponse));
@@ -130,10 +144,14 @@ function selectUser(userName) {
                 var context = {
                     messageOutput: element.message,
 <<<<<<< HEAD
+<<<<<<< HEAD
                     time: getCurrentTime(),
 =======
                     time: element.time,
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+                    time: element.time,
+>>>>>>> SpringAppIndexPage
                     toUserName: element.iduser.username
                 };
 
@@ -141,6 +159,7 @@ function selectUser(userName) {
             }
         });
     });
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< develop
 >>>>>>> Implemented chat function
@@ -152,6 +171,8 @@ function selectUser(userName) {
 >>>>>>> SpringAppPostsAndProducts
 =======
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+>>>>>>> SpringAppIndexPage
 }
 
 $("#clearbutton").on("click", function(){

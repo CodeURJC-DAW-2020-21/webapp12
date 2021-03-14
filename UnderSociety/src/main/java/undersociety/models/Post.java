@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< develop
 =======
 import javax.persistence.JoinColumn;
@@ -21,6 +22,10 @@ import javax.persistence.Lob;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+>>>>>>> SpringAppIndexPage
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,11 +39,15 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< develop
 	private int id_post;
 =======
 	private int idpost;
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+	private int idpost;
+>>>>>>> SpringAppIndexPage
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
 	private Users iduser;
@@ -59,6 +68,7 @@ public class Post {
 	public Users getIduser() {
 		return iduser;
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
 	public void setId_user(Users id_user) {
 		this.id_user = id_user;
@@ -91,6 +101,10 @@ public class Post {
 	public void setIduser(Users iduser) {
 		this.iduser = iduser;
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+	public void setIduser(Users iduser) {
+		this.iduser = iduser;
+>>>>>>> SpringAppIndexPage
 	}
 	public String getTitle() {
 		return title;

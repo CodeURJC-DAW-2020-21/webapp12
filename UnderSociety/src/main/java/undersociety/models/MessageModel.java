@@ -5,9 +5,13 @@ public class MessageModel {
     private String message;
     private String fromLogin;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private String time;
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+    private String time;
+>>>>>>> SpringAppIndexPage
 
     public String getMessage() {
         return message;
@@ -25,9 +29,12 @@ public class MessageModel {
         this.fromLogin = fromLogin;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     @Override
 =======
+=======
+>>>>>>> SpringAppIndexPage
     
     public String getTime() {
 		return time;
@@ -38,15 +45,22 @@ public class MessageModel {
 	}
 
 	@Override
+<<<<<<< HEAD
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+>>>>>>> SpringAppIndexPage
     public String toString() {
         return "MessageModel{" +
                 "message='" + message + '\'' +
                 ", fromLogin='" + fromLogin + '\'' +
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 ", time='" + time + '\'' +
 >>>>>>> SpringAppUserAndCompanyPage
+=======
+                ", time='" + time + '\'' +
+>>>>>>> SpringAppIndexPage
                 '}';
     }
 }
