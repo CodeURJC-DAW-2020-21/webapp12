@@ -17,26 +17,7 @@ function connectToChat(userName) {
         console.log("connected to: " + frame);
         stompClient.subscribe("/topic/messages/" + userName, function (response) {
             let data = JSON.parse(response.body);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< develop
-<<<<<<< develop
-=======
             console.log(response.body);
->>>>>>> Implemented chat function
-=======
-            console.log(response.body);
-<<<<<<< HEAD
->>>>>>> Implemented Email functions in App
-=======
->>>>>>> fixes to posts and product
->>>>>>> SpringAppPostsAndProducts
-=======
-            console.log(response.body);
->>>>>>> SpringAppUserAndCompanyPage
-=======
-            console.log(response.body);
->>>>>>> SpringAppIndexPage
             if (selectedUser === data.fromLogin) {
                 render(data.message, data.fromLogin);
             } else {
@@ -95,30 +76,9 @@ function selectUser(userName) {
     }
     $('#selectedUserId').html('');
     $('#selectedUserId').append('Chat with ' + userName);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< develop
-<<<<<<< develop
-=======
-=======
-<<<<<<< HEAD
->>>>>>> Implemented Email functions in App
-=======
->>>>>>> fixes to posts and product
->>>>>>> SpringAppPostsAndProducts
-    var ul = document.getElementById("messageList");
-    ul.innerHTML = "";
-    $.get("getChad",{from: $('#userName').text(), to: userName},function(data){
-=======
     var ul = document.getElementById("messageList");
     ul.innerHTML = "";
     $.get("api/getChad",{from: $('#userName').attr("placeholder"), to: userName},function(data){
->>>>>>> SpringAppUserAndCompanyPage
-=======
-    var ul = document.getElementById("messageList");
-    ul.innerHTML = "";
-    $.get("api/getChad",{from: $('#userName').attr("placeholder"), to: userName},function(data){
->>>>>>> SpringAppIndexPage
         data.forEach(element => {
             console.log("FROM:"+element.iduser.username+" TO: "+element.iduserto.username+" message: "+element.message);
             if (selectedUser === element.iduser.username) {
@@ -126,15 +86,7 @@ function selectUser(userName) {
                 var templateResponse = Handlebars.compile($("#message-response-template").html());
                 var contextResponse = {
                     response: element.message,
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    time: getCurrentTime(),
-=======
                     time: element.time,
->>>>>>> SpringAppUserAndCompanyPage
-=======
-                    time: element.time,
->>>>>>> SpringAppIndexPage
                     userName: element.iduser.username
                 };
                 $chatHistoryList.append(templateResponse(contextResponse));
@@ -143,15 +95,7 @@ function selectUser(userName) {
                 var template = Handlebars.compile($("#message-template").html());
                 var context = {
                     messageOutput: element.message,
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    time: getCurrentTime(),
-=======
                     time: element.time,
->>>>>>> SpringAppUserAndCompanyPage
-=======
-                    time: element.time,
->>>>>>> SpringAppIndexPage
                     toUserName: element.iduser.username
                 };
 
@@ -159,20 +103,6 @@ function selectUser(userName) {
             }
         });
     });
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< develop
->>>>>>> Implemented chat function
-=======
-<<<<<<< HEAD
->>>>>>> Implemented Email functions in App
-=======
->>>>>>> fixes to posts and product
->>>>>>> SpringAppPostsAndProducts
-=======
->>>>>>> SpringAppUserAndCompanyPage
-=======
->>>>>>> SpringAppIndexPage
 }
 
 $("#clearbutton").on("click", function(){

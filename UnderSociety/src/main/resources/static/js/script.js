@@ -290,15 +290,6 @@ $(window).on("load", function() {
 
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> SpringAppUserAndCompanyPage
-=======
->>>>>>> SpringAppIndexPage
   $(document).on("click", "i.del" , function() {
         var input = $(this).parent().children('label').children();
         var imagepreview = $(this).parent().children('div');
@@ -328,26 +319,6 @@ $(window).on("load", function() {
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-
-
-=======
-
-
-
-
->>>>>>> SpringAppUserAndCompanyPage
-  $(document).ready(function() {
-
-    
-    var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-=======
 
 
 
@@ -359,7 +330,6 @@ $(window).on("load", function() {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
->>>>>>> SpringAppIndexPage
             reader.onload = function (e) {
                 $('.profile-pic').attr('src', e.target.result);
             }
@@ -377,21 +347,12 @@ $(window).on("load", function() {
        $(".file-upload").click();
     });
 });
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> SpringAppPostsAndProducts
-=======
-=======
->>>>>>> SpringAppIndexPage
 
 
 var pageprofile = 1;
 var pagecompany = 1;
-<<<<<<< HEAD
-=======
 var pagepost = 1;
 
->>>>>>> SpringAppIndexPage
 
 $(".profile").on("click", function(){
     size = 10;
@@ -428,9 +389,6 @@ $(".company").on("click", function(){
         }
     });
 });
-<<<<<<< HEAD
->>>>>>> SpringAppUserAndCompanyPage
-=======
 
 $(".posts").on("click", function(){
     size = 10;
@@ -451,4 +409,3 @@ $(".posts").on("click", function(){
         }
     });
 });
->>>>>>> SpringAppIndexPage

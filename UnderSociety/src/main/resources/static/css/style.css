@@ -1872,16 +1872,6 @@ main {
 	width: 100%;
 	color: #b2b2b2;
 	font-size: 14px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	border: 1px solid #e5e5e5;
-=======
->>>>>>> SpringAppPostsAndProducts
-=======
->>>>>>> SpringAppUserAndCompanyPage
-=======
->>>>>>> SpringAppIndexPage
 	margin-bottom: 20px;
 	font-weight: 500;
 }
@@ -2231,16 +2221,6 @@ select {
 	padding: 0 15px 0 40px;
 	color: #b2b2b2;
 	font-size: 14px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	border:1px solid #e5e5e5;
-=======
->>>>>>> SpringAppPostsAndProducts
-=======
->>>>>>> SpringAppUserAndCompanyPage
-=======
->>>>>>> SpringAppIndexPage
 }
 .sign_in_sec form select {
 	line-height: 40px;
@@ -5716,14 +5696,6 @@ ul {
     clear: both;
     height: 0;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> SpringAppUserAndCompanyPage
-=======
->>>>>>> SpringAppIndexPage
 
 
 
@@ -5870,12 +5842,6 @@ ul {
 	transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
 	color: #999;
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> SpringAppPostsAndProducts
-=======
-=======
->>>>>>> SpringAppIndexPage
 
 
 
@@ -5913,9 +5879,4 @@ ul {
   
   .round {
 	border-radius: 50%;
-<<<<<<< HEAD
   }
->>>>>>> SpringAppUserAndCompanyPage
-=======
-  }
->>>>>>> SpringAppIndexPage

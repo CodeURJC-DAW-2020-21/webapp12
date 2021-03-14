@@ -46,43 +46,15 @@ public class Users {
 	private String linktwitter;
 	@Column
 	private String linkinstagram;
+	@Lob
+	@JsonIgnore
+	private Blob imageprofile;
 	
 	public int getIdusers() {
 		return idusers;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< develop
-<<<<<<< develop
-<<<<<<< HEAD
-=======
-<<<<<<< develop
->>>>>>> SpringAppPostsAndProducts
-	public void setId_users(int id_users) {
-		this.idusers = id_users;
-=======
-	public void setId_users(int idusers) {
-=======
-	public void setIdusers(int idusers) {
->>>>>>> Fixes in INdex.html
-		this.idusers = idusers;
->>>>>>> Implemented chat function
-=======
-	public void setId_users(int idusers) {
-		this.idusers = idusers;
-<<<<<<< HEAD
->>>>>>> Implemented Email functions in App
-=======
->>>>>>> fixes to posts and product
->>>>>>> SpringAppPostsAndProducts
-=======
 	public void setIdusers(int idusers) {
 		this.idusers = idusers;
->>>>>>> SpringAppUserAndCompanyPage
-=======
-	public void setIdusers(int idusers) {
-		this.idusers = idusers;
->>>>>>> SpringAppIndexPage
 	}
 	public String getEmail() {
 		return email;
@@ -162,4 +134,11 @@ public class Users {
 	public void setLinkinstagram(String linkinstagram) {
 		this.linkinstagram = linkinstagram;
 	}
+	public Blob getImageprofile() {
+		return imageprofile;
+	}
+	public void setImageprofile(Blob imageprofile) {
+		this.imageprofile = imageprofile;
+	}
+	
 }

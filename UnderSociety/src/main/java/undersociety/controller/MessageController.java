@@ -37,27 +37,12 @@ public class MessageController {
         System.out.println("handling send message: " + message + " to: " + to);
         Users f = (Users) userservice.findByUser_name(message.getFromLogin());
     	Users t = (Users) userservice.findByUser_name(to);
-<<<<<<< HEAD
-<<<<<<< HEAD
-    	System.out.println("from: "+ f.getIdusers()+" to: " + t.getIdusers());
-=======
     	System.out.println("from: "+ f.getIdusers()+" to: " + t.getIdusers()+" time: "+message.getTime());
->>>>>>> SpringAppUserAndCompanyPage
-=======
-    	System.out.println("from: "+ f.getIdusers()+" to: " + t.getIdusers()+" time: "+message.getTime());
->>>>>>> SpringAppIndexPage
     	Message m = new Message();
     	m.setIduser(f);
     	m.setIduserto(t);
     	m.setMessage(message.getMessage());
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     	m.setTime(message.getTime());
->>>>>>> SpringAppUserAndCompanyPage
-=======
-    	m.setTime(message.getTime());
->>>>>>> SpringAppIndexPage
     	messagedb.save(m);
         boolean isExists = userservice.findByUser_nameExists(to);
         if (isExists) {
@@ -65,15 +50,7 @@ public class MessageController {
         }
     }
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-    @GetMapping("getChad")
-=======
     @GetMapping("/api/getChad")
->>>>>>> SpringAppUserAndCompanyPage
-=======
-    @GetMapping("/api/getChad")
->>>>>>> SpringAppIndexPage
     public List<Message> getChat(@RequestParam String from, @RequestParam String to) {
     	Users f = (Users) userservice.findByUser_name(from);
     	Users t = (Users) userservice.findByUser_name(to);

@@ -23,24 +23,6 @@ function cacheDOM() {
 function render(message, userName) {
     scrollToBottom();
     // responses
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< develop
-<<<<<<< develop
-    console.log("Message: "+message);
-    console.log("From to: "+userName);
-=======
->>>>>>> Implemented chat function
-=======
-<<<<<<< HEAD
->>>>>>> Implemented Email functions in App
-=======
->>>>>>> fixes to posts and product
->>>>>>> SpringAppPostsAndProducts
-=======
->>>>>>> SpringAppUserAndCompanyPage
-=======
->>>>>>> SpringAppIndexPage
     var templateResponse = Handlebars.compile($("#message-response-template").html());
     var contextResponse = {
         response: message,

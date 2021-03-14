@@ -40,35 +40,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers( "/fonts/**").permitAll();
 		 http.authorizeRequests().antMatchers("/sign-in").permitAll();
 		 http.authorizeRequests().antMatchers("/registerUser").permitAll();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< develop
-		 
-=======
-		 http.authorizeRequests().antMatchers("/forgotPassword").permitAll();
-		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
-<<<<<<< HEAD
-
->>>>>>> Implemented Email functions in App
-=======
-		 http.authorizeRequests().antMatchers("/errorpage").permitAll();
-		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
-
->>>>>>> fixes to posts and product
->>>>>>> SpringAppPostsAndProducts
-=======
-=======
->>>>>>> SpringAppIndexPage
 		 http.authorizeRequests().antMatchers("/registerCompany").permitAll();
 		 http.authorizeRequests().antMatchers("/forgotPassword").permitAll();
 		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
 		 http.authorizeRequests().antMatchers("/errorpage").permitAll();
 		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
 
-<<<<<<< HEAD
->>>>>>> SpringAppUserAndCompanyPage
-=======
->>>>>>> SpringAppIndexPage
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
 

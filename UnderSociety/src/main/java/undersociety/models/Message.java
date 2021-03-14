@@ -24,16 +24,8 @@ public class Message  implements Comparable<Message>{
 	private Users iduserto;
 	@Column
 	private String message;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	@Column
 	private String time;
->>>>>>> SpringAppUserAndCompanyPage
-=======
-	@Column
-	private String time;
->>>>>>> SpringAppIndexPage
 	
 	
 	public int getIdmessage() {
@@ -60,11 +52,6 @@ public class Message  implements Comparable<Message>{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> SpringAppIndexPage
 	
 	public String getTime() {
 		return time;
@@ -72,10 +59,6 @@ public class Message  implements Comparable<Message>{
 	public void setTime(String time) {
 		this.time = time;
 	}
-<<<<<<< HEAD
->>>>>>> SpringAppUserAndCompanyPage
-=======
->>>>>>> SpringAppIndexPage
 	@Override
 	public int compareTo(Message u) {
 		if (getIdmessage() == 0 || u.getIdmessage() == 0) {
