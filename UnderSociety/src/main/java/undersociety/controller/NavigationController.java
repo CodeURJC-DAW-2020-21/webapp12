@@ -212,8 +212,10 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/profile-account-setting")
 	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
+		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
+		model.addAttribute("followersList", relationrepo.findByuserone(actual.get()));
 		return "profile-account-setting";
 	}
 	

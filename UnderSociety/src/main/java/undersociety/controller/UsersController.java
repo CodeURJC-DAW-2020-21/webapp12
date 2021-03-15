@@ -149,4 +149,10 @@ public class UsersController {
     		return true;
     	}
     }
+    
+    @PostMapping("/api/unfollowlist")
+    public boolean follow(@RequestParam int idrelation) {
+    	relationrepo.deleteById(idrelation);
+    	return true;
+    }
 }

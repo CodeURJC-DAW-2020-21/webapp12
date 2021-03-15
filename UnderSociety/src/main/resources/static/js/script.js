@@ -653,6 +653,19 @@ $("#follow").on("click", function () {
     });
 });
 
+function unfollow(idfollow) {
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: ('/api/unfollowlist?idrelation=' + idfollow),
+        success: function (response) {
+            if(response){
+                $("#follower"+idfollow).remove();
+            }
+        }
+    });
+}
+
 function initIndex(username) {
     loadPosts();
     connectToChat(username,"null");
