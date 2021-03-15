@@ -47,6 +47,12 @@ public class Product {
 	private Tags idtagthree;
 	@Column
 	private String status;
+	@Column
+	private Boolean img0;
+	@Column
+	private Boolean img1;
+	@Column
+	private Boolean img2;
 	
 	
 	public int getIdproduct() {
@@ -121,19 +127,23 @@ public class Product {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public void view() {
-		System.out.println();
-		System.out.println(iduser);
-		System.out.println(title);
-		System.out.println(description);
-		System.out.println(image0);
-		System.out.println(image1);
-		System.out.println(image2);
-		System.out.println(price);
-		System.out.println(idtagone);
-		System.out.println(idtagtwo);
-		System.out.println(idtagthree);
-		System.out.println(status);
-		System.out.println();
+	
+	public Boolean getImg0() {
+		return img0;
+	}
+	public void setImg0(Boolean img0) {
+		this.img0 = img0;
+	}
+	public Boolean getImg1() {
+		return img1;
+	}
+	public void setImg1(Boolean img1) {
+		this.img1 = img1;
+	}
+	public Boolean getImg2() {
+		return img2;
+	}
+	public void setImg2(Boolean img2) {
+		this.img2 = img2;
 	}
 }

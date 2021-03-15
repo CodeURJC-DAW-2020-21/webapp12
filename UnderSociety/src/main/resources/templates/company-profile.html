@@ -28,7 +28,7 @@
 </head>
 
 
-<body onload="connectToChat('{{username}}')">
+<body onload="connectToChat('{{usernameview}}')">
 
 
 	<div class="wrapper">
@@ -110,7 +110,7 @@
 							<h3>Username</h3>
 							<div class="search_form">
 								<form>
-									<input type="text" name="search" placeholder="{{username}}" readonly>
+									<input type="text" name="search" placeholder="{{usernameview}}" readonly>
 								</form>
 							</div>
 							<h3>Online Status</h3>
@@ -180,7 +180,7 @@
 										<!--user-pro-img end-->
 										<div class="user_pro_status">
 											<ul class="flw-hr">
-												<li><a id="follow" title="" class="flww"><i class="la la-plus"></i>
+												<li><a id="follow" title="" class="flww" style="background-color: {{follow}};"><i class="la la-plus"></i>
 														Follow</a></li>
 											</ul>
 											<ul class="flw-status">
@@ -255,7 +255,7 @@
 													</ul>
 													<ul class="bk-links">
 														<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-														<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
+														<li><a href="./messages?to={{iduser.username}}" title=""><i class="la la-envelope"></i></a></li>
 													</ul>
 												</div>
 												<div class="job_descp">
@@ -385,7 +385,7 @@
 							<div class="col-lg-3">
 								<div class="right-sidebar">
 									<div class="message-btn">
-										<a href="#" title=""><i class="fa fa-envelope"></i> Messages</a>
+										<a href="./messages?to={{username}}" title=""><i class="fa fa-envelope"></i> Messages</a>
 									</div>
 									<div class="widget widget-portfolio">
 										<div class="wd-heady">

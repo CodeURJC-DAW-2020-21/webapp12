@@ -351,7 +351,7 @@ $(document).ready(function () {
 var pageprofile = 1;
 var pagecompany = 1;
 var pagepost = 1;
-
+var pageproduct = 1;
 
 $(".profile").on("click", function () {
     size = 10;
@@ -362,10 +362,12 @@ $(".profile").on("click", function () {
         url: ('/api/moreUsers?page=' + pageprofile + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages?to=" + value.username + "' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pageprofile + 1 <= result.totalPages) {
                 pageprofile++;
+            }else{
+                $(".process-comm").remove();
             }
         }
     });
@@ -380,10 +382,12 @@ $(".company").on("click", function () {
         url: ('/api/moreCompany?page=' + pagecompany + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul><li><a href='#' title='' class='follow'>Follow</a></li><li><a href='./messages?to=" + value.username + "' title='' class='message-us'><i class='fa fa-envelope'></i></a></li></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pagecompany + 1 <= result.totalPages) {
                 pagecompany++;
+            }else{
+                $(".process-comm").remove();
             }
         }
     });
@@ -397,34 +401,69 @@ $(".posts").on("click", function () {
         contentType: "application/json",
         url: ('/api/getMorePosts?page=' + pagepost + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
-            $(".process-comm").remove();
             $.each(result.content, function (index, value) {
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a href='#' title=''><i class='la la-bookmark'></i></a></li><li><a href='#' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost +"' class='btn btn-primary stretched-link' onclick='readmore("+ value.idpost +")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='la la-heart-o'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
-            $(".posts-section").append("<div class='process-comm'><div class='spinner posts'><div class='bounce1'></div><div class='bounce2'></div><div class='bounce3'></div></div></div>");
             if (pagepost + 1 <= result.totalPages) {
                 pagepost++;
+            }else{
+                $(".process-comm").remove();
             }
         }
     });
 });
 
-$("#follow").on("click", function () {
-    let follow = $("#usernameto").text();
+$(".products").on("click", function () {
+    size = 2;
+    sort = 'idproduct';
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
-        url: ('/api/follow?username=' + follow),
-        success: function (response) {
-            if (response) {
-                $(".flww").css("background-color", "#e44d3a");
-            } else {
-                $(".flww").css("background-color", "#53D690");
+        url: ('/api/getMoreProducts?page=' + pageproduct + '&size=' + size + '&sort=' + sort + '&direction=asc'),
+        success: function (result) {
+            $.each(result.content, function (index, value) {
+                console.log(value);
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='http://localhost:8080/api/imageprofile/" +value.iduser.username+ "' alt=''>";
+                base = base.concat("<div class='usy-name'><h3>" +value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li>");
+                base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='la la-bookmark'></i></a></li><li><a href='./messages?to=" +value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li>");
+                base = base.concat("</ul></div><div class='job_descp'><h3>" +value.title+ "</h3><div class='row'>");
+                base = base.concat("<div id='carouselExampleControls-" +value.idproduct+ "' class='carousel slide' data-ride='carousel'>");
+                base = base.concat("<div class='carousel-inner'>");
+                if(value.img0){
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='http://localhost:8080/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
+                }
+                if(value.img1){
+                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='http://localhost:8080/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
+                }
+                if(value.img2){
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='http://localhost:8080/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");
+                }
+                base = base.concat("</div>");
+                base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
+                base = base.concat("</div>");
+                base = base.concat("</div><div class='row'><ul class='description-store'><li><p>" +value.description+ "</p></li></ul></div><br><a id='readmore" +value.idproduct+ "' class='btn btn-primary stretched-link' onclick='readmore(" +value.idproduct+ ")' title=''>view more</a>");
+                base = base.concat("<ul class='skill-tags'>");
+                if(value.idtag != null){
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtag.description+ "</p></a></li>");
+                }
+                if(value.idtagtwo != null){
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagtwo.description+ "</p></a></li>");
+                }
+                if(value.idtagthree != null){
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagthree.description+ "</p></a></li>");
+                }
+                base = base.concat("</ul>");
+                base = base.concat("</div><div class='job-status-bar' style='background-color:#ec887a;'><div class='col-lg-3'><h3>" +value.status+ "</h3></div><div class='col-lg-3'><h3> " +value.price+ " $ </h3></div></div></div><!--post-bar end-->");
+                $(".posts-section").append(base);
+            });
+            if (pageproduct + 1 <= result.totalPages) {
+                pageproduct++;
+            }else{
+                $(".process-comm").remove();
             }
         }
     });
 });
-
 
 function like(idpost) {
     var s = $("#" + idpost);
@@ -434,6 +473,16 @@ function like(idpost) {
         s.children().attr("class", "la la-heart")
     }
 }
+
+function mark(idproduct) {
+    var s = $("#product" + idproduct);
+    if (s.children().attr("class") == "la la-bookmark") {
+        s.children().attr("class", "la la-check-circle");
+    } else {
+        s.children().attr("class", "la la-bookmark");
+    }
+}
+
 
 function clearAllFilter() {
     document.getElementById('word').value = '';
@@ -545,3 +594,24 @@ function searchBarCompany() {
         }
     }
 }
+
+function colorFollow(color) {
+    console.log("HOLAS");
+    $(".flww").css("background-color", color);
+}
+
+$("#follow").on("click", function () {
+    let follow = $("#usernameto").text();
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: ('/api/follow?username=' + follow),
+        success: function (response) {
+            if (response) {
+                $(".flww").css("background-color", "#e44d3a");
+            } else {
+                $(".flww").css("background-color", "#53D690");
+            }
+        }
+    });
+});
