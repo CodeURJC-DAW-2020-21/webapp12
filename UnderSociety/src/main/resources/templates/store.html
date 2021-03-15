@@ -284,7 +284,7 @@
 													
 														<div id="carouselExampleControls-{{idproduct}}" class="carousel slide" data-ride="carousel">
 															<div class="carousel-inner">
-																{{#image0}}
+															  {{#image0}}
 															  <div class="carousel-item active">
 																<img class="img-thumbnail" src="http://localhost:8080/api/imageProduct0/{{idproduct}}" alt="First slide">
 															  </div>
@@ -315,11 +315,12 @@
 													<ul class="description-store">
 														<li>
 															<p>{{description}}
-																<a href="#" title="">view more</a>
+																
 															</p>
 														</li>
 													</ul>
-												</div>
+												</div><br>
+												<a id="readmore{{idproduct}}" class="btn btn-primary stretched-link" onclick="readmore('{{idproduct}}')" title="">view more</a>
 												<ul class="skill-tags">
 													{{#idtagone}}
 													<li><a href="#" title="">
@@ -347,8 +348,15 @@
 												</div>
 											</div>
 										</div><!--post-bar end-->
-										{{/products}}		
+										{{/products}}	
 									</div><!--posts-section end-->
+									<div class="process-comm">
+										<div class="spinner products">
+											<div class="bounce1"></div>
+											<div class="bounce2"></div>
+											<div class="bounce3"></div>
+										</div>
+									</div>	
 								</div><!--main-ws-sec end-->
 							</div>
 							
