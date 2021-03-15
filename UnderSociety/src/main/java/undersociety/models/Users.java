@@ -139,6 +139,5 @@ public class Users {
 	}
 	public void setImageprofile(Blob imageprofile) {
 		this.imageprofile = imageprofile;
-	}
-	
+	}	
 }
