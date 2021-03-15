@@ -156,7 +156,7 @@ public class NavigationController implements ErrorController{
 	private String getCompanyProfile(Model model, HttpServletRequest request, @RequestParam String username) {
 		Optional<Users> follow = userRepository.findByusername(username);
 		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
-		Page<Product> products = productrepo.findByiduser(follow.get(),PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
+		Page<Product> products = productrepo.findByiduser(follow.get(),PageRequest.of(0, 2,Sort.by("idproduct").ascending()));
 		List<UsersRelations> following = relationrepo.findByuserone(follow.get());
 		List<UsersRelations> followers = relationrepo.findByusertwo(follow.get());
 		model.addAttribute("following", following.size());

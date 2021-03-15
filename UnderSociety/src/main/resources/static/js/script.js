@@ -402,7 +402,7 @@ $(".posts").on("click", function () {
         url: ('/api/getMorePosts?page=' + pagepost + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a href='#' title=''><i class='la la-bookmark'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='la la-heart-o'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepost + 1 <= result.totalPages) {
                 pagepost++;
@@ -414,7 +414,7 @@ $(".posts").on("click", function () {
 });
 
 $(".products").on("click", function () {
-    size = 10;
+    size = 2;
     sort = 'idproduct';
     $.ajax({
         type: "GET",
@@ -425,7 +425,7 @@ $(".products").on("click", function () {
                 console.log(value);
                 var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='http://localhost:8080/api/imageprofile/" +value.iduser.username+ "' alt=''>";
                 base = base.concat("<div class='usy-name'><h3>" +value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li>");
-                base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a href='#' title=''><i class='la la-bookmark'></i></a></li><li><a href='" +value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li>");
+                base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='la la-bookmark'></i></a></li><li><a href='./messages?to=" +value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li>");
                 base = base.concat("</ul></div><div class='job_descp'><h3>" +value.title+ "</h3><div class='row'>");
                 base = base.concat("<div id='carouselExampleControls-" +value.idproduct+ "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
@@ -473,6 +473,16 @@ function like(idpost) {
         s.children().attr("class", "la la-heart")
     }
 }
+
+function mark(idproduct) {
+    var s = $("#product" + idproduct);
+    if (s.children().attr("class") == "la la-bookmark") {
+        s.children().attr("class", "la la-check-circle");
+    } else {
+        s.children().attr("class", "la la-bookmark");
+    }
+}
+
 
 function clearAllFilter() {
     document.getElementById('word').value = '';
