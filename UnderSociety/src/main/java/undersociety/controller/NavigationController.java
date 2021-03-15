@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import undersociety.models.Post;
 import undersociety.models.Product;
+import undersociety.models.Tags;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
 import undersociety.repositories.PostRepository;
 import undersociety.repositories.ProductRepository;
+import undersociety.repositories.TagsRepository;
 import undersociety.repositories.UserRepository;
 import undersociety.repositories.UsersRelationsRepository;
 
@@ -44,6 +46,9 @@ public class NavigationController implements ErrorController{
 	
 	@Autowired
 	 private UserRepository userRepository;
+	
+	@Autowired
+	 private TagsRepository tagrepo;
 	
 	@GetMapping("/sign-in")
 	private String getSignIn() {
@@ -222,6 +227,13 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("username", request.getUserPrincipal().getName());
 		model.addAttribute("numpost", postsrepo.findAll().size());
 		List<Product> p = productrepo.findAll();
+		List<Tags> tag = tagrepo.findAll();
+		int elec = productrepo.findByidtagone(tag.get(0)).size();
+		int fur = productrepo.findByidtagtwo(tag.get(1)).size();
+		int appli = productrepo.findByidtagthree(tag.get(2)).size();
+		int book = productrepo.findByidtagfour(tag.get(3)).size();
+		int clot = productrepo.findByidtagfive(tag.get(4)).size();
+		int tproduct = p.size();
 		int sum = 0;
 		for (Product product : p) {
 			sum = sum + product.getPrice();
@@ -229,6 +241,11 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("sumstore", sum);
 		model.addAttribute("numproduct", productrepo.findAll().size());
 		model.addAttribute("sumuser", userRepository.findAll().size());
+		model.addAttribute("electronic", ((elec*100)/tproduct));
+		model.addAttribute("furniture", ((fur*100)/tproduct));
+		model.addAttribute("appliance", ((appli*100)/tproduct));
+		model.addAttribute("book", ((book*100)/tproduct));
+		model.addAttribute("clothe", ((clot*100)/tproduct));
 		return "admin";
 	}
 	
