@@ -220,6 +220,15 @@ public class NavigationController implements ErrorController{
 	@GetMapping("/admin")
 	private String getAdminpage(Model model, HttpServletRequest request) {
 		model.addAttribute("username", request.getUserPrincipal().getName());
+		model.addAttribute("numpost", postsrepo.findAll().size());
+		List<Product> p = productrepo.findAll();
+		int sum = 0;
+		for (Product product : p) {
+			sum = sum + product.getPrice();
+		}
+		model.addAttribute("sumstore", sum);
+		model.addAttribute("numproduct", productrepo.findAll().size());
+		model.addAttribute("sumuser", userRepository.findAll().size());
 		return "admin";
 	}
 	
