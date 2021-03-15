@@ -352,7 +352,7 @@ var pageprofile = 1;
 var pagecompany = 1;
 var pagepost = 1;
 var pageproduct = 1;
-
+var likes = [];
 $(".profile").on("click", function () {
     size = 10;
     sort = 'username';
@@ -393,16 +393,48 @@ $(".company").on("click", function () {
     });
 });
 
+function loadPosts() {
+    $.ajax({
+        type: "GET",
+        contentType: "data",
+        url: ('/api/getLikes'),
+        success: function (result) {
+            $.each(result, function (indexInArray, valueOfElement) { 
+                likes.push(valueOfElement.idpost.idpost);
+            });
+        }
+    });
+    $.ajax({
+        type: "GET",
+        contentType: "data",
+        url: ('/api/getPosts?page=0&size=10&sort=idpost&direction=asc'),
+        success: function (result) {
+            $.each(result.content, function (index, value) {
+                var icon = "la la-heart-o";
+                if(likes.includes(value.idpost)){
+                    icon = "la la-heart";
+                }
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='"+icon+"'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+            });
+        }
+    });
+}
+
 $(".posts").on("click", function () {
     size = 10;
     sort = 'idpost';
+    console.log(likes);
     $.ajax({
         type: "GET",
         contentType: "application/json",
         url: ('/api/getMorePosts?page=' + pagepost + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='la la-heart-o'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                var icon = "la la-heart-o";
+                if(likes.includes(value.idpost)){
+                    icon = "la la-heart";
+                }
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" +icon+ "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepost + 1 <= result.totalPages) {
                 pagepost++;
@@ -468,9 +500,15 @@ $(".products").on("click", function () {
 function like(idpost) {
     var s = $("#" + idpost);
     if (s.children().attr("class") == "la la-heart") {
-        s.children().attr("class", "la la-heart-o")
+        $.post( "/api/unlikePost?idpost="+idpost, function( data ) {
+            console.log(data);
+        });
+        s.children().attr("class", "la la-heart-o");
     } else {
-        s.children().attr("class", "la la-heart")
+        $.post( "/api/likePost?idpost="+idpost, function( data ) {
+            console.log("Holaa"+data);
+        });
+        s.children().attr("class", "la la-heart");
     }
 }
 
@@ -596,7 +634,6 @@ function searchBarCompany() {
 }
 
 function colorFollow(color) {
-    console.log("HOLAS");
     $(".flww").css("background-color", color);
 }
 
@@ -615,3 +652,8 @@ $("#follow").on("click", function () {
         }
     });
 });
+
+function initIndex(username) {
+    loadPosts();
+    connectToChat(username,"null");
+}

@@ -1,20 +1,21 @@
 package undersociety.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "post_like")
-public class PostLike {
-	
+@Table(name = "Post_likes")
+public class LikeAPost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idpostlike;
+	private int idlike;
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
 	private Users iduser;
@@ -22,11 +23,11 @@ public class PostLike {
 	@JoinColumn(name = "idpost", referencedColumnName = "idpost")
 	private Post idpost;
 	
-	public int getIdpostlike() {
-		return idpostlike;
+	public int getIdlike() {
+		return idlike;
 	}
-	public void setIdpostlike(int idpostlike) {
-		this.idpostlike = idpostlike;
+	public void setIdlike(int idlike) {
+		this.idlike = idlike;
 	}
 	public Users getIduser() {
 		return iduser;
@@ -40,4 +41,5 @@ public class PostLike {
 	public void setIdpost(Post idpost) {
 		this.idpost = idpost;
 	}
+	
 }

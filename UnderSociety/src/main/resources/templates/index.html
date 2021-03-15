@@ -28,7 +28,7 @@
 </head>
 
 
-<body onload="connectToChat('{{username}}')">
+<body onload="initIndex('{{username}}')">
 
 
 	<div class="wrapper">
@@ -287,48 +287,7 @@
 									</div>
 									<!--post-topbar end-->
 									<div class="posts-section" id="myUL">
-										{{#posts}}
-										<div class="post-bar">
-											<div class="post_topbar">
-												<div class="row usy-dt">
-													<div class="user-post-icon">
-														<img src="http://localhost:8080/api/imageprofile/{{iduser.username}}" alt="">
-													</div>
-													<div class="usy-name">
-														<h3>{{iduser.username}}</h3>
-													</div>
-												</div>
-
-											</div>
-											<div class="epi-sec">
-												<ul class="descp">
-													<li><img src="images/icon8.png" alt=""><span>Empresa</span></li>
-													<li><img src="images/icon9.png" alt=""><span>Madrid</span></li>
-												</ul>
-												<ul class="bk-links">
-													<li><a id="{{idpost}}" title=""><i onclick="like('{{idpost}}')" class="la la-heart-o"></i></a></li>
-													<li><a href="./messages?to={{iduser.username}}" title=""><i class="la la-envelope"></i></a></li>
-												</ul>
-											</div>
-											<div class="job_descp">
-												<h3>{{title}}</h3>
-												<div class="row">
-													<ul class="image-store">
-														<li><img src="http://localhost:8080/api/imagepost/{{idpost}}" alt=""></li>
-													</ul>
-												</div>
-												<div class="row">
-													<ul class="description-store">
-														<li>
-															<p>{{description}}</p>
-														</li>
-													</ul>													
-												</div><br>
-												<a id="readmore{{idpost}}" class="btn btn-primary stretched-link" onclick="readmore('{{idpost}}')" title="">view more</a>
-											</div>
-										</div>
-										{{/posts}}
-										<!--process-comm end-->
+										
 									</div>
 									<div class="process-comm">
 										<div class="spinner posts">

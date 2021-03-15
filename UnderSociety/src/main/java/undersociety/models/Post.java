@@ -64,14 +64,4 @@ public class Post {
 	public void setImage(Blob image) {
 		this.image = image;
 	}
-	
-	
-	public void view() {
-		System.out.println();
-		System.out.println(iduser);
-		System.out.println(title);
-		System.out.println(description);
-		System.out.println(image);
-		System.out.println();
-	}
 }
