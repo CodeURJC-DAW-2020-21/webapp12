@@ -207,7 +207,6 @@ public class NavigationController implements ErrorController{
 
 	@GetMapping("/store")
 	private String getStore(Model model, HttpServletRequest request) {
-		Page<Product> products = productrepo.findAll( PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "store";
@@ -220,6 +219,7 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		model.addAttribute("followersList", relationrepo.findByuserone(actual.get()));
+		model.addAttribute("productsList", listproductrepo.findByiduser(actual.get()));
 		return "profile-account-setting";
 	}
 	

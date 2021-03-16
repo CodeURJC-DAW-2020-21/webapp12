@@ -740,6 +740,14 @@ function unfollow(idfollow) {
     });
 }
 
+function dropProduct(idproduct) {
+    $.post( "/api/dropProduct?idproduct="+idproduct, function( response ) {
+        if(response){
+            $("#product"+idproduct).remove();
+        }
+    });
+}
+
 function initIndex(username) {
     loadPosts();
     connectToChat(username,"null");

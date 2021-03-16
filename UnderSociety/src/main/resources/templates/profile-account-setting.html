@@ -167,9 +167,9 @@
 						<div class="col-lg-3">
 							<div class="acc-leftbar">
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
-								    <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Setting</a>
-								    <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
+								    <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Bookmark Products</a>
 								    <a class="nav-item nav-link" id="nav-requests-tab" data-toggle="tab" href="#nav-requests" role="tab" aria-controls="nav-requests" aria-selected="false"><i class="fa fa-group"></i>Follows</a>
+									<a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
 								    <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
 								  </div>
 							</div><!--acc-leftbar end-->
@@ -178,36 +178,24 @@
 							<div class="tab-content" id="nav-tabContent">
 								<div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
 									<div class="acc-setting">
-										<h3>Account Setting</h3>
-										<form>
-											<div class="notbar">
-												<h4>Dark Mode</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id</p>
-												<div class="toggle-btn">
-													<a href="#" title=""><img src="images/up-btn.png" alt=""></a>
-												</div>
-											</div><!--notbar end-->
-											<div class="notbar">
-												<h4>Change Email</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id</p>
-												<div class="toggle-btn">
-													<a href="#" title=""><img src="images/up-btn.png" alt=""></a>
-												</div>
-											</div><!--notbar end-->
-											<div class="notbar">
-												<h4>Filters</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id</p>
-												<div class="toggle-btn">
-													<a href="#" title=""><img src="images/up-btn.png" alt=""></a>
-												</div>
-											</div><!--notbar end-->
-											<div class="save-stngs">
-												<ul>
-													<li><button type="submit">Save Setting</button></li>
-													<li><button type="submit">Restore Setting</button></li>
-												</ul>
-											</div><!--save-stngs end-->
-										</form>
+										<h3>Bookmark Products</h3>
+										<div class="requests-list">
+											{{#productsList}}  
+							  				<div class="request-details" id="product{{idproductlist}}">
+							  					<div class="noty-user-img">
+							  						<img src="http://localhost:8080/api/imageProduct0/{{idproduct.idproduct}}" alt="">
+							  					</div>
+							  					<div class="request-info">
+							  						<h3>{{idproduct.title}}</h3>
+							  					</div>
+							  					<div class="accept-feat">
+							  						<ul>
+							  							<li><button type="submit" class="close-req"><i onclick="dropProduct({{idproductlist}})" class="la la-close"></i></button></li>
+							  						</ul>
+							  					</div><!--accept-feat end-->
+							  				</div><!--request-detailse end-->
+											{{/productsList}}
+							  			</div><!--requests-list end-->
 									</div><!--acc-setting end-->
 								</div>
 							  	<div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">
