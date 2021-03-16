@@ -11,4 +11,5 @@ public interface UsersRelationsRepository extends JpaRepository<UsersRelations, 
 	public List<UsersRelations> findByuserone(Users userone);
 	public List<UsersRelations> findByusertwo(Users usertwo);
 	public UsersRelations findByuseroneAndUsertwo(Users userone, Users usertwo);
+	public Long deleteByUserone(Users userone);
 }

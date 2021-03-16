@@ -10,4 +10,5 @@ import undersociety.models.Users;
 
 public interface PostRepository extends JpaRepository<Post, Integer>{
 	public Page<Post> findByiduser(Users iduser, Pageable page);
+	public Long deleteByIduser(Users iduser);
 }

@@ -11,4 +11,5 @@ import undersociety.models.Users;
 public interface ListProductsRepository extends JpaRepository<ListProducts, Integer>{
 	public List<ListProducts> findByiduser(Users iduser);
 	public ListProducts findByiduserAndIdproduct(Users iduser, Product idproduct);
+	public Long deleteByIduser(Users iduser);
 }

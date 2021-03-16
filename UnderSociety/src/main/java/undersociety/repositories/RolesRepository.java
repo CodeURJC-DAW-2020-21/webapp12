@@ -9,4 +9,5 @@ import undersociety.models.Users;
 
 public interface RolesRepository extends JpaRepository<Roles, Integer>{
 	public List<Roles> findByiduser(Users iduser);
+	public Long deleteByIduser(Users iduser);
 }

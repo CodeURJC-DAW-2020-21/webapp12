@@ -25,6 +25,11 @@ import org.springframework.web.multipart.MultipartFile;
 import undersociety.models.Roles;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
+import undersociety.repositories.LikesRepository;
+import undersociety.repositories.ListProductsRepository;
+import undersociety.repositories.MessageRepository;
+import undersociety.repositories.PostRepository;
+import undersociety.repositories.ProductRepository;
 import undersociety.repositories.RolesRepository;
 import undersociety.repositories.UserRepository;
 import undersociety.repositories.UsersRelationsRepository;
@@ -45,7 +50,22 @@ import javax.servlet.http.HttpServletResponse;
 public class UsersController {
 	
 	@Autowired
+	private ProductRepository productrepo;
+	
+	@Autowired
+	private PostRepository postsrepo;
+	
+	@Autowired
+	private LikesRepository likerepo;
+	
+	@Autowired
+	private MessageRepository messagerepo;
+	
+	@Autowired
 	private UsersRelationsRepository relationrepo;
+	
+	@Autowired
+	private ListProductsRepository listproductrepo;
 	
 	@Autowired
 	 private UserRepository userRepository;
@@ -183,14 +203,26 @@ public class UsersController {
     @Modifying
     @PostMapping("/api/changePassword")
     public void modifyPassword(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    	
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	System.out.println("Change Password");
     	response.sendRedirect("/profile-account-setting");
     }
     
     
-    @DeleteMapping("/api/deleteUser")
+    @PostMapping("/api/deleteUser")
     public void deleteUser(HttpServletResponse response, HttpServletRequest request) throws IOException {
-    	System.out.println("Delete User");
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	System.out.println("Bokmarks: "+listproductrepo.deleteByIduser(prev));
+    	System.out.println("follows: "+relationrepo.deleteByUserone(prev));
+    	/*System.out.println("messages: "+messagerepo.deleteByIduser(prev));
+    	System.out.println("likes: "+likerepo.deleteByIduser(prev));
+    	System.out.println("post: "+postsrepo.deleteByIduser(prev));
+    	System.out.println("products: "+productrepo.deleteByIduser(prev));
+    	System.out.println("relations: "+relationrepo.deleteByUserone(prev));
+    	System.out.println("roles: "+rolesRepository.deleteByIduser(prev));
+    	userRepository.deleteById(prev.getIdusers());*/
+    	System.out.println("exito");
     	response.sendRedirect("/profile-account-setting");
     }
 }
