@@ -17,13 +17,12 @@
 	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+	<script type="text/javascript" src="js/list.min.js"></script>
+	<script type="text/javascript" src="js/handlebars.min.js"></script>
+	<script type="text/javascript" src="js/list.min.js"></script>
 	<!--    libs for stomp and sockjs-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<script type="text/javascript" src="js/sockjs.js"></script>
+	<script type="text/javascript" src="js/stomp.min.js"></script>
 	<!--    end libs for stomp and sockjs-->
 </head>
 
@@ -102,7 +101,7 @@
 					<!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="http://localhost:8080/api/imageprofile" alt="">
+							<img src="https://localhost:8443/api/imageprofile" alt="">
 							<a href="#" title=""></a>
 							<i class="la la-sort-down"></i>
 						</div>
@@ -170,7 +169,7 @@
 										<div class="user-profile">
 											<div class="username-dt">
 												<div class="usr-pic">
-													<img src="http://localhost:8080/api/imageprofile" alt="">
+													<img src="https://localhost:8443/api/imageprofile" alt="">
 												</div>
 											</div>
 											<!--username-dt end-->
@@ -203,42 +202,42 @@
 										<!--sd-title end-->
 										<div class="suggestions-list">
 											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
+												<img src="https://via.placeholder.com/35x35" alt="">
 												<div class="sgt-text">
 													<h4>Jessica William</h4>
 												</div>
 												<span><i class="la la-plus"></i></span>
 											</div>
 											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
+												<img src="https://via.placeholder.com/35x35" alt="">
 												<div class="sgt-text">
 													<h4>John Doe</h4>
 												</div>
 												<span><i class="la la-plus"></i></span>
 											</div>
 											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
+												<img src="https://via.placeholder.com/35x35" alt="">
 												<div class="sgt-text">
 													<h4>Poonam</h4>
 												</div>
 												<span><i class="la la-plus"></i></span>
 											</div>
 											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
+												<img src="https://via.placeholder.com/35x35" alt="">
 												<div class="sgt-text">
 													<h4>Bill Gates</h4>
 												</div>
 												<span><i class="la la-plus"></i></span>
 											</div>
 											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
+												<img src="https://via.placeholder.com/35x35" alt="">
 												<div class="sgt-text">
 													<h4>Jessica William</h4>
 												</div>
 												<span><i class="la la-plus"></i></span>
 											</div>
 											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
+												<img src="https://via.placeholder.com/35x35" alt="">
 												<div class="sgt-text">
 													<h4>John Doe</h4>
 												</div>
@@ -275,7 +274,7 @@
 								<div class="main-ws-sec">
 									<div class="post-topbar">
 										<div class="user-picy">
-											<img src="http://localhost:8080/api/imageprofile" alt="">
+											<img src="https://localhost:8443/api/imageprofile" alt="">
 										</div>
 										<div class="post-st">
 											<ul>
@@ -292,7 +291,7 @@
 												<div class="post_topbar">
 													<div class="row usy-dt">
 														<div class="user-post-icon">
-															<img src="http://localhost:8080/api/imageprofile/{{post.iduser.username}}"
+															<img src="https://localhost:8443/api/imageprofile/{{post.iduser.username}}"
 																alt="">
 														</div>
 														<div class="usy-name">
@@ -317,7 +316,7 @@
 													<h3>{{post.title}}</h3>
 													<div class="row">
 														<ul class="image-store">
-															<li><img src="http://localhost:8080/api/imagepost/{{post.idpost}}"
+															<li><img src="https://localhost:8443/api/imagepost/{{post.idpost}}"
 																	alt=""></li>
 														</ul>
 													</div>

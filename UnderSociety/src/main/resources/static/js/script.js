@@ -774,8 +774,3 @@ function dropProduct(idproduct) {
         }
     });
 }
-
-function initIndex(username) {
-    loadPosts();
-    connectToChat(username,"null");
-}
