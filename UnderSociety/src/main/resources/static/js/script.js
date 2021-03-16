@@ -489,6 +489,12 @@ function loadProducts(username) {
                 if(value.idtagthree != null){
                     base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagthree.description+ "</p></a></li>");
                 }
+                if(value.idtagfour != null){
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagfour.description+ "</p></a></li>");
+                }
+                if(value.idtagfive != null){
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagfive.description+ "</p></a></li>");
+                }
                 base = base.concat("</ul>");
                 base = base.concat("</div><div class='job-status-bar' style='background-color:#ec887a;'><div class='col-lg-3'><h3>" +value.status+ "</h3></div><div class='col-lg-3'><h3> " +value.price+ " $ </h3></div></div></div><!--post-bar end-->");
                 products.push(base);
