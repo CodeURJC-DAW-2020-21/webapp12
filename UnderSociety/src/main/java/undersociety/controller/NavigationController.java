@@ -233,8 +233,12 @@ public class NavigationController implements ErrorController{
 		int appli = productrepo.findByidtagthree(tag.get(2)).size();
 		int book = productrepo.findByidtagfour(tag.get(3)).size();
 		int clot = productrepo.findByidtagfive(tag.get(4)).size();
+		int instock = productrepo.findBystatus("in stock").size();
+		int available = productrepo.findBystatus("available").size();
+		int reserved = productrepo.findBystatus("reserved").size();
 		int tproduct = p.size();
 		int sum = 0;
+		
 		for (Product product : p) {
 			sum = sum + product.getPrice();
 		}
@@ -246,6 +250,9 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("appliance", ((appli*100)/tproduct));
 		model.addAttribute("book", ((book*100)/tproduct));
 		model.addAttribute("clothe", ((clot*100)/tproduct));
+		model.addAttribute("stock", ((instock*100)/tproduct));
+		model.addAttribute("available", ((available*100)/tproduct));
+		model.addAttribute("reserved", ((reserved*100)/tproduct));
 		return "admin";
 	}
 	
