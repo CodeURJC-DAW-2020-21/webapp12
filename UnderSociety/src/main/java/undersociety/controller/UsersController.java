@@ -201,27 +201,37 @@ public class UsersController {
     
     @Modifying
     @PostMapping("/api/changePassword")
-    public void modifyPassword(HttpServletResponse response, HttpServletRequest request) throws IOException {
-    	
+    public void modifyPassword(HttpServletResponse response, HttpServletRequest request, @RequestParam String oldpassword,  @RequestParam String newpassword,  @RequestParam String repeatpassword) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	System.out.println("Change Password" + prev);
-    	response.sendRedirect("/profile-account-setting");
+    	if(encoder.encode(newpassword) == prev.getPass()) {
+    		if(newpassword == repeatpassword) {
+    			prev.setPass(encoder.encode(newpassword));
+    			userRepository.save(prev);
+    	    	response.sendRedirect("/sign-in");
+    		}
+    	}
+    	response.sendRedirect("/error");
     }
     
     
     @PostMapping("/api/deleteUser")
-    public void deleteUser(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void deleteUser(HttpServletResponse response, HttpServletRequest request, @RequestParam String email, @RequestParam String pass, @RequestParam String explication) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	System.out.println("Bokmarks: "+listproductrepo.deleteByIduser(prev));
-    	System.out.println("follows: "+relationrepo.deleteByUserone(prev));
-    	System.out.println("messages: "+messagerepo.deleteByIduser(prev));
-    	System.out.println("likes: "+likerepo.deleteByIduser(prev));
-    	System.out.println("post: "+postsrepo.deleteByIduser(prev));
-    	System.out.println("products: "+productrepo.deleteByIduser(prev));
-    	System.out.println("relations: "+relationrepo.deleteByUserone(prev));
-    	System.out.println("roles: "+rolesRepository.deleteByIduser(prev));
-    	userRepository.deleteById(prev.getIdusers());
-    	System.out.println("exito");
-    	response.sendRedirect("/profile-account-setting");
+    	if(prev.getEmail().equalsIgnoreCase(email)) {
+    		System.out.println(email);
+    		if(encoder.encode(pass).equalsIgnoreCase(prev.getPass())) {
+    			listproductrepo.deleteByIduser(prev);
+    	    	relationrepo.deleteByUserone(prev);
+    	    	messagerepo.deleteByIduser(prev);
+    	    	likerepo.deleteByIduser(prev);
+    	    	postsrepo.deleteByIduser(prev);
+    	    	productrepo.deleteByIduser(prev);
+    	    	relationrepo.deleteByUserone(prev);
+    	    	rolesRepository.deleteByIduser(prev);
+    	    	userRepository.deleteById(prev.getIdusers());
+    	    	response.sendRedirect("/profile-account-setting");
+    		}
+    	}
+    	response.sendRedirect("/error");
     }
 }

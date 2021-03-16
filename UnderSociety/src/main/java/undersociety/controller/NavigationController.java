@@ -3,6 +3,7 @@ package undersociety.controller;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -66,7 +70,9 @@ public class NavigationController implements ErrorController{
 	 private TagsRepository tagrepo;
 	
 	@GetMapping("/sign-in")
-	private String getSignIn() {
+	private String getSignIn(Model model,HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		return "sign-in";
 	}
     
@@ -77,7 +83,9 @@ public class NavigationController implements ErrorController{
 	}
 	
 	@GetMapping("/index")
-	private String getIndex(Model model,HttpServletRequest request) {
+	private String getIndex(Model model,HttpServletRequest request) throws SQLException {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		Page<Post> p = postsrepo.findAll(PageRequest.of(0, 10,Sort.by("idpost").ascending()));
 		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).get());
 		List<PostModel> postsmodels = new ArrayList<>();
