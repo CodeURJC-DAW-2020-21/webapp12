@@ -1,23 +1,24 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>UnderSociety</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="stylesheet" type="text/css" href="css/animate.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
-<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
-<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/responsive.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8">
+	<title>UnderSociety</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+		type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
@@ -29,10 +30,10 @@
 
 
 <body onload="connectToChat('{{username}}')">
-	
+
 
 	<div class="wrapper">
-		
+
 
 
 		<header>
@@ -84,7 +85,7 @@
 										<a id="clearbutton" href="#" title="">Clear all</a>
 									</div>
 									<div class="nott-list">
-										
+
 										<div class="view-all-nots">
 											<a href="messages" title="">View All Messsages</a>
 										</div>
@@ -134,7 +135,7 @@
 									</div>
 								</li>
 							</ul>
-							
+
 							<!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
@@ -167,100 +168,137 @@
 						<div class="col-lg-3">
 							<div class="acc-leftbar">
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
-								    <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Bookmark Products</a>
-								    <a class="nav-item nav-link" id="nav-requests-tab" data-toggle="tab" href="#nav-requests" role="tab" aria-controls="nav-requests" aria-selected="false"><i class="fa fa-group"></i>Follows</a>
-									<a class="nav-item nav-link" id="nav-modify-tab" data-toggle="tab" href="#nav-modify" role="tab" aria-controls="nav-modify" aria-selected="false"><i class="fa fa-address-book-o"></i>Modify Information User</a>
-									<a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
-								    <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
-								  </div>
-							</div><!--acc-leftbar end-->
+									<a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab"
+										href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i
+											class="fa fa-cart-arrow-down"></i>Bookmark Products</a>
+									<a class="nav-item nav-link" id="nav-requests-tab" data-toggle="tab"
+										href="#nav-requests" role="tab" aria-controls="nav-requests"
+										aria-selected="false"><i class="fa fa-group"></i>Follows</a>
+									<a class="nav-item nav-link" id="nav-modify-tab" data-toggle="tab"
+										href="#nav-modify" role="tab" aria-controls="nav-modify"
+										aria-selected="false"><i class="fa fa-address-card-o"></i>Modify Information
+										User</a>
+									<a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab"
+										href="#nav-password" role="tab" aria-controls="nav-password"
+										aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
+									<a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
+										href="#nav-deactivate" role="tab" aria-controls="nav-deactivate"
+										aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
+								</div>
+							</div>
+							<!--acc-leftbar end-->
 						</div>
 						<div class="col-lg-9">
 							<div class="tab-content" id="nav-tabContent">
-								<div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
+								<div class="tab-pane fade show active" id="nav-acc" role="tabpanel"
+									aria-labelledby="nav-acc-tab">
 									<div class="acc-setting">
 										<h3>Bookmark Products</h3>
 										<div class="requests-list">
-											{{#productsList}}  
-							  				<div class="request-details" id="product{{idproductlist}}">
-							  					<div class="noty-user-img">
-							  						<img src="http://localhost:8080/api/imageProduct0/{{idproduct.idproduct}}" alt="">
-							  					</div>
-							  					<div class="request-info">
-							  						<h3>{{idproduct.title}}</h3>
-							  					</div>
-							  					<div class="accept-feat">
-							  						<ul>
-							  							<li><button type="submit" class="close-req"><i onclick="dropProduct({{idproductlist}})" class="la la-close"></i></button></li>
-							  						</ul>
-							  					</div><!--accept-feat end-->
-							  				</div><!--request-detailse end-->
+											{{#productsList}}
+											<div class="request-details" id="product{{idproductlist}}">
+												<div class="noty-user-img">
+													<img src="http://localhost:8080/api/imageProduct0/{{idproduct.idproduct}}"
+														alt="">
+												</div>
+												<div class="request-info">
+													<h3>{{idproduct.title}}</h3>
+												</div>
+												<div class="accept-feat">
+													<ul>
+														<li><button type="submit" class="close-req"><i
+																	onclick="dropProduct({{idproductlist}})"
+																	class="la la-close"></i></button></li>
+													</ul>
+												</div>
+												<!--accept-feat end-->
+											</div>
+											<!--request-detailse end-->
 											{{/productsList}}
-							  			</div><!--requests-list end-->
-									</div><!--acc-setting end-->
+										</div>
+										<!--requests-list end-->
+									</div>
+									<!--acc-setting end-->
 								</div>
-							  	<div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">
-							  		<div class="acc-setting">
-							  			<h3>Profile Status</h3>
-							  			<div class="profile-bx-details">
-							  				<div class="row">
-							  					<div class="col-lg-3 col-md-6 col-sm-12">
-							  						<div class="profile-bx-info">
-							  							<div class="pro-bx">
-							  								<img src="images/pro-icon1.png" alt="">
-							  								<div class="bx-info">
-							  									<h3>$5,145</h3>
-							  									<h5>Total Income</h5>
-							  								</div><!--bx-info end-->
-							  							</div><!--pro-bx end-->
-							  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-							  						</div><!--profile-bx-info end-->
-							  					</div>
-							  					<div class="col-lg-3 col-md-6 col-sm-12">
-							  						<div class="profile-bx-info">
-							  							<div class="pro-bx">
-							  								<img src="images/pro-icon2.png" alt="">
-							  								<div class="bx-info">
-							  									<h3>$4,745</h3>
-							  									<h5>Widthraw</h5>
-							  								</div><!--bx-info end-->
-							  							</div><!--pro-bx end-->
-							  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-							  						</div><!--profile-bx-info end-->
-							  					</div>
-							  					<div class="col-lg-3 col-md-6 col-sm-12">
-							  						<div class="profile-bx-info">
-							  							<div class="pro-bx">
-							  								<img src="images/pro-icon3.png" alt="">
-							  								<div class="bx-info">
-							  									<h3>$1,145</h3>
-							  									<h5>Sent</h5>
-							  								</div><!--bx-info end-->
-							  							</div><!--pro-bx end-->
-							  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-							  						</div><!--profile-bx-info end-->
-							  					</div>
-							  					<div class="col-lg-3 col-md-6 col-sm-12">
-							  						<div class="profile-bx-info">
-							  							<div class="pro-bx">
-							  								<img src="images/pro-icon4.png" alt="">
-							  								<div class="bx-info">
-							  									<h3>130</h3>
-							  									<h5>Total Projects</h5>
-							  								</div><!--bx-info end-->
-							  							</div><!--pro-bx end-->
-							  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-							  						</div><!--profile-bx-info end-->
-							  					</div>
-							  				</div>
-							  			</div><!--profile-bx-details end-->
-							  			<div class="pro-work-status">
-							  				<!-- <h4>Work Status  -  Last Months Working Status</h4> -->
-							  			</div><!--pro-work-status end-->
-							  		</div><!--acc-setting end-->
-							  	</div>
-							  	<div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
-							  		<div class="acc-setting">
+								<div class="tab-pane fade" id="nav-status" role="tabpanel"
+									aria-labelledby="nav-status-tab">
+									<div class="acc-setting">
+										<h3>Profile Status</h3>
+										<div class="profile-bx-details">
+											<div class="row">
+												<div class="col-lg-3 col-md-6 col-sm-12">
+													<div class="profile-bx-info">
+														<div class="pro-bx">
+															<img src="images/pro-icon1.png" alt="">
+															<div class="bx-info">
+																<h3>$5,145</h3>
+																<h5>Total Income</h5>
+															</div>
+															<!--bx-info end-->
+														</div>
+														<!--pro-bx end-->
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+													</div>
+													<!--profile-bx-info end-->
+												</div>
+												<div class="col-lg-3 col-md-6 col-sm-12">
+													<div class="profile-bx-info">
+														<div class="pro-bx">
+															<img src="images/pro-icon2.png" alt="">
+															<div class="bx-info">
+																<h3>$4,745</h3>
+																<h5>Widthraw</h5>
+															</div>
+															<!--bx-info end-->
+														</div>
+														<!--pro-bx end-->
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+													</div>
+													<!--profile-bx-info end-->
+												</div>
+												<div class="col-lg-3 col-md-6 col-sm-12">
+													<div class="profile-bx-info">
+														<div class="pro-bx">
+															<img src="images/pro-icon3.png" alt="">
+															<div class="bx-info">
+																<h3>$1,145</h3>
+																<h5>Sent</h5>
+															</div>
+															<!--bx-info end-->
+														</div>
+														<!--pro-bx end-->
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+													</div>
+													<!--profile-bx-info end-->
+												</div>
+												<div class="col-lg-3 col-md-6 col-sm-12">
+													<div class="profile-bx-info">
+														<div class="pro-bx">
+															<img src="images/pro-icon4.png" alt="">
+															<div class="bx-info">
+																<h3>130</h3>
+																<h5>Total Projects</h5>
+															</div>
+															<!--bx-info end-->
+														</div>
+														<!--pro-bx end-->
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+													</div>
+													<!--profile-bx-info end-->
+												</div>
+											</div>
+										</div>
+										<!--profile-bx-details end-->
+										<div class="pro-work-status">
+											<!-- <h4>Work Status  -  Last Months Working Status</h4> -->
+										</div>
+										<!--pro-work-status end-->
+									</div>
+									<!--acc-setting end-->
+								</div>
+								<div class="tab-pane fade" id="nav-password" role="tabpanel"
+									aria-labelledby="nav-password-tab">
+									<div class="acc-setting">
 										<h3>Account Setting</h3>
 										<form>
 											<div class="cp-field">
@@ -280,7 +318,8 @@
 											<div class="cp-field">
 												<h5>Repeat Password</h5>
 												<div class="cpp-fiel">
-													<input type="text" name="repeat-password" placeholder="Repeat Password">
+													<input type="text" name="repeat-password"
+														placeholder="Repeat Password">
 													<i class="fa fa-lock"></i>
 												</div>
 											</div>
@@ -292,113 +331,151 @@
 													<li><button type="submit">Save Setting</button></li>
 													<li><button type="submit">Restore Setting</button></li>
 												</ul>
-											</div><!--save-stngs end-->
+											</div>
+											<!--save-stngs end-->
 										</form>
-									</div><!--acc-setting end-->
-							  	</div>
-							  	<div class="tab-pane fade" id="nav-notification" role="tabpanel" aria-labelledby="nav-notification-tab">
-							  		<div class="acc-setting">
-							  			<h3>Notifications</h3>
-							  			<div class="notifications-list">
-							  				<div class="notfication-details">
-								  				<div class="noty-user-img">
-								  					<img src="http://via.placeholder.com/35x35" alt="">
-								  				</div>
-								  				<div class="notification-info">
-								  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  				<div class="notfication-details">
-								  				<div class="noty-user-img">
-								  					<img src="http://via.placeholder.com/35x35" alt="">
-								  				</div>
-								  				<div class="notification-info">
-								  					<h3><a href="#" title="">Poonam Verma</a> Bid on your Latest project.</h3>
-								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  				<div class="notfication-details">
-								  				<div class="noty-user-img">
-								  					<img src="http://via.placeholder.com/35x35" alt="">
-								  				</div>
-								  				<div class="notification-info">
-								  					<h3><a href="#" title="">Tonney Dhman</a> Comment on your project.</h3>
-								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  				<div class="notfication-details">
-								  				<div class="noty-user-img">
-								  					<img src="http://via.placeholder.com/35x35" alt="">
-								  				</div>
-								  				<div class="notification-info">
-								  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  				<div class="notfication-details">
-								  				<div class="noty-user-img">
-								  					<img src="http://via.placeholder.com/35x35" alt="">
-								  				</div>
-								  				<div class="notification-info">
-								  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  				<div class="notfication-details">
-								  				<div class="noty-user-img">
-								  					<img src="http://via.placeholder.com/35x35" alt="">
-								  				</div>
-								  				<div class="notification-info">
-								  					<h3><a href="#" title="">Poonam Verma </a> Bid on your Latest project.</h3>
-								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  				<div class="notfication-details">
-								  				<div class="noty-user-img">
-								  					<img src="http://via.placeholder.com/35x35" alt="">
-								  				</div>
-								  				<div class="notification-info">
-								  					<h3><a href="#" title="">Tonney Dhman</a> Comment on your project</h3>
-								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  				<div class="notfication-details">
-								  				<div class="noty-user-img">
-								  					<img src="http://via.placeholder.com/35x35" alt="">
-								  				</div>
-								  				<div class="notification-info">
-								  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-								  					<span>2 min ago</span>
-								  				</div><!--notification-info -->
-							  				</div><!--notfication-details end-->
-							  			</div><!--notifications-list end-->
-							  		</div><!--acc-setting end-->
-							  	</div>
-							  	<div class="tab-pane fade" id="nav-requests" role="tabpanel" aria-labelledby="nav-requests-tab">
-							  		<div class="acc-setting">
-							  			<h3>Follows</h3>
-							  			<div class="requests-list">
-											{{#followersList}}  
-							  				<div class="request-details" id="follower{{iduserrelation}}">
-							  					<div class="noty-user-img">
-							  						<img src="http://localhost:8080/api/imageprofile/{{usertwo.username}}" alt="">
-							  					</div>
-							  					<div class="request-info">
-							  						<h3>{{usertwo.username}}</h3>
-							  					</div>
-							  					<div class="accept-feat">
-							  						<ul>
-							  							<li><button type="submit" class="close-req"><i onclick="unfollow({{iduserrelation}})" class="la la-close"></i></button></li>
-							  						</ul>
-							  					</div><!--accept-feat end-->
-							  				</div><!--request-detailse end-->
+									</div>
+									<!--acc-setting end-->
+								</div>
+								<div class="tab-pane fade" id="nav-notification" role="tabpanel"
+									aria-labelledby="nav-notification-tab">
+									<div class="acc-setting">
+										<h3>Notifications</h3>
+										<div class="notifications-list">
+											<div class="notfication-details">
+												<div class="noty-user-img">
+													<img src="http://via.placeholder.com/35x35" alt="">
+												</div>
+												<div class="notification-info">
+													<h3><a href="#" title="">Jassica William</a> Comment on your
+														project.</h3>
+													<span>2 min ago</span>
+												</div>
+												<!--notification-info -->
+											</div>
+											<!--notfication-details end-->
+											<div class="notfication-details">
+												<div class="noty-user-img">
+													<img src="http://via.placeholder.com/35x35" alt="">
+												</div>
+												<div class="notification-info">
+													<h3><a href="#" title="">Poonam Verma</a> Bid on your Latest
+														project.</h3>
+													<span>2 min ago</span>
+												</div>
+												<!--notification-info -->
+											</div>
+											<!--notfication-details end-->
+											<div class="notfication-details">
+												<div class="noty-user-img">
+													<img src="http://via.placeholder.com/35x35" alt="">
+												</div>
+												<div class="notification-info">
+													<h3><a href="#" title="">Tonney Dhman</a> Comment on your project.
+													</h3>
+													<span>2 min ago</span>
+												</div>
+												<!--notification-info -->
+											</div>
+											<!--notfication-details end-->
+											<div class="notfication-details">
+												<div class="noty-user-img">
+													<img src="http://via.placeholder.com/35x35" alt="">
+												</div>
+												<div class="notification-info">
+													<h3><a href="#" title="">Jassica William</a> Comment on your
+														project.</h3>
+													<span>2 min ago</span>
+												</div>
+												<!--notification-info -->
+											</div>
+											<!--notfication-details end-->
+											<div class="notfication-details">
+												<div class="noty-user-img">
+													<img src="http://via.placeholder.com/35x35" alt="">
+												</div>
+												<div class="notification-info">
+													<h3><a href="#" title="">Jassica William</a> Comment on your
+														project.</h3>
+													<span>2 min ago</span>
+												</div>
+												<!--notification-info -->
+											</div>
+											<!--notfication-details end-->
+											<div class="notfication-details">
+												<div class="noty-user-img">
+													<img src="http://via.placeholder.com/35x35" alt="">
+												</div>
+												<div class="notification-info">
+													<h3><a href="#" title="">Poonam Verma </a> Bid on your Latest
+														project.</h3>
+													<span>2 min ago</span>
+												</div>
+												<!--notification-info -->
+											</div>
+											<!--notfication-details end-->
+											<div class="notfication-details">
+												<div class="noty-user-img">
+													<img src="http://via.placeholder.com/35x35" alt="">
+												</div>
+												<div class="notification-info">
+													<h3><a href="#" title="">Tonney Dhman</a> Comment on your project
+													</h3>
+													<span>2 min ago</span>
+												</div>
+												<!--notification-info -->
+											</div>
+											<!--notfication-details end-->
+											<div class="notfication-details">
+												<div class="noty-user-img">
+													<img src="http://via.placeholder.com/35x35" alt="">
+												</div>
+												<div class="notification-info">
+													<h3><a href="#" title="">Jassica William</a> Comment on your
+														project.</h3>
+													<span>2 min ago</span>
+												</div>
+												<!--notification-info -->
+											</div>
+											<!--notfication-details end-->
+										</div>
+										<!--notifications-list end-->
+									</div>
+									<!--acc-setting end-->
+								</div>
+								<div class="tab-pane fade" id="nav-requests" role="tabpanel"
+									aria-labelledby="nav-requests-tab">
+									<div class="acc-setting">
+										<h3>Follows</h3>
+										<div class="requests-list">
+											{{#followersList}}
+											<div class="request-details" id="follower{{iduserrelation}}">
+												<div class="noty-user-img">
+													<img src="http://localhost:8080/api/imageprofile/{{usertwo.username}}"
+														alt="">
+												</div>
+												<div class="request-info">
+													<h3>{{usertwo.username}}</h3>
+												</div>
+												<div class="accept-feat">
+													<ul>
+														<li><button type="submit" class="close-req"><i
+																	onclick="unfollow({{iduserrelation}})"
+																	class="la la-close"></i></button></li>
+													</ul>
+												</div>
+												<!--accept-feat end-->
+											</div>
+											<!--request-detailse end-->
 											{{/followersList}}
-							  			</div><!--requests-list end-->
-							  		</div><!--acc-setting end-->
-							  	</div>
-							  	<div class="tab-pane fade" id="nav-deactivate" role="tabpanel" aria-labelledby="nav-deactivate-tab">
-							  		<div class="acc-setting">
+										</div>
+										<!--requests-list end-->
+									</div>
+									<!--acc-setting end-->
+								</div>
+								<div class="tab-pane fade" id="nav-deactivate" role="tabpanel"
+									aria-labelledby="nav-deactivate-tab">
+									<div class="acc-setting">
 										<h3>Deactivate Account</h3>
 										<form>
 											<div class="cp-field">
@@ -427,62 +504,89 @@
 													</label>
 													<small>Email option out</small>
 												</div>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id,</p>
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+													pretium nulla quis erat dapibus, varius hendrerit neque suscipit.
+													Integer in ex euismod, posuere lectus id,</p>
 											</div>
 											<div class="save-stngs pd3">
 												<ul>
 													<li><button type="submit">Save Setting</button></li>
 													<li><button type="submit">Restore Setting</button></li>
 												</ul>
-											</div><!--save-stngs end-->
+											</div>
+											<!--save-stngs end-->
 										</form>
-									</div><!--acc-setting end-->
-							  	</div>
-								<div class="tab-pane fade" id="nav-modify" role="tabpanel" aria-labelledby="nav-modify-tab">
+									</div>
+									<!--acc-setting end-->
+								</div>
+								<div class="tab-pane fade" id="nav-modify" role="tabpanel"
+									aria-labelledby="nav-modify-tab">
 									<div class="acc-setting">
-									  <h3>Information User</h3>
-									  <form>
-										  <div class="cp-field">
-											  <h5>Email</h5>
-											  <div class="cpp-fiel">
-												  <input type="text" name="email" placeholder="Email">
-												  <i class="fa fa-envelope"></i>
-											  </div>
-										  </div>
-										  <div class="cp-field">
-											  <h5>Password</h5>
-											  <div class="cpp-fiel">
-												  <input type="password" name="password" placeholder="Password">
-												  <i class="fa fa-lock"></i>
-											  </div>
-										  </div>
-										  <div class="cp-field">
-											  <h5>Please Explain Further</h5>
-											  <textarea></textarea>
-										  </div>
-										  <div class="cp-field">
-											  <div class="fgt-sec">
-												  <input type="checkbox" name="cc" id="c4">
-												  <label for="c4">
-													  <span></span>
-												  </label>
-												  <small>Email option out</small>
-											  </div>
-											  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id,</p>
-										  </div>
-										  <div class="save-stngs pd3">
-											  <ul>
-												  <li><button type="submit">Save Setting</button></li>
-												  <li><button type="submit">Restore Setting</button></li>
-											  </ul>
-										  </div><!--save-stngs end-->
-									  </form>
-								  </div><!--acc-setting end-->
+										<h3>Information User</h3>
+										<form>
+											<div class="cp-field">
+												<h5>Image Profile</h5>
+												<div class="cpp-fiel">
+													<div class="container">
+														<div class="row">
+															<div class="col-md-3 imgUp">
+																<div class="imagePreview" style="background-image: url(http://localhost:8080/api/imageprofile);"></div>
+																<label class="btn btn-primary">Upload<input name="imagen" type="file" class="uploadFile img"
+																		value="Upload Photo"
+																		style="width: 0px;height: 0px;overflow: hidden;"
+																		accept="image/*">
+																</label>
+																<i class="fa fa-times del"></i>
+															</div><!-- col-2 -->
+														</div><!-- row -->
+													</div><!-- container -->
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>Username</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="username" placeholder="{{username}}">
+													<i class="fa fa-user"></i>
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>Email</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="email" placeholder="{{email}}">
+													<i class="fa fa-envelope"></i>
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>Name</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="fullname" placeholder="{{name}}">
+													<i class="fa fa-bars"></i>
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>City</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="city" placeholder="{{city}}">
+													<i class="fa fa-map-marker"></i>
+												</div>
+											</div>
+											
+											<div class="save-stngs pd3">
+												<ul>
+													<li><button type="submit">Save Setting</button></li>
+													<li><button type="reset">Restore Setting</button></li>
+												</ul>
+											</div>
+											<!--save-stngs end-->
+										</form>
+									</div>
+									<!--acc-setting end-->
 								</div>
 							</div>
 						</div>
 					</div>
-				</div><!--account-tabs-setting end-->
+				</div>
+				<!--account-tabs-setting end-->
 			</div>
 		</section>
 
@@ -507,17 +611,19 @@
 			</div>
 		</footer>
 
-	</div><!--theme-layout end-->
+	</div>
+	<!--theme-layout end-->
 
 
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/popper.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
-<script type="text/javascript" src="lib/slick/slick.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/chat.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/popper.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/chat.js"></script>
 </body>
+
 </html>

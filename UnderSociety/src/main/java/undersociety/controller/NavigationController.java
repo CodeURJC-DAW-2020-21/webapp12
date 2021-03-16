@@ -260,9 +260,28 @@ public class NavigationController implements ErrorController{
 	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
 		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		model.addAttribute("username",request.getUserPrincipal().getName());
 		model.addAttribute("followersList", relationrepo.findByuserone(actual.get()));
 		model.addAttribute("productsList", listproductrepo.findByiduser(actual.get()));
+		model.addAttribute("username",request.getUserPrincipal().getName());
+		
+		if(actual.get().getName() != null) {
+			model.addAttribute("name",actual.get().getName());
+		}else {
+			model.addAttribute("name","");
+		}
+		
+		if(actual.get().getEmail() != null) {
+			model.addAttribute("email",actual.get().getEmail());
+		}else {
+			model.addAttribute("email","");
+		}
+		
+		if(actual.get().getCity() != null) {
+			model.addAttribute("city",actual.get().getCity());
+		}else {
+			model.addAttribute("city","");
+		}
+		
 		return "profile-account-setting";
 	}
 	
