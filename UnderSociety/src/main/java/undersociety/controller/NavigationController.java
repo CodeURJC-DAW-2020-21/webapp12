@@ -28,12 +28,14 @@ import undersociety.models.Post;
 import undersociety.models.PostModel;
 import undersociety.models.Product;
 import undersociety.models.ProductModel;
+import undersociety.models.Tags;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
 import undersociety.repositories.LikesRepository;
 import undersociety.repositories.ListProductsRepository;
 import undersociety.repositories.PostRepository;
 import undersociety.repositories.ProductRepository;
+import undersociety.repositories.TagsRepository;
 import undersociety.repositories.UserRepository;
 import undersociety.repositories.UsersRelationsRepository;
 
@@ -59,6 +61,9 @@ public class NavigationController implements ErrorController{
 	
 	@Autowired
 	 private UserRepository userRepository;
+	
+	@Autowired
+	 private TagsRepository tagrepo;
 	
 	@GetMapping("/sign-in")
 	private String getSignIn() {
@@ -294,6 +299,34 @@ public class NavigationController implements ErrorController{
 	@GetMapping("/admin")
 	private String getAdminpage(Model model, HttpServletRequest request) {
 		model.addAttribute("username", request.getUserPrincipal().getName());
+		model.addAttribute("numpost", postsrepo.findAll().size());
+		List<Product> p = productrepo.findAll();
+		List<Tags> tag = tagrepo.findAll();
+		int elec = productrepo.findByidtagone(tag.get(0)).size();
+		int fur = productrepo.findByidtagtwo(tag.get(1)).size();
+		int appli = productrepo.findByidtagthree(tag.get(2)).size();
+		int book = productrepo.findByidtagfour(tag.get(3)).size();
+		int clot = productrepo.findByidtagfive(tag.get(4)).size();
+		int instock = productrepo.findBystatus("in stock").size();
+		int available = productrepo.findBystatus("available").size();
+		int reserved = productrepo.findBystatus("reserved").size();
+		int tproduct = p.size();
+		int sum = 0;
+		
+		for (Product product : p) {
+			sum = sum + product.getPrice();
+		}
+		model.addAttribute("sumstore", sum);
+		model.addAttribute("numproduct", productrepo.findAll().size());
+		model.addAttribute("sumuser", userRepository.findAll().size());
+		model.addAttribute("electronic", ((elec*100)/tproduct));
+		model.addAttribute("furniture", ((fur*100)/tproduct));
+		model.addAttribute("appliance", ((appli*100)/tproduct));
+		model.addAttribute("book", ((book*100)/tproduct));
+		model.addAttribute("clothe", ((clot*100)/tproduct));
+		model.addAttribute("stock", ((instock*100)/tproduct));
+		model.addAttribute("available", ((available*100)/tproduct));
+		model.addAttribute("reserved", ((reserved*100)/tproduct));
 		return "admin";
 	}
 	

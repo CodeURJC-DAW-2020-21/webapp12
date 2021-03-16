@@ -56,7 +56,7 @@ public class StoreController {
 	private ProductRepository productrepo;
 	
 	@PostMapping("/api/uploadProduct")
-	private void uploadProduct(HttpServletResponse response, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree) throws IOException {
+	private void uploadProduct(HttpServletResponse response, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree, @RequestParam(required = false) boolean tagfour, @RequestParam(required = false) boolean tagfive) throws IOException {
 		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
 		Page<Tags> listag = tagsrepo.findAll(PageRequest.of(0, 10,Sort.by("idtags").ascending()));
 		if(imag0.isEmpty() == false) {
@@ -86,6 +86,12 @@ public class StoreController {
 		}
 		if(tagthree) {
 			product.setIdtagthree(listag.getContent().get(2));
+		}
+		if(tagfour) {
+			product.setIdtagfour(listag.getContent().get(3));
+		}
+		if(tagfive) {
+			product.setIdtagfive(listag.getContent().get(4));
 		}
 		product.setStatus("in stock");
 		productrepo.save(product);

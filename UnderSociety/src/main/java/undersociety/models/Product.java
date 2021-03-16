@@ -45,6 +45,12 @@ public class Product {
 	@OneToOne
 	@JoinColumn(name = "idtagthree", referencedColumnName = "idtags")
 	private Tags idtagthree;
+	@OneToOne
+	@JoinColumn(name = "idtagfour", referencedColumnName = "idtags")
+	private Tags idtagfour;
+	@OneToOne
+	@JoinColumn(name = "idtagfive", referencedColumnName = "idtags")
+	private Tags idtagfive;
 	@Column
 	private String status;
 	@Column
@@ -117,6 +123,19 @@ public class Product {
 	}
 	public Tags getIdtagthree() {
 		return idtagthree;
+	}
+	
+	public Tags getIdtagfour() {
+		return idtagfour;
+	}
+	public void setIdtagfour(Tags idtagfour) {
+		this.idtagfour = idtagfour;
+	}
+	public Tags getIdtagfive() {
+		return idtagfive;
+	}
+	public void setIdtagfive(Tags idtagfive) {
+		this.idtagfive = idtagfive;
 	}
 	public void setIdtagthree(Tags idtagthree) {
 		this.idtagthree = idtagthree;
