@@ -1,23 +1,24 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>UnderSociety</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="stylesheet" type="text/css" href="css/animate.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.range.css">
-<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
-<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
-<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/responsive.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8">
+	<title>UnderSociety</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.range.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+		type="text/css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
@@ -28,11 +29,11 @@
 </head>
 
 
-<body onload="loadProducts('{{username}}')">
-	
+<body onload="connectToChat('{{username}}')">
+
 
 	<div class="wrapper">
-		
+
 
 
 		<header>
@@ -84,7 +85,7 @@
 										<a id="clearbutton" href="#" title="">Clear all</a>
 									</div>
 									<div class="nott-list">
-										
+
 										<div class="view-all-nots">
 											<a href="messages" title="">View All Messsages</a>
 										</div>
@@ -134,7 +135,7 @@
 									</div>
 								</li>
 							</ul>
-							
+
 							<!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
@@ -163,12 +164,15 @@
 			<div class="container">
 				<div class="search-box">
 					<form>
-						<input id="myInput" type="text" onkeyup="searchBar()" name="search" placeholder="Search keywords">
+						<input id="myInput" type="text" onkeyup="searchBar()" name="search"
+							placeholder="Search keywords">
 						<button type="submit">Search</button>
 					</form>
-				</div><!--search-box end-->
+				</div>
+				<!--search-box end-->
 			</div>
-		</div><!--search-sec end-->
+		</div>
+		<!--search-sec end-->
 
 
 		<main>
@@ -181,12 +185,14 @@
 									<div class="filter-heading">
 										<h3>Filtros</h3>
 										<a onclick="clearAllFilter()" title="">Limpiar todos los filtros</a>
-									</div><!--filter-heading end-->
+									</div>
+									<!--filter-heading end-->
 									<div class="paddy">
 										<div class="filter-dd">
 											<div class="filter-ttl">
 												<h3>Palabras Clave</h3>
-												<a onclick="document.getElementById('word').value = ''" title="">Limpiar</a>
+												<a onclick="document.getElementById('word').value = ''"
+													title="">Limpiar</a>
 											</div>
 											<form>
 												<input id="word" type="text" name="search-skills" placeholder="">
@@ -221,25 +227,27 @@
 												</li>
 											</ul>
 										</div>
-										
+
 										<div class="filter-dd">
 											<div class="filter-ttl">
 												<h3>Precio de Venta</h3>
 												<a onclick="clearSlider()" title="">Clear</a>
 											</div>
 											<div class="rg-slider">
-			                                    <input class="rn-slider slider-input" type="hidden" value="5,50" />
-			                                </div>
-			                                <div class="rg-limit">
-			                                	<h4>1</h4>
-			                                	<h4>100+</h4>
-			                                </div><!--rg-limit end-->
+												<input class="rn-slider slider-input" type="hidden" value="5,50" />
+											</div>
+											<div class="rg-limit">
+												<h4>1</h4>
+												<h4>100+</h4>
+											</div>
+											<!--rg-limit end-->
 										</div>
-										
+
 										<div class="filter-dd">
 											<div class="filter-ttl">
 												<h3>Ciudad de Venta</h3>
-												<a onclick="$('#menu option[value=0]').attr('selected', true)" title="">Clear</a>
+												<a onclick="$('#menu option[value=0]').attr('selected', true)"
+													title="">Clear</a>
 											</div>
 											<form class="job-tp">
 												<select id="menu">
@@ -252,39 +260,116 @@
 											</form>
 										</div>
 									</div>
-								</div><!--filter-secs end-->
+								</div>
+								<!--filter-secs end-->
 							</div>
 							<div class="col-lg-8">
 								<div class="main-ws-sec">
 									<div class="posts-section" id="myUL">
-										
-									</div><!--posts-section end-->
+										{{#products}}
+										<div class="post-bar">
+											<div class="post_topbar">
+												<div class="usy-dt">
+													<img src="http://localhost:8080/api/imageprofile/{{product.iduser.username}}"
+														alt="">
+													<div class="usy-name">
+														<h3>{{product.iduser.username}}</h3>
+													</div>
+												</div>
+
+											</div>
+											<div class="epi-sec">
+												<ul class="descp">
+													<li><img src="images/icon8.png" alt=""><span>Empresa</span></li>
+													<li><img src="images/icon9.png" alt=""><span>Madrid</span></li>
+												</ul>
+												<ul class="bk-links">
+													<li><a href="#" title=""><i class="{{bookamark}}"></i></a></li>
+													<li><a href="./messages?to={{product.iduser.username}}" title=""><i
+																class="la la-envelope"></i></a></li>
+												</ul>
+											</div>
+											<div class="job_descp">
+												<h3>{{product.title}}</h3>
+												<div class="row">
+													<ul class="image-store">
+														<li><img src="http://localhost:8080/api/imageProduct0/{{product.idproduct}}"
+																alt=""></li>
+													</ul>
+												</div>
+												<div class="row">
+													<ul class="description-store">
+														<li>
+															<p>{{product.description}}
+																<a href="#" title="">view more</a>
+															</p>
+														</li>
+													</ul>
+												</div>
+												<ul class="skill-tags">
+													{{#product.idtagone}}
+													<li><a href="#" title="">
+															<p style="color:#040500" ;>{{product.idtagone.description}}
+															</p>
+														</a></li>
+													{{/product.idtagone}}
+													{{#product.idtagtwo}}
+													<li><a href="#" title="">
+															<p style="color:#040500" ;>{{product.idtagtwo.description}}
+															</p>
+														</a></li>
+													{{/product.idtagtwo}}
+													{{#product.idtagthree}}
+													<li><a href="#" title="">
+															<p style="color:#040500" ;>
+																{{product.idtagthree.description}}
+															</p>
+														</a></li>
+													{{/product.idtagthree}}
+												</ul>
+											</div>
+											<div class="job-status-bar" style="background-color:#ec887a;">
+												<div class="col-lg-3">
+													<h3>{{product.status}}</h3>
+												</div>
+												<div class="col-lg-3">
+													<h3> {{product.price}} $ </h3>
+												</div>
+											</div>
+										</div>
+										<!--post-bar end-->
+										{{/products}}
+									</div>
+									<!--posts-section end-->
 									<div class="process-comm">
 										<div class="spinner products">
 											<div class="bounce1"></div>
 											<div class="bounce2"></div>
 											<div class="bounce3"></div>
 										</div>
-									</div>	
-								</div><!--main-ws-sec end-->
+									</div>
+								</div>
+								<!--main-ws-sec end-->
 							</div>
-							
+
 						</div>
 					</div><!-- main-section-data end-->
-				</div> 
+				</div>
 			</div>
 		</main>
-	</div><!--theme-layout end-->
+	</div>
+	<!--theme-layout end-->
 
 
 
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/popper.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.range-min.js"></script>
-<script type="text/javascript" src="lib/slick/slick.min.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/chat.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/popper.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.range-min.js"></script>
+	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/chat.js"></script>
 </body>
+
 </html>

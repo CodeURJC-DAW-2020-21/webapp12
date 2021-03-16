@@ -5937,24 +5937,3 @@ ul {
 	  height: 280px;
 	  min-width: inherit;
   }
-
-
-  .carousel-control-prev{
-	  width: 10px;
-	  max-height: 20%;
-  }
-
-  .carousel-control-next{
-	width: 10px;
-	max-height: 20%;
-  }
-
-  .carousel-control-prev-icon{
-	width: 10px;
-	max-height: 20%;
-  }
-
-  .carousel-control-next-icon{
-	width: 10px;
-	max-height: 20%;
-  }

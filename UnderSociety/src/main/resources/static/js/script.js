@@ -355,6 +355,7 @@ var pageproduct = 1;
 var likes = [];
 var bookmarks = [];
 var products = [];
+
 $.ajax({
     type: "GET",
     contentType: "data",
@@ -366,6 +367,17 @@ $.ajax({
     }
 });
 
+
+$.ajax({
+    type: "GET",
+    contentType: "data",
+    url: ('/api/getLikes'),
+    success: function (result) {
+        $.each(result, function (indexInArray, valueOfElement) { 
+            likes.push(valueOfElement.idpost.idpost);
+        });
+    }
+});
 
 $(".profile").on("click", function () {
     size = 10;
@@ -408,16 +420,6 @@ $(".company").on("click", function () {
 });
 
 function loadPosts() {
-    $.ajax({
-        type: "GET",
-        contentType: "data",
-        url: ('/api/getLikes'),
-        success: function (result) {
-            $.each(result, function (indexInArray, valueOfElement) { 
-                likes.push(valueOfElement.idpost.idpost);
-            });
-        }
-    });
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -513,7 +515,7 @@ $(".posts").on("click", function () {
 });
 
 $(".products").on("click", function () {
-    size = 2;
+    size = 10;
     sort = 'idproduct';
     $.ajax({
         type: "GET",
@@ -521,6 +523,7 @@ $(".products").on("click", function () {
         url: ('/api/getMoreProducts?page=' + pageproduct + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
+                bookmarks.includes(value.idproduct)
                 var icon = "la la-bookmark";
                 if(bookmarks.includes(value.idproduct)){
                     icon = "la la-check-circle";
@@ -581,16 +584,15 @@ function like(idpost) {
 }
 
 function mark(idproduct) {
-    var s = $("#product" + idproduct);
-    if (s.children().attr("class") == "la la-bookmark") {
+    if ($("#product" + idproduct).children().attr("class") == "la la-bookmark") {
         $.post( "/api/addProduct?idproduct="+idproduct, function( data ) {
             console.log(data);
-            s.children().attr("class", "la la-check-circle");
+            $("#product" + idproduct).children().attr("class", "la la-check-circle");
         });
     } else {
         $.post( "/api/dropProduct?idproduct="+idproduct, function( data ) {
             console.log(data);
-            s.children().attr("class", "la la-bookmark");
+            $("#product" + idproduct).children().attr("class", "la la-bookmark");
         });
     }
 }
