@@ -23,6 +23,7 @@ import undersociety.models.Post;
 import undersociety.models.Product;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
+import undersociety.repositories.ListProductsRepository;
 import undersociety.repositories.PostRepository;
 import undersociety.repositories.ProductRepository;
 import undersociety.repositories.UserRepository;
@@ -38,6 +39,9 @@ public class NavigationController implements ErrorController{
 	
 	@Autowired
 	private ProductRepository productrepo;
+	
+	@Autowired
+	private ListProductsRepository listproductrepo;
 	
 	@Autowired
 	private PostRepository postsrepo;
@@ -83,6 +87,7 @@ public class NavigationController implements ErrorController{
 		}else {
 			model.addAttribute("url","/company-profile?&username="+request.getUserPrincipal().getName());	
 		}
+		model.addAttribute("storeList",listproductrepo.findByiduser(s.get()));
 		model.addAttribute("posts", p.getContent());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
@@ -204,7 +209,6 @@ public class NavigationController implements ErrorController{
 	private String getStore(Model model, HttpServletRequest request) {
 		Page<Product> products = productrepo.findAll( PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		model.addAttribute("products", products);
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "store";
 	}

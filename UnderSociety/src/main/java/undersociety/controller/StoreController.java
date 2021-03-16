@@ -2,6 +2,7 @@ package undersociety.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import undersociety.models.ListProducts;
 import undersociety.models.Product;
 import undersociety.models.Tags;
 import undersociety.models.Users;
+import undersociety.repositories.ListProductsRepository;
 import undersociety.repositories.ProductRepository;
 import undersociety.repositories.TagsRepository;
+import undersociety.repositories.UserRepository;
 import undersociety.services.UserService;
 
 @RestController
@@ -38,6 +42,12 @@ public class StoreController {
 	
 	@Autowired
 	private UserService userservice;
+	
+	@Autowired
+	 private UserRepository userRepository;
+	
+	@Autowired
+	private ListProductsRepository listproductrepo;
 	
 	@Autowired
 	private TagsRepository tagsrepo;
@@ -83,13 +93,24 @@ public class StoreController {
 	}
 	
 	@GetMapping("/api/getMoreProducts")
-	private Page<Product> getMorePost(Pageable page){
+	private Page<Product> getMoreProduct(Pageable page){
 		return productrepo.findAll(page);
 	}
 	
+	@GetMapping("/api/getProducts")
+	private Page<Product> getProducts(Pageable page){
+		return productrepo.findAll(page);
+	}
+	
+	@GetMapping("/api/getBookmark")
+	public List<ListProducts> getLikes(HttpServletRequest request) {
+		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
+		List<ListProducts> lp = listproductrepo.findByiduser(s.get());
+		return lp;
+	}
 	
 	@GetMapping("/api/imageProduct0/{idproduct}")
-    private ResponseEntity<Object> downloadImagePost0( @PathVariable int idproduct) throws SQLException{
+    private ResponseEntity<Object> downloadImageProduct0( @PathVariable int idproduct) throws SQLException{
 		Optional<Product> p = productrepo.findById(idproduct);
     	Resource file = new InputStreamResource(p.get().getImage0().getBinaryStream());
     	return ResponseEntity.ok()
@@ -99,7 +120,7 @@ public class StoreController {
     }
 	
 	@GetMapping("/api/imageProduct1/{idproduct}")
-    private ResponseEntity<Object> downloadImagePost1( @PathVariable int idproduct) throws SQLException{
+    private ResponseEntity<Object> downloadImageProduct1( @PathVariable int idproduct) throws SQLException{
 		Optional<Product> p = productrepo.findById(idproduct);
     	Resource file = new InputStreamResource(p.get().getImage1().getBinaryStream());
     	return ResponseEntity.ok()
@@ -109,7 +130,7 @@ public class StoreController {
     }
 	
 	@GetMapping("/api/imageProduct2/{idproduct}")
-    private ResponseEntity<Object> downloadImagePost2( @PathVariable int idproduct) throws SQLException{
+    private ResponseEntity<Object> downloadImageProduct2( @PathVariable int idproduct) throws SQLException{
 		Optional<Product> p = productrepo.findById(idproduct);
     	Resource file = new InputStreamResource(p.get().getImage2().getBinaryStream());
     	return ResponseEntity.ok()
@@ -117,4 +138,27 @@ public class StoreController {
 				.contentLength(p.get().getImage2().length())
 				.body(file);
     }
+	
+	@PostMapping("/api/addProduct")
+	public boolean addProduct(@RequestParam int idproduct, HttpServletRequest request) {
+		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
+		Optional<Product> p = productrepo.findById(idproduct);
+		ListProducts lp = new ListProducts();
+		lp.setIdproduct(p.get());
+		lp.setIduser(s);
+		return listproductrepo.save(lp) != null;
+	}
+	
+	@PostMapping("/api/dropProduct")
+	public boolean dropProduct(@RequestParam int idproduct, HttpServletRequest request) {
+		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
+		Optional<Product> p = productrepo.findById(idproduct);
+		ListProducts lp = listproductrepo.findByiduserAndIdproduct(s, p.get());
+		if(lp != null) {
+			listproductrepo.deleteById(lp.getIdproductlist());
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

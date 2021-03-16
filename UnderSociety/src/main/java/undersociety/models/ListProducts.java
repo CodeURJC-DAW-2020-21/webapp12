@@ -9,23 +9,23 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Post_likes")
-public class LikeAPost {
+@Table(name = "List_Products")
+public class ListProducts {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idlike;
+	private int idproductlist;
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
 	private Users iduser;
 	@OneToOne
-	@JoinColumn(name = "idpost", referencedColumnName = "idpost")
-	private Post idpost;
+	@JoinColumn(name = "idproduct", referencedColumnName = "idproduct")
+	private Product idproduct;
 	
-	public int getIdlike() {
-		return idlike;
+	public int getIdproductlist() {
+		return idproductlist;
 	}
-	public void setIdlike(int idlike) {
-		this.idlike = idlike;
+	public void setIdproductlist(int idproductlist) {
+		this.idproductlist = idproductlist;
 	}
 	public Users getIduser() {
 		return iduser;
@@ -33,11 +33,12 @@ public class LikeAPost {
 	public void setIduser(Users iduser) {
 		this.iduser = iduser;
 	}
-	public Post getIdpost() {
-		return idpost;
+	public Product getIdproduct() {
+		return idproduct;
 	}
-	public void setIdpost(Post idpost) {
-		this.idpost = idpost;
+	public void setIdproduct(Product idproduct) {
+		this.idproduct = idproduct;
 	}
+	
 	
 }

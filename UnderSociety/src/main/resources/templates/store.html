@@ -28,7 +28,7 @@
 </head>
 
 
-<body onload="connectToChat('{{username}}')">
+<body onload="loadProducts('{{username}}')">
 	
 
 	<div class="wrapper">
@@ -257,98 +257,7 @@
 							<div class="col-lg-8">
 								<div class="main-ws-sec">
 									<div class="posts-section" id="myUL">
-										{{#products}}
-										<div class="post-bar">
-											<div class="post_topbar">
-												<div class="usy-dt">
-													<img src="http://localhost:8080/api/imageprofile/{{iduser.username}}" alt="">
-													<div class="usy-name">
-														<h3>{{iduser.username}}</h3>
-													</div>
-												</div>
-
-											</div>
-											<div class="epi-sec">
-												<ul class="descp">
-													<li><img src="images/icon8.png" alt=""><span>Empresa</span></li>
-													<li><img src="images/icon9.png" alt=""><span>Madrid</span></li>
-												</ul>
-												<ul class="bk-links">
-													<li><a id="product{{idproduct}}" title=""><i onclick="mark('{{idproduct}}')" class="la la-bookmark"></i></a></li>
-													<li><a href="./messages?to={{iduser.username}}" title=""><i class="la la-envelope"></i></a></li>
-												</ul>
-											</div>
-											<div class="job_descp">
-												<h3>{{title}}</h3>
-												<div class="row">
-													
-														<div id="carouselExampleControls-{{idproduct}}" class="carousel slide" data-ride="carousel">
-															<div class="carousel-inner">
-															  {{#image0}}
-															  <div class="carousel-item active">
-																<img class="img-thumbnail" src="http://localhost:8080/api/imageProduct0/{{idproduct}}" alt="First slide">
-															  </div>
-															  {{/image0}}
-															  {{#image1}}
-															  <div class="carousel-item">
-																<img class="img-thumbnail " src="http://localhost:8080/api/imageProduct1/{{idproduct}}" alt="Second slide">
-															  </div>
-															  {{/image1}}
-															  {{#image2}}
-															  <div class="carousel-item">
-																<img class="img-thumbnail " src="http://localhost:8080/api/imageProduct2/{{idproduct}}" alt="Third slide">
-															  </div>
-															  {{/image2}}
-															</div>
-															<a class="carousel-control-prev" href="#carouselExampleControls-{{idproduct}}" role="button" data-slide="prev">
-															  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-															  <span class="sr-only">Previous</span>
-															</a>
-															<a class="carousel-control-next" href="#carouselExampleControls-{{idproduct}}" role="button" data-slide="next">
-															  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-															  <span class="sr-only">Next</span>
-															</a>
-														</div>
-													
-												</div>
-												<div class="row">
-													<ul class="description-store">
-														<li>
-															<p>{{description}}
-																
-															</p>
-														</li>
-													</ul>
-												</div><br>
-												<a id="readmore{{idproduct}}" class="btn btn-primary stretched-link" onclick="readmore('{{idproduct}}')" title="">view more</a>
-												<ul class="skill-tags">
-													{{#idtagone}}
-													<li><a href="#" title="">
-															<p style="color:#040500" ;>{{idtagone.description}}</p>
-														</a></li>
-													{{/idtagone}}
-													{{#idtagtwo}}
-													<li><a href="#" title="">
-															<p style="color:#040500" ;>{{idtagtwo.description}}</p>
-														</a></li>
-													{{/idtagtwo}}
-													{{#idtagthree}}
-													<li><a href="#" title="">
-															<p style="color:#040500" ;>{{idtagthree.description}}</p>
-														</a></li>
-													{{/idtagthree}}
-												</ul>
-											</div>
-											<div class="job-status-bar" style="background-color:#ec887a;">
-												<div class="col-lg-3">
-													<h3>{{status}}</h3>
-												</div>
-												<div class="col-lg-3">
-													<h3> {{price}} $ </h3>
-												</div>
-											</div>
-										</div><!--post-bar end-->
-										{{/products}}	
+										
 									</div><!--posts-section end-->
 									<div class="process-comm">
 										<div class="spinner products">

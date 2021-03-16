@@ -309,26 +309,19 @@
 											<i class="la la-ellipsis-v"></i>
 										</div>
 										<div class="jobs-list">
+											{{#storeList}}
 											<div class="job-info">
-												<div class="job-details">
-													<h3>KALLAX</h3>
-													<p>Estantería..</p>
-												</div>
-												<div class="hr-rate">
-													<span>$50</span>
-												</div>
+												<a href="./messages?to={{iduser.username}}" title="" >
+													<div class="job-details">
+														<h3>{{idproduct.title}}</h3>
+														<p></p>
+													</div>
+													<div class="hr-rate">
+														<span>${{idproduct.price}}</span>
+													</div>
+												</a>
 											</div>
-											<!--job-info end-->
-											<div class="job-info">
-												<div class="job-details">
-													<h3>GRILLSKÄR</h3>
-													<p>Barbacoa..</p>
-												</div>
-												<div class="hr-rate">
-													<span>$25</span>
-												</div>
-											</div>
-											<!--job-info end-->
+											{{/storeList}}
 										</div>
 										<!--jobs-list end-->
 									</div>
