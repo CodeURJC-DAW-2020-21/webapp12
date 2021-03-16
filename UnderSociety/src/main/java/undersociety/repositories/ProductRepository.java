@@ -11,14 +11,7 @@ import undersociety.models.Tags;
 import undersociety.models.Users;
 
 public interface ProductRepository extends JpaRepository<Product, Integer>{
-	public Page<Product> findByiduser(Users iduser, Pageable page);
-	public List<Product> findByidtagone(Tags idtagone);
-	public List<Product> findByidtagtwo(Tags idtagtwo);
-	public List<Product> findByidtagthree(Tags idtagthree);
-	public List<Product> findByidtagfour(Tags idtagfour);
-	public List<Product> findByidtagfive(Tags idtagfive);
-	public List<Product> findBystatus(String status);
-	
+	public Page<Product> findByiduser(Users iduser, Pageable page);	
 	public Long deleteByIduser(Users iduser);
 	public List<Product> findByidtagone(Tags idtagone);
 	public List<Product> findByidtagtwo(Tags idtagtwo);

@@ -301,7 +301,7 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("username", request.getUserPrincipal().getName());
 		model.addAttribute("numpost", postsrepo.findAll().size());
 		List<Product> p = productrepo.findAll();
-		List<Tags> tag = tagrepo.findAll();
+		List<Tags> tag = tagrepo.findAll(Sort.by("idtags"));
 		int elec = productrepo.findByidtagone(tag.get(0)).size();
 		int fur = productrepo.findByidtagtwo(tag.get(1)).size();
 		int appli = productrepo.findByidtagthree(tag.get(2)).size();
@@ -312,7 +312,6 @@ public class NavigationController implements ErrorController{
 		int reserved = productrepo.findBystatus("reserved").size();
 		int tproduct = p.size();
 		int sum = 0;
-		
 		for (Product product : p) {
 			sum = sum + product.getPrice();
 		}

@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -205,7 +204,7 @@ public class UsersController {
     public void modifyPassword(HttpServletResponse response, HttpServletRequest request) throws IOException {
     	
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	System.out.println("Change Password");
+    	System.out.println("Change Password" + prev);
     	response.sendRedirect("/profile-account-setting");
     }
     
@@ -215,13 +214,13 @@ public class UsersController {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	System.out.println("Bokmarks: "+listproductrepo.deleteByIduser(prev));
     	System.out.println("follows: "+relationrepo.deleteByUserone(prev));
-    	/*System.out.println("messages: "+messagerepo.deleteByIduser(prev));
+    	System.out.println("messages: "+messagerepo.deleteByIduser(prev));
     	System.out.println("likes: "+likerepo.deleteByIduser(prev));
     	System.out.println("post: "+postsrepo.deleteByIduser(prev));
     	System.out.println("products: "+productrepo.deleteByIduser(prev));
     	System.out.println("relations: "+relationrepo.deleteByUserone(prev));
     	System.out.println("roles: "+rolesRepository.deleteByIduser(prev));
-    	userRepository.deleteById(prev.getIdusers());*/
+    	userRepository.deleteById(prev.getIdusers());
     	System.out.println("exito");
     	response.sendRedirect("/profile-account-setting");
     }
