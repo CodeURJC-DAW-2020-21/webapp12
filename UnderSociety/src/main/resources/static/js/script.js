@@ -386,7 +386,7 @@ $.ajax({
     url: ('/api/getFollows'),
     success: function (result) {
         $.each(result, function (indexInArray, valueOfElement) { 
-            follows.push(valueOfElement.idpost.idpost);
+            follows.push(valueOfElement.usertwo.idusers);
         });
     }
 });
@@ -757,6 +757,7 @@ function unfollow(idfollow) {
 function dropProduct(idproduct) {
     $.post( "/api/dropProduct?idproduct="+idproduct, function( response ) {
         if(response){
+            console.log(response);
             $("#product"+idproduct).remove();
         }
     });

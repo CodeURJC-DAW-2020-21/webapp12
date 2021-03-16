@@ -9,4 +9,5 @@ import undersociety.models.Users;
 
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 	public Page<Product> findByiduser(Users iduser, Pageable page);
+	public Long deleteByIduser(Users iduser);
 }

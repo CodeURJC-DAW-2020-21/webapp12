@@ -10,4 +10,5 @@ import undersociety.models.Users;
 
 public interface MessageRepository extends JpaRepository<Message, Integer>{
 	public List<Message> findByIduserAndIduserto(Users iduser,Users iduserto);
+	public Long deleteByIduser(Users iduser);
 }
