@@ -255,7 +255,17 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "myprofilefeed";
 	}
-		
+	
+	@GetMapping("/profile-account-setting")
+	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
+		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		model.addAttribute("username",request.getUserPrincipal().getName());
+		model.addAttribute("followersList", relationrepo.findByuserone(actual.get()));
+		model.addAttribute("productsList", listproductrepo.findByiduser(actual.get()));
+		return "profile-account-setting";
+	}
+	
 	@GetMapping("/messages")
 	private String getMessages(Model model,HttpServletRequest request,@RequestParam(required = false) String to) {
 		if(to != null) {
@@ -271,17 +281,7 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("response","{{response}}");
 		return "messages";
 	}	
-	
-	@GetMapping("/profile-account-setting")
-	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
-		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		model.addAttribute("username",request.getUserPrincipal().getName());
-		model.addAttribute("followersList", relationrepo.findByuserone(actual.get()));
-		model.addAttribute("productsList", listproductrepo.findByiduser(actual.get()));
-		return "profile-account-setting";
-	}
-	
+		
 	@GetMapping("/admin")
 	private String getAdminpage(Model model, HttpServletRequest request) {
 		model.addAttribute("username", request.getUserPrincipal().getName());
