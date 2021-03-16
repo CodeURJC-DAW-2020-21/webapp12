@@ -196,7 +196,7 @@
 										<h3>Bookmark Products</h3>
 										<div class="requests-list">
 											{{#productsList}}
-											<div class="request-details" id="product{{idproductlist}}">
+											<div class="request-details" id="product{{idproduct.idproduct}}">
 												<div class="noty-user-img">
 													<img src="http://localhost:8080/api/imageProduct0/{{idproduct.idproduct}}"
 														alt="">
@@ -207,7 +207,7 @@
 												<div class="accept-feat">
 													<ul>
 														<li><button type="submit" class="close-req"><i
-																	onclick="dropProduct({{idproductlist}})"
+																	onclick="dropProduct({{idproduct.idproduct}})"
 																	class="la la-close"></i></button></li>
 													</ul>
 												</div>
@@ -300,18 +300,20 @@
 									aria-labelledby="nav-password-tab">
 									<div class="acc-setting">
 										<h3>Account Setting</h3>
-										<form>
+										<form action="/api/changePassword" method="POST">
 											<div class="cp-field">
 												<h5>Old Password</h5>
 												<div class="cpp-fiel">
-													<input type="text" name="old-password" placeholder="Old Password">
+													<input type="text" name="old-password" placeholder="Old Password"
+														required>
 													<i class="fa fa-lock"></i>
 												</div>
 											</div>
 											<div class="cp-field">
 												<h5>New Password</h5>
 												<div class="cpp-fiel">
-													<input type="text" name="new-password" placeholder="New Password">
+													<input type="text" name="new-password" placeholder="New Password"
+														required>
 													<i class="fa fa-lock"></i>
 												</div>
 											</div>
@@ -319,7 +321,7 @@
 												<h5>Repeat Password</h5>
 												<div class="cpp-fiel">
 													<input type="text" name="repeat-password"
-														placeholder="Repeat Password">
+														placeholder="Repeat Password" required>
 													<i class="fa fa-lock"></i>
 												</div>
 											</div>
@@ -477,18 +479,19 @@
 									aria-labelledby="nav-deactivate-tab">
 									<div class="acc-setting">
 										<h3>Deactivate Account</h3>
-										<form>
+										<form action="/api/deleteUser" method="POST">
 											<div class="cp-field">
 												<h5>Email</h5>
 												<div class="cpp-fiel">
-													<input type="text" name="email" placeholder="Email">
+													<input type="text" name="email" placeholder="Email" required>
 													<i class="fa fa-envelope"></i>
 												</div>
 											</div>
 											<div class="cp-field">
 												<h5>Password</h5>
 												<div class="cpp-fiel">
-													<input type="password" name="password" placeholder="Password">
+													<input type="password" name="password" placeholder="Password"
+														required>
 													<i class="fa fa-lock"></i>
 												</div>
 											</div>
@@ -511,7 +514,7 @@
 											<div class="save-stngs pd3">
 												<ul>
 													<li><button type="submit">Save Setting</button></li>
-													<li><button type="submit">Restore Setting</button></li>
+													<li><button type="reset">Restore Setting</button></li>
 												</ul>
 											</div>
 											<!--save-stngs end-->
@@ -523,15 +526,18 @@
 									aria-labelledby="nav-modify-tab">
 									<div class="acc-setting">
 										<h3>Information User</h3>
-										<form>
+										<form action="/api/modifyUser" method="POST" enctype="multipart/form-data">
 											<div class="cp-field">
 												<h5>Image Profile</h5>
 												<div class="cpp-fiel">
 													<div class="container">
 														<div class="row">
 															<div class="col-md-3 imgUp">
-																<div class="imagePreview" style="background-image: url(http://localhost:8080/api/imageprofile);"></div>
-																<label class="btn btn-primary">Upload<input name="imagen" type="file" class="uploadFile img"
+																<div class="imagePreview"
+																	style="background-image: url(http://localhost:8080/api/imageprofile);">
+																</div>
+																<label class="btn btn-primary">Upload<input
+																		name="imagen" type="file" class="uploadFile img"
 																		value="Upload Photo"
 																		style="width: 0px;height: 0px;overflow: hidden;"
 																		accept="image/*">
@@ -559,7 +565,7 @@
 											<div class="cp-field">
 												<h5>Name</h5>
 												<div class="cpp-fiel">
-													<input type="text" name="fullname" placeholder="{{name}}">
+													<input type="text" name="name" placeholder="{{name}}">
 													<i class="fa fa-bars"></i>
 												</div>
 											</div>
@@ -570,7 +576,23 @@
 													<i class="fa fa-map-marker"></i>
 												</div>
 											</div>
-											
+											<div class="cp-field">
+												<h5>Links</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="linkfacebook"
+														placeholder="{{linkfacebook}}">
+													<i class="fa fa-facebook-official"></i>
+												</div><br>
+												<div class="cpp-fiel">
+													<input type="text" name="linkinstagram"
+														placeholder="{{linkinstagram}}">
+													<i class="fa fa-instagram"></i>
+												</div><br>
+												<div class="cpp-fiel">
+													<input type="text" name="linktwitter" placeholder="{{linktwitter}}">
+													<i class="fa fa-twitter"></i>
+												</div>
+											</div>
 											<div class="save-stngs pd3">
 												<ul>
 													<li><button type="submit">Save Setting</button></li>

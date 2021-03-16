@@ -2,11 +2,13 @@ package undersociety.controller;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -65,38 +67,8 @@ public class NavigationController implements ErrorController{
     
 	
 	@GetMapping("/")
-	private String getInit(Model model, HttpServletRequest request) {
-		Page<Post> p = postsrepo.findAll(PageRequest.of(0, 10,Sort.by("idpost").ascending()));
-		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
-		List<UsersRelations> following = relationrepo.findByuserone(s.get());
-		List<UsersRelations> followers = relationrepo.findByusertwo(s.get());
-		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).get());
-		List<PostModel> postsmodels = new ArrayList<>();
-		List<Integer> likes = new ArrayList<>();
-		for (LikeAPost like : lp) {
-			likes.add(like.getIdpost().getIdpost());
-		}
-		for (Post post : p) {
-			PostModel postmodel = new PostModel();
-			if(likes.contains(post.getIdpost())) {
-				postmodel.setLike("la la-heart");
-			}else {
-				postmodel.setLike("la la-heart-o");
-			}
-			postmodel.setPost(post);
-			postsmodels.add(postmodel);
-		}
-		model.addAttribute("following", following.size());
-		model.addAttribute("followers", followers.size());
-		if(s.get().getUserprofile()) {
-			model.addAttribute("url","/pageProfileUser?&username="+request.getUserPrincipal().getName());
-		}else {
-			model.addAttribute("url","/company-profile?&username="+request.getUserPrincipal().getName());	
-		}
-		model.addAttribute("posts", postsmodels);
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		model.addAttribute("username",request.getUserPrincipal().getName());
-		return "index";
+	private void getInit(HttpServletResponse response) throws IOException {
+		response.sendRedirect("/index");
 	}
 	
 	@GetMapping("/index")
@@ -282,6 +254,24 @@ public class NavigationController implements ErrorController{
 			model.addAttribute("city","");
 		}
 		
+		if(actual.get().getLinkfacebook() != null) {
+			model.addAttribute("linkfacebook",actual.get().getLinkfacebook());
+		}else {
+			model.addAttribute("linkfacebook","");
+		}
+		
+		if(actual.get().getLinkinstagram() != null) {
+			model.addAttribute("linkinstagram",actual.get().getLinkinstagram());
+		}else {
+			model.addAttribute("linkinstagram","");
+		}
+		
+		if(actual.get().getLinktwitter() != null) {
+			model.addAttribute("linktwitter",actual.get().getLinktwitter());
+		}else {
+			model.addAttribute("linktwitter","");
+		}
+		
 		return "profile-account-setting";
 	}
 	
@@ -323,5 +313,5 @@ public class NavigationController implements ErrorController{
 	public String getErrorPath() {
 		// TODO Auto-generated method stub
 		return "error";
-	}	
+	}
 }

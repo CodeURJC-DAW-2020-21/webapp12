@@ -275,7 +275,7 @@
 								<div class="main-ws-sec">
 									<div class="post-topbar">
 										<div class="user-picy">
-											<img src="http://localhost:8080/api/imageprofile" alt="">
+											<img src="2" alt="">
 										</div>
 										<div class="post-st">
 											<ul>
@@ -375,27 +375,21 @@
 
 									<div class="widget suggestions full-width">
 										<div class="sd-title">
-											<h3>Most Viewed People</h3>
+											<h3>Most Followed People</h3>
 											<i class="la la-ellipsis-v"></i>
 										</div>
 										<!--sd-title end-->
 										<div class="suggestions-list">
 											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
+												<img src="http://localhost:8080/api/imageprofile/{{username}}" alt="">
 												<div class="sgt-text">
 													<h4>Jessica William</h4>
 												</div>
-												<span><i class="la la-plus"></i></span>
+												<span><i href="#" class="la la-plus"></i></span>
 											</div>
-											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
-												<div class="sgt-text">
-													<h4>John Doe</h4>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
+											
 											<div class="view-more">
-												<a href="#" title="">View More</a>
+												<a onclick="viewMoreSuggestion()" title="">View More</a>
 											</div>
 										</div>
 										<!--suggestions-list end-->
@@ -471,7 +465,7 @@
 												Upload<input name="imag0" type="file" class="uploadFile img"
 													value="Upload Photo"
 													style="width: 0px;height: 0px;overflow: hidden;"
-													accept="image/*">
+													accept="image/*" required>
 											</label>
 											<i class="fa fa-times del"></i>
 										</div><!-- col-2 -->

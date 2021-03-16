@@ -8,11 +8,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,7 @@ import undersociety.services.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -99,7 +102,7 @@ public class UsersController {
 		r.setIduser(use);
 		r.setRol("USER");
 		rolesRepository.save(r);
-		response.sendRedirect("s/ign-in");
+		response.sendRedirect("/sign-in");
 	}
     
     @GetMapping("/api/imageprofile")
@@ -154,5 +157,40 @@ public class UsersController {
     public boolean follow(@RequestParam int idrelation) {
     	relationrepo.deleteById(idrelation);
     	return true;
+    }
+    
+    @GetMapping("api/getFollows")
+	public List<UsersRelations> getFollows(HttpServletRequest request) {
+		return relationrepo.findByuserone(userRepository.findByusername(request.getUserPrincipal().getName()).get());
+	}
+    
+    @Modifying
+    @PostMapping("/api/modifyUser")
+    public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile imagen) throws IOException {
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	System.out.println(prev.getIdusers());
+    	System.out.println("imagen: "+imagen.getOriginalFilename());
+    	System.out.println(user.getUsername());
+    	System.out.println(user.getEmail());
+    	System.out.println(user.getCity());
+    	System.out.println(user.getName());
+    	System.out.println(user.getLinkfacebook());
+    	System.out.println(user.getLinkinstagram());
+    	System.out.println(user.getLinktwitter());
+    	response.sendRedirect("/profile-account-setting");
+    }
+    
+    @Modifying
+    @PostMapping("/api/changePassword")
+    public void modifyPassword(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    	System.out.println("Change Password");
+    	response.sendRedirect("/profile-account-setting");
+    }
+    
+    
+    @DeleteMapping("/api/deleteUser")
+    public void deleteUser(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    	System.out.println("Delete User");
+    	response.sendRedirect("/profile-account-setting");
     }
 }
