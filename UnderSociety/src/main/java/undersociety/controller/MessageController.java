@@ -34,8 +34,6 @@ public class MessageController {
 
     @MessageMapping("/chat/{to}")
     public void sendMessage(@DestinationVariable String to, MessageModel message) {
-    	System.out.println(to);
-    	System.out.println(message.getFromLogin());
         Users f = (Users) userservice.findByUser_name(message.getFromLogin());
     	Users t = (Users) userservice.findByUser_name(to);
     	Message m = new Message();
@@ -52,8 +50,6 @@ public class MessageController {
     
     @GetMapping("/api/getChad")
     public List<Message> getChat(@RequestParam String from, @RequestParam String to) {
-    	System.out.println(to);
-    	System.out.println(from);
     	Users f = (Users) userservice.findByUser_name(from);
     	Users t = (Users) userservice.findByUser_name(to);
     	List<Message> m = messagedb.findByIduserAndIduserto(t, f);

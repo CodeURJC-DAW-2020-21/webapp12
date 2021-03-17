@@ -45,7 +45,8 @@
 					<!--logo end-->
 					<div class="search-bar">
 						<form>
-							<input id="myInput" onkeyup="searchBarPosts()" type="text" name="search" placeholder="Search...">
+							<input id="myInput" onkeyup="searchBarPosts()" type="text" name="search"
+								placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div>
@@ -85,7 +86,7 @@
 										<a id="clearbutton" href="#" title="">Clear all</a>
 									</div>
 									<div class="nott-list">
-										
+
 										<div class="view-all-nots">
 											<a href="messages" title="">View All Messsages</a>
 										</div>
@@ -113,7 +114,7 @@
 								<form>
 									<input type="text" name="search" placeholder="{{username}}" readonly>
 								</form>
-							</div>							
+							</div>
 							<!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
@@ -127,7 +128,8 @@
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
 							<form action="/logout" method="POST">
-								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /><input type="hidden" name="_csrf" value="{{token}}"/></h3>
+								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /><input
+										type="hidden" name="_csrf" value="{{token}}" /></h3>
 							</form>
 						</div>
 						<!--user-account-settingss end-->
@@ -146,22 +148,28 @@
 						<div class="col-lg-3">
 							<div class="acc-leftbar">
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
 									<a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab"
 										href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i
 											class="fa fa-cart-arrow-down"></i>Bookmark Products</a>
+
 									<a class="nav-item nav-link" id="nav-requests-tab" data-toggle="tab"
 										href="#nav-requests" role="tab" aria-controls="nav-requests"
 										aria-selected="false"><i class="fa fa-group"></i>Follows</a>
+
 									<a class="nav-item nav-link" id="nav-modify-tab" data-toggle="tab"
 										href="#nav-modify" role="tab" aria-controls="nav-modify"
 										aria-selected="false"><i class="fa fa-address-card-o"></i>Modify Information
 										User</a>
+
 									<a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab"
 										href="#nav-password" role="tab" aria-controls="nav-password"
 										aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
+
 									<a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
 										href="#nav-deactivate" role="tab" aria-controls="nav-deactivate"
 										aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
+
 								</div>
 							</div>
 							<!--acc-leftbar end-->
@@ -290,15 +298,16 @@
 											<div class="cp-field">
 												<h5>New Password</h5>
 												<div class="cpp-fiel">
-													<input id="newpass" type="password" name="newpassword" placeholder="New Password"
-														required>
+													<input id="newpass" type="password" name="newpassword"
+														placeholder="New Password" required>
 													<i class="fa fa-lock"></i>
 												</div>
 											</div>
 											<div class="cp-field">
 												<h5>Repeat Password</h5>
 												<div class="cpp-fiel">
-													<input id="repeatpass" type="password" name="repeatpassword" placeholder="Repeat Password" required>
+													<input id="repeatpass" type="password" name="repeatpassword"
+														placeholder="Repeat Password" required>
 													<i class="fa fa-lock"></i>
 												</div>
 											</div>
@@ -307,7 +316,8 @@
 											</div>
 											<div class="save-stngs pd2">
 												<ul>
-													<li><button type="submit">Save Setting</button><input type="hidden" name="_csrf" value="{{token}}"/></li>
+													<li><button type="submit">Save Setting</button><input type="hidden"
+															name="_csrf" value="{{token}}" /></li>
 													<li><button type="submit">Restore Setting</button></li>
 												</ul>
 											</div>
@@ -467,8 +477,7 @@
 											<div class="cp-field">
 												<h5>Password</h5>
 												<div class="cpp-fiel">
-													<input type="password" name="pass" placeholder="Password"
-														required>
+													<input type="password" name="pass" placeholder="Password" required>
 													<i class="fa fa-lock"></i>
 												</div>
 											</div>
@@ -478,7 +487,8 @@
 											</div>
 											<div class="save-stngs pd3">
 												<ul>
-													<li><button type="submit">Save Setting</button><input type="hidden" name="_csrf" value="{{token}}"/></li>
+													<li><button type="submit">Save Setting</button><input type="hidden"
+															name="_csrf" value="{{token}}" /></li>
 													<li><button type="reset">Restore Setting</button></li>
 												</ul>
 											</div>
@@ -560,7 +570,8 @@
 											</div>
 											<div class="save-stngs pd3">
 												<ul>
-													<li><button type="submit">Save Setting</button><input type="hidden" name="_csrf" value="{{token}}"/></li>
+													<li><button type="submit">Save Setting</button><input type="hidden"
+															name="_csrf" value="{{token}}" /></li>
 													<li><button type="reset">Restore Setting</button></li>
 												</ul>
 											</div>
@@ -608,10 +619,10 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
 	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
-	
+
 	<script type="text/javascript" src="js/script.js"></script>
-	
-	
+
+
 </body>
 
 </html>

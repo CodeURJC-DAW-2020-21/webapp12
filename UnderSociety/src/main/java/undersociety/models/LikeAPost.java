@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "Post_likes")
 public class LikeAPost {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idlike;
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")

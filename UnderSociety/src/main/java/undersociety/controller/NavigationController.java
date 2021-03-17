@@ -306,7 +306,6 @@ public class NavigationController implements ErrorController{
 		}else {
 			model.addAttribute("linktwitter","");
 		}
-		
 		return "profile-account-setting";
 	}
 	
@@ -342,7 +341,7 @@ public class NavigationController implements ErrorController{
 		int book = productrepo.findByidtagfour(tag.get(3)).size();
 		int clot = productrepo.findByidtagfive(tag.get(4)).size();
 		int instock = productrepo.findBystatus("in stock").size();
-		int available = productrepo.findBystatus("available").size();
+		int sold = productrepo.findBystatus("sold").size();
 		int reserved = productrepo.findBystatus("reserved").size();
 		int tproduct = p.size();
 		int sum = 0;
@@ -358,7 +357,7 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("book", ((book*100)/tproduct));
 		model.addAttribute("clothe", ((clot*100)/tproduct));
 		model.addAttribute("stock", ((instock*100)/tproduct));
-		model.addAttribute("available", ((available*100)/tproduct));
+		model.addAttribute("sold", ((sold*100)/tproduct));
 		model.addAttribute("reserved", ((reserved*100)/tproduct));
 		return "admin";
 	}

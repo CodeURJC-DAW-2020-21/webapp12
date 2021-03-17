@@ -218,7 +218,6 @@ public class UsersController {
     public void deleteUser(HttpServletResponse response, HttpServletRequest request, @RequestParam String email, @RequestParam String pass, @RequestParam String explication) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	if(prev.getEmail().equalsIgnoreCase(email)) {
-    		System.out.println(email);
     		if(encoder.encode(pass).equalsIgnoreCase(prev.getPass())) {
     			listproductrepo.deleteByIduser(prev);
     	    	relationrepo.deleteByUserone(prev);

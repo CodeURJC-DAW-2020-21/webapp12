@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "List_Products")
 public class ListProducts {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idproductlist;
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
