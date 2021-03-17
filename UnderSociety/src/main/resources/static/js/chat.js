@@ -8,7 +8,8 @@ var notifynum = 0;
 var useractual;
 
 
-function connectToChat(userName, to) {
+function connectToChat(userName, to, token) {
+    passToken(token);
     useractual = userName;
     console.log("connecting to chat...")
     let socket = new SockJS(url + '/chat');

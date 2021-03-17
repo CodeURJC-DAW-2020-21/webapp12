@@ -29,7 +29,7 @@
 </head>
 
 
-<body onload="connectToChat('{{usernameview}}')">
+<body onload="connectToChat('{{usernameview}}','null','{{token}}')">
 
 
 	<div class="wrapper">
@@ -45,7 +45,7 @@
 					<!--logo end-->
 					<div class="search-bar">
 						<form>
-							<input type="text" name="search" placeholder="Search...">
+							<input id="myInput" onkeyup="searchBarPosts(); searchBarProducts();" type="text" name="search" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div>
@@ -85,40 +85,7 @@
 										<a id="clearbutton" href="#" title="">Clear all</a>
 									</div>
 									<div class="nott-list">
-										<div class="notfication-details">
-											<div class="noty-user-img">
-												<img src="images/resources/ny-img1.png" alt="">
-											</div>
-											<div class="notification-info">
-												<h3><a href="messages" title="">Jassica William</a> </h3>
-												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-												<span>2 min ago</span>
-											</div>
-											<!--notification-info -->
-										</div>
-										<div class="notfication-details">
-											<div class="noty-user-img">
-												<img src="images/resources/ny-img2.png" alt="">
-											</div>
-											<div class="notification-info">
-												<h3><a href="messages" title="">Jassica William</a></h3>
-												<p>Lorem ipsum dolor sit amet.</p>
-												<span>2 min ago</span>
-											</div>
-											<!--notification-info -->
-										</div>
-										<div class="notfication-details">
-											<div class="noty-user-img">
-												<img src="images/resources/ny-img3.png" alt="">
-											</div>
-											<div class="notification-info">
-												<h3><a href="messages" title="">Jassica William</a></h3>
-												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-													eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
-												<span>2 min ago</span>
-											</div>
-											<!--notification-info -->
-										</div>
+										
 										<div class="view-all-nots">
 											<a href="messages" title="">View All Messsages</a>
 										</div>
@@ -136,7 +103,7 @@
 					<!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="http://localhost:8080/api/imageprofile" alt="">
+							<img src="https://localhost:8443/api/imageprofile" alt="">
 							<a href="#" title=""></a>
 							<i class="la la-sort-down"></i>
 						</div>
@@ -146,29 +113,7 @@
 								<form>
 									<input type="text" name="search" placeholder="{{usernameview}}" readonly>
 								</form>
-							</div>
-							<h3>Online Status</h3>
-							<ul class="on-off-status">
-								<li>
-									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c5">
-										<label for="c5">
-											<span></span>
-										</label>
-										<small>Online</small>
-									</div>
-								</li>
-								<li>
-									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c6">
-										<label for="c6">
-											<span></span>
-										</label>
-										<small>Offline</small>
-									</div>
-								</li>
-							</ul>
-
+							</div>							
 							<!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
@@ -182,7 +127,7 @@
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
 							<form action="/logout" method="POST">
-								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /></h3>
+								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /><input type="hidden" name="_csrf" value="{{token}}"/></h3>
 							</form>
 						</div>
 						<!--user-account-settingss end-->
@@ -208,7 +153,7 @@
 								<div class="main-left-sidebar">
 									<div class="user_profile">
 										<div class="user-pro-img">
-											<img src="http://localhost:8080/api/imageprofile/{{username}}" alt="">
+											<img src="https://localhost:8443/api/imageprofile/{{username}}" alt="">
 										</div>
 										<!--user-pro-img end-->
 										<div class="user_pro_status">
@@ -347,13 +292,13 @@
 									</div>
 									<!--user-tab-sec end-->
 									<div class="product-feed-tab current" id="feed-dd">
-										<div class="posts-section">
+										<div class="posts-section" id="myUL">
 											{{#postlist}}
 											<div class="post-bar">
 												<div class="post_topbar">
 													<div class="row usy-dt">
 														<div class="user-post-icon">
-															<img src="http://localhost:8080/api/imageprofile/{{post.iduser.username}}"
+															<img src="https://localhost:8443/api/imageprofile/{{post.iduser.username}}"
 																alt="">
 														</div>
 														<div class="usy-name">
@@ -379,7 +324,7 @@
 													<h3>{{post.title}}</h3>
 													<div class="row">
 														<ul class="image-store">
-															<li><img src="http://localhost:8080/api/imagepost/{{post.idpost}}"
+															<li><img src="https://localhost:8443/api/imagepost/{{post.idpost}}"
 																	alt=""></li>
 														</ul>
 													</div>
@@ -412,12 +357,12 @@
 									<div class="product-feed-tab" id="info-dd">
 										<div class="col-lg-20">
 											<div class="main-ws-sec">
-												<div class="posts-section">
+												<div class="posts-section" id="myULS">
 													{{#products}}
 													<div class="post-bar">
 														<div class="post_topbar">
 															<div class="usy-dt">
-																<img src="http://localhost:8080/api/imageprofile/{{product.iduser.username}}"
+																<img src="https://localhost:8443/api/imageprofile/{{product.iduser.username}}"
 																	alt="">
 																<div class="usy-name">
 																	<h3>{{product.iduser.username}}</h3>
@@ -443,7 +388,7 @@
 															<h3>{{product.title}}</h3>
 															<div class="row">
 																<ul class="image-store">
-																	<li><img src="http://localhost:8080/api/imageProduct0/{{product.idproduct}}"
+																	<li><img src="https://localhost:8443/api/imageProduct0/{{product.idproduct}}"
 																			alt=""></li>
 																</ul>
 															</div>
@@ -513,7 +458,7 @@
 													{{#postlist}}
 													<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 														<div class="gallery_pt">
-															<img src="http://localhost:8080/api/imagepost/{{post.idpost}}"
+															<img src="https://localhost:8443/api/imagepost/{{post.idpost}}"
 																alt="">
 														</div>
 														<!--gallery_pt end-->
@@ -544,7 +489,7 @@
 											<ul>
 												{{#postlist}}
 												<li><a href="#" title=""><img
-															src="http://localhost:8080/api/imagepost/{{post.idpost}}"
+															src="https://localhost:8443/api/imagepost/{{post.idpost}}"
 															alt=""></a></li>
 												{{/postlist}}
 											</ul>
@@ -594,8 +539,8 @@
 	<script type="text/javascript" src="js/flatpickr.min.js"></script>
 	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="js/chat.js"></script>
+	
+	
 </body>
 
 </html>

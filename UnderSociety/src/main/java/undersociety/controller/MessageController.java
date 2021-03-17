@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,7 @@ import undersociety.models.Message;
 import undersociety.models.MessageModel;
 import undersociety.models.Users;
 import undersociety.repositories.MessageRepository;
-import undersociety.services.UserService;
+import undersociety.repositories.UserRepository;
 
 
 @RestController
@@ -24,7 +25,7 @@ import undersociety.services.UserService;
 public class MessageController {
 
 	@Autowired
-	private UserService userservice;
+	 private UserRepository userRepository;
 
 	@Autowired
 	private MessageRepository messagedb;
@@ -34,15 +35,15 @@ public class MessageController {
 
     @MessageMapping("/chat/{to}")
     public void sendMessage(@DestinationVariable String to, MessageModel message) {
-        Users f = (Users) userservice.findByUser_name(message.getFromLogin());
-    	Users t = (Users) userservice.findByUser_name(to);
+        Users f =  userRepository.findByusername(message.getFromLogin()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users t =  userRepository.findByusername(to).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	Message m = new Message();
     	m.setIduser(f);
     	m.setIduserto(t);
     	m.setMessage(message.getMessage());
     	m.setTime(message.getTime());
     	messagedb.save(m);
-        boolean isExists = userservice.findByUser_nameExists(to);
+        boolean isExists = (t != null);
         if (isExists) {
             simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
         }
@@ -50,8 +51,8 @@ public class MessageController {
     
     @GetMapping("/api/getChad")
     public List<Message> getChat(@RequestParam String from, @RequestParam String to) {
-    	Users f = (Users) userservice.findByUser_name(from);
-    	Users t = (Users) userservice.findByUser_name(to);
+    	Users f = userRepository.findByusername(from).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users t = userRepository.findByusername(to).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	List<Message> m = messagedb.findByIduserAndIduserto(t, f);
     	List<Message> m2 = messagedb.findByIduserAndIduserto(f, t);
     	m.addAll(m2);

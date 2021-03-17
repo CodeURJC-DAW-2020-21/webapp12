@@ -32,7 +32,6 @@ import undersociety.repositories.ProductRepository;
 import undersociety.repositories.RolesRepository;
 import undersociety.repositories.UserRepository;
 import undersociety.repositories.UsersRelationsRepository;
-import undersociety.services.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -68,9 +67,6 @@ public class UsersController {
 	
 	@Autowired
 	 private UserRepository userRepository;
-	
-	@Autowired
-	private UserService userservice;
 		
 	@Autowired
 	private RolesRepository rolesRepository;
@@ -96,7 +92,7 @@ public class UsersController {
     	user.setUserprofile(true);
 		user.setCompanyprofile(false);
 		user.setPass(encoder.encode(user.getPass()));
-		userservice.save(user);
+		userRepository.save(user);
 		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found")));
 		Roles r = new Roles();
 		r.setIduser(use);
@@ -115,7 +111,7 @@ public class UsersController {
 		System.out.println(user.getUserprofile());
 		System.out.println(user.getCompanyprofile());
 		user.setPass(encoder.encode(user.getPass()));
-		userservice.save(user);
+		userRepository.save(user);
 		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found")));
 		Roles r = new Roles();
 		r.setIduser(use);
@@ -126,7 +122,7 @@ public class UsersController {
     
     @GetMapping("/api/imageprofile")
     private ResponseEntity<Object> downloadImage(HttpServletRequest sesion) throws SQLException{
-    	Users s = (Users) userservice.findByUser_name(sesion.getUserPrincipal().getName());
+    	Users s = userRepository.findByusername(sesion.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
@@ -136,7 +132,7 @@ public class UsersController {
     
     @GetMapping("/api/imageprofile/{username}")
     private ResponseEntity<Object> downloadImageProfile(@PathVariable String username) throws SQLException{
-    	Users s = (Users) userservice.findByUser_name(username);
+    	Users s = userRepository.findByusername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
@@ -218,7 +214,6 @@ public class UsersController {
     public void deleteUser(HttpServletResponse response, HttpServletRequest request, @RequestParam String email, @RequestParam String pass, @RequestParam String explication) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	if(prev.getEmail().equalsIgnoreCase(email)) {
-    		System.out.println(email);
     		if(encoder.encode(pass).equalsIgnoreCase(prev.getPass())) {
     			listproductrepo.deleteByIduser(prev);
     	    	relationrepo.deleteByUserone(prev);

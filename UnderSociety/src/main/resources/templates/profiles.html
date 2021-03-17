@@ -28,7 +28,7 @@
 </head>
 
 
-<body onload="connectToChat('{{username}}')">
+<body onload="connectToChat('{{username}}','null','{{token}}')">
 	
 
 	<div class="wrapper">
@@ -102,7 +102,7 @@
 					<!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="http://localhost:8080/api/imageprofile" alt="">
+							<img src="https://localhost:8443/api/imageprofile" alt="">
 							<a href="#" title=""></a>
 							<i class="la la-sort-down"></i>
 						</div>
@@ -112,29 +112,7 @@
 								<form>
 									<input type="text" name="search" placeholder="{{username}}" readonly>
 								</form>
-							</div>
-							<h3>Online Status</h3>
-							<ul class="on-off-status">
-								<li>
-									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c5">
-										<label for="c5">
-											<span></span>
-										</label>
-										<small>Online</small>
-									</div>
-								</li>
-								<li>
-									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c6">
-										<label for="c6">
-											<span></span>
-										</label>
-										<small>Offline</small>
-									</div>
-								</li>
-							</ul>
-							
+							</div>							
 							<!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
@@ -148,7 +126,7 @@
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
 							<form action="/logout" method="POST">
-								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /></h3>
+								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /><input type="hidden" name="_csrf" value="{{token}}"/></h3>
 							</form>
 						</div>
 						<!--user-account-settingss end-->
@@ -172,7 +150,7 @@
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="company_profile_info">
 								<div class="company-up-info">
-									<img src="http://localhost:8080/api/imageprofile/{{username}}" alt="">
+									<img src="https://localhost:8443/api/imageprofile/{{username}}" alt="">
 									<h3>{{username}}</h3>
 									
 									<ul>
@@ -205,8 +183,9 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/flatpickr.min.js"></script>
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
+
 <script type="text/javascript" src="js/script.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/chat.js"></script>
+
+
 </body>
 </html>

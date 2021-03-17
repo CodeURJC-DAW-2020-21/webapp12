@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -73,6 +71,7 @@ public class NavigationController implements ErrorController{
 	private String getSignIn(Model model,HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
+		loadData();
 		return "sign-in";
 	}
     
@@ -122,6 +121,8 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/pageProfileUser")
 	private String getPageProfileUser(Model model,HttpServletRequest request, @RequestParam String username){
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		Optional<Users> follow = userRepository.findByusername(username);
 		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
 		Page<Post> p = postsrepo.findByiduser(follow.get(),PageRequest.of(0, 10,Sort.by("idpost").ascending()));
@@ -179,7 +180,6 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("followers", followers.size());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("postlist", postsmodels);
-		System.out.println(productmodels.size());
 		model.addAttribute("products",productmodels);
 		model.addAttribute("username",follow.get().getUsername());
 		model.addAttribute("usernameview", request.getUserPrincipal().getName());
@@ -188,6 +188,8 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/store")
 	private String getStore(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		Page<Product> products = productrepo.findAll(PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
 		List<ListProducts> lp = listproductrepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).get());
 		List<ProductModel> productmodels = new ArrayList<>();
@@ -197,6 +199,19 @@ public class NavigationController implements ErrorController{
 		}
 		for (Product product : products) {
 			ProductModel productmodel = new ProductModel();
+			
+			if(product.getStatus().equalsIgnoreCase("in stock")) {
+				productmodel.setColor("#228B22");
+			}
+			
+			if(product.getStatus().equalsIgnoreCase("sold")) {
+				productmodel.setColor("#DC143C");
+			}
+			
+			if(product.getStatus().equalsIgnoreCase("reserved")) {
+				productmodel.setColor("#FFD700");
+			}
+			
 			if(bookmarks.contains(product.getIdproduct())) {
 				productmodel.setBookamark("la la-check-circle");
 			}else {
@@ -213,6 +228,8 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/profiles")
 	private String getProfiles(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		Page<Users> users = userRepository.findByuserprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("users",users.getContent());
@@ -222,6 +239,8 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/companies")
 	private String getCompanies(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		Page<Users> companies = userRepository.findBycompanyprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("companies",companies.getContent());
@@ -231,6 +250,8 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/my-profile-feed")
 	private String getMyProfileFeed(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
 		List<UsersRelations> following = relationrepo.findByuserone(s.get());
 		List<UsersRelations> followers = relationrepo.findByusertwo(s.get());
@@ -243,6 +264,8 @@ public class NavigationController implements ErrorController{
 	
 	@GetMapping("/profile-account-setting")
 	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("followersList", relationrepo.findByuserone(actual.get()));
@@ -284,12 +307,13 @@ public class NavigationController implements ErrorController{
 		}else {
 			model.addAttribute("linktwitter","");
 		}
-		
 		return "profile-account-setting";
 	}
 	
 	@GetMapping("/messages")
 	private String getMessages(Model model,HttpServletRequest request,@RequestParam(required = false) String to) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		if(to != null) {
 			model.addAttribute("to",to);
 		}else {
@@ -306,6 +330,8 @@ public class NavigationController implements ErrorController{
 		
 	@GetMapping("/admin")
 	private String getAdminpage(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		model.addAttribute("username", request.getUserPrincipal().getName());
 		model.addAttribute("numpost", postsrepo.findAll().size());
 		List<Product> p = productrepo.findAll();
@@ -316,7 +342,7 @@ public class NavigationController implements ErrorController{
 		int book = productrepo.findByidtagfour(tag.get(3)).size();
 		int clot = productrepo.findByidtagfive(tag.get(4)).size();
 		int instock = productrepo.findBystatus("in stock").size();
-		int available = productrepo.findBystatus("available").size();
+		int sold = productrepo.findBystatus("sold").size();
 		int reserved = productrepo.findBystatus("reserved").size();
 		int tproduct = p.size();
 		int sum = 0;
@@ -332,13 +358,15 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("book", ((book*100)/tproduct));
 		model.addAttribute("clothe", ((clot*100)/tproduct));
 		model.addAttribute("stock", ((instock*100)/tproduct));
-		model.addAttribute("available", ((available*100)/tproduct));
+		model.addAttribute("sold", ((sold*100)/tproduct));
 		model.addAttribute("reserved", ((reserved*100)/tproduct));
 		return "admin";
 	}
 	
 	@GetMapping("/forgotPassword")
-	private String getForgotPassword() {
+	private String getForgotPassword(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		return "forgotPassword";
 	}
 	
@@ -354,4 +382,26 @@ public class NavigationController implements ErrorController{
 		// TODO Auto-generated method stub
 		return "error";
 	}
+	
+	
+	private void loadData() {
+		if(tagrepo.findAll().isEmpty()) {
+			Tags tag1 = new Tags();
+			Tags tag2 = new Tags();
+			Tags tag3 = new Tags();
+			Tags tag4 = new Tags();
+			Tags tag5 = new Tags();
+			tag1.setDescription("Electronics");
+			tag2.setDescription("Furniture");
+			tag3.setDescription("Appliance");
+			tag4.setDescription("Books");
+			tag5.setDescription("Clothes");
+			tagrepo.save(tag1);
+			tagrepo.save(tag2);
+			tagrepo.save(tag3);
+			tagrepo.save(tag4);
+			tagrepo.save(tag5);
+		}
+	}
+	
 }
