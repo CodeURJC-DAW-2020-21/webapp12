@@ -29,7 +29,7 @@
 </head>
 
 
-<body onload="connectToChat('{{username}}')">
+<body onload="connectToChat('{{username}}','null','{{token}}')">
 
 
 	<div class="wrapper">
@@ -103,7 +103,7 @@
 					<!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="http://localhost:8080/api/imageprofile" alt="">
+							<img src="https://localhost:8443/api/imageprofile" alt="">
 							<a href="#" title=""></a>
 							<i class="la la-sort-down"></i>
 						</div>
@@ -198,7 +198,7 @@
 											{{#productsList}}
 											<div class="request-details" id="product{{idproduct.idproduct}}">
 												<div class="noty-user-img">
-													<img src="http://localhost:8080/api/imageProduct0/{{idproduct.idproduct}}"
+													<img src="https://localhost:8443/api/imageProduct0/{{idproduct.idproduct}}"
 														alt="">
 												</div>
 												<div class="request-info">
@@ -452,7 +452,7 @@
 											{{#followersList}}
 											<div class="request-details" id="follower{{iduserrelation}}">
 												<div class="noty-user-img">
-													<img src="http://localhost:8080/api/imageprofile/{{usertwo.username}}"
+													<img src="https://localhost:8443/api/imageprofile/{{usertwo.username}}"
 														alt="">
 												</div>
 												<div class="request-info">
@@ -521,7 +521,7 @@
 														<div class="row">
 															<div class="col-md-3 imgUp">
 																<div class="imagePreview"
-																	style="background-image: url(http://localhost:8080/api/imageprofile);">
+																	style="background-image: url(https://localhost:8443/api/imageprofile);">
 																</div>
 																<label class="btn btn-primary">Upload<input
 																		name="imagen" type="file" class="uploadFile img"

@@ -348,6 +348,245 @@ $(document).ready(function () {
 });
 
 
+
+
+
+const url = 'https://localhost:8443';
+let stompClient;
+let selectedUser;
+let newMessages = new Map();
+var pageusers;
+var totalPages;
+var notifynum = 0;
+var useractual;
+
+
+function connectToChat(userName, to, tk) {
+    console.log(tk);
+    token = tk;
+    useractual = userName;
+    console.log("connecting to chat...")
+    let socket = new SockJS(url + '/chat');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        console.log("connected to: " + frame);
+        stompClient.subscribe("/topic/messages/" + userName, function (response) {
+            let data = JSON.parse(response.body);
+            console.log(response.body);
+            if (selectedUser === data.fromLogin) {
+                render(data.message, data.fromLogin);
+            } else {
+                console.log("message recibido");
+                if (notifynum + 1 < 4) {
+                    notifynum++;
+                    newMessages.set(data.fromLogin, data.message);
+                    $(".nott-list").find(".view-all-nots").remove();
+                    $(".nott-list").append('<div id="newMessage_' + data.fromLogin + '" class="notfication-details"><div class="noty-user-img"><img src="https://localhost:8443/api/imageprofile/' + data.fromLogin + '" alt=""></div><div class="notification-info"><h3><a href="messages" title="">' + data.fromLogin + '</a> </h3><p>' + data.message + '</p><span>' + data.time + '</span></div><!--notification-info --></div>');
+                    $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
+                }
+            }
+        });
+    });
+    $.get(url + "/api/getUserPage?page=0&size=10&sort=username&direction=asc", function (response) {
+        pageusers = response.number;
+        totalPages = response.totalPages;
+        let users = response.content;
+        let usersTemplateHTML = "";
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].username != userName) {
+                usersTemplateHTML = usersTemplateHTML + '<a href="#" onclick="selectUser(\'' + users[i].username + '\')"><li class="clearfix">\n' +
+                    '                <img src="https://localhost:8443/api/imageprofile/' + users[i].username + '" width="55px" height="55px" alt="avatar" />\n' +
+                    '                <div class="about">\n' +
+                    '                    <div id="userNameAppender_' + users[i].username + '" class="name">' + users[i].username + '</div>\n' +
+                    '                    <div class="status">\n' +
+                    '                        <i class="fa fa-circle offline"></i>\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </li></a>';
+            }
+        }
+        $('#usersList').html(usersTemplateHTML);
+    });
+    if (to != "null") {
+        console.log("selecting users: " + to);
+        $(".chat-header").children().attr("src", 'https://localhost:8443/api/imageprofile/' + to);
+        selectedUser = to;
+        let isNew = document.getElementById("newMessage_" + to) !== null;
+        if (isNew) {
+            let element = document.getElementById("newMessage_" + to);
+            element.remove();
+            notifynum--;
+            render(newMessages.get(userName), to);
+        }
+        $('#selectedUserId').html('');
+        $('#selectedUserId').append('Chat with ' + to);
+        var ul = document.getElementById("messageList");
+        ul.innerHTML = "";
+        $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: to }, function (data) {
+            data.forEach(element => {
+                console.log("FROM:" + element.iduser.username + " TO: " + element.iduserto.username + " message: " + element.message);
+                if (selectedUser === element.iduser.username) {
+                    console.log("jhon");
+                    var templateResponse = Handlebars.compile($("#message-response-template").html());
+                    var contextResponse = {
+                        response: element.message,
+                        time: element.time,
+                        userName: element.iduser.username
+                    };
+                    $chatHistoryList.append(templateResponse(contextResponse));
+                } else {
+                    console.log("no jhon");
+                    var template = Handlebars.compile($("#message-template").html());
+                    var context = {
+                        messageOutput: element.message,
+                        time: element.time,
+                        toUserName: element.iduser.username
+                    };
+
+                    $chatHistoryList.append(template(context));
+                }
+            });
+        });
+    }
+}
+
+function sendMsg(from, text) {
+    stompClient.send("/app/chat/" + selectedUser, {}, JSON.stringify({
+        fromLogin: from,
+        message: text,
+        time: "" + getCurrentTime()
+    }));
+}
+
+
+function selectUser(userName) {
+    console.log("selecting users: " + userName);
+    $(".chat-header").children().attr("src", 'https://localhost:8443/api/imageprofile/' + userName);
+    selectedUser = userName;
+    let isNew = document.getElementById("newMessage_" + userName) !== null;
+    if (isNew) {
+        let element = document.getElementById("newMessage_" + userName);
+        element.remove();
+        notifynum--;
+        render(newMessages.get(userName), userName);
+    }
+    $('#selectedUserId').html('');
+    $('#selectedUserId').append('Chat with ' + userName);
+    var ul = document.getElementById("messageList");
+    ul.innerHTML = "";
+    $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: userName }, function (data) {
+        data.forEach(element => {
+            console.log("FROM:" + element.iduser.username + " TO: " + element.iduserto.username + " message: " + element.message);
+            if (selectedUser === element.iduser.username) {
+                console.log("jhon");
+                var templateResponse = Handlebars.compile($("#message-response-template").html());
+                var contextResponse = {
+                    response: element.message,
+                    time: element.time,
+                    userName: element.iduser.username
+                };
+                $chatHistoryList.append(templateResponse(contextResponse));
+            } else {
+                console.log("no jhon");
+                var template = Handlebars.compile($("#message-template").html());
+                var context = {
+                    messageOutput: element.message,
+                    time: element.time,
+                    toUserName: element.iduser.username
+                };
+
+                $chatHistoryList.append(template(context));
+            }
+        });
+    });
+}
+
+$("#clearbutton").on("click", function () {
+    $(".nott-list").empty();
+    $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
+    notifynum = 0;
+});
+
+
+$(".previous").on("click", function () {
+    size = 10;
+    sort = 'username';
+    if (pageusers > 0) {
+        pageusers--;
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: ('/api/getUserPage?page=' + pageusers + '&size=' + size + '&sort=' + sort + '&direction=asc'),
+            success: function (response) {
+                let users = response.content;
+                let usersTemplateHTML = "";
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].username != useractual) {
+                        usersTemplateHTML = usersTemplateHTML + '<a href="#" onclick="selectUser(\'' + users[i].username + '\')"><li class="clearfix">\n' +
+                            '                <img src="https://localhost:8443/api/imageprofile/' + users[i].username + '" width="55px" height="55px" alt="avatar" />\n' +
+                            '                <div class="about">\n' +
+                            '                    <div id="userNameAppender_' + users[i].username + '" class="name">' + users[i].username + '</div>\n' +
+                            '                    <div class="status">\n' +
+                            '                        <i class="fa fa-circle offline"></i>\n' +
+                            '                    </div>\n' +
+                            '                </div>\n' +
+                            '            </li></a>';
+                    }
+                }
+                $('#usersList').html(usersTemplateHTML);
+            }
+        });
+    }
+});
+
+$(".next").on("click", function () {
+    size = 10;
+    sort = 'username';
+    if (pageusers + 1 <= totalPages) {
+        pageusers++;
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: ('/api/getUserPage?page=' + pageusers + '&size=' + size + '&sort=' + sort + '&direction=asc'),
+            success: function (response) {
+                let users = response.content;
+                let usersTemplateHTML = "";
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].username != useractual) {
+                        usersTemplateHTML = usersTemplateHTML + '<a href="#" onclick="selectUser(\'' + users[i].username + '\')"><li class="clearfix">\n' +
+                            '                <img src="https://localhost:8443/api/imageprofile/' + users[i].username + '" width="55px" height="55px" alt="avatar" />\n' +
+                            '                <div class="about">\n' +
+                            '                    <div id="userNameAppender_' + users[i].username + '" class="name">' + users[i].username + '</div>\n' +
+                            '                    <div class="status">\n' +
+                            '                        <i class="fa fa-circle offline"></i>\n' +
+                            '                    </div>\n' +
+                            '                </div>\n' +
+                            '            </li></a>';
+                    }
+                }
+                $('#usersList').html(usersTemplateHTML);
+            }
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let token;
 var pageprofile = 1;
 var pagecompany = 1;
 var pagepost = 1;
@@ -356,6 +595,10 @@ var likes = [];
 var bookmarks = [];
 var products = [];
 var follows = [];
+
+function passToken(tk) {
+    token = tk;
+}
 
 $.ajax({
     type: "GET",
@@ -400,7 +643,7 @@ $(".profile").on("click", function () {
         url: ('/api/moreUsers?page=' + pageprofile + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pageprofile + 1 <= result.totalPages) {
                 pageprofile++;
@@ -420,7 +663,7 @@ $(".company").on("click", function () {
         url: ('/api/moreCompany?page=' + pagecompany + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='http://localhost:8080/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pagecompany + 1 <= result.totalPages) {
                 pagecompany++;
@@ -442,7 +685,7 @@ function loadPosts() {
                 if(likes.includes(value.idpost)){
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='"+icon+"'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='"+icon+"'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
         }
     });
@@ -460,20 +703,20 @@ function loadProducts(username) {
                 if(bookmarks.includes(value.idproduct)){
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='http://localhost:8080/api/imageprofile/" +value.iduser.username+ "' alt=''>";
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" +value.iduser.username+ "' alt=''>";
                 base = base.concat("<div class='usy-name'><h3>" +value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li>");
                 base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='"+icon+"'></i></a></li><li><a href='./messages?to=" +value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li>");
                 base = base.concat("</ul></div><br><div class='job_descp'><h3>" +value.title+ "</h3><div class='row'>");
                 base = base.concat("<div id='carouselExampleControls-" +value.idproduct+ "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
                 if(value.img0){
-                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='http://localhost:8080/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
                 }
                 if(value.img1){
-                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='http://localhost:8080/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
+                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
                 }
                 if(value.img2){
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='http://localhost:8080/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");
                 }
                 base = base.concat("</div>");
                 base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
@@ -508,9 +751,9 @@ function loadProducts(username) {
 }
 
 $(".posts").on("click", function () {
+    console.log(token);
     size = 10;
     sort = 'idpost';
-    console.log(likes);
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -521,7 +764,7 @@ $(".posts").on("click", function () {
                 if(likes.includes(value.idpost)){
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='http://localhost:8080/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" +icon+ "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='http://localhost:8080/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" +icon+ "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepost + 1 <= result.totalPages) {
                 pagepost++;
@@ -546,20 +789,20 @@ $(".products").on("click", function () {
                 if(bookmarks.includes(value.idproduct)){
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='http://localhost:8080/api/imageprofile/" +value.iduser.username+ "' alt=''>";
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" +value.iduser.username+ "' alt=''>";
                 base = base.concat("<div class='usy-name'><h3>" +value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li>");
                 base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='"+icon+"'></i></a></li><li><a href='./messages?to=" +value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li>");
                 base = base.concat("</ul></div><div class='job_descp'><h3>" +value.title+ "</h3><div class='row'>");
                 base = base.concat("<div id='carouselExampleControls-" +value.idproduct+ "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
                 if(value.img0){
-                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='http://localhost:8080/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
                 }
                 if(value.img1){
-                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='http://localhost:8080/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
+                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
                 }
                 if(value.img2){
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='http://localhost:8080/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");
                 }
                 base = base.concat("</div>");
                 base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
@@ -594,32 +837,7 @@ $(".products").on("click", function () {
     });
 });
 
-function like(idpost) {
-    var s = $("#" + idpost);
-    if (s.children().attr("class") == "la la-heart") {
-        $.post( "/api/unlikePost?idpost="+idpost, function( data ) {
-        });
-        s.children().attr("class", "la la-heart-o");
-    } else {
-        $.post( "/api/likePost?idpost="+idpost, function( data ) {
-        });
-        s.children().attr("class", "la la-heart");
-    }
-}
 
-function mark(idproduct) {
-    if ($("#product" + idproduct).children().attr("class") == "la la-bookmark") {
-        $.post( "/api/addProduct?idproduct="+idproduct, function( data ) {
-            console.log(data);
-            $("#product" + idproduct).children().attr("class", "la la-check-circle");
-        });
-    } else {
-        $.post( "/api/dropProduct?idproduct="+idproduct, function( data ) {
-            console.log(data);
-            $("#product" + idproduct).children().attr("class", "la la-bookmark");
-        });
-    }
-}
 
 
 function clearAllFilter() {
@@ -742,7 +960,7 @@ $("#follow").on("click", function () {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: ('/api/follow?username=' + follow),
+        url: ('/api/follow?username=' + follow+"&_csrf="+token),
         success: function (response) {
             if (response) {
                 $(".flww").css("background-color", "#e44d3a");
@@ -757,7 +975,7 @@ function unfollow(idfollow) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: ('/api/unfollowlist?idrelation=' + idfollow),
+        url: ('/api/unfollowlist?idrelation=' + idfollow+"&_csrf="+token),
         success: function (response) {
             if(response){
                 $("#follower"+idfollow).remove();
@@ -767,10 +985,37 @@ function unfollow(idfollow) {
 }
 
 function dropProduct(idproduct) {
-    $.post( "/api/dropProduct?idproduct="+idproduct, function( response ) {
+    $.post( "/api/dropProduct?idproduct="+idproduct+"&_csrf="+token, function( response ) {
         if(response){
             console.log(response);
             $("#product"+idproduct).remove();
         }
     });
+}
+
+function like(idpost) {
+    var s = $("#" + idpost);
+    if (s.children().attr("class") == "la la-heart") {
+        $.post( "/api/unlikePost?idpost="+idpost+"&_csrf="+token, function( data ) {
+        });
+        s.children().attr("class", "la la-heart-o");
+    } else {
+        $.post( "/api/likePost?idpost="+idpost+"&_csrf="+token, function( data ) {
+        });
+        s.children().attr("class", "la la-heart");
+    }
+}
+
+function mark(idproduct) {
+    if ($("#product" + idproduct).children().attr("class") == "la la-bookmark") {
+        $.post( "/api/addProduct?idproduct="+idproduct+"&_csrf="+token, function( data ) {
+            console.log(data);
+            $("#product" + idproduct).children().attr("class", "la la-check-circle");
+        });
+    } else {
+        $.post( "/api/dropProduct?idproduct="+idproduct+"&_csrf="+token, function( data ) {
+            console.log(data);
+            $("#product" + idproduct).children().attr("class", "la la-bookmark");
+        });
+    }
 }

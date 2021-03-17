@@ -29,7 +29,7 @@
 </head>
 
 
-<body onload="connectToChat('{{usernameview}}')">
+<body onload="connectToChat('{{usernameview}}','null','{{token}}')">
 
 
 	<div class="wrapper">
@@ -136,7 +136,7 @@
 					<!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="http://localhost:8080/api/imageprofile" alt="">
+							<img src="https://localhost:8443/api/imageprofile" alt="">
 							<a href="#" title=""></a>
 							<i class="la la-sort-down"></i>
 						</div>
@@ -208,7 +208,7 @@
 								<div class="main-left-sidebar">
 									<div class="user_profile">
 										<div class="user-pro-img">
-											<img src="http://localhost:8080/api/imageprofile/{{username}}" alt="">
+											<img src="https://localhost:8443/api/imageprofile/{{username}}" alt="">
 										</div>
 										<!--user-pro-img end-->
 										<div class="user_pro_status">
@@ -353,7 +353,7 @@
 												<div class="post_topbar">
 													<div class="row usy-dt">
 														<div class="user-post-icon">
-															<img src="http://localhost:8080/api/imageprofile/{{post.iduser.username}}"
+															<img src="https://localhost:8443/api/imageprofile/{{post.iduser.username}}"
 																alt="">
 														</div>
 														<div class="usy-name">
@@ -379,7 +379,7 @@
 													<h3>{{post.title}}</h3>
 													<div class="row">
 														<ul class="image-store">
-															<li><img src="http://localhost:8080/api/imagepost/{{post.idpost}}"
+															<li><img src="https://localhost:8443/api/imagepost/{{post.idpost}}"
 																	alt=""></li>
 														</ul>
 													</div>
@@ -417,7 +417,7 @@
 													<div class="post-bar">
 														<div class="post_topbar">
 															<div class="usy-dt">
-																<img src="http://localhost:8080/api/imageprofile/{{product.iduser.username}}"
+																<img src="https://localhost:8443/api/imageprofile/{{product.iduser.username}}"
 																	alt="">
 																<div class="usy-name">
 																	<h3>{{product.iduser.username}}</h3>
@@ -443,7 +443,7 @@
 															<h3>{{product.title}}</h3>
 															<div class="row">
 																<ul class="image-store">
-																	<li><img src="http://localhost:8080/api/imageProduct0/{{product.idproduct}}"
+																	<li><img src="https://localhost:8443/api/imageProduct0/{{product.idproduct}}"
 																			alt=""></li>
 																</ul>
 															</div>
@@ -513,7 +513,7 @@
 													{{#postlist}}
 													<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 														<div class="gallery_pt">
-															<img src="http://localhost:8080/api/imagepost/{{post.idpost}}"
+															<img src="https://localhost:8443/api/imagepost/{{post.idpost}}"
 																alt="">
 														</div>
 														<!--gallery_pt end-->
@@ -544,7 +544,7 @@
 											<ul>
 												{{#postlist}}
 												<li><a href="#" title=""><img
-															src="http://localhost:8080/api/imagepost/{{post.idpost}}"
+															src="https://localhost:8443/api/imagepost/{{post.idpost}}"
 															alt=""></a></li>
 												{{/postlist}}
 											</ul>

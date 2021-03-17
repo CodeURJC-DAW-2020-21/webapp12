@@ -179,7 +179,6 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("followers", followers.size());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("postlist", postsmodels);
-		System.out.println(productmodels.size());
 		model.addAttribute("products",productmodels);
 		model.addAttribute("username",follow.get().getUsername());
 		model.addAttribute("usernameview", request.getUserPrincipal().getName());
