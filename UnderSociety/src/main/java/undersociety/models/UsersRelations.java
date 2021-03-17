@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="user_relation")
 public class UsersRelations {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int iduserrelation;
 	@OneToOne
 	@JoinColumn(name = "userone", referencedColumnName = "idusers")

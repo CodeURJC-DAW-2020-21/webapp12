@@ -71,6 +71,7 @@ public class NavigationController implements ErrorController{
 	private String getSignIn(Model model,HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
+		loadData();
 		return "sign-in";
 	}
     
@@ -381,4 +382,26 @@ public class NavigationController implements ErrorController{
 		// TODO Auto-generated method stub
 		return "error";
 	}
+	
+	
+	private void loadData() {
+		if(tagrepo.findAll().isEmpty()) {
+			Tags tag1 = new Tags();
+			Tags tag2 = new Tags();
+			Tags tag3 = new Tags();
+			Tags tag4 = new Tags();
+			Tags tag5 = new Tags();
+			tag1.setDescription("Electronics");
+			tag2.setDescription("Furniture");
+			tag3.setDescription("Appliance");
+			tag4.setDescription("Books");
+			tag5.setDescription("Clothes");
+			tagrepo.save(tag1);
+			tagrepo.save(tag2);
+			tagrepo.save(tag3);
+			tagrepo.save(tag4);
+			tagrepo.save(tag5);
+		}
+	}
+	
 }

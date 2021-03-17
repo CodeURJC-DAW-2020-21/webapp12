@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,15 +35,11 @@ import undersociety.repositories.ListProductsRepository;
 import undersociety.repositories.ProductRepository;
 import undersociety.repositories.TagsRepository;
 import undersociety.repositories.UserRepository;
-import undersociety.services.UserService;
 
 @RestController
 @CrossOrigin
 public class StoreController {
-	
-	@Autowired
-	private UserService userservice;
-	
+		
 	@Autowired
 	 private UserRepository userRepository;
 	
@@ -57,7 +54,7 @@ public class StoreController {
 	
 	@PostMapping("/api/uploadProduct")
 	private void uploadProduct(HttpServletResponse response, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree, @RequestParam(required = false) boolean tagfour, @RequestParam(required = false) boolean tagfive) throws IOException {
-		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		Page<Tags> listag = tagsrepo.findAll(PageRequest.of(0, 10,Sort.by("idtags").ascending()));
 		if(imag0.isEmpty() == false) {
 			product.setImage0(BlobProxy.generateProxy(imag0.getInputStream(), imag0.getSize()));
@@ -147,7 +144,7 @@ public class StoreController {
 	
 	@PostMapping("/api/addProduct")
 	public boolean addProduct(@RequestParam int idproduct, HttpServletRequest request) {
-		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		Optional<Product> p = productrepo.findById(idproduct);
 		ListProducts lp = new ListProducts();
 		lp.setIdproduct(p.get());
@@ -157,7 +154,7 @@ public class StoreController {
 	
 	@PostMapping("/api/dropProduct")
 	public boolean dropProduct(@RequestParam int idproduct, HttpServletRequest request) {
-		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		Optional<Product> p = productrepo.findById(idproduct);
 		ListProducts lp = listproductrepo.findByiduserAndIdproduct(s, p.get());
 		if(lp != null) {

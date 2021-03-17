@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,6 @@ import undersociety.models.Users;
 import undersociety.repositories.LikesRepository;
 import undersociety.repositories.PostRepository;
 import undersociety.repositories.UserRepository;
-import undersociety.services.UserService;
 
 @RestController
 public class PostsController {
@@ -43,15 +43,12 @@ public class PostsController {
 	
 	@Autowired
 	private LikesRepository likerepo;
-		
-	@Autowired
-	private UserService userservice;
-	
+			
 	
 	@PostMapping("/api/uploadPost")
 	private void uploadPost(Model model,HttpServletResponse response, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
 		model.addAttribute("username",request.getUserPrincipal().getName());
-		Users s = (Users) userservice.findByUser_name(request.getUserPrincipal().getName());
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		if(imag0 != null) {
 			post.setImage(BlobProxy.generateProxy(imag0.getInputStream(), imag0.getSize()));
 		}

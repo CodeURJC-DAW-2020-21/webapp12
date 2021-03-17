@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Message  implements Comparable<Message>{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idmessage;
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
