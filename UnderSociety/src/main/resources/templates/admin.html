@@ -445,7 +445,10 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="sign-in">Logout</a>
+                    <form action="/logout" method="POST">
+                        <input id="uploadImage" type="submit" value="Logout" />
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
+                    </form>
                 </div>
             </div>
         </div>
@@ -453,6 +456,13 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="js/popper.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+    <script type="text/javascript" src="lib/slick/slick.min.js"></script>
+    <script type="text/javascript" src="js/scrollbar.js"></script>
+    
+    <script type="text/javascript" src="js/script.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -467,8 +477,8 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/chat.js"></script>
+    
+    
 
 </body>
 

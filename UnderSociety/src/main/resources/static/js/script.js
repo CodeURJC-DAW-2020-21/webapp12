@@ -347,7 +347,89 @@ $(document).ready(function () {
     });
 });
 
+// -----------------------------------------------------------------------RENDER TEMPLATES-----------------------------------------------------------------
 
+
+let $chatHistory;
+let $button;
+let $textarea;
+let $chatHistoryList;
+
+function init() {
+    cacheDOM();
+    bindEvents();
+}
+
+function bindEvents() {
+    $button.on('click', addMessage.bind(this));
+    $textarea.on('keyup', addMessageEnter.bind(this));
+}
+
+function cacheDOM() {
+    $chatHistory = $('.chat-history');
+    $button = $('#sendBtn');
+    $textarea = $('#message-to-send');
+    $chatHistoryList = $chatHistory.find('ul');
+}
+
+function render(message, userName) {
+    scrollToBottom();
+    // responses
+    var templateResponse = Handlebars.compile($("#message-response-template").html());
+    var contextResponse = {
+        response: message,
+        time: getCurrentTime(),
+        userName: userName
+    };
+
+    setTimeout(function () {
+        $chatHistoryList.append(templateResponse(contextResponse));
+        scrollToBottom();
+    }.bind(this), 1500);
+}
+
+function sendMessage(message) {
+    let username = $('#userName').attr("placeholder");
+    console.log(username);
+    sendMsg(username, message);
+    scrollToBottom();
+    if (message.trim() !== '') {
+        var template = Handlebars.compile($("#message-template").html());
+        var context = {
+            messageOutput: message,
+            time: getCurrentTime(),
+            toUserName: selectedUser
+        };
+
+        $chatHistoryList.append(template(context));
+        scrollToBottom();
+        $textarea.val('');
+    }
+}
+
+function scrollToBottom() {
+    $chatHistory.scrollTop($chatHistory[0].scrollHeight);
+}
+
+function getCurrentTime() {
+    return new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+}
+
+function addMessage() {
+    sendMessage($textarea.val());
+}
+
+function addMessageEnter(event) {
+    // enter was pressed
+    if (event.keyCode === 13) {
+        addMessage();
+    }
+}
+
+init();
+
+
+// -----------------------------------------------------------------------lOGIC CHAT-----------------------------------------------------------------
 
 
 
@@ -501,6 +583,23 @@ function selectUser(userName) {
     });
 }
 
+
+
+
+
+
+
+//---------------------------------------------------------------------CARRROUSEL-----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 $("#clearbutton").on("click", function () {
     $(".nott-list").empty();
     $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
@@ -579,7 +678,7 @@ $(".next").on("click", function () {
 
 
 
-
+//-------------------------------------------------------------------OTHER-------------------------------------------------------------------------
 
 
 
@@ -643,7 +742,7 @@ $(".profile").on("click", function () {
         url: ('/api/moreUsers?page=' + pageprofile + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" +value.username+ "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pageprofile + 1 <= result.totalPages) {
                 pageprofile++;
@@ -663,7 +762,7 @@ $(".company").on("click", function () {
         url: ('/api/moreCompany?page=' + pagecompany + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='./user-profile' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" +value.username+ "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pagecompany + 1 <= result.totalPages) {
                 pagecompany++;

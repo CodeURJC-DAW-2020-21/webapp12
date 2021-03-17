@@ -47,7 +47,7 @@
 					<!--logo end-->
 					<div class="search-bar">
 						<form>
-							<input id="myInput" onkeyup="searchBarCompany()" type="text" name="search" placeholder="Search...">
+							<input id="myInput" onkeyup="searchBarPosts()" type="text" name="search" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div>
@@ -115,29 +115,7 @@
 								<form>
 									<input type="text" name="search" placeholder="{{username}}" readonly>
 								</form>
-							</div>
-							<h3>Online Status</h3>
-							<ul class="on-off-status">
-								<li>
-									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c5">
-										<label for="c5">
-											<span></span>
-										</label>
-										<small>Online</small>
-									</div>
-								</li>
-								<li>
-									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c6">
-										<label for="c6">
-											<span></span>
-										</label>
-										<small>Offline</small>
-									</div>
-								</li>
-							</ul>
-
+							</div>							
 							<!--search_form end-->
 							<h3>Setting</h3>
 							<ul class="us-links">
@@ -151,7 +129,7 @@
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
 							<form action="/logout" method="POST">
-								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /></h3>
+								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /><input type="hidden" name="_csrf" value="{{token}}"/></h3>
 							</form>
 						</div>
 						<!--user-account-settingss end-->
@@ -213,9 +191,9 @@
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/flatpickr.min.js"></script>
 	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+	
 	<script type="text/javascript" src="js/script.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="js/chat.js"></script>
+	
 </body>
 
 </html>
