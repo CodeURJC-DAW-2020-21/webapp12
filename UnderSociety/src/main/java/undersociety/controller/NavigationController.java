@@ -352,14 +352,26 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("sumstore", sum);
 		model.addAttribute("numproduct", productrepo.findAll().size());
 		model.addAttribute("sumuser", userRepository.findAll().size());
-		model.addAttribute("electronic", ((elec*100)/tproduct));
-		model.addAttribute("furniture", ((fur*100)/tproduct));
-		model.addAttribute("appliance", ((appli*100)/tproduct));
-		model.addAttribute("book", ((book*100)/tproduct));
-		model.addAttribute("clothe", ((clot*100)/tproduct));
-		model.addAttribute("stock", ((instock*100)/tproduct));
-		model.addAttribute("sold", ((sold*100)/tproduct));
-		model.addAttribute("reserved", ((reserved*100)/tproduct));
+		if (tproduct > 0) {
+			model.addAttribute("electronic", ((elec*100)/tproduct));
+			model.addAttribute("furniture", ((fur*100)/tproduct));
+			model.addAttribute("appliance", ((appli*100)/tproduct));
+			model.addAttribute("book", ((book*100)/tproduct));
+			model.addAttribute("clothe", ((clot*100)/tproduct));
+			model.addAttribute("stock", ((instock*100)/tproduct));
+			model.addAttribute("sold", ((sold*100)/tproduct));
+			model.addAttribute("reserved", ((reserved*100)/tproduct));
+		  
+		} else {
+			model.addAttribute("electronic", 0);
+			model.addAttribute("furniture", 0);
+			model.addAttribute("appliance", 0);
+			model.addAttribute("book", 0);
+			model.addAttribute("clothe",0);
+			model.addAttribute("stock",0);
+			model.addAttribute("sold", 0);
+			model.addAttribute("reserved",0);
+		}
 		return "admin";
 	}
 	
