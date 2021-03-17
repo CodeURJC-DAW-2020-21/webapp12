@@ -970,7 +970,7 @@ function searchBarProducts() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('myInput');
     filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
+    ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
 
     // Loop through all list items, and hide those who don't match the search query
