@@ -966,7 +966,7 @@ function readmore(idpost) {
     $("#readmore" + idpost).parent().children(".row").children(".description-store").toggleClass("show");
 }
 
-function searchBar() {
+function searchBarProducts() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('myInput');
     filter = input.value.toUpperCase();
