@@ -6,22 +6,20 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import undersociety.models.LikeAPost;
@@ -44,7 +42,7 @@ import undersociety.repositories.UsersRelationsRepository;
 
 @Controller
 @CrossOrigin
-public class NavigationController implements ErrorController{
+public class NavigationController{
 	
 	@Autowired
 	private LikesRepository likerepo;
@@ -102,17 +100,17 @@ public class NavigationController implements ErrorController{
 			postmodel.setPost(post);
 			postsmodels.add(postmodel);
 		}
-		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
-		List<UsersRelations> following = relationrepo.findByuserone(s.get());
-		List<UsersRelations> followers = relationrepo.findByusertwo(s.get());
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		List<UsersRelations> following = relationrepo.findByuserone(s);
+		List<UsersRelations> followers = relationrepo.findByusertwo(s);
 		model.addAttribute("following", following.size());
 		model.addAttribute("followers", followers.size());
-		if(s.get().getUserprofile()) {
+		if(s.getUserprofile()) {
 			model.addAttribute("url","/pageProfileUser?&username="+request.getUserPrincipal().getName());
 		}else {
 			model.addAttribute("url","/company-profile?&username="+request.getUserPrincipal().getName());	
 		}
-		model.addAttribute("storeList",listproductrepo.findByiduser(s.get()));
+		model.addAttribute("storeList",listproductrepo.findByiduser(s));
 		model.addAttribute("posts", postsmodels);
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
@@ -123,13 +121,13 @@ public class NavigationController implements ErrorController{
 	private String getPageProfileUser(Model model,HttpServletRequest request, @RequestParam String username){
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Optional<Users> follow = userRepository.findByusername(username);
-		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
-		Page<Post> p = postsrepo.findByiduser(follow.get(),PageRequest.of(0, 10,Sort.by("idpost").ascending()));
-		Page<Product> products = productrepo.findByiduser(follow.get(),PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
-		List<UsersRelations> following = relationrepo.findByuserone(follow.get());
-		List<UsersRelations> followers = relationrepo.findByusertwo(follow.get());
-		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(follow.get().getUsername()).get());
+		Users follow = userRepository.findByusername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Page<Post> p = postsrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idpost").ascending()));
+		Page<Product> products = productrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
+		List<UsersRelations> following = relationrepo.findByuserone(follow);
+		List<UsersRelations> followers = relationrepo.findByusertwo(follow);
+		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(follow.getUsername()).get());
 		List<PostModel> postsmodels = new ArrayList<>();
 		List<Integer> likes = new ArrayList<>();
 		for (LikeAPost like : lp) {
@@ -161,16 +159,16 @@ public class NavigationController implements ErrorController{
 			productmodel.setProduct(product);
 			productmodels.add(productmodel);
 		}
-		if(follow.get().getImageprofile() != null) {
+		if(follow.getImageprofile() != null) {
 			model.addAttribute("imageProfile","");
 			
 		}else {
 			model.addAttribute("imageProfile","http://via.placeholder.com/1600x400");
 		}
     	UsersRelations save = new UsersRelations();
-    	save.setUserone(actual.get());
-    	save.setUsertwo(follow.get());
-    	UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual.get(), follow.get());
+    	save.setUserone(actual);
+    	save.setUsertwo(follow);
+    	UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual, follow);
     	if(s != null) {
     		model.addAttribute("follow","#e44d3a");
     	}else {
@@ -181,7 +179,7 @@ public class NavigationController implements ErrorController{
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("postlist", postsmodels);
 		model.addAttribute("products",productmodels);
-		model.addAttribute("username",follow.get().getUsername());
+		model.addAttribute("username",follow.getUsername());
 		model.addAttribute("usernameview", request.getUserPrincipal().getName());
 		return "user-profile";
 	}
@@ -252,9 +250,9 @@ public class NavigationController implements ErrorController{
 	private String getMyProfileFeed(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
-		List<UsersRelations> following = relationrepo.findByuserone(s.get());
-		List<UsersRelations> followers = relationrepo.findByusertwo(s.get());
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		List<UsersRelations> following = relationrepo.findByuserone(s);
+		List<UsersRelations> followers = relationrepo.findByusertwo(s);
 		model.addAttribute("following", following.size());
 		model.addAttribute("followers", followers.size());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
@@ -266,44 +264,44 @@ public class NavigationController implements ErrorController{
 	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
+		Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		model.addAttribute("followersList", relationrepo.findByuserone(actual.get()));
-		model.addAttribute("productsList", listproductrepo.findByiduser(actual.get()));
+		model.addAttribute("followersList", relationrepo.findByuserone(actual));
+		model.addAttribute("productsList", listproductrepo.findByiduser(actual));
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		
-		if(actual.get().getName() != null) {
-			model.addAttribute("name",actual.get().getName());
+		if(actual.getName() != null) {
+			model.addAttribute("name",actual.getName());
 		}else {
 			model.addAttribute("name","");
 		}
 		
-		if(actual.get().getEmail() != null) {
-			model.addAttribute("email",actual.get().getEmail());
+		if(actual.getEmail() != null) {
+			model.addAttribute("email",actual.getEmail());
 		}else {
 			model.addAttribute("email","");
 		}
 		
-		if(actual.get().getCity() != null) {
-			model.addAttribute("city",actual.get().getCity());
+		if(actual.getCity() != null) {
+			model.addAttribute("city",actual.getCity());
 		}else {
 			model.addAttribute("city","");
 		}
 		
-		if(actual.get().getLinkfacebook() != null) {
-			model.addAttribute("linkfacebook",actual.get().getLinkfacebook());
+		if(actual.getLinkfacebook() != null) {
+			model.addAttribute("linkfacebook",actual.getLinkfacebook());
 		}else {
 			model.addAttribute("linkfacebook","");
 		}
 		
-		if(actual.get().getLinkinstagram() != null) {
-			model.addAttribute("linkinstagram",actual.get().getLinkinstagram());
+		if(actual.getLinkinstagram() != null) {
+			model.addAttribute("linkinstagram",actual.getLinkinstagram());
 		}else {
 			model.addAttribute("linkinstagram","");
 		}
 		
-		if(actual.get().getLinktwitter() != null) {
-			model.addAttribute("linktwitter",actual.get().getLinktwitter());
+		if(actual.getLinktwitter() != null) {
+			model.addAttribute("linktwitter",actual.getLinktwitter());
 		}else {
 			model.addAttribute("linktwitter","");
 		}
@@ -382,19 +380,11 @@ public class NavigationController implements ErrorController{
 		return "forgotPassword";
 	}
 	
-	 @RequestMapping("/error")
-	    public String handleError() {
-	        //do something like logging
-	        return "error";
-	 }
-
 	
-	@Override
-	public String getErrorPath() {
-		// TODO Auto-generated method stub
-		return "error";
-	}
-	
+    @GetMapping("/prueba")
+    private void prueba() {
+    	Users s = userRepository.findByusername("null").orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 	
 	private void loadData() {
 		if(tagrepo.findAll().isEmpty()) {

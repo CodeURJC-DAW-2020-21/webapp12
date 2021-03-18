@@ -3,7 +3,6 @@ package undersociety.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -70,30 +69,30 @@ public class PostsController {
 	
 	@GetMapping("/api/imagepost/{idpost}")
     private ResponseEntity<Object> downloadImagePost( @PathVariable int idpost) throws SQLException, IOException{
-		Optional<Post> p = postsrepo.findById(idpost);
-    	Resource file = new InputStreamResource(p.get().getImage().getBinaryStream());
+		Post p = postsrepo.findById(idpost).orElseThrow(() -> new UsernameNotFoundException("Post not found"));
+    	Resource file = new InputStreamResource(p.getImage().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-				.contentLength(p.get().getImage().length())
+				.contentLength(p.getImage().length())
 				.body(file);
     }
 	
 	@PostMapping("/api/likePost")
 	public boolean likePost(@RequestParam int idpost, HttpServletRequest request){
-		Optional<Post> p = postsrepo.findById(idpost);
-		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
+		Post p = postsrepo.findById(idpost).orElseThrow(() -> new UsernameNotFoundException("Post not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		LikeAPost lp = new LikeAPost();
-		lp.setIdpost(p.get());
-		lp.setIduser(s.get());
+		lp.setIdpost(p);
+		lp.setIduser(s);
 		likerepo.save(lp);
 		return  true;
 	}
 	
 	@PostMapping("/api/unlikePost")
 	public boolean unlikePost(@RequestParam int idpost, HttpServletRequest request){
-		Optional<Post> p = postsrepo.findById(idpost);
-		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
-		LikeAPost lp = likerepo.findByidpostAndIduser(p.get(), s.get());
+		Post p = postsrepo.findById(idpost).orElseThrow(() -> new UsernameNotFoundException("	Post not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		LikeAPost lp = likerepo.findByidpostAndIduser(p, s);
 		if(lp != null) {
 			likerepo.deleteById(lp.getIdlike());
 			return true;
@@ -104,7 +103,7 @@ public class PostsController {
 	
 	@GetMapping("/api/getLikes")
 	public List<LikeAPost> getLikes(HttpServletRequest request) {
-		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
-		return likerepo.findByiduser(s.get());
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		return likerepo.findByiduser(s);
 	}
 }

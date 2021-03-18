@@ -36,7 +36,6 @@ import undersociety.repositories.UsersRelationsRepository;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -108,8 +107,6 @@ public class UsersController {
     	}
 		user.setUserprofile(false);
 		user.setCompanyprofile(true);
-		System.out.println(user.getUserprofile());
-		System.out.println(user.getCompanyprofile());
 		user.setPass(encoder.encode(user.getPass()));
 		userRepository.save(user);
 		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found")));
@@ -152,12 +149,12 @@ public class UsersController {
     
     @PostMapping("/api/follow")
     public boolean follow(HttpServletRequest request, @RequestParam String username) {
-    	Optional<Users> follow = userRepository.findByusername(username);
-    	Optional<Users> actual = userRepository.findByusername(request.getUserPrincipal().getName());
+    	Users follow = userRepository.findByusername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     	UsersRelations save = new UsersRelations();
-    	save.setUserone(actual.get());
-    	save.setUsertwo(follow.get());
-    	UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual.get(), follow.get());
+    	save.setUserone(actual);
+    	save.setUsertwo(follow);
+    	UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual, follow);
     	if(s != null) {
     		save.setIduserrelation(s.getIduserrelation());
     		relationrepo.delete(save);
@@ -199,8 +196,8 @@ public class UsersController {
     @PostMapping("/api/changePassword")
     public void modifyPassword(HttpServletResponse response, HttpServletRequest request, @RequestParam String oldpassword,  @RequestParam String newpassword,  @RequestParam String repeatpassword) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	if(encoder.encode(newpassword) == prev.getPass()) {
-    		if(newpassword == repeatpassword) {
+    	if(oldpassword.equals(prev.getPass())) {
+    		if(newpassword.equals(repeatpassword)) {
     			prev.setPass(encoder.encode(newpassword));
     			userRepository.save(prev);
     	    	response.sendRedirect("/sign-in");
@@ -209,15 +206,16 @@ public class UsersController {
     	response.sendRedirect("/error");
     }
     
-    
     @PostMapping("/api/deleteUser")
     public void deleteUser(HttpServletResponse response, HttpServletRequest request, @RequestParam String email, @RequestParam String pass, @RequestParam String explication) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	if(prev.getEmail().equalsIgnoreCase(email)) {
-    		if(encoder.encode(pass).equalsIgnoreCase(prev.getPass())) {
+    	if(email.equals(prev.getEmail())) {
+    		if(pass.equals(prev.getPass())) {
     			listproductrepo.deleteByIduser(prev);
     	    	relationrepo.deleteByUserone(prev);
+    	    	relationrepo.deleteByUsertwo(prev);
     	    	messagerepo.deleteByIduser(prev);
+    	    	messagerepo.deleteByIduserto(prev);
     	    	likerepo.deleteByIduser(prev);
     	    	postsrepo.deleteByIduser(prev);
     	    	productrepo.deleteByIduser(prev);

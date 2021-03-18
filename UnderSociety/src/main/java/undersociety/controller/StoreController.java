@@ -3,7 +3,6 @@ package undersociety.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -107,47 +106,47 @@ public class StoreController {
 	
 	@GetMapping("/api/getBookmark")
 	public List<ListProducts> getLikes(HttpServletRequest request) {
-		Optional<Users> s = userRepository.findByusername(request.getUserPrincipal().getName());
-		List<ListProducts> lp = listproductrepo.findByiduser(s.get());
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		List<ListProducts> lp = listproductrepo.findByiduser(s);
 		return lp;
 	}
 	
 	@GetMapping("/api/imageProduct0/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct0( @PathVariable int idproduct) throws SQLException{
-		Optional<Product> p = productrepo.findById(idproduct);
-    	Resource file = new InputStreamResource(p.get().getImage0().getBinaryStream());
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+    	Resource file = new InputStreamResource(p.getImage0().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-				.contentLength(p.get().getImage0().length())
+				.contentLength(p.getImage0().length())
 				.body(file);
     }
 	
 	@GetMapping("/api/imageProduct1/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct1( @PathVariable int idproduct) throws SQLException{
-		Optional<Product> p = productrepo.findById(idproduct);
-    	Resource file = new InputStreamResource(p.get().getImage1().getBinaryStream());
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+    	Resource file = new InputStreamResource(p.getImage1().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-				.contentLength(p.get().getImage1().length())
+				.contentLength(p.getImage1().length())
 				.body(file);
     }
 	
 	@GetMapping("/api/imageProduct2/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct2( @PathVariable int idproduct) throws SQLException{
-		Optional<Product> p = productrepo.findById(idproduct);
-    	Resource file = new InputStreamResource(p.get().getImage2().getBinaryStream());
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+    	Resource file = new InputStreamResource(p.getImage2().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-				.contentLength(p.get().getImage2().length())
+				.contentLength(p.getImage2().length())
 				.body(file);
     }
 	
 	@PostMapping("/api/addProduct")
 	public boolean addProduct(@RequestParam int idproduct, HttpServletRequest request) {
 		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		Optional<Product> p = productrepo.findById(idproduct);
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
 		ListProducts lp = new ListProducts();
-		lp.setIdproduct(p.get());
+		lp.setIdproduct(p);
 		lp.setIduser(s);
 		return listproductrepo.save(lp) != null;
 	}
@@ -155,8 +154,8 @@ public class StoreController {
 	@PostMapping("/api/dropProduct")
 	public boolean dropProduct(@RequestParam int idproduct, HttpServletRequest request) {
 		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		Optional<Product> p = productrepo.findById(idproduct);
-		ListProducts lp = listproductrepo.findByiduserAndIdproduct(s, p.get());
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+		ListProducts lp = listproductrepo.findByiduserAndIdproduct(s, p);
 		if(lp != null) {
 			listproductrepo.deleteById(lp.getIdproductlist());
 			return true;
