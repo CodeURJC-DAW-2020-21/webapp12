@@ -88,7 +88,7 @@ public class NavigationController{
 	private String getIndex(Model model,HttpServletRequest request) throws SQLException {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Page<Post> p = postsrepo.findAll(PageRequest.of(0, 10,Sort.by("idpost").ascending()));
+		Page<Post> p = postsrepo.findAll(PageRequest.of(0, 10,Sort.by("idpost").descending()));
 		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).get());
 		List<PostModel> postsmodels = new ArrayList<>();
 		List<Integer> likes = new ArrayList<>();
@@ -128,8 +128,8 @@ public class NavigationController{
 		model.addAttribute("token", token.getToken());
 		Users follow = userRepository.findByusername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		Page<Post> p = postsrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idpost").ascending()));
-		Page<Product> products = productrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
+		Page<Post> p = postsrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idpost").descending()));
+		Page<Product> products = productrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idproduct").descending()));
 		List<UsersRelations> following = relationrepo.findByuserone(follow);
 		List<UsersRelations> followers = relationrepo.findByusertwo(follow);
 		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(follow.getUsername()).get());
@@ -193,7 +193,7 @@ public class NavigationController{
 	private String getStore(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Page<Product> products = productrepo.findAll(PageRequest.of(0, 10,Sort.by("idproduct").ascending()));
+		Page<Product> products = productrepo.findAll(PageRequest.of(0, 10,Sort.by("idproduct").descending()));
 		List<ListProducts> lp = listproductrepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).get());
 		List<ProductModel> productmodels = new ArrayList<>();
 		List<Integer> bookmarks = new ArrayList<>();
