@@ -16,6 +16,12 @@ public class Tags {
 	@Column
 	private String description;
 	
+	
+	public Tags() {}
+	public Tags(String description) {
+		super();
+		this.description = description;
+	}
 	public int getIdtag() {
 		return idtags;
 	}

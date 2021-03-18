@@ -28,6 +28,15 @@ public class Message  implements Comparable<Message>{
 	private String time;
 	
 	
+	
+	public Message() {}
+	public Message(Users iduser, Users iduserto, String message, String time) {
+		super();
+		this.iduser = iduser;
+		this.iduserto = iduserto;
+		this.message = message;
+		this.time = time;
+	}
 	public int getIdmessage() {
 		return idmessage;
 	}

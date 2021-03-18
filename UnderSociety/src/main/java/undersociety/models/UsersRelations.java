@@ -21,6 +21,13 @@ public class UsersRelations {
 	@JoinColumn(name = "usertwo", referencedColumnName = "idusers")
 	private Users usertwo;
 	
+	
+	public UsersRelations() {}
+	public UsersRelations(Users userone, Users usertwo) {
+		super();
+		this.userone = userone;
+		this.usertwo = usertwo;
+	}
 	public int getIduserrelation() {
 		return iduserrelation;
 	}
