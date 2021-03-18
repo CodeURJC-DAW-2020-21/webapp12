@@ -26,18 +26,18 @@ public class AdminController {
 	@Autowired
 	private RolesRepository rolrepo;
 	
-	@Autowired
-	private UserRepository userepo;
+	
 	
 	@GetMapping("/api/admin")
 	public AdminData getAdminData() {
 		AdminData d = new AdminData();
+	
 		d.setUsers(userRepository.findByuserprofile(true).size());
 		d.setCompanies(userRepository.findBycompanyprofile(true).size());
 		d.setProducts(productrepo.findAll().size());
 		d.setPosts(postsrepo.findAll().size());
 		d.setRoles(rolrepo.findAll().size());
-		d.setUsers(userepo.findAll().size());
+		
 		return d;
 	}
 }
