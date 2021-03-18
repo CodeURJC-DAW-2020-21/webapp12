@@ -21,7 +21,14 @@ public class Roles {
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
 	private Users iduser;
-
+	
+	
+	public Roles() {}
+	public Roles(String rol, Users iduser) {
+		super();
+		this.rol = rol;
+		this.iduser = iduser;
+	}
 	public int getIdroles() {
 		return idroles;
 	}

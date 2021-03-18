@@ -21,6 +21,13 @@ public class LikeAPost {
 	@JoinColumn(name = "idpost", referencedColumnName = "idpost")
 	private Post idpost;
 	
+	
+	public LikeAPost() {}
+	public LikeAPost(Users iduser, Post idpost) {
+		super();
+		this.iduser = iduser;
+		this.idpost = idpost;
+	}
 	public int getIdlike() {
 		return idlike;
 	}

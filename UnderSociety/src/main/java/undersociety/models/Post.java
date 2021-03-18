@@ -34,6 +34,15 @@ public class Post {
 	@JsonIgnore
 	private Blob image;
 	
+	
+	public Post() {}
+	public Post(Users iduser, String title, String description, Blob image) {
+		super();
+		this.iduser = iduser;
+		this.title = title;
+		this.description = description;
+		this.image = image;
+	}
 	public int getIdpost() {
 		return idpost;
 	}

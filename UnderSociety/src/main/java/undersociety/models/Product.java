@@ -63,6 +63,29 @@ public class Product {
 	private Boolean img2;
 	
 	
+	
+	public Product() {}
+	public Product(Users iduser, String title, String description, Blob image0, Blob image1, Blob image2, int price,
+			Tags idtagone, Tags idtagtwo, Tags idtagthree, Tags idtagfour, Tags idtagfive, String status, Boolean img0,
+			Boolean img1, Boolean img2) {
+		super();
+		this.iduser = iduser;
+		this.title = title;
+		this.description = description;
+		this.image0 = image0;
+		this.image1 = image1;
+		this.image2 = image2;
+		this.price = price;
+		this.idtagone = idtagone;
+		this.idtagtwo = idtagtwo;
+		this.idtagthree = idtagthree;
+		this.idtagfour = idtagfour;
+		this.idtagfive = idtagfive;
+		this.status = status;
+		this.img0 = img0;
+		this.img1 = img1;
+		this.img2 = img2;
+	}
 	public int getIdproduct() {
 		return idproduct;
 	}

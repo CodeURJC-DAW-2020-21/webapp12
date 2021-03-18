@@ -21,6 +21,13 @@ public class ListProducts {
 	@JoinColumn(name = "idproduct", referencedColumnName = "idproduct")
 	private Product idproduct;
 	
+	
+	public ListProducts() {}
+	public ListProducts(Users iduser, Product idproduct) {
+		super();
+		this.iduser = iduser;
+		this.idproduct = idproduct;
+	}
 	public int getIdproductlist() {
 		return idproductlist;
 	}

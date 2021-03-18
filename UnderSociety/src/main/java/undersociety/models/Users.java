@@ -58,6 +58,27 @@ public class Users {
 	@JsonIgnore
 	private Blob imageprofile;
 	
+	
+	public Users() {}
+	public Users(String email, String username, String pass, String name, Blob userimg, boolean companyprofile,
+			boolean userprofile, String city, String userportimg, String userinfo, String linkfacebook,
+			String linktwitter, String linkinstagram, Blob imageprofile) {
+		super();
+		this.email = email;
+		this.username = username;
+		this.pass = pass;
+		this.name = name;
+		this.userimg = userimg;
+		this.companyprofile = companyprofile;
+		this.userprofile = userprofile;
+		this.city = city;
+		this.userportimg = userportimg;
+		this.userinfo = userinfo;
+		this.linkfacebook = linkfacebook;
+		this.linktwitter = linktwitter;
+		this.linkinstagram = linkinstagram;
+		this.imageprofile = imageprofile;
+	}
 	public int getIdusers() {
 		return idusers;
 	}
