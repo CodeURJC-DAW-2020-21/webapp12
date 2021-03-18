@@ -28,6 +28,7 @@ import undersociety.models.Post;
 import undersociety.models.PostModel;
 import undersociety.models.Product;
 import undersociety.models.ProductModel;
+import undersociety.models.Roles;
 import undersociety.models.Tags;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
@@ -35,6 +36,7 @@ import undersociety.repositories.LikesRepository;
 import undersociety.repositories.ListProductsRepository;
 import undersociety.repositories.PostRepository;
 import undersociety.repositories.ProductRepository;
+import undersociety.repositories.RolesRepository;
 import undersociety.repositories.TagsRepository;
 import undersociety.repositories.UserRepository;
 import undersociety.repositories.UsersRelationsRepository;
@@ -64,6 +66,9 @@ public class NavigationController{
 	
 	@Autowired
 	 private TagsRepository tagrepo;
+	
+	@Autowired
+	 private RolesRepository rolrepo;
 	
 	@GetMapping("/sign-in")
 	private String getSignIn(Model model,HttpServletRequest request) {
@@ -334,6 +339,7 @@ public class NavigationController{
 		model.addAttribute("numpost", postsrepo.findAll().size());
 		List<Product> p = productrepo.findAll();
 		List<Tags> tag = tagrepo.findAll(Sort.by("idtags"));
+		
 		int elec = productrepo.findByidtagone(tag.get(0)).size();
 		int fur = productrepo.findByidtagtwo(tag.get(1)).size();
 		int appli = productrepo.findByidtagthree(tag.get(2)).size();
@@ -343,7 +349,14 @@ public class NavigationController{
 		int sold = productrepo.findBystatus("sold").size();
 		int reserved = productrepo.findBystatus("reserved").size();
 		int tproduct = p.size();
+		int tuser = userRepository.findAll().size();
+		int user = rolrepo.findByrol("USER").size();
+		int admin = rolrepo.findByrol("ADMIN").size();
 		int sum = 0;
+		
+		model.addAttribute("user", ((user*100)/tuser));
+		model.addAttribute("admin", ((admin*100)/tuser));
+		
 		for (Product product : p) {
 			sum = sum + product.getPrice();
 		}
@@ -396,7 +409,7 @@ public class NavigationController{
 			tag1.setDescription("Electronics");
 			tag2.setDescription("Furniture");
 			tag3.setDescription("Appliance");
-			tag4.setDescription("Books");
+			tag4.setDescription("Books ");
 			tag5.setDescription("Clothes");
 			tagrepo.save(tag1);
 			tagrepo.save(tag2);

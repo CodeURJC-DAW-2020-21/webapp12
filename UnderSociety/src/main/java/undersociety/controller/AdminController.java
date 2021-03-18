@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import undersociety.models.AdminData;
 import undersociety.repositories.PostRepository;
 import undersociety.repositories.ProductRepository;
+import undersociety.repositories.RolesRepository;
 import undersociety.repositories.UserRepository;
 
 @RestController
@@ -22,6 +23,12 @@ public class AdminController {
 	@Autowired
 	private PostRepository postsrepo;
 	
+	@Autowired
+	private RolesRepository rolrepo;
+	
+	@Autowired
+	private UserRepository userepo;
+	
 	@GetMapping("/api/admin")
 	public AdminData getAdminData() {
 		AdminData d = new AdminData();
@@ -29,6 +36,8 @@ public class AdminController {
 		d.setCompanies(userRepository.findBycompanyprofile(true).size());
 		d.setProducts(productrepo.findAll().size());
 		d.setPosts(postsrepo.findAll().size());
+		d.setRoles(rolrepo.findAll().size());
+		d.setUsers(userepo.findAll().size());
 		return d;
 	}
 }

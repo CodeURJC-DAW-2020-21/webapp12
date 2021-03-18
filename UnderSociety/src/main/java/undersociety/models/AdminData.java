@@ -5,6 +5,7 @@ public class AdminData {
 	private int companies;
 	private int products;
 	private int posts;
+	private int roles;
 	
 	public int getUsers() {
 		return users;
@@ -29,6 +30,12 @@ public class AdminData {
 	}
 	public void setPosts(int posts) {
 		this.posts = posts;
+	}
+	public int getRoles() {
+		return roles;
+	}
+	public void setRoles(int roles) {
+		this.roles = roles;
 	}
 	
 }
