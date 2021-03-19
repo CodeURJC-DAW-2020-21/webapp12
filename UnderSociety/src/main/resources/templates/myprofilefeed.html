@@ -160,7 +160,17 @@
 										<div class="user-pro-img">
 											
 											<img src="https://localhost:8443/api/imageprofile" alt="">
-											<a href="#" title=""><i class="fa fa-camera"></i></a>
+											<section class="cover-sec">
+												<form class="cover-sec" method="POST" action="/api/changeUserImage" enctype="multipart/form-data">
+													<a>
+														<i class="fa fa-camera"></i>
+														<label for="imgPro" class="btn">Changed Image</label>
+														<input id="imgPro" style="visibility:hidden; width: 7px; height: 5px;" type="file" name="imageUserFile"
+															accept=".jpg">
+														<input type="submit" value="Save"><input type="hidden" name="_csrf" value="{{token}}"/>
+													</a>
+												</form>
+											</section>
 										</div>
 										<!--user-pro-img end-->
 										<div class="user_pro_status">
@@ -181,11 +191,11 @@
 										<!--user_pro_status end-->
 										<ul class="social_links">
 											<li><a href="#" title=""><i class="fa fa-facebook-square"></i>
-													www.facebook.com/Ikea... <i class="fa fa-pencil"></i></a></li>
+													{{userfacebook}} </a></li>
 											<li><a href="#" title=""><i class="fa fa-twitter"></i>
-													www.Twitter.com/Ikea... <i class="fa fa-pencil"></i></a></li>
+													{{userTwitter}} </a></li>
 											<li><a href="#" title=""><i class="fa fa-instagram"></i>
-													www.instagram.com/Ikea... <i class="fa fa-pencil"></i></a></li>
+													{{userinstagram}} </a></li>
 
 										</ul>
 									</div>
