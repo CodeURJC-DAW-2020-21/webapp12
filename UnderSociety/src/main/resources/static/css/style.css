@@ -680,9 +680,9 @@ nav > ul > li > a:hover {
 .user-info img {
 	margin-right: 300px;	
 	border-radius: 90px;
-	float: none;
+	/*float: none; */
 	border: 1px solid #ffffff;
-	width: 130px;
+	width: 90px;
 	height: 52px;
 	
  /*	-webkit-border-radius: 100px;
@@ -2615,10 +2615,10 @@ footer {
 .user-pro-img {
 	float: left;
 	width: 100%;
-	text-align: center;
-	margin-bottom: 28px;
+ /*	text-align: center;
+	margin-bottom: 28px; */
 	margin-top: -95px;
-	position: relative;
+ /*	position: relative; */
 }
 .user-pro-img > a {
 	width: 40px;
@@ -2637,13 +2637,17 @@ footer {
 }
 
 .user-pro-img img {
-	-webkit-border-radius: 100px;
+   /* -webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	-ms-border-radius: 100px;
-	-o-border-radius: 100px;
+	-o-border-radius: 100px; */
 	border-radius: 100px;
+	/*float: none; */
+	border: 1px solid #ffffff;
+	width: 200px;
+	height: 200px;
 	float: none;
-	border: 5px solid #fff;
+	border: 2px solid #fff;
 }
 .user_pro_status {
 	float: left;
@@ -3561,25 +3565,29 @@ a:hover {
 .company-up-info {
 	float: left;
 	width: 100%;
-	padding: 30px 0;
+	padding: 10px 0;
 	border-bottom: 1px solid #e5e5e5;
 }
 .company-up-info img {
-	float: none;
-	margin-bottom: 10px;
+/*	margin-bottom: 10px;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	-ms-border-radius: 100px;
 	-o-border-radius: 100px;
 	border-radius: 100px;
-	height: 90px;
+	height: 90px; */
+	border-radius: 90px;
+	float: none;
+	border: 1px solid #000000;
+	width: 125px;
+	height: 125px;
 	object-fit: cover;
 }
 .company-up-info h3 {
 	color: #000000;
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: 600;
-	margin-bottom: 10px;
+	/*margin-bottom: 10px; */
 }
 .company-up-info h4 {
 	color: #686868;
