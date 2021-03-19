@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import undersociety.models.LikeAPost;
 import undersociety.models.ListProducts;
+import undersociety.models.Loader;
 import undersociety.models.Post;
 import undersociety.models.PostModel;
 import undersociety.models.Product;
@@ -67,14 +69,20 @@ public class NavigationController{
 	@Autowired
 	 private TagsRepository tagrepo;
 	
+	
 	@Autowired
-	 private RolesRepository rolrepo;
+	private RolesRepository rolesRepository;
+
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	@GetMapping("/sign-in")
 	private String getSignIn(Model model,HttpServletRequest request) {
+		Loader ld = new Loader(likerepo, relationrepo, productrepo, listproductrepo, postsrepo, userRepository, tagrepo, rolesRepository, encoder);
+		ld.load();
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		loadData();
+		
 		return "sign-in";
 	}
     
@@ -350,8 +358,8 @@ public class NavigationController{
 		int reserved = productrepo.findBystatus("reserved").size();
 		int tproduct = p.size();
 		int tuser = userRepository.findAll().size();
-		int user = rolrepo.findByrol("USER").size();
-		int admin = rolrepo.findByrol("ADMIN").size();
+		int user = rolesRepository.findByrol("USER").size();
+		int admin = rolesRepository.findByrol("ADMIN").size();
 		int sum = 0;
 		
 		model.addAttribute("user", ((user*100)/tuser));
@@ -399,24 +407,10 @@ public class NavigationController{
     	Users s = userRepository.findByusername("null").orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 	
-	private void loadData() {
-		if(tagrepo.findAll().isEmpty()) {
-			Tags tag1 = new Tags();
-			Tags tag2 = new Tags();
-			Tags tag3 = new Tags();
-			Tags tag4 = new Tags();
-			Tags tag5 = new Tags();
-			tag1.setDescription("Electronics");
-			tag2.setDescription("Furniture");
-			tag3.setDescription("Appliance");
-			tag4.setDescription("Books ");
-			tag5.setDescription("Clothes");
-			tagrepo.save(tag1);
-			tagrepo.save(tag2);
-			tagrepo.save(tag3);
-			tagrepo.save(tag4);
-			tagrepo.save(tag5);
-		}
-	}
+	
+    
+
+    
+	
 	
 }
