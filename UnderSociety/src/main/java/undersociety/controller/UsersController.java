@@ -178,17 +178,34 @@ public class UsersController {
     
     @Modifying
     @PostMapping("/api/modifyUser")
-    public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile imagen) throws IOException {
+    public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	System.out.println(prev.getIdusers());
-    	System.out.println("imagen: "+imagen.getOriginalFilename());
-    	System.out.println(user.getUsername());
-    	System.out.println(user.getEmail());
-    	System.out.println(user.getCity());
-    	System.out.println(user.getName());
-    	System.out.println(user.getLinkfacebook());
-    	System.out.println(user.getLinkinstagram());
-    	System.out.println(user.getLinktwitter());
+    	
+    	if(image.getOriginalFilename() != "") {
+    		prev.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+    	}
+    	if(user.getUsername() != null) {
+    		prev.setUsername(user.getUsername());
+    	}
+    	if(user.getEmail() != null) {
+    		prev.setEmail(user.getEmail());
+    	}
+    	if(user.getName() != null) {
+    		prev.setName(user.getName());
+    	}
+    	if(user.getCity() != null) {
+    		prev.setCity(user.getCity());
+    	}
+    	if(user.getLinkfacebook() != null) {
+    		prev.setLinkfacebook(user.getLinkfacebook());
+    	}
+    	if(user.getLinkinstagram() != null) {
+    		prev.setLinkinstagram(user.getLinkinstagram());
+    	}
+    	if(user.getLinktwitter() != null) {
+    		prev.setLinktwitter(user.getLinktwitter());
+    	}
+    	userRepository.save(prev);
     	response.sendRedirect("/profile-account-setting");
     }
     
@@ -196,14 +213,17 @@ public class UsersController {
     @PostMapping("/api/changePassword")
     public void modifyPassword(HttpServletResponse response, HttpServletRequest request, @RequestParam String oldpassword,  @RequestParam String newpassword,  @RequestParam String repeatpassword) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	if(oldpassword.equals(prev.getPass())) {
+    	String page = "/error";
+    	if(encoder.matches(oldpassword, prev.getPass())) {
+    		System.out.println("entro");
     		if(newpassword.equals(repeatpassword)) {
     			prev.setPass(encoder.encode(newpassword));
     			userRepository.save(prev);
-    	    	response.sendRedirect("/sign-in");
+    	    	page = "/sign-in";
     		}
+    		
     	}
-    	response.sendRedirect("/error");
+    	response.sendRedirect(page);
     }
     
     @PostMapping("/api/deleteUser")
