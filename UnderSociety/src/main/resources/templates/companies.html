@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>UnderSociety</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/flatpickr.min.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+		type="text/css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+	<!--    libs for stomp and sockjs-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<!--    end libs for stomp and sockjs-->
+
+
+</head>
+
+
+<body onload="connectToChat('{{username}}','null','{{token}}')">
+
+
+	<div class="wrapper">
+
+
+
+		<header>
+			<div class="container">
+				<div class="header-data">
+					<div class="logo">
+						<a href="index" title=""><img src="images/logo.png" alt=""></a>
+					</div>
+					<!--logo end-->
+					<div class="search-bar">
+						<form>
+							<input id="myInput" onkeyup="searchBarCompany()" type="text" name="search" placeholder="Search...">
+							<button type="submit"><i class="la la-search"></i></button>
+						</form>
+					</div>
+					<!--search-bar end-->
+					<nav>
+						<ul>
+							<li>
+								<a href="index" title="">
+									<span><img src="images/icon1.png" alt=""></span>
+									Home
+								</a>
+							</li>
+							<li>
+								<a href="profiles" title="">
+									<span><img src="images/icon4.png" alt=""></span>
+									Profiles
+								</a>
+								<ul>
+									<li><a href="profiles" title="">User Profile</a></li>
+									<li><a href="companies" title="">Company Profile</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="store" title="">
+									<span><img src="images/icon5.png" alt=""></span>
+									Store
+								</a>
+							</li>
+							<li>
+								<a href="#" title="" class="not-box-open">
+									<span><img src="images/icon6.png" alt=""></span>
+									Messages
+								</a>
+								<div class="notification-box msg">
+									<div class="nt-title">
+										<h4>Setting</h4>
+										<a id="clearbutton" href="#" title="">Clear all</a>
+									</div>
+									<div class="nott-list">
+										
+										<div class="view-all-nots">
+											<a href="messages" title="">View All Messsages</a>
+										</div>
+									</div>
+									<!--nott-list end-->
+								</div>
+								<!--notification-box end-->
+							</li>
+						</ul>
+					</nav>
+					<!--nav end-->
+					<div class="menu-btn">
+						<a href="#" title=""><i class="fa fa-bars"></i></a>
+					</div>
+					<!--menu-btn end-->
+					<div class="user-account">
+						<div class="user-info">
+							<img src="https://localhost:8443/api/imageprofile" alt="">
+							<a href="#" title=""></a>
+							<i class="la la-sort-down"></i>
+						</div>
+						<div class="user-account-settingss">
+							<h3>Username</h3>
+							<div class="search_form">
+								<form>
+									<input type="text" name="search" placeholder="{{username}}" readonly>
+								</form>
+							</div>							
+							<!--search_form end-->
+							<h3>Setting</h3>
+							<ul class="us-links">
+								{{#admin}}
+								<li><a href="/admin">Admin Page</a></li>
+								{{/admin}}
+								<li><a href="my-profile-feed" title="">Profile Setting</a></li>
+								<li><a href="profile-account-setting" title="">Account Setting</a></li>
+								<li><a href="#" title="">Privacy</a></li>
+								<li><a href="#" title="">Faqs</a></li>
+								<li><a href="#" title="">Terms & Conditions</a></li>
+							</ul>
+							<form action="/logout" method="POST">
+								<h3 class="tc"><input id="uploadImage" type="submit" value="Logout" /><input type="hidden" name="_csrf" value="{{token}}"/></h3>
+							</form>
+						</div>
+						<!--user-account-settingss end-->
+					</div>
+				</div>
+				<!--header-data end-->
+			</div>
+		</header>
+		<!--header end-->
+
+		<section class="companies-info">
+			<div class="container">
+				<div class="company-title">
+					<h3>All Companies</h3>
+				</div>
+				<!--company-title end-->
+				<div class="companies-list">
+					<div class="row" id="myUL">
+						{{#companies}}
+						<div class="col-lg-3 col-md-4 col-sm-6">
+							<div class="company_profile_info">
+								<div class="company-up-info">
+									<img src="https://localhost:8443/api/imageprofile/{{username}}" alt="">
+									<h3>{{username}}</h3>
+									<h4>Establish Feb, 2004</h4>
+									<ul>
+										
+									</ul>
+								</div>
+								<a href="/pageProfileUser?&username={{username}}" title="" class="view-more-pro">View
+									Profile</a>
+							</div>
+							<!--company_profile_info end-->
+						</div>
+						{{/companies}}
+					</div>
+				</div>
+				<!--companies-list end-->
+				<div class="process-comm">
+					<div class="spinner company">
+						<div class="bounce1"></div>
+						<div class="bounce2"></div>
+						<div class="bounce3"></div>
+					</div>
+				</div>
+				<!--process-comm end-->
+			</div>
+		</section>
+		<!--companies-info end-->
+
+
+	</div>
+	<!--theme-layout end-->
+
+
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/popper.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/flatpickr.min.js"></script>
+	<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+	
+	<script type="text/javascript" src="js/script.js"></script>
+	
+</body>
+
+</html>
