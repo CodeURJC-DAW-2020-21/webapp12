@@ -266,10 +266,17 @@ public class NavigationController{
 		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		List<UsersRelations> following = relationrepo.findByuserone(s);
 		List<UsersRelations> followers = relationrepo.findByusertwo(s);
+		model.addAttribute("userfacebook", s.getLinkfacebook());
+		model.addAttribute("userTwitter", s.getLinktwitter());
+		model.addAttribute("userinstagram", s.getLinkinstagram());
+		model.addAttribute("userInfo", s.getUserinfo());
+		model.addAttribute("userCity", s.getCity());
+		model.addAttribute("userFullName", s.getName());
 		model.addAttribute("following", following.size());
 		model.addAttribute("followers", followers.size());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
+		model.addAttribute("url", s.getIdusers());
 		return "myprofilefeed";
 	}
 	
