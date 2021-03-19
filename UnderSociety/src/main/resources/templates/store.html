@@ -145,7 +145,7 @@
 							<div class="col-lg-4">
 								<div class="filter-secs">
 									<div class="filter-heading">
-										<h3>Filtros</h3>
+										<h3>Filters</h3>
 										<a onclick="clearAllFilter()" title="">Clear Filters</a>
 									</div>
 									<!--filter-heading end-->
@@ -157,7 +157,7 @@
 													title="">Clear</a>
 											</div>
 											<form>
-												<input id="word" type="text" name="search-skills" placeholder="">
+												<input id="word" onkeyup="SearchKeyWords()" type="text" name="search-skills" placeholder="">
 											</form>
 										</div>
 										<div class="filter-dd">
@@ -167,21 +167,21 @@
 											</div>
 											<ul class="avail-checks">
 												<li>
-													<input class='selectall' type="radio" name="cc" id="c1">
+													<input class='selectall' type="radio" name="cc" onclick="SearchStatus1()" id="c1">
 													<label for="c1">
 														<span></span>
 													</label>
 													<small>In Stock</small>
 												</li>
 												<li>
-													<input class='selectall' type="radio" name="cc" id="c2">
+													<input class='selectall' type="radio" name="cc" onclick="SearchStatus2()" id="c2">
 													<label for="c2">
 														<span></span>
 													</label>
 													<small>Reserved</small>
 												</li>
 												<li>
-													<input class='selectall' type="radio" name="cc" id="c3">
+													<input class='selectall' type="radio" name="cc" onclick="SearchStatus3()" id="c3">
 													<label for="c3">
 														<span></span>
 													</label>

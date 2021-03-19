@@ -1154,10 +1154,10 @@ function SearchKeyWords() {
 }
 
 
-function SeachStatus1() {
+function SearchStatus1() {
     var input, filter, ul, li, a, i, txtValue;
-    input = "in stock"
-    filter = input.value.toUpperCase();
+    input = "in stock";
+    filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
     // Loop through all list items, and hide those who don't match the search query
@@ -1174,10 +1174,10 @@ function SeachStatus1() {
     }
 }
 
-function SeachStatus2() {
+function SearchStatus2() {
     var input, filter, ul, li, a, i, txtValue;
-    input = "reserved"
-    filter = input.value.toUpperCase();
+    input = "reserved";
+    filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
     // Loop through all list items, and hide those who don't match the search query
@@ -1196,8 +1196,8 @@ function SeachStatus2() {
 
 function SearchStatus3() {
     var input, filter, ul, li, a, i, txtValue;
-    input = "sold"
-    filter = input.value.toUpperCase();
+    input = "sold";
+    filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
     // Loop through all list items, and hide those who don't match the search query
