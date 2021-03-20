@@ -386,7 +386,7 @@ function render(message, userName, time) {
     $chatHistoryList.append(template);
 
     setTimeout(function () {
-        $chatHistoryList.append(templateResponse(contextResponse));
+        $chatHistoryList.append(template);
         scrollToBottom();
     }.bind(this), 1500);
 }
@@ -492,11 +492,10 @@ function connectToChat(userName, to, tk) {
         }
         $("#usersList").html(usersTemplateHTML);
     });
-    if (to != useractual) {
+    if (to != "useractual") {
         console.log(useractual);
         selectedUser = to;
-        var ul = document.getElementById("messageList");
-        ul.innerHTML = "";
+        $chatHistoryList.empty();
         $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: to }, function (data) {
             data.forEach(element => {
                 if (selectedUser === element.iduser.username) {
@@ -538,8 +537,7 @@ function sendMsg(from, text) {
 function selectUser(userName) {
     console.log("selecting users onclik: " + userName);
     selectedUser = userName;
-    var ul = $chatHistory.find('ul');
-    ul.empty();
+    $chatHistoryList.empty();
     $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: userName }, function (data) {
         data.forEach(element => {
             console.log("FROM:" + element.iduser.username + " TO: " + element.iduserto.username + " message: " + element.message);
