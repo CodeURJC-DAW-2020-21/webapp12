@@ -30,7 +30,6 @@ import undersociety.models.Post;
 import undersociety.models.PostModel;
 import undersociety.models.Product;
 import undersociety.models.ProductModel;
-import undersociety.models.Roles;
 import undersociety.models.Tags;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
@@ -77,7 +76,7 @@ public class NavigationController{
 	private PasswordEncoder encoder;
 	
 	@GetMapping("/sign-in")
-	private String getSignIn(Model model,HttpServletRequest request) {
+	private String getSignIn(Model model,HttpServletRequest request) throws IOException {
 		Loader ld = new Loader(likerepo, relationrepo, productrepo, listproductrepo, postsrepo, userRepository, tagrepo, rolesRepository, encoder);
 		ld.load();
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -105,6 +104,11 @@ public class NavigationController{
 		}
 		for (Post post : p) {
 			PostModel postmodel = new PostModel();
+			if(post.getIduser().getUserprofile()) {
+				postmodel.setTypeUser("user");
+			}else {
+				postmodel.setTypeUser("company");
+			}
 			if(likes.contains(post.getIdpost())) {
 				postmodel.setLike("la la-heart");
 			}else {
@@ -144,6 +148,11 @@ public class NavigationController{
 		}
 		for (Post post : p) {
 			PostModel postmodel = new PostModel();
+			if(post.getIduser().getUserprofile()) {
+				postmodel.setTypeUser("user");
+			}else {
+				postmodel.setTypeUser("company");
+			}
 			if(likes.contains(post.getIdpost())) {
 				postmodel.setLike("la la-heart");
 			}else {
@@ -160,6 +169,23 @@ public class NavigationController{
 		}
 		for (Product product : products) {
 			ProductModel productmodel = new ProductModel();
+			if(product.getIduser().getUserprofile()) {
+				productmodel.setTypeUser("user");
+			}else {
+				productmodel.setTypeUser("company");
+			}
+			if(product.getStatus().equalsIgnoreCase("in stock")) {
+				productmodel.setColor("#228B22");
+			}
+			
+			if(product.getStatus().equalsIgnoreCase("sold")) {
+				productmodel.setColor("#DC143C");
+			}
+			
+			if(product.getStatus().equalsIgnoreCase("reserved")) {
+				productmodel.setColor("#FFD700");
+			}
+			
 			if(bookmarks.contains(product.getIdproduct())) {
 				productmodel.setBookamark("la la-check-circle");
 			}else {
@@ -211,7 +237,11 @@ public class NavigationController{
 		}
 		for (Product product : products) {
 			ProductModel productmodel = new ProductModel();
-			
+			if(product.getIduser().getUserprofile()) {
+				productmodel.setTypeUser("user");
+			}else {
+				productmodel.setTypeUser("company");
+			}
 			if(product.getStatus().equalsIgnoreCase("in stock")) {
 				productmodel.setColor("#228B22");
 			}
@@ -408,17 +438,5 @@ public class NavigationController{
 		model.addAttribute("token", token.getToken());
 		return "forgotPassword";
 	}
-	
-	
-    @GetMapping("/prueba")
-    private void prueba() {
-    	Users s = userRepository.findByusername("null").orElseThrow(() -> new NoSuchElementException("User not found"));
-    }
-	
-	
-    
-
-    
-	
 	
 }

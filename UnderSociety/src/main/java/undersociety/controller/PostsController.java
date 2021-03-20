@@ -66,6 +66,11 @@ public class PostsController {
 		return postsrepo.findAll(page);
 	}
 	
+	@GetMapping("/api/getMorePostsUser")
+	private Page<Post> getMorePostUser(Pageable page, @RequestParam String username){
+		Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return postsrepo.findByiduser(s,page);
+	}
 	
 	@GetMapping("/api/imagepost/{idpost}")
     private ResponseEntity<Object> downloadImagePost( @PathVariable int idpost) throws SQLException, IOException{

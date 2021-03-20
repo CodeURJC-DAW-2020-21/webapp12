@@ -1,12 +1,19 @@
 package undersociety.models;
 
 public class ProductModel {
+	private String typeUser;
 	private String color;
 	private String bookamark;
 	private Product product;
 	
 	
 	
+	public String getTypeUser() {
+		return typeUser;
+	}
+	public void setTypeUser(String typeUser) {
+		this.typeUser = typeUser;
+	}
 	public String getColor() {
 		return color;
 	}

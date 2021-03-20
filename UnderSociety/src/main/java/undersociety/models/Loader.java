@@ -1,13 +1,20 @@
 package undersociety.models;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Blob;
+
 import javax.annotation.PostConstruct;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import undersociety.repositories.LikesRepository;
 import undersociety.repositories.ListProductsRepository;
-import undersociety.repositories.MessageRepository;
 import undersociety.repositories.PostRepository;
 import undersociety.repositories.ProductRepository;
 import undersociety.repositories.RolesRepository;
@@ -17,12 +24,8 @@ import undersociety.repositories.UsersRelationsRepository;
 
 public class Loader {
 
-	@Autowired
-	private LikesRepository likerepo;
-
-	@Autowired
-	private UsersRelationsRepository relationrepo;
-
+	private static final Path IMAGES_FOLDER = Paths.get(System.getProperty("user.dir"), "src/main/resources/static/images/");
+	
 	@Autowired
 	private ProductRepository productrepo;
 
@@ -36,12 +39,7 @@ public class Loader {
 	private UserRepository userRepository;
 
 	@Autowired
-	private TagsRepository tagrepo;
-	
-	
-	@Autowired
-	private MessageRepository messagerepo;
-	
+	private TagsRepository tagrepo;	
 	
 	@Autowired
 	private RolesRepository rolesRepository;
@@ -65,8 +63,6 @@ public class Loader {
 			TagsRepository tagrepo,  RolesRepository rolesRepository,
 			PasswordEncoder encoder) {
 		super();
-		this.likerepo = likerepo;
-		this.relationrepo = relationrepo;
 		this.productrepo = productrepo;
 		this.listproductrepo = listproductrepo;
 		this.postsrepo = postsrepo;
@@ -80,7 +76,110 @@ public class Loader {
 
 
 	@PostConstruct
-	public void load() {
+	public void load() throws IOException {
+		//Images User 
+		Path imagePath = IMAGES_FOLDER.resolve("FOndo2.jpeg");
+		Resource image = new UrlResource(imagePath.toUri());
+		Blob img = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img1 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img2 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img3 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img4 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img5 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img6 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img7 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img8 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img9 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img10 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img11 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img12 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img13 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img14 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img15 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img16 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img17 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img18 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img19 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		
+		
+		//Images Companies 
+		Blob img20 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img21 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img22 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img23 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img24 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img25 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img26 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img27 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img28 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img29 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img30 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img31 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img32 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img33 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img34 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img35 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img36 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img37 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img38 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img39 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		
+		//Images Post
+		Blob imgpost = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost1 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost2 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost3 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost4 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost5 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost6 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost7 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost8 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost9 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost10 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost11 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost12 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost13 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost14 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost15 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost16 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost17 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost18 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgpost19 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		
+		//Images Post
+		Blob imgproduct = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct1 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct2 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct3 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct4 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct5 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct6 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct7 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct8 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct9 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct10 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct11 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct12 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct13 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct14 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct15 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct16 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct17 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct18 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct19 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		
+		Blob imgproduct20 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct21 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct22 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct23 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct24 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct25 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct26 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct27 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct28 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct29 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob imgproduct30 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		
 		
 		
 		//Tags Creations
@@ -98,49 +197,49 @@ public class Loader {
 		
 		
 		//Users creations
-		Users user1 = new Users("sr.crnt@hotmail.com","h",encoder.encode("h"),"h",null, false,true, "Madrid","","usu1", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user2 = new Users("sr.crnt2@hotmail.com","Cette02",encoder.encode("cette01"),"Cristian2",null, false,true, "Barcelona","","usu2", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user3 = new Users("sr.crnt3@hotmail.com","Cette03",encoder.encode("cette01"),"Cristian3",null, false,true, "Malaga","","usu3", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user4 = new Users("sr.crnt4@hotmail.com","Cette04",encoder.encode("cette01"),"Cristian4",null, false,true, "Barcelona","","usu4", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user5 = new Users("sr.crnt5@hotmail.com","Cette05",encoder.encode("cette01"),"Cristian5",null, false,true, "Madrid","","usu5", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user6 = new Users("sr.crnt6@hotmail.com","Cette06",encoder.encode("cette01"),"Cristian6",null, false,true, "Barcelona","","usu6", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user7 = new Users("sr.crnt7@hotmail.com","Cette07",encoder.encode("cette01"),"Cristian7",null, false,true, "Madrid","","usu7", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user8 = new Users("sr.crnt8@hotmail.com","Cette08",encoder.encode("cette01"),"Cristian8",null, false,true, "Malaga","","usu8", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user9 = new Users("sr.crnt9@hotmail.com","Cette09",encoder.encode("cette01"),"Cristian9",null, false,true, "Barcelona","","usu9", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user10 = new Users("sr.crnt10@hotmail.com","Cette10",encoder.encode("cette01"),"Cristian10",null, false,true, "Madrid","","usu10", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user11 = new Users("sr.crnt11@hotmail.com","Cette11",encoder.encode("cette01"),"Cristian11",null, false,true, "Barcelona","","usu11", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user12 = new Users("sr.crnt12@hotmail.com","Cette12",encoder.encode("cette01"),"Cristian12",null, false,true, "Madrid","","usu12", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user13 = new Users("sr.crnt13@hotmail.com","Cette13",encoder.encode("cette01"),"Cristian13",null, false,true, "Madrid","","usu13", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user14 = new Users("sr.crnt14@hotmail.com","Cette14",encoder.encode("cette01"),"Cristian14",null, false,true, "Barcelona","","usu14", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user15 = new Users("sr.crnt15@hotmail.com","Cette15",encoder.encode("cette01"),"Cristian15",null, false,true, "Malaga","","usu15", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user16 = new Users("sr.crnt16@hotmail.com","Cette16",encoder.encode("cette01"),"Cristian16",null, false,true, "Madrid","","usu16", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user17 = new Users("sr.crnt17@hotmail.com","Cette17",encoder.encode("cette01"),"Cristian17",null, false,true, "Barcelona","","usu17", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user18 = new Users("sr.crnt18@hotmail.com","Cette18",encoder.encode("cette01"),"Cristian18",null, false,true, "Malaga","","usu18", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user19 = new Users("sr.crnt19@hotmail.com","Cette19",encoder.encode("cette01"),"Cristian19",null, false,true, "Madrid","","usu19", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user20 = new Users("sr.crnt20@hotmail.com","cette20",encoder.encode("h"),"Cristian",null, false,true, "Barcelona","","usu20", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user1 = new Users("sr.crnt@hotmail.com","h",encoder.encode("h"),"h",img, false,true, "Madrid","","usu1", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user2 = new Users("sr.crnt2@hotmail.com","Cette02",encoder.encode("cette01"),"Cristian2",img1, false,true, "Barcelona","","usu2", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user3 = new Users("sr.crnt3@hotmail.com","Cette03",encoder.encode("cette01"),"Cristian3",img2, false,true, "Malaga","","usu3", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user4 = new Users("sr.crnt4@hotmail.com","Cette04",encoder.encode("cette01"),"Cristian4",img3, false,true, "Barcelona","","usu4", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user5 = new Users("sr.crnt5@hotmail.com","Cette05",encoder.encode("cette01"),"Cristian5",img4, false,true, "Madrid","","usu5", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user6 = new Users("sr.crnt6@hotmail.com","Cette06",encoder.encode("cette01"),"Cristian6",img5, false,true, "Barcelona","","usu6", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user7 = new Users("sr.crnt7@hotmail.com","Cette07",encoder.encode("cette01"),"Cristian7",img6, false,true, "Madrid","","usu7", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user8 = new Users("sr.crnt8@hotmail.com","Cette08",encoder.encode("cette01"),"Cristian8",img7, false,true, "Malaga","","usu8", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user9 = new Users("sr.crnt9@hotmail.com","Cette09",encoder.encode("cette01"),"Cristian9",img8, false,true, "Barcelona","","usu9", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user10 = new Users("sr.crnt10@hotmail.com","Cette10",encoder.encode("cette01"),"Cristian10",img9, false,true, "Madrid","","usu10", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user11 = new Users("sr.crnt11@hotmail.com","Cette11",encoder.encode("cette01"),"Cristian11",img10, false,true, "Barcelona","","usu11", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user12 = new Users("sr.crnt12@hotmail.com","Cette12",encoder.encode("cette01"),"Cristian12",img11, false,true, "Madrid","","usu12", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user13 = new Users("sr.crnt13@hotmail.com","Cette13",encoder.encode("cette01"),"Cristian13",img12, false,true, "Madrid","","usu13", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user14 = new Users("sr.crnt14@hotmail.com","Cette14",encoder.encode("cette01"),"Cristian14",img13, false,true, "Barcelona","","usu14", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user15 = new Users("sr.crnt15@hotmail.com","Cette15",encoder.encode("cette01"),"Cristian15",img14, false,true, "Malaga","","usu15", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user16 = new Users("sr.crnt16@hotmail.com","Cette16",encoder.encode("cette01"),"Cristian16",img15, false,true, "Madrid","","usu16", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user17 = new Users("sr.crnt17@hotmail.com","Cette17",encoder.encode("cette01"),"Cristian17",img16, false,true, "Barcelona","","usu17", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user18 = new Users("sr.crnt18@hotmail.com","Cette18",encoder.encode("cette01"),"Cristian18",img17, false,true, "Malaga","","usu18", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user19 = new Users("sr.crnt19@hotmail.com","Cette19",encoder.encode("cette01"),"Cristian19",img18, false,true, "Madrid","","usu19", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user20 = new Users("sr.crnt20@hotmail.com","cette20",encoder.encode("cette01"),"Cristian",img19, false,true, "Barcelona","","usu20", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		
 		
 		
-		Users company1 = new Users("ikea@hotmail.com","Ikea",encoder.encode("i"),"Ikea",null, true,false, "Madrid","","company1", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company2 = new Users("nike@hotmail.com","Nike",encoder.encode("n"),"Nike",null, true,false, "Barcelona","","company2", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company3 = new Users("golf@hotmail.com","Golf",encoder.encode("g"),"Golf",null, true,false, "Malaga","","company3", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company4 = new Users("alcampo@hotmail.com","Alcampo",encoder.encode("a"),"Alcampo",null, true,false, "Barcelona","","company4", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company5 = new Users("apple@hotmail.com","Apple",encoder.encode("a"),"Apple",null, true,false, "Madrid","","company5", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company6 = new Users("hawkers@hotmail.com","Hawkers",encoder.encode("h"),"Hawkers",null, true,false, "Barcelona","","company6", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company7 = new Users("zara@hotmail.com","Zara",encoder.encode("z"),"Zara",null, true,false, "Madrid","","company7", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company8 = new Users("razer@hotmail.com","Razer",encoder.encode("r"),"Razer",null, true,false, "Malaga","","company8", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company9 = new Users("nivea@hotmail.com","Nivea",encoder.encode("n"),"Nivea",null, true,false, "Barcelona","","company9", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company10 = new Users("adidas@hotmail.com","Adidas",encoder.encode("a"),"Adidas",null, true,false, "Madrid","","company10", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company11 = new Users("puma@hotmail.com","Puma",encoder.encode("p"),"Puma",null, true,false, "Barcelona","","company11", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company12 = new Users("samsung@hotmail.com","Samsung",encoder.encode("s"),"Samsung",null, true,false, "Madrid","","company12", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company13 = new Users("seat@hotmail.com","Seat",encoder.encode("se"),"Seat",null, true,false, "Madrid","","company13", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company14 = new Users("mahou@hotmail.com","Mahou",encoder.encode("m"),"Mahou",null, true,false, "Barcelona","","company14", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company15 = new Users("AOC@hotmail.com","AOC",encoder.encode("ao"),"AOC",null, true,false, "Malaga","","company15", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company16 = new Users("GXT@hotmail.com","GXT",encoder.encode("g"),"GXT",null, true,false, "Madrid","","company16", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company17 = new Users("bluebanana@hotmail.com","BlueBanana",encoder.encode("b"),"BlueBanana",null, true,false, "Barcelona","","company17", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company18 = new Users("mango18@hotmail.com","Mango",encoder.encode("ma"),"Mango",null, true,false, "Malaga","","company18", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company19 = new Users("hp@hotmail.com","HP",encoder.encode("h"),"Hp",null, false,false, "Madrid","","company19", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company20 = new Users("MSI.crnt20@hotmail.com","MSI",encoder.encode("ms"),"MSI",null, true,false, "Barcelona","","company20", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company1 = new Users("ikea@hotmail.com","Ikea",encoder.encode("i"),"Ikea",img20, true,false, "Madrid","","company1", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company2 = new Users("nike@hotmail.com","Nike",encoder.encode("n"),"Nike",img21, true,false, "Barcelona","","company2", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company3 = new Users("golf@hotmail.com","Golf",encoder.encode("g"),"Golf",img22, true,false, "Malaga","","company3", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company4 = new Users("alcampo@hotmail.com","Alcampo",encoder.encode("a"),"Alcampo",img23, true,false, "Barcelona","","company4", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company5 = new Users("apple@hotmail.com","Apple",encoder.encode("a"),"Apple",img24, true,false, "Madrid","","company5", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company6 = new Users("hawkers@hotmail.com","Hawkers",encoder.encode("h"),"Hawkers",img25, true,false, "Barcelona","","company6", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company7 = new Users("zara@hotmail.com","Zara",encoder.encode("z"),"Zara",img26, true,false, "Madrid","","company7", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company8 = new Users("razer@hotmail.com","Razer",encoder.encode("r"),"Razer",img27, true,false, "Malaga","","company8", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company9 = new Users("nivea@hotmail.com","Nivea",encoder.encode("n"),"Nivea",img28, true,false, "Barcelona","","company9", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company10 = new Users("adidas@hotmail.com","Adidas",encoder.encode("a"),"Adidas",img29, true,false, "Madrid","","company10", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company11 = new Users("puma@hotmail.com","Puma",encoder.encode("p"),"Puma",img30, true,false, "Barcelona","","company11", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company12 = new Users("samsung@hotmail.com","Samsung",encoder.encode("s"),"Samsung",img31, true,false, "Madrid","","company12", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company13 = new Users("seat@hotmail.com","Seat",encoder.encode("se"),"Seat",img32, true,false, "Madrid","","company13", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company14 = new Users("mahou@hotmail.com","Mahou",encoder.encode("m"),"Mahou",img33, true,false, "Barcelona","","company14", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company15 = new Users("AOC@hotmail.com","AOC",encoder.encode("ao"),"AOC",img34, true,false, "Malaga","","company15", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company16 = new Users("GXT@hotmail.com","GXT",encoder.encode("g"),"GXT",img35, true,false, "Madrid","","company16", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company17 = new Users("bluebanana@hotmail.com","BlueBanana",encoder.encode("b"),"BlueBanana",img36, true,false, "Barcelona","","company17", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company18 = new Users("mango18@hotmail.com","Mango",encoder.encode("ma"),"Mango",img37, true,false, "Malaga","","company18", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company19 = new Users("hp@hotmail.com","HP",encoder.encode("h"),"Hp",img38, false,false, "Madrid","","company19", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company20 = new Users("MSI.crnt20@hotmail.com","MSI",encoder.encode("ms"),"MSI",img39, true,false, "Barcelona","","company20", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		
 		
 		//Creation user rol of user
@@ -200,26 +299,26 @@ public class Loader {
 		Roles rol50 = new Roles("ADMIN", user10);
 		
 		//Creation products
-		Product product1 = new Product(user1,"product 1", "description 1", null, null, null, 40, tag1, tag2, tag3, null, null, "in stock", false, false, false);
-		Product product2 = new Product(company2,"product 2", "description 2", null, null, null, 20, null, tag2, tag3, tag4, null, "in stock", false, false, false);
-		Product product3 = new Product(user1,"product 3", "description 3", null, null, null, 15, tag1, tag2, tag3, null, tag5, "sold", false, false, false);
-		Product product4 = new Product(user2,"product 4", "description 4", null, null, null, 45, tag1, null, tag3, null, null, "reserved", false, false, false);
-		Product product5 = new Product(company1,"product 5", "description 5", null, null, null, 60, tag1, tag2, tag3, tag4, null, "sold", false, false, false);
-		Product product6 = new Product(user1,"product 6", "description 6", null, null, null, 5, null, tag2, tag3, null, tag5, "in stock", false, false, false);
-		Product product7 = new Product(user4,"product 7", "description 7", null, null, null, 8, tag1, tag2, null, null, null, "reserved", false, false, false);
-		Product product8 = new Product(company1,"product 8", "description 8", null, null, null, 12, tag1, tag2, tag3, tag4, null, "sold", false, false, false);
-		Product product9 = new Product(user9,"product 9", "description 9", null, null, null, 15, tag1, null, tag3, null, tag5, "in stock", false, false, false);
-		Product product10 = new Product(user2,"product 10", "description 10", null, null, null, 100, tag1, tag2, tag3, null, null, "in stock", false, false, false);
-		Product product11 = new Product(user10,"product 11", "description 11", null, null, null, 40, null, tag2, tag3, tag4, null, "reserved", false, false, false);
-		Product product12 = new Product(company12,"product 12", "description 12", null, null, null, 140, tag1, tag2, null, null, null, "in stock", false, false, false);
-		Product product13 = new Product(company8,"product 13", "description 13", null, null, null, 12, tag1, null, null, null, tag5, "sold", false, false, false);
-		Product product14 = new Product(user7,"product 14", "description 14", null, null, null, 40, null, tag2, null, tag4, null, "reserved", false, false, false);
-		Product product15 = new Product(company9,"product 15", "description 15", null, null, null, 18, tag1, null, tag3, null, null, "sold", false, false, false);
-		Product product16 = new Product(user4,"product 16", "description 16", null, null, null, 70, null, null, null, tag4, null, "in stock", false, false, false);
-		Product product17 = new Product(user2,"product 17", "description 17", null, null, null, 80, tag1, null, tag3, null, null, "sold", false, false, false);
-		Product product18 = new Product(company5,"product 18", "description 18", null, null, null, 82, null, tag2, tag3, null, tag5, "reserved", false, false, false);
-		Product product19 = new Product(user6,"product 19", "description 19", null, null, null, 95, tag1, tag2, null, null, null, "in stock", false, false, false);
-		Product product20 = new Product(company10,"product 20", "description 20", null, null, null, 145, tag1, null,null, tag4, null, "reserved", false, false, false);
+		Product product1 = new Product(user1,"product 1", "description 1", imgproduct, imgproduct20, imgproduct21, 40, tag1, tag2, tag3, null, null, "in stock", true, true, true);
+		Product product2 = new Product(company2,"product 2", "description 2", imgproduct1, imgproduct22, imgproduct23, 20, null, tag2, tag3, tag4, null, "in stock", true, true, true);
+		Product product3 = new Product(user1,"product 3", "description 3", imgproduct2, imgproduct24, imgproduct25, 15, tag1, tag2, tag3, null, tag5, "sold", true, true, true);
+		Product product4 = new Product(user2,"product 4", "description 4", imgproduct3, null, null, 45, tag1, null, tag3, null, null, "reserved", true, false, false);
+		Product product5 = new Product(company1,"product 5", "description 5", imgproduct4, null, null, 60, tag1, tag2, tag3, tag4, null, "sold", true, false, false);
+		Product product6 = new Product(user1,"product 6", "description 6", imgproduct5, null, imgproduct26, 5, null, tag2, tag3, null, tag5, "in stock", true, false, true);
+		Product product7 = new Product(user4,"product 7", "description 7", imgproduct6, null, null, 8, tag1, tag2, null, null, null, "reserved", true, false, false);
+		Product product8 = new Product(company1,"product 8", "description 8", imgproduct7, imgproduct27, null, 12, tag1, tag2, tag3, tag4, null, "sold", true, true, false);
+		Product product9 = new Product(user9,"product 9", "description 9", imgproduct8, null, null, 15, tag1, null, tag3, null, tag5, "in stock", true, false, false);
+		Product product10 = new Product(user2,"product 10", "description 10", imgproduct9, imgproduct28, null, 100, tag1, tag2, tag3, null, null, "in stock", true, true, false);
+		Product product11 = new Product(user10,"product 11", "description 11", imgproduct10, null, imgproduct29, 40, null, tag2, tag3, tag4, null, "reserved", true, false, true);
+		Product product12 = new Product(company12,"product 12", "description 12", imgproduct11, imgproduct30, null, 140, tag1, tag2, null, null, null, "in stock", true, true, false);
+		Product product13 = new Product(company8,"product 13", "description 13", imgproduct12, null, null, 12, tag1, null, null, null, tag5, "sold", true, false, false);
+		Product product14 = new Product(user7,"product 14", "description 14", imgproduct13, null, null, 40, null, tag2, null, tag4, null, "reserved", true, false, false);
+		Product product15 = new Product(company9,"product 15", "description 15", imgproduct14, null, null, 18, tag1, null, tag3, null, null, "sold", true, false, false);
+		Product product16 = new Product(user4,"product 16", "description 16", imgproduct15, null, null, 70, null, null, null, tag4, null, "in stock", true, false, false);
+		Product product17 = new Product(user2,"product 17", "description 17", imgproduct16, null, null, 80, tag1, null, tag3, null, null, "sold", true, false, false);
+		Product product18 = new Product(company5,"product 18", "description 18", imgproduct17, null, null, 82, null, tag2, tag3, null, tag5, "reserved", true, false, false);
+		Product product19 = new Product(user6,"product 19", "description 19", imgproduct18, null, null, 95, tag1, tag2, null, null, null, "in stock", true, false, false);
+		Product product20 = new Product(company10,"product 20", "description 20", imgproduct19, null, null, 145, tag1, null,null, tag4, null, "reserved", true, false, false);
 		
 		
 		//Creation list product
@@ -267,26 +366,26 @@ public class Loader {
 		
 		
 		//Creation Posts
-		Post pos1 = new Post(user1, "title 1", "description 1", null);
-		Post pos2 = new Post(company5, "title 2", "description 2", null);
-		Post pos3 = new Post(user1, "title 3", "description 3", null);
-		Post pos4 = new Post(user7, "title 4", "description 4", null);
-		Post pos5 = new Post(company9, "title 5", "description 5", null);
-		Post pos6 = new Post(user17, "title 6", "description 6", null);
-		Post pos7 = new Post(user12, "title 7", "description 7", null);
-		Post pos8 = new Post(user1, "title 8", "description 8", null);
-		Post pos9 = new Post(company18, "title 9", "description 9", null);
-		Post pos10 = new Post(user1, "title 10", "description 10", null);
-		Post pos11 = new Post(user13, "title 11", "description 11", null);
-		Post pos12 = new Post(user1, "title 12", "description 12", null);
-		Post pos13 = new Post(user1, "title 13", "description 13", null);
-		Post pos14 = new Post(user12, "title 14", "description 14", null);
-		Post pos15 = new Post(company3, "title 15", "description 15", null);
-		Post pos16 = new Post(user11, "title 16", "description 16", null);
-		Post pos17 = new Post(company1, "title 17", "description 17", null);
-		Post pos18 = new Post(user10, "title 18", "description 18", null);
-		Post pos19 = new Post(user4, "title 19", "description 19", null);
-		Post pos20 = new Post(user12, "title 20", "description 20", null);
+		Post pos1 = new Post(user1, "title 1", "description 1", imgpost);
+		Post pos2 = new Post(company5, "title 2", "description 2", imgpost1);
+		Post pos3 = new Post(user1, "title 3", "description 3", imgpost2);
+		Post pos4 = new Post(user7, "title 4", "description 4", imgpost3);
+		Post pos5 = new Post(company9, "title 5", "description 5", imgpost4);
+		Post pos6 = new Post(user17, "title 6", "description 6", imgpost5);
+		Post pos7 = new Post(user12, "title 7", "description 7", imgpost6);
+		Post pos8 = new Post(user1, "title 8", "description 8", imgpost7);
+		Post pos9 = new Post(company18, "title 9", "description 9", imgpost8);
+		Post pos10 = new Post(user1, "title 10", "description 10", imgpost9);
+		Post pos11 = new Post(user13, "title 11", "description 11", imgpost10);
+		Post pos12 = new Post(user1, "title 12", "description 12", imgpost11);
+		Post pos13 = new Post(user1, "title 13", "description 13", imgpost12);
+		Post pos14 = new Post(user12, "title 14", "description 14", imgpost13);
+		Post pos15 = new Post(company3, "title 15", "description 15", imgpost14);
+		Post pos16 = new Post(user11, "title 16", "description 16", imgpost15);
+		Post pos17 = new Post(company1, "title 17", "description 17", imgpost16);
+		Post pos18 = new Post(user10, "title 18", "description 18", imgpost17);
+		Post pos19 = new Post(user4, "title 19", "description 19", imgpost18);
+		Post pos20 = new Post(user12, "title 20", "description 20", imgpost19);
 		
 		
 		
