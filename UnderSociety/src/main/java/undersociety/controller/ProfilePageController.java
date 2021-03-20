@@ -7,6 +7,7 @@ package undersociety.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +41,7 @@ public class ProfilePageController {
 	@Modifying
     @PostMapping("/api/changeImageProfile")
     public void modifyimageThemeProfile(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
-    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	if(imageFile != null) {
     		prev.setImageprofile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
     	}
@@ -53,7 +53,7 @@ public class ProfilePageController {
 	@Modifying
     @PostMapping("/api/changeUserImage")
     public void modifyUserImg(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile imageUserFile) throws IOException {
-    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	if(imageUserFile != null) {
     		prev.setUserimg(BlobProxy.generateProxy(imageUserFile.getInputStream(), imageUserFile.getSize()));
     	}
@@ -65,7 +65,7 @@ public class ProfilePageController {
 	@Modifying
 	@PostMapping("/api/changeUserInfo")
 	public void modifyUserInfo(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) String userInfo) throws IOException {
-    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	if(userInfo != null) {
     		prev.setUserinfo(userInfo);
     	}
@@ -77,7 +77,7 @@ public class ProfilePageController {
 	@Modifying
 	@PostMapping("/api/changeUserCity")
 	public void modifyUserCity(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) String userCity) throws IOException {
-    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	if(userCity != null) {
     		prev.setCity(userCity);
     	}
@@ -88,7 +88,7 @@ public class ProfilePageController {
 	
 	@GetMapping("/api/imageThemeProfile")
     private ResponseEntity<Object> downloadImage(HttpServletRequest sesion) throws SQLException{
-    	Users s = userRepository.findByusername(sesion.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users s = userRepository.findByusername(sesion.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	Resource file = new InputStreamResource(s.getImageprofile().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
