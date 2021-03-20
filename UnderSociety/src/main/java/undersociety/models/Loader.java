@@ -80,49 +80,133 @@ public class Loader {
 		//Images User 
 		Path imagePath = IMAGES_FOLDER.resolve("FOndo2.jpeg");
 		Resource image = new UrlResource(imagePath.toUri());
+		Path imagePathUser1 = IMAGES_FOLDER.resolve("legolas_z9w5.jpg");
+		Resource imageUser1 = new UrlResource(imagePathUser1.toUri());
+		Path imagePathUser2 = IMAGES_FOLDER.resolve("maxresdefault-1-e1510939930531-1024x663.jpg.webp");
+		Resource imageUser2 = new UrlResource(imagePathUser2.toUri());
+		Path imagePathUser3 = IMAGES_FOLDER.resolve("frodo_smc7.jpg");
+		Resource imageUser3 = new UrlResource(imagePathUser3.toUri());
+		Path imagePathUser4 = IMAGES_FOLDER.resolve("lord-of-the-rings-sean-bean-boromir-1584636601.jpg");
+		Resource imageUser4 = new UrlResource(imagePathUser4.toUri());
+		Path imagePathUser5 = IMAGES_FOLDER.resolve("unnamed.jpg");
+		Resource imageUser5 = new UrlResource(imagePathUser5.toUri());
+		Path imagePathUser6 = IMAGES_FOLDER.resolve("201b8814bc242568936940c34180eb6e--lotr-quotes-frodo-baggins.jpg");
+		Resource imageUser6 = new UrlResource(imagePathUser6.toUri());
+		Path imagePathUser7 = IMAGES_FOLDER.resolve("Pippinprintscreen.jpg");
+		Resource imageUser7 = new UrlResource(imagePathUser7.toUri());
+		Path imagePathUser8 = IMAGES_FOLDER.resolve("ian-mckellen-hobbit-an-unexpected-journey-gandalf.jpg");
+		Resource imageUser8 = new UrlResource(imagePathUser8.toUri());
+		Path imagePathUser9 = IMAGES_FOLDER.resolve("tipos-magia3_1.jpg");
+		Resource imageUser9 = new UrlResource(imagePathUser9.toUri());
+		Path imagePathUser10 = IMAGES_FOLDER.resolve("4a08dfec8bfb49ef9565217ffe22cbda.jpg");
+		Resource imageUser10 = new UrlResource(imagePathUser10.toUri());
+		Path imagePathUser11 = IMAGES_FOLDER.resolve("Faramir-movie.jpg");
+		Resource imageUser11 = new UrlResource(imagePathUser11.toUri());
+		Path imagePathUser12 = IMAGES_FOLDER.resolve("martin-freeman-hobbit.jpg");
+		Resource imageUser12 = new UrlResource(imagePathUser12.toUri());
+		Path imagePathUser13 = IMAGES_FOLDER.resolve("64aab6e1c836e7d79b132ab1cf66df1e.jpg");
+		Resource imageUser13 = new UrlResource(imagePathUser13.toUri());
+		Path imagePathUser14 = IMAGES_FOLDER.resolve("the-lord-of-the-rings-the-return-of-the-king-gollum-1553685731.jpg");
+		Resource imageUser14 = new UrlResource(imagePathUser14.toUri());
+		Path imagePathUser15 = IMAGES_FOLDER.resolve("1366055.jpg");
+		Resource imageUser15 = new UrlResource(imagePathUser15.toUri());
+		Path imagePathUser16 = IMAGES_FOLDER.resolve("Radagast_the_Brown.jpg");
+		Resource imageUser16 = new UrlResource(imagePathUser16.toUri());
+		Path imagePathUser17 = IMAGES_FOLDER.resolve("unnamed (1).jpg");
+		Resource imageUser17 = new UrlResource(imagePathUser17.toUri());
+		Path imagePathUser18 = IMAGES_FOLDER.resolve("8da0f0135b32ac6c26067c09498685f8.jpg");
+		Resource imageUser18 = new UrlResource(imagePathUser18.toUri());
+		Path imagePathUser19 = IMAGES_FOLDER.resolve("f3d3931074bef5d59f3639e55818dbea.jpg");
+		Resource imageUser19 = new UrlResource(imagePathUser19.toUri());
+		
+		
+				
 		Blob img = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img1 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img2 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img3 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img4 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img5 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img6 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img7 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img8 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img9 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img10 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img11 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img12 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img13 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img14 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img15 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img16 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img17 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img18 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img19 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Blob img1 = BlobProxy.generateProxy(imageUser1.getInputStream(), imageUser1.contentLength());
+		Blob img2 = BlobProxy.generateProxy(imageUser2.getInputStream(), imageUser2.contentLength());
+		Blob img3 = BlobProxy.generateProxy(imageUser3.getInputStream(), imageUser3.contentLength());
+		Blob img4 = BlobProxy.generateProxy(imageUser4.getInputStream(), imageUser4.contentLength());
+		Blob img5 = BlobProxy.generateProxy(imageUser5.getInputStream(), imageUser5.contentLength());
+		Blob img6 = BlobProxy.generateProxy(imageUser6.getInputStream(), imageUser6.contentLength());
+		Blob img7 = BlobProxy.generateProxy(imageUser7.getInputStream(), imageUser7.contentLength());
+		Blob img8 = BlobProxy.generateProxy(imageUser8.getInputStream(), imageUser8.contentLength());
+		Blob img9 = BlobProxy.generateProxy(imageUser9.getInputStream(), imageUser9.contentLength());
+		Blob img10 = BlobProxy.generateProxy(imageUser10.getInputStream(), imageUser10.contentLength());
+		Blob img11 = BlobProxy.generateProxy(imageUser11.getInputStream(), imageUser11.contentLength());
+		Blob img12 = BlobProxy.generateProxy(imageUser12.getInputStream(), imageUser12.contentLength());
+		Blob img13 = BlobProxy.generateProxy(imageUser13.getInputStream(), imageUser13.contentLength());
+		Blob img14 = BlobProxy.generateProxy(imageUser14.getInputStream(), imageUser14.contentLength());
+		Blob img15 = BlobProxy.generateProxy(imageUser15.getInputStream(), imageUser15.contentLength());
+		Blob img16 = BlobProxy.generateProxy(imageUser16.getInputStream(), imageUser16.contentLength());
+		Blob img17 = BlobProxy.generateProxy(imageUser17.getInputStream(), imageUser17.contentLength());
+		Blob img18 = BlobProxy.generateProxy(imageUser18.getInputStream(), imageUser18.contentLength());
+		Blob img19 = BlobProxy.generateProxy(imageUser19.getInputStream(), imageUser19.contentLength());
 		
 		
 		//Images Companies 
-		Blob img20 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img21 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img22 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img23 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img24 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img25 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img26 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img27 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img28 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img29 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img30 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img31 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img32 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img33 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img34 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img35 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img36 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img37 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img38 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob img39 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Path imagePathCompania20 = IMAGES_FOLDER.resolve("3rgMnSKT_400x400_1.png");
+		Resource imageCompania20 = new UrlResource(imagePathCompania20.toUri());
+		Path imagePathCompania21 = IMAGES_FOLDER.resolve("nike12.jpg");
+		Resource imageCompania21 = new UrlResource(imagePathCompania21.toUri());
+		Path imagePathCompania22 = IMAGES_FOLDER.resolve("png-transparent-volkswagen-group-car-volkswagen-emissions-scandal-volkswagen-golf-germany-emblem-trademark-logo.png");
+		Resource imageCompania22 = new UrlResource(imagePathCompania22.toUri());
+		Path imagePathCompania23 = IMAGES_FOLDER.resolve("descarga1.jpg");
+		Resource imageCompania23 = new UrlResource(imagePathCompania23.toUri());
+		Path imagePathCompania24 = IMAGES_FOLDER.resolve("apple-logo.jpg");
+		Resource imageCompania24 = new UrlResource(imagePathCompania24.toUri());
+		Path imagePathCompania25 = IMAGES_FOLDER.resolve("ff8080814dd21b23014de3186e4701aa-large.png");
+		Resource imageCompania25 = new UrlResource(imagePathCompania25.toUri());
+		Path imagePathCompania26 = IMAGES_FOLDER.resolve("zara-new-logo-06022019in2.png");
+		Resource imageCompania26 = new UrlResource(imagePathCompania26.toUri());
+		Path imagePathCompania27 = IMAGES_FOLDER.resolve("PFJP6V4AWNEFFEVBLJ6WGX3L2I.jpg");
+		Resource imageCompania27 = new UrlResource(imagePathCompania27.toUri());
+		Path imagePathCompania28 = IMAGES_FOLDER.resolve("366201-1596732976821.jpg");
+		Resource imageCompania28 = new UrlResource(imagePathCompania28.toUri());
+		Path imagePathCompania29 = IMAGES_FOLDER.resolve("adidas-logo.jpg");
+		Resource imageCompania29 = new UrlResource(imagePathCompania29.toUri());
+		Path imagePathCompania30 = IMAGES_FOLDER.resolve("186153b44d408d68738794ee51704837.jpg");
+		Resource imageCompania30 = new UrlResource(imagePathCompania30.toUri());
+		Path imagePathCompania31 = IMAGES_FOLDER.resolve("thumb-1920-588106.png");
+		Resource imageCompania31 = new UrlResource(imagePathCompania31.toUri());
+		Path imagePathCompania32 = IMAGES_FOLDER.resolve("seat-logo.jpg");
+		Resource imageCompania32 = new UrlResource(imagePathCompania32.toUri());
+		Path imagePathCompania33 = IMAGES_FOLDER.resolve("mahou-logo.jpg");
+		Resource imageCompania33 = new UrlResource(imagePathCompania33.toUri());
+		Path imagePathCompania34 = IMAGES_FOLDER.resolve("descarga.png");
+		Resource imageCompania34 = new UrlResource(imagePathCompania34.toUri());
+		Path imagePathCompania35 = IMAGES_FOLDER.resolve("images.png");
+		Resource imageCompania35 = new UrlResource(imagePathCompania35.toUri());
+		Path imagePathCompania36 = IMAGES_FOLDER.resolve("42367_24102018081432778016_opt_520.jpg");
+		Resource imageCompania36 = new UrlResource(imagePathCompania36.toUri());
+		Path imagePathCompania37 = IMAGES_FOLDER.resolve("mango-1541664133.jpg");
+		Resource imageCompania37 = new UrlResource(imagePathCompania37.toUri());
+		Path imagePathCompania38 = IMAGES_FOLDER.resolve("thumb-hp-logo-hewlett-packard-black-background-minimal-lines-texture.jpg");
+		Resource imageCompania38 = new UrlResource(imagePathCompania38.toUri());
+		Path imagePathCompania39 = IMAGES_FOLDER.resolve("flat,750x1000,075,f.jpg");
+		Resource imageCompania39 = new UrlResource(imagePathCompania39.toUri());
+			
+		
+		
+		Blob img20 = BlobProxy.generateProxy(imageCompania20.getInputStream(), imageCompania20.contentLength());
+		Blob img21 = BlobProxy.generateProxy(imageCompania21.getInputStream(), imageCompania21.contentLength());
+		Blob img22 = BlobProxy.generateProxy(imageCompania22.getInputStream(), imageCompania22.contentLength());
+		Blob img23 = BlobProxy.generateProxy(imageCompania23.getInputStream(), imageCompania23.contentLength());
+		Blob img24 = BlobProxy.generateProxy(imageCompania24.getInputStream(), imageCompania24.contentLength());
+		Blob img25 = BlobProxy.generateProxy(imageCompania25.getInputStream(), imageCompania25.contentLength());
+		Blob img26 = BlobProxy.generateProxy(imageCompania26.getInputStream(), imageCompania26.contentLength());
+		Blob img27 = BlobProxy.generateProxy(imageCompania27.getInputStream(), imageCompania27.contentLength());
+		Blob img28 = BlobProxy.generateProxy(imageCompania28.getInputStream(), imageCompania28.contentLength());
+		Blob img29 = BlobProxy.generateProxy(imageCompania29.getInputStream(), imageCompania29.contentLength());
+		Blob img30 = BlobProxy.generateProxy(imageCompania30.getInputStream(), imageCompania30.contentLength());
+		Blob img31 = BlobProxy.generateProxy(imageCompania31.getInputStream(), imageCompania31.contentLength());
+		Blob img32 = BlobProxy.generateProxy(imageCompania32.getInputStream(), imageCompania32.contentLength());
+		Blob img33 = BlobProxy.generateProxy(imageCompania33.getInputStream(), imageCompania33.contentLength());
+		Blob img34 = BlobProxy.generateProxy(imageCompania34.getInputStream(), imageCompania34.contentLength());
+		Blob img35 = BlobProxy.generateProxy(imageCompania35.getInputStream(), imageCompania35.contentLength());
+		Blob img36 = BlobProxy.generateProxy(imageCompania36.getInputStream(), imageCompania36.contentLength());
+		Blob img37 = BlobProxy.generateProxy(imageCompania37.getInputStream(), imageCompania37.contentLength());
+		Blob img38 = BlobProxy.generateProxy(imageCompania38.getInputStream(), imageCompania38.contentLength());
+		Blob img39 = BlobProxy.generateProxy(imageCompania39.getInputStream(), imageCompania39.contentLength());
 		
 		//Images Post
 		Blob imgpost = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
@@ -196,27 +280,27 @@ public class Loader {
 		
 		
 		
-		//Users creations
+		//Users creations         
 		Users user1 = new Users("sr.crnt@hotmail.com","h",encoder.encode("h"),"h",img, false,true, "Madrid","","usu1", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user2 = new Users("sr.crnt2@hotmail.com","Cette02",encoder.encode("cette01"),"Cristian2",img1, false,true, "Barcelona","","usu2", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user3 = new Users("sr.crnt3@hotmail.com","Cette03",encoder.encode("cette01"),"Cristian3",img2, false,true, "Malaga","","usu3", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user4 = new Users("sr.crnt4@hotmail.com","Cette04",encoder.encode("cette01"),"Cristian4",img3, false,true, "Barcelona","","usu4", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user5 = new Users("sr.crnt5@hotmail.com","Cette05",encoder.encode("cette01"),"Cristian5",img4, false,true, "Madrid","","usu5", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user6 = new Users("sr.crnt6@hotmail.com","Cette06",encoder.encode("cette01"),"Cristian6",img5, false,true, "Barcelona","","usu6", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user7 = new Users("sr.crnt7@hotmail.com","Cette07",encoder.encode("cette01"),"Cristian7",img6, false,true, "Madrid","","usu7", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user8 = new Users("sr.crnt8@hotmail.com","Cette08",encoder.encode("cette01"),"Cristian8",img7, false,true, "Malaga","","usu8", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user9 = new Users("sr.crnt9@hotmail.com","Cette09",encoder.encode("cette01"),"Cristian9",img8, false,true, "Barcelona","","usu9", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user10 = new Users("sr.crnt10@hotmail.com","Cette10",encoder.encode("cette01"),"Cristian10",img9, false,true, "Madrid","","usu10", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user11 = new Users("sr.crnt11@hotmail.com","Cette11",encoder.encode("cette01"),"Cristian11",img10, false,true, "Barcelona","","usu11", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user12 = new Users("sr.crnt12@hotmail.com","Cette12",encoder.encode("cette01"),"Cristian12",img11, false,true, "Madrid","","usu12", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user13 = new Users("sr.crnt13@hotmail.com","Cette13",encoder.encode("cette01"),"Cristian13",img12, false,true, "Madrid","","usu13", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user14 = new Users("sr.crnt14@hotmail.com","Cette14",encoder.encode("cette01"),"Cristian14",img13, false,true, "Barcelona","","usu14", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user15 = new Users("sr.crnt15@hotmail.com","Cette15",encoder.encode("cette01"),"Cristian15",img14, false,true, "Malaga","","usu15", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user16 = new Users("sr.crnt16@hotmail.com","Cette16",encoder.encode("cette01"),"Cristian16",img15, false,true, "Madrid","","usu16", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user17 = new Users("sr.crnt17@hotmail.com","Cette17",encoder.encode("cette01"),"Cristian17",img16, false,true, "Barcelona","","usu17", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user18 = new Users("sr.crnt18@hotmail.com","Cette18",encoder.encode("cette01"),"Cristian18",img17, false,true, "Malaga","","usu18", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user19 = new Users("sr.crnt19@hotmail.com","Cette19",encoder.encode("cette01"),"Cristian19",img18, false,true, "Madrid","","usu19", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users user20 = new Users("sr.crnt20@hotmail.com","cette20",encoder.encode("cette01"),"Cristian",img19, false,true, "Barcelona","","usu20", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user2 = new Users("Legolas@hotmail.com","Legolas",encoder.encode("h"),"Cristian2",img1, false,true, "Antanamaribo","","usuLegolas", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user3 = new Users("Gimly@hotmail.com","Gimli",encoder.encode("h"),"Gimli Stone",img2, false,true, "Atenas","","usuGimli", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user4 = new Users("Frodo@hotmail.com","Frodo",encoder.encode("h"),"Frodo Hole",img3, false,true, "Estambul","","usuFrodo", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user5 = new Users("Boromir@hotmail.com","Boromir",encoder.encode("h"),"Boromir Dawn",img4, false,true, "Katmandú","","usuBoromir", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user6 = new Users("Aragorn@hotmail.com","Aragorn",encoder.encode("h"),"Aragorn Gondor",img5, false,true, "Dhaka","","usuAragorn", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user7 = new Users("Merry@hotmail.com","Merry",encoder.encode("h"),"Merry Mess",img6, false,true, "Hanoi","","usuMerry", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user8 = new Users("Pippin@hotmail.com","Pippin",encoder.encode("h"),"Pippin Mass",img7, false,true, "Bangkok","","usuPippin", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user9 = new Users("Gandalf@hotmail.com","Gandalf",encoder.encode("h"),"Gandalf Grey",img8, false,true, "Manila","","usuGandalf", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user10 = new Users("Sauron@hotmail.com","Sauron",encoder.encode("h"),"Sauron Ringout",img9, false,true, "Yakarta","","usuSauron", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user11 = new Users("Denethor@hotmail.com","Denethor",encoder.encode("h"),"Denethor Law",img10, false,true, "Singapur","","usuDenethor", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user12 = new Users("Faramir@hotmail.com","Faramir",encoder.encode("h"),"Faramir river",img11, false,true, "Perth","","usuFaramir", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user13 = new Users("Bilbo@hotmail.com","Bilbo",encoder.encode("h"),"Bilbo Bolson",img12, false,true, "Sidney","","usuBilbo", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user14 = new Users("Barbol@hotmail.com","Barbol",encoder.encode("h"),"Barbol Tree",img13, false,true, "Melbourne","","usuBarbol", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user15 = new Users("Gollum@hotmail.com","Gollum",encoder.encode("h"),"Gollum Gollum",img14, false,true, "Canberra","","usuGollum", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user16 = new Users("Saruman@hotmail.com","Saruman",encoder.encode("h"),"Saruman Mad",img15, false,true, "Hobart","","usuSaruman", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user17 = new Users("Radagast@hotmail.com","Radagast",encoder.encode("h"),"Radagast Pard",img16, false,true, "Wellington","","usuRadagast", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user18 = new Users("Arwen@hotmail.com","Arwen",encoder.encode("h"),"Arwen Water",img17, false,true, "Honolulu","","usuArwen", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user19 = new Users("Sam@hotmail.com","Sam",encoder.encode("h"),"Sam SagazGamyi",img18, false,true, "Denver","","usuSam", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users user20 = new Users("Theoden@hotmail.com","Theoden",encoder.encode("h"),"Theoden King",img19, false,true, "Los angeles","","usuTheoden", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		
 		
 		
@@ -321,47 +405,7 @@ public class Loader {
 		Product product20 = new Product(company10,"product 20", "description 20", imgproduct19, null, null, 145, tag1, null,null, tag4, null, "reserved", true, false, false);
 		
 		
-		//Creation list product
-		ListProducts lista1 = new ListProducts(user1, product1);
-		ListProducts lista2 = new ListProducts(user2, product11);
-		ListProducts lista3 = new ListProducts(user3, product12);
-		ListProducts lista4 = new ListProducts(user4, product1);
-		ListProducts lista5 = new ListProducts(user5, product15);
-		ListProducts lista6 = new ListProducts(user6, product1);
-		ListProducts lista7 = new ListProducts(user7, product18);
-		ListProducts lista8 = new ListProducts(user8, product17);
-		ListProducts lista9 = new ListProducts(user9, product7);
-		ListProducts lista10 = new ListProducts(user10, product1);
-		ListProducts lista11 = new ListProducts(user11, product14);
-		ListProducts lista12 = new ListProducts(user12, product1);
-		ListProducts lista13 = new ListProducts(user13, product12);
-		ListProducts lista14 = new ListProducts(user14, product8);
-		ListProducts lista15 = new ListProducts(user15, product15);
-		ListProducts lista16 = new ListProducts(user16, product2);
-		ListProducts lista17 = new ListProducts(user17, product1);
-		ListProducts lista18 = new ListProducts(user18, product6);
-		ListProducts lista19 = new ListProducts(user19, product1);
-		ListProducts lista20 = new ListProducts(user20, product9);
-		ListProducts lista21 = new ListProducts(company1, product7);
-		ListProducts lista22 = new ListProducts(company2, product1);
-		ListProducts lista23 = new ListProducts(company3, product1);
-		ListProducts lista24 = new ListProducts(company4, product3);
-		ListProducts lista25 = new ListProducts(company5, product1);
-		ListProducts lista26 = new ListProducts(company6, product4);
-		ListProducts lista27 = new ListProducts(company7, product1);
-		ListProducts lista28= new ListProducts(company8, product6);
-		ListProducts lista29 = new ListProducts(company9, product1);
-		ListProducts lista30 = new ListProducts(company10, product7);
-		ListProducts lista31 = new ListProducts(company11, product1);
-		ListProducts lista32 = new ListProducts(company12, product8);
-		ListProducts lista33 = new ListProducts(company13, product1);
-		ListProducts lista34 = new ListProducts(company14, product1);
-		ListProducts lista35 = new ListProducts(company15, product12);
-		ListProducts lista36 = new ListProducts(company16, product12);
-		ListProducts lista37 = new ListProducts(company17, product15);
-		ListProducts lista38 = new ListProducts(company18, product18);
-		ListProducts lista39 = new ListProducts(company19, product17);
-		ListProducts lista40 = new ListProducts(company20, product1);
+		
 		
 		
 		
@@ -523,48 +567,7 @@ public class Loader {
 			
 		}
 		
-		if(listproductrepo.findAll().isEmpty()) {
-			listproductrepo.save(lista1);
-			listproductrepo.save(lista2);
-			listproductrepo.save(lista3);
-			listproductrepo.save(lista4);
-			listproductrepo.save(lista5);
-			listproductrepo.save(lista6);
-			listproductrepo.save(lista7);
-			listproductrepo.save(lista8);
-			listproductrepo.save(lista9);
-			listproductrepo.save(lista10);
-			listproductrepo.save(lista11);
-			listproductrepo.save(lista12);
-			listproductrepo.save(lista13);
-			listproductrepo.save(lista14);
-			listproductrepo.save(lista15);
-			listproductrepo.save(lista16);
-			listproductrepo.save(lista17);
-			listproductrepo.save(lista18);
-			listproductrepo.save(lista19);
-			listproductrepo.save(lista20);
-			listproductrepo.save(lista21);
-			listproductrepo.save(lista22);
-			listproductrepo.save(lista23);
-			listproductrepo.save(lista24);
-			listproductrepo.save(lista25);
-			listproductrepo.save(lista26);
-			listproductrepo.save(lista27);
-			listproductrepo.save(lista28);
-			listproductrepo.save(lista29);
-			listproductrepo.save(lista30);
-			listproductrepo.save(lista31);
-			listproductrepo.save(lista32);
-			listproductrepo.save(lista33);
-			listproductrepo.save(lista34);
-			listproductrepo.save(lista35);
-			listproductrepo.save(lista36);
-			listproductrepo.save(lista37);
-			listproductrepo.save(lista38);
-			listproductrepo.save(lista39);
-			listproductrepo.save(lista40);
-		}
+		
 		
 		if(postsrepo.findAll().isEmpty()) {
 			postsrepo.save(pos1);
