@@ -4,6 +4,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +35,8 @@ import undersociety.repositories.UserRepository;
 import undersociety.repositories.UsersRelationsRepository;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -46,6 +49,8 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @CrossOrigin
 public class UsersController {
+	
+	private static final Path IMAGES_FOLDER = Paths.get(System.getProperty("user.dir"), "src/main/resources/static/images/");
 	
 	@Autowired
 	private ProductRepository productrepo;

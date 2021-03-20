@@ -302,6 +302,12 @@ public class NavigationController{
 		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		List<UsersRelations> following = relationrepo.findByuserone(s);
 		List<UsersRelations> followers = relationrepo.findByusertwo(s);
+		if(s.getImageprofile() != null) {
+			model.addAttribute("imageProfile","https://localhost:8443/api/imageThemeProfile");
+			
+		}else {
+			model.addAttribute("imageProfile","http://via.placeholder.com/1600x400");
+		}
 		model.addAttribute("userfacebook", s.getLinkfacebook());
 		model.addAttribute("userTwitter", s.getLinktwitter());
 		model.addAttribute("userinstagram", s.getLinkinstagram());
