@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import undersociety.models.Roles;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
@@ -181,28 +182,29 @@ public class UsersController {
     public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	
+    	System.out.println("Usuario: "+user.getUsername().isEmpty());
     	if(image.getOriginalFilename() != "") {
     		prev.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
     	}
-    	if(user.getUsername() != null) {
+    	if(!user.getUsername().isEmpty()) {
     		prev.setUsername(user.getUsername());
     	}
-    	if(user.getEmail() != null) {
+    	if(!user.getEmail().isEmpty()) {
     		prev.setEmail(user.getEmail());
     	}
-    	if(user.getName() != null) {
+    	if(!user.getName().isEmpty()) {
     		prev.setName(user.getName());
     	}
-    	if(user.getCity() != null) {
+    	if(!user.getCity().isEmpty()) {
     		prev.setCity(user.getCity());
     	}
-    	if(user.getLinkfacebook() != null) {
+    	if(!user.getLinkfacebook().isEmpty()) {
     		prev.setLinkfacebook(user.getLinkfacebook());
     	}
-    	if(user.getLinkinstagram() != null) {
+    	if(!user.getLinkinstagram().isEmpty()) {
     		prev.setLinkinstagram(user.getLinkinstagram());
     	}
-    	if(user.getLinktwitter() != null) {
+    	if(!user.getLinktwitter().isEmpty()) {
     		prev.setLinktwitter(user.getLinktwitter());
     	}
     	userRepository.save(prev);
