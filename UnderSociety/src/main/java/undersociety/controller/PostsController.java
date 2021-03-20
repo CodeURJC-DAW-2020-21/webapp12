@@ -3,6 +3,7 @@ package undersociety.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +47,7 @@ public class PostsController {
 	@PostMapping("/api/uploadPost")
 	private void uploadPost(Model model,HttpServletResponse response, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
 		model.addAttribute("username",request.getUserPrincipal().getName());
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		if(imag0 != null) {
 			post.setImage(BlobProxy.generateProxy(imag0.getInputStream(), imag0.getSize()));
 		}
@@ -69,7 +69,7 @@ public class PostsController {
 	
 	@GetMapping("/api/imagepost/{idpost}")
     private ResponseEntity<Object> downloadImagePost( @PathVariable int idpost) throws SQLException, IOException{
-		Post p = postsrepo.findById(idpost).orElseThrow(() -> new UsernameNotFoundException("Post not found"));
+		Post p = postsrepo.findById(idpost).orElseThrow(() -> new NoSuchElementException("Post not found"));
     	Resource file = new InputStreamResource(p.getImage().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
@@ -79,8 +79,8 @@ public class PostsController {
 	
 	@PostMapping("/api/likePost")
 	public boolean likePost(@RequestParam int idpost, HttpServletRequest request){
-		Post p = postsrepo.findById(idpost).orElseThrow(() -> new UsernameNotFoundException("Post not found"));
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Post p = postsrepo.findById(idpost).orElseThrow(() -> new NoSuchElementException("Post not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		LikeAPost lp = new LikeAPost();
 		lp.setIdpost(p);
 		lp.setIduser(s);
@@ -90,8 +90,8 @@ public class PostsController {
 	
 	@PostMapping("/api/unlikePost")
 	public boolean unlikePost(@RequestParam int idpost, HttpServletRequest request){
-		Post p = postsrepo.findById(idpost).orElseThrow(() -> new UsernameNotFoundException("	Post not found"));
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Post p = postsrepo.findById(idpost).orElseThrow(() -> new NoSuchElementException("	Post not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		LikeAPost lp = likerepo.findByidpostAndIduser(p, s);
 		if(lp != null) {
 			likerepo.deleteById(lp.getIdlike());
@@ -103,7 +103,7 @@ public class PostsController {
 	
 	@GetMapping("/api/getLikes")
 	public List<LikeAPost> getLikes(HttpServletRequest request) {
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		return likerepo.findByiduser(s);
 	}
 }

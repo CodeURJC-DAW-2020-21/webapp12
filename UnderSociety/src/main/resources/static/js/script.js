@@ -1126,3 +1126,90 @@ function mark(idproduct) {
         });
     }
 }
+
+
+function SearchKeyWords() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('word');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job_descp")[0];
+        m = s.getElementsByClassName("skill-tags")[0];
+        p = m.getElementsByTagName("li");
+        for (x = 0; x < p.length; x++) {
+            q = p[x].getElementsByTagName("a")[0];
+            a = q.getElementsByTagName("p")[0];
+            console.log(a);
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
+function SearchStatus1() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = "in stock";
+    filter = input.toUpperCase();
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job-status-bar")[0];
+        m = s.getElementsByClassName("col-lg-3")[0];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function SearchStatus2() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = "reserved";
+    filter = input.toUpperCase();
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job-status-bar")[0];
+        m = s.getElementsByClassName("col-lg-3")[0];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function SearchStatus3() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = "sold";
+    filter = input.toUpperCase();
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job-status-bar")[0];
+        m = s.getElementsByClassName("col-lg-3")[0];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
