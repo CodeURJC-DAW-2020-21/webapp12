@@ -191,7 +191,9 @@ public class UsersController {
     public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	
-    	System.out.println("Usuario: "+user.getUsername().isEmpty());
+    	if(userRepository.existsIdusersByUsername(user.getUsername())) {
+    		throw new NoSuchElementException("USERNAME IS TOKEN");
+    	}
     	if(image.getOriginalFilename() != "") {
     		prev.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
     	}
