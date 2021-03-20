@@ -92,6 +92,8 @@ public class UsersController {
 	    	if(image != null) {
 	    		user.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
 	    	}
+	    	user.setCity("");
+	    	user.setUserinfo("");
 	    	user.setUserprofile(true);
 			user.setCompanyprofile(false);
 			user.setPass(encoder.encode(user.getPass()));
@@ -190,11 +192,10 @@ public class UsersController {
     @PostMapping("/api/modifyUser")
     public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
-    	
     	if(userRepository.existsIdusersByUsername(user.getUsername())) {
     		throw new NoSuchElementException("USERNAME IS TOKEN");
     	}
-    	if(image.getOriginalFilename() != "") {
+    	if(!image.isEmpty()) {
     		prev.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
     	}
     	if(!user.getUsername().isEmpty()) {
