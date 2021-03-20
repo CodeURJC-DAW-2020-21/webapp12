@@ -393,7 +393,7 @@
 												Upload<input name="imag0" type="file" class="uploadFile img"
 													value="Upload Photo"
 													style="width: 0px;height: 0px;overflow: hidden;"
-													accept="image/*">
+													accept="image/*" required>
 											</label>
 											<i class="fa fa-times del"></i>
 										</div><!-- col-2 -->
@@ -401,10 +401,10 @@
 								</div><!-- container -->
 							</div>
 							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title">
+								<input type="text" name="title" placeholder="Title" required>
 							</div>
 							<div class="col-lg-12">
-								<textarea name="description" placeholder="Description"></textarea>
+								<textarea name="description" placeholder="Description" required></textarea>
 							</div>
 							<div class="col-lg-12">
 								<ul>
@@ -428,9 +428,6 @@
 				<div class="post-project-fields">
 					<form action="api/uploadProduct" method="POST" enctype="multipart/form-data">
 						<div class="row">
-							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title">
-							</div>
 							<div class="col-lg-12">
 								<div class="container">
 									<div class="row">
@@ -467,14 +464,17 @@
 									</div><!-- row -->
 								</div><!-- container -->
 							</div>
+							<div class="col-lg-12">
+								<input type="text" name="title" placeholder="Title" required>
+							</div>
 							<div class="col-lg-6">
 								<div class="price-br">
-									<input type="text" name="price" placeholder="Price">
+									<input type="text" name="price" placeholder="Price" required>
 									<i class="la la-dollar"></i>
 								</div>
 							</div>
 							<div class="col-lg-12">
-								<textarea name="description" placeholder="Description"></textarea>
+								<textarea name="description" placeholder="Description" required></textarea>
 							</div>
 							<div class="col-lg-12">
 								<ul>
