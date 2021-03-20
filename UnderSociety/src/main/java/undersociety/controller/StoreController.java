@@ -99,6 +99,12 @@ public class StoreController {
 		return productrepo.findAll(page);
 	}
 	
+	@GetMapping("/api/getMoreProductsUser")
+	private Page<Product> getMoreProductsUser(Pageable page, @RequestParam String username){
+		Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return productrepo.findByiduser(s,page);
+	}
+	
 	@GetMapping("/api/getProducts")
 	private Page<Product> getProducts(Pageable page){
 		return productrepo.findAll(page);

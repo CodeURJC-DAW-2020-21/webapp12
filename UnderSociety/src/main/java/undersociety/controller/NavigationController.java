@@ -174,6 +174,18 @@ public class NavigationController{
 			}else {
 				productmodel.setTypeUser("company");
 			}
+			if(product.getStatus().equalsIgnoreCase("in stock")) {
+				productmodel.setColor("#228B22");
+			}
+			
+			if(product.getStatus().equalsIgnoreCase("sold")) {
+				productmodel.setColor("#DC143C");
+			}
+			
+			if(product.getStatus().equalsIgnoreCase("reserved")) {
+				productmodel.setColor("#FFD700");
+			}
+			
 			if(bookmarks.contains(product.getIdproduct())) {
 				productmodel.setBookamark("la la-check-circle");
 			}else {
