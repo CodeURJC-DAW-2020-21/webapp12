@@ -95,6 +95,11 @@ public class NavigationController{
 	private String getIndex(Model model,HttpServletRequest request) throws SQLException {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
+		
+		/*algorithm*/
+		List<Users> listMostFollower = relationrepo.findMostFollowers(PageRequest.of(0, 5));
+		model.addAttribute("mostFollow",listMostFollower);
+		
 		Page<Post> p = postsrepo.findAll(PageRequest.of(0, 10,Sort.by("idpost").descending()));
 		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found")));
 		List<PostModel> postsmodels = new ArrayList<>();
