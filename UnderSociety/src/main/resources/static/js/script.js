@@ -373,7 +373,7 @@ function cacheDOM() {
 }
 
 function render(message, userName, time) {
-    scrollToBottom();
+    scrollDown();
     // responses
     var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + userName + "' alt='user' width='50' class='rounded-circle'>";
     template = template.concat("<div class='media-body ml-3'>");
@@ -383,18 +383,16 @@ function render(message, userName, time) {
     template = template.concat("<p class='small text-muted'>" + time + "</p>");
     template = template.concat("</div>");
     template = template.concat("</div>");
-    $chatHistoryList.append(template);
-
     setTimeout(function () {
         $chatHistoryList.append(template);
-        scrollToBottom();
+        scrollDown();
     }.bind(this), 1500);
 }
 
 function sendMessage(message) {
     let username = $('#userName').attr("placeholder");
     sendMsg(username, message);
-    scrollToBottom();
+    scrollDown();
     if (message.trim() !== '') {
         var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
         templateResponse = templateResponse.concat("<div class='media-body'>");
@@ -406,11 +404,11 @@ function sendMessage(message) {
         templateResponse = templateResponse.concat("</div>");
     };
     $chatHistoryList.append(templateResponse);
-    scrollToBottom();
+    scrollDown();
     $textarea.val('');
 }
 
-function scrollToBottom() {
+function scrollDown() {
     $chatHistory.scrollTop($chatHistory[0].scrollHeight);
 }
 
@@ -536,6 +534,7 @@ function sendMsg(from, text) {
 
 function selectUser(userName) {
     console.log("selecting users onclik: " + userName);
+    $("#userTo").text(userName);
     selectedUser = userName;
     $chatHistoryList.empty();
     $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: userName }, function (data) {
@@ -565,29 +564,6 @@ function selectUser(userName) {
         });
     });
 }
-
-
-
-
-
-
-
-//---------------------------------------------------------------------CARRROUSEL-----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-$("#clearbutton").on("click", function () {
-    $(".nott-list").empty();
-    $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
-    notifynum = 0;
-});
 
 
 $(".previous").on("click", function () {
@@ -653,6 +629,15 @@ $(".next").on("click", function () {
         });
     }
 });
+
+$("#clearbutton").on("click", function () {
+    $(".nott-list").empty();
+    $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
+    notifynum = 0;
+});
+
+
+
 
 
 

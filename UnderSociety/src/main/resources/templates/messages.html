@@ -149,7 +149,7 @@
 					<div class="bg-white">
 			  
 					  <div class="bg-gray px-4 py-2 bg-light">
-						<p class="h5 mb-0 py-1">Users</p>
+						<p class="h5 mb-0 py-1" id="userTo" >{{to}}</p>
 						<div class="d-flex justify-content-center">
 							<a  class="previous round">&#8249;</a>
 							<a  class="next round">&#8250;</a>		
@@ -219,31 +219,6 @@
 <script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
 <script type="text/javascript" src="js/scrollbar.js"></script>
-
 <script type="text/javascript" src="js/script.js"></script>
-
-	<script id="message-template" type="text/x-handlebars-template">
-		<li class="clearfix">
-			<div class="message-data align-right">
-				<span class="message-data-time">{{time}}, Today</span> &nbsp; &nbsp;
-				<span class="message-data-name">You</span> <i class="fa fa-circle me"></i>
-			</div>
-			<div class="message other-message float-right">
-				{{messageOutput}}
-			</div>
-		</li>
-	</script>
-
-	<script id="message-response-template" type="text/x-handlebars-template">
-		<li>
-			<div class="message-data">
-				<span class="message-data-name"><i class="fa fa-circle online"></i> {{userName}}</span>
-				<span class="message-data-time">{{time}}, Today</span>
-			</div>
-			<div class="message my-message">
-				{{response}}
-			</div>
-		</li>
-</script>
 </body>
 </html>
