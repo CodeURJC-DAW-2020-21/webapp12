@@ -141,51 +141,49 @@
 
 
 		<section class="profile-account-setting">
-			<div class="containerchat clearfix">
-				<div class="people-list" id="people-list"><br>
-					<div class="d-flex justify-content-center">
-						<a href="#" class="previous round">&#8249;</a>
-						<a href="#" class="next round">&#8250;</a>		
-					</div>
-					<ul class="list" id="usersList">
-			
-			
-					</ul>
-				</div>
-			
-				<div class="chat">
-					<div class="chat-header clearfix">
-						<img alt="avatar" height="55px"
-							 src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg"
-							 width="55px"/>
-			
-						<div class="chat-about">
-							<div class="chat-with" id="selectedUserId"></div>
-							<div class="chat-num-messages"></div>
+			<div class="container py-5 px-4" >
+		  
+				<div class="row rounded-lg overflow-hidden shadow">
+				  <!-- Users box-->
+				  <div class="col-5 px-0">
+					<div class="bg-white">
+			  
+					  <div class="bg-gray px-4 py-2 bg-light">
+						<p class="h5 mb-0 py-1" id="userTo" >{{to}}</p>
+						<div class="d-flex justify-content-center">
+							<a  class="previous round">&#8249;</a>
+							<a  class="next round">&#8250;</a>		
 						</div>
-						<i class="fa fa-star"></i>
-					</div> <!-- end chat-header -->
-			
-					<div class="chat-history">
-						<ul id="messageList">
-			
-						</ul>
-			
-					</div> <!-- end chat-history -->
-			
-					<div class="chat-message clearfix">
-						<textarea id="message-to-send" name="message-to-send" placeholder="Type your message" rows="3"></textarea>
-			
-						<i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-						<i class="fa fa-file-image-o"></i>
-			
-						<button id="sendBtn">Send</button>
-			
-					</div> <!-- end chat-message -->
-			
-				</div> <!-- end chat -->
-			
-			</div> <!-- end container -->
+					  </div>
+			  
+					  <div class="messages-box" style="height: 761px; max-height: 761px; overflow-y: scroll;">
+						<div class="list-group rounded-0" id="usersList">
+
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  <!-- Chat Box-->
+				  <div class="col-7 px-0">
+					<div class="px-4 py-5 chat-box bg-white chat-history" id="messageList" style="max-width: 654.5px; max-height: 763px; width: 654.5px; height: 763px; overflow-y: scroll;">
+					  <ul>
+
+					  </ul>			  
+					</div>
+			  
+					<!-- Typing area -->
+					<form class="bg-light">
+					  <div class="input-group">
+						<textarea id="message-to-send" name="message-to-send" placeholder="Type your message" rows="3" style="width: 100%;"></textarea>
+						<div class="input-group-append">
+						  <button id="sendBtn" type="button" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+						</div>
+					  </div>
+					</form>
+			  
+				  </div>
+				</div>
+			  </div>
 		</section>
 
 
@@ -221,31 +219,6 @@
 <script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
 <script type="text/javascript" src="js/scrollbar.js"></script>
-
 <script type="text/javascript" src="js/script.js"></script>
-
-	<script id="message-template" type="text/x-handlebars-template">
-		<li class="clearfix">
-			<div class="message-data align-right">
-				<span class="message-data-time">{{time}}, Today</span> &nbsp; &nbsp;
-				<span class="message-data-name">You</span> <i class="fa fa-circle me"></i>
-			</div>
-			<div class="message other-message float-right">
-				{{messageOutput}}
-			</div>
-		</li>
-	</script>
-
-	<script id="message-response-template" type="text/x-handlebars-template">
-		<li>
-			<div class="message-data">
-				<span class="message-data-name"><i class="fa fa-circle online"></i> {{userName}}</span>
-				<span class="message-data-time">{{time}}, Today</span>
-			</div>
-			<div class="message my-message">
-				{{response}}
-			</div>
-		</li>
-</script>
 </body>
 </html>

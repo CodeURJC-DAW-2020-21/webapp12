@@ -1,9 +1,17 @@
 package undersociety.models;
 
 public class PostModel {
+	private String typeUser;
 	private String like;
 	private Post post;
 	
+	
+	public String getTypeUser() {
+		return typeUser;
+	}
+	public void setTypeUser(String typeUser) {
+		this.typeUser = typeUser;
+	}
 	public String getLike() {
 		return like;
 	}

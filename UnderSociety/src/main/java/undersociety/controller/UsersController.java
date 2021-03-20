@@ -85,38 +85,49 @@ public class UsersController {
     }
     
     @PostMapping("/api/registerUser")
-	private void registerUser(Users user,HttpServletResponse response , HttpServletRequest sesion, @RequestParam(required = false) MultipartFile imagen) throws IOException, SQLException {
-    	if(imagen != null) {
-    		user.setUserimg(BlobProxy.generateProxy(imagen.getInputStream(), imagen.getSize()));
+	private void registerUser(Users user,HttpServletResponse response , HttpServletRequest sesion, @RequestParam(required = false) MultipartFile image) throws IOException, SQLException {
+    	if(userRepository.existsIdusersByUsername(user.getUsername())) {
+    		throw new NoSuchElementException("USERNAME IS TOKEN");
+    	}else {
+	    	if(image != null) {
+	    		user.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+	    	}
+	    	user.setCity("");
+	    	user.setUserinfo("");
+	    	user.setUserprofile(true);
+			user.setCompanyprofile(false);
+			user.setPass(encoder.encode(user.getPass()));
+			userRepository.save(user);
+			Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
+			Roles r = new Roles();
+			r.setIduser(use);
+			r.setRol("USER");
+			rolesRepository.save(r);
+			response.sendRedirect("/sign-in");
     	}
-    	user.setUserprofile(true);
-		user.setCompanyprofile(false);
-		user.setPass(encoder.encode(user.getPass()));
-		userRepository.save(user);
-		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
-		Roles r = new Roles();
-		r.setIduser(use);
-		r.setRol("USER");
-		rolesRepository.save(r);
-		response.sendRedirect("/sign-in");
-	}
+    }
     
     @PostMapping("/api/registerCompany")
-	private void registerCompany(Users user,HttpServletResponse response, HttpServletRequest sesion, @RequestParam(required = false) MultipartFile imagen) throws IOException {
-    	if(imagen != null) {
-    		user.setUserimg(BlobProxy.generateProxy(imagen.getInputStream(), imagen.getSize()));
+	private void registerCompany(Users user,HttpServletResponse response, HttpServletRequest sesion, @RequestParam(required = false) MultipartFile image) throws IOException {
+    	if(userRepository.existsIdusersByUsername(user.getUsername())) {
+    		throw new NoSuchElementException("USERNAME IS TOKEN");
+    	}else {
+	    	if(image != null) {
+	    		user.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+	    	}
+			user.setUserprofile(false);
+			user.setCompanyprofile(true);
+			user.setPass(encoder.encode(user.getPass()));
+			userRepository.save(user);
+			Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
+			Roles r = new Roles();
+			r.setIduser(use);
+			r.setRol("USER");
+			rolesRepository.save(r);
+			response.sendRedirect("/sign-in");
     	}
-		user.setUserprofile(false);
-		user.setCompanyprofile(true);
-		user.setPass(encoder.encode(user.getPass()));
-		userRepository.save(user);
-		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
-		Roles r = new Roles();
-		r.setIduser(use);
-		r.setRol("USER");
-		rolesRepository.save(r);
-		response.sendRedirect("/sign-in");
-	}
+    }
+    
     
     @GetMapping("/api/imageprofile")
     private ResponseEntity<Object> downloadImage(HttpServletRequest sesion) throws SQLException{
@@ -181,9 +192,10 @@ public class UsersController {
     @PostMapping("/api/modifyUser")
     public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
     	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
-    	
-    	System.out.println("Usuario: "+user.getUsername().isEmpty());
-    	if(image.getOriginalFilename() != "") {
+    	if(userRepository.existsIdusersByUsername(user.getUsername())) {
+    		throw new NoSuchElementException("USERNAME IS TOKEN");
+    	}
+    	if(!image.isEmpty()) {
     		prev.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
     	}
     	if(!user.getUsername().isEmpty()) {
