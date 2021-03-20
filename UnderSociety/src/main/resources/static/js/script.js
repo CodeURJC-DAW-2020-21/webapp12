@@ -1333,3 +1333,53 @@ function SearchStatus3() {
         }
     }
 }
+
+function searchCity() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = $("#menu").val();
+    console.log(input);
+    filter = input.toUpperCase();
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("epi-sec")[0];
+        m = s.getElementsByClassName("descp")[0];
+        j = m.getElementsByTagName("li")[1];
+        a = j.getElementsByTagName("span")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function searchSlider() {
+    var input, filter, ul, li, a, i, txtValue,limits;
+    input = $("#sliderInput").val();
+    limits = input.split(',');
+    filter = range(limits[0],limits[1]);
+    console.log(filter);
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job-status-bar")[0];
+        m = s.getElementsByClassName("col-lg-3")[1];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (filter.includes(txtValue.split(' ')[1])) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function range(start, end) {
+    var ans = [];
+    for (let i = start; i <= end; i++) {
+        ans.push(''+i);
+    }
+    return ans;
+}

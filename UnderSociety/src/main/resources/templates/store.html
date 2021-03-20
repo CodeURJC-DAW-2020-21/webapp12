@@ -196,7 +196,7 @@
 												<a onclick="clearSlider()" title="">Clear</a>
 											</div>
 											<div class="rg-slider">
-												<input class="rn-slider slider-input" type="hidden" value="5,50" />
+												<input id="sliderInput" class="rn-slider slider-input" type="hidden" value="5,50" onchange="searchSlider()" />
 											</div>
 											<div class="rg-limit">
 												<h4>1</h4>
@@ -212,11 +212,11 @@
 													title="">Clear</a>
 											</div>
 											<form class="job-tp">
-												<select id="menu">
+												<select id="menu" onchange="searchCity()">
 													<option value="0">Select a City</option>
-													<option value="1">Madrid</option>
-													<option value="2">Barcelona</option>
-													<option value="3">Oviedo</option>
+													<option value="Madrid">Madrid</option>
+													<option value="Barcelona">Barcelona</option>
+													<option value="Oviedo">Oviedo</option>
 												</select>
 												<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
 											</form>
