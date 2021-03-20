@@ -30,7 +30,6 @@ import undersociety.models.Post;
 import undersociety.models.PostModel;
 import undersociety.models.Product;
 import undersociety.models.ProductModel;
-import undersociety.models.Roles;
 import undersociety.models.Tags;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
@@ -77,7 +76,7 @@ public class NavigationController{
 	private PasswordEncoder encoder;
 	
 	@GetMapping("/sign-in")
-	private String getSignIn(Model model,HttpServletRequest request) {
+	private String getSignIn(Model model,HttpServletRequest request) throws IOException {
 		Loader ld = new Loader(likerepo, relationrepo, productrepo, listproductrepo, postsrepo, userRepository, tagrepo, rolesRepository, encoder);
 		ld.load();
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -412,13 +411,8 @@ public class NavigationController{
 	
     @GetMapping("/prueba")
     private void prueba() {
-    	Users s = userRepository.findByusername("null").orElseThrow(() -> new NoSuchElementException("User not found"));
-    }
-	
-	
-    
-
-    
+    	userRepository.findByusername("null").orElseThrow(() -> new NoSuchElementException("User not found"));
+    }  
 	
 	
 }

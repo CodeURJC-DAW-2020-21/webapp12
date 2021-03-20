@@ -886,6 +886,11 @@ $(".products").on("click", function () {
                 bookmarks.includes(value.idproduct)
                 var icon = "la la-bookmark";
                 var color = ("#228B22");
+                var type = "company";
+                if(value.iduser.userprofile){
+                    type = "user";
+                }
+
                 if (value.status == "sold") {
                     color = ("#DC143C");
                 }
@@ -896,17 +901,19 @@ $(".products").on("click", function () {
                 if(bookmarks.includes(value.idproduct)){
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" +value.iduser.username+ "' alt=''>";
-                base = base.concat("<div class='usy-name'><h3>" +value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li>");
-                base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='"+icon+"'></i></a></li><li><a href='./messages?to=" +value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li>");
-                base = base.concat("</ul></div><div class='job_descp'><h3>" +value.title+ "</h3><div class='row'>");
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/"+value.iduser.username+"'alt=''>";
+                base = base.concat("<div class='usy-name'><h3>"+value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>"+type+"</span></li>");
+                base = base.concat("<li><img src='images/icon9.png' alt=''><span>"+value.iduser.city+"</span></li></ul><ul class='bk-links'>");
+                base = base.concat("<li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='"+icon+"'></i></a></li>");
+                base = base.concat("<li><a href='./messages?to="+value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>"+value.title+"</h3>");
+                base = base.concat("<div class='row'>");
                 base = base.concat("<div id='carouselExampleControls-" +value.idproduct+ "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
                 if(value.img0){
                     base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
                 }
                 if(value.img1){
-                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
                 }
                 if(value.img2){
                     base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");

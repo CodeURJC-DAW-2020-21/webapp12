@@ -85,9 +85,9 @@ public class UsersController {
     }
     
     @PostMapping("/api/registerUser")
-	private void registerUser(Users user,HttpServletResponse response , HttpServletRequest sesion, @RequestParam(required = false) MultipartFile imagen) throws IOException, SQLException {
-    	if(imagen != null) {
-    		user.setUserimg(BlobProxy.generateProxy(imagen.getInputStream(), imagen.getSize()));
+	private void registerUser(Users user,HttpServletResponse response , HttpServletRequest sesion, @RequestParam(required = false) MultipartFile image) throws IOException, SQLException {
+    	if(image != null) {
+    		user.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
     	}
     	user.setUserprofile(true);
 		user.setCompanyprofile(false);

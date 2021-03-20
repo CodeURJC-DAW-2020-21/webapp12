@@ -12,12 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import undersociety.repositories.RolesRepository;
-import undersociety.repositories.UserRepository;
 
 
 @Entity
