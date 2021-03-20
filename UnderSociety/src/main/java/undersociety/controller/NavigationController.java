@@ -370,10 +370,6 @@ public class NavigationController{
 		}
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("username",request.getUserPrincipal().getName());
-		model.addAttribute("time","{{time}}");
-		model.addAttribute("messageOutput","{{messageOutput}}");
-		model.addAttribute("userName","{{userName}}");
-		model.addAttribute("response","{{response}}");
 		return "messages";
 	}	
 		

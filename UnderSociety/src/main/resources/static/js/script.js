@@ -1,3 +1,27 @@
+let chatContainer;
+let sendButtonMessage;
+let messageText;
+let listchat;
+let stompClient;
+let selectedUser;
+let newMessages = new Map();
+var pageusers;
+var totalPages;
+var notifynum = 0;
+var useractual;
+let token;
+var pageprofile = 1;
+var pagecompany = 1;
+var pagepost = 1;
+var pageproduct = 1;
+var pagepostuser = 1;
+var pageproductuser = 1;
+var likes = [];
+var bookmarks = [];
+var products = [];
+var follows = [];
+
+
 $(window).on("load", function () {
     "use strict";
 
@@ -347,118 +371,65 @@ $(document).ready(function () {
     });
 });
 
-// -----------------------------------------------------------------------RENDER TEMPLATES-----------------------------------------------------------------
+// -----------------------------------------------------------------------CHAT LOGIC-----------------------------------------------------------------
+chatContainer = $('.chat-history');
+sendButtonMessage = $('#sendBtn');
+messageText = $('#message-to-send');
+listchat = chatContainer.find('ul');
 
 
-let $chatHistory;
-let $button;
-let $textarea;
-let $chatHistoryList;
-
-function init() {
-    cacheDOM();
-    bindEvents();
-}
-
-function bindEvents() {
-    $button.on('click', addMessage.bind(this));
-    $textarea.on('keyup', addMessageEnter.bind(this));
-}
-
-function cacheDOM() {
-    $chatHistory = $('.chat-history');
-    $button = $('#sendBtn');
-    $textarea = $('#message-to-send');
-    $chatHistoryList = $chatHistory.find('ul');
-}
-
-function render(message, userName) {
-    scrollToBottom();
-    // responses
-    var templateResponse = Handlebars.compile($("#message-response-template").html());
-    var contextResponse = {
-        response: message,
-        time: getCurrentTime(),
-        userName: userName
-    };
-
-    setTimeout(function () {
-        $chatHistoryList.append(templateResponse(contextResponse));
-        scrollToBottom();
-    }.bind(this), 1500);
-}
-
-function sendMessage(message) {
+sendButtonMessage.on('click', function () { 
     let username = $('#userName').attr("placeholder");
-    console.log(username);
-    sendMsg(username, message);
-    scrollToBottom();
+    let message = messageText.val();
+    stompClient.send("/app/chat/" + selectedUser, {}, JSON.stringify({
+        fromLogin: username,
+        message: message,
+        time: "" + new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
+    }));
+    chatContainer.scrollTop(chatContainer[0].scrollHeight);
     if (message.trim() !== '') {
-        var template = Handlebars.compile($("#message-template").html());
-        var context = {
-            messageOutput: message,
-            time: getCurrentTime(),
-            toUserName: selectedUser
-        };
-
-        $chatHistoryList.append(template(context));
-        scrollToBottom();
-        $textarea.val('');
-    }
-}
-
-function scrollToBottom() {
-    $chatHistory.scrollTop($chatHistory[0].scrollHeight);
-}
-
-function getCurrentTime() {
-    return new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-}
-
-function addMessage() {
-    sendMessage($textarea.val());
-}
-
-function addMessageEnter(event) {
-    // enter was pressed
-    if (event.keyCode === 13) {
-        addMessage();
-    }
-}
-
-init();
-
-
-// -----------------------------------------------------------------------lOGIC CHAT-----------------------------------------------------------------
+        var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
+        templateResponse = templateResponse.concat("<div class='media-body'>");
+        templateResponse = templateResponse.concat("<div class='bg-primary rounded py-2 px-3 mb-2'>");
+        templateResponse = templateResponse.concat("<p class='text-small mb-0 text-white'>" + message + "</p>");
+        templateResponse = templateResponse.concat("</div>");
+        templateResponse = templateResponse.concat("<p class='small text-muted'>" + new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + "</p>");
+        templateResponse = templateResponse.concat("</div>");
+        templateResponse = templateResponse.concat("</div>");
+    };
+    listchat.append(templateResponse);
+    chatContainer.scrollTop(chatContainer[0].scrollHeight);
+    messageText.val('');
+ });
 
 
 
-const url = 'https://localhost:8443';
-let stompClient;
-let selectedUser;
-let newMessages = new Map();
-var pageusers;
-var totalPages;
-var notifynum = 0;
-var useractual;
+
 
 
 function connectToChat(userName, to, tk) {
-    console.log(tk);
     token = tk;
     useractual = userName;
-    console.log("connecting to chat...")
-    let socket = new SockJS(url + '/chat');
+    let socket = new SockJS('https://localhost:8443/chat');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-        console.log("connected to: " + frame);
         stompClient.subscribe("/topic/messages/" + userName, function (response) {
             let data = JSON.parse(response.body);
-            console.log(response.body);
-            if (selectedUser === data.fromLogin) {
-                render(data.message, data.fromLogin);
+            if (selectedUser == data.fromLogin) {
+                chatContainer.scrollTop(chatContainer[0].scrollHeight);
+                var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + data.fromLogin + "' alt='user' width='50' class='rounded-circle'>";
+                template = template.concat("<div class='media-body ml-3'>");
+                template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
+                template = template.concat("<p class='text-small mb-0 text-muted'>" + data.fromLogin + ": " + data.message + "</p>");
+                template = template.concat("</div>");
+                template = template.concat("<p class='small text-muted'>" + data.time + "</p>");
+                template = template.concat("</div>");
+                template = template.concat("</div>");
+                setTimeout(function () {
+                    listchat.append(template);
+                    chatContainer.scrollTop(chatContainer[0].scrollHeight);
+                }.bind(this), 1500);
             } else {
-                console.log("message recibido");
                 if (notifynum + 1 < 4) {
                     notifynum++;
                     newMessages.set(data.fromLogin, data.message);
@@ -469,142 +440,94 @@ function connectToChat(userName, to, tk) {
             }
         });
     });
-    $.get(url + "/api/getUserPage?page=0&size=10&sort=username&direction=asc", function (response) {
+    $.get("https://localhost:8443/api/getUserPage?page=0&size=10&sort=username&direction=asc", function (response) {
         pageusers = response.number;
         totalPages = response.totalPages;
         let users = response.content;
         let usersTemplateHTML = "";
         for (let i = 0; i < users.length; i++) {
             if (users[i].username != userName) {
-                usersTemplateHTML = usersTemplateHTML + '<a href="#" onclick="selectUser(\'' + users[i].username + '\')"><li class="clearfix">\n' +
-                    '                <img src="https://localhost:8443/api/imageprofile/' + users[i].username + '" width="55px" height="55px" alt="avatar" />\n' +
-                    '                <div class="about">\n' +
-                    '                    <div id="userNameAppender_' + users[i].username + '" class="name">' + users[i].username + '</div>\n' +
-                    '                    <div class="status">\n' +
-                    '                        <i class="fa fa-circle offline"></i>\n' +
-                    '                    </div>\n' +
-                    '                </div>\n' +
-                    '            </li></a>';
+                usersTemplateHTML = usersTemplateHTML.concat("<a onclick='selectUser( \"" + users[i].username + "\" )' class='list-group-item list-group-item-action list-group-item-light rounded-0'>");
+                usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/api/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
+                usersTemplateHTML = usersTemplateHTML.concat("<div class='media-body ml-4'>");
+                usersTemplateHTML = usersTemplateHTML.concat("<div class='d-flex align-items-center justify-content-between mb-1'>");
+                usersTemplateHTML = usersTemplateHTML.concat("<h6 class='mb-0'>" + users[i].username + "</h6><small class='small font-weight-bold'>14 Dec</small>");
+                usersTemplateHTML = usersTemplateHTML.concat("</div>");
+                usersTemplateHTML = usersTemplateHTML.concat("<p class='font-italic text-muted mb-0 text-small'>Lorem ipsum dolor sit amet, consectetur. incididunt ut labore.</p>");
+                usersTemplateHTML = usersTemplateHTML.concat("</div>");
+                usersTemplateHTML = usersTemplateHTML.concat(" </div>");
+                usersTemplateHTML = usersTemplateHTML.concat(" </a><br>");
             }
         }
-        $('#usersList').html(usersTemplateHTML);
+        $("#usersList").html(usersTemplateHTML);
     });
     if (to != "null") {
-        console.log("selecting users: " + to);
-        $(".chat-header").children().attr("src", 'https://localhost:8443/api/imageprofile/' + to);
         selectedUser = to;
-        let isNew = document.getElementById("newMessage_" + to) !== null;
-        if (isNew) {
-            let element = document.getElementById("newMessage_" + to);
-            element.remove();
-            notifynum--;
-            render(newMessages.get(userName), to);
-        }
-        $('#selectedUserId').html('');
-        $('#selectedUserId').append('Chat with ' + to);
-        var ul = document.getElementById("messageList");
-        ul.innerHTML = "";
+        listchat.empty();
         $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: to }, function (data) {
             data.forEach(element => {
-                console.log("FROM:" + element.iduser.username + " TO: " + element.iduserto.username + " message: " + element.message);
-                if (selectedUser === element.iduser.username) {
-                    console.log("jhon");
-                    var templateResponse = Handlebars.compile($("#message-response-template").html());
-                    var contextResponse = {
-                        response: element.message,
-                        time: element.time,
-                        userName: element.iduser.username
-                    };
-                    $chatHistoryList.append(templateResponse(contextResponse));
+                if (selectedUser != element.iduser.username) {
+                    var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
+                    templateResponse = templateResponse.concat("<div class='media-body'>");
+                    templateResponse = templateResponse.concat("<div class='bg-primary rounded py-2 px-3 mb-2'>");
+                    templateResponse = templateResponse.concat("<p class='text-small mb-0 text-white'>you:" + element.message + "</p>");
+                    templateResponse = templateResponse.concat("</div>");
+                    templateResponse = templateResponse.concat("<p class='small text-muted'>" + element.time + "</p>");
+                    templateResponse = templateResponse.concat("</div>");
+                    templateResponse = templateResponse.concat("</div>");
+                    listchat.append(templateResponse);
+                    chatContainer.scrollTop(chatContainer[0].scrollHeight);
                 } else {
-                    console.log("no jhon");
-                    var template = Handlebars.compile($("#message-template").html());
-                    var context = {
-                        messageOutput: element.message,
-                        time: element.time,
-                        toUserName: element.iduser.username
-                    };
-
-                    $chatHistoryList.append(template(context));
+                    var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + selectedUser + "' alt='user' width='50' class='rounded-circle'>";
+                    template = template.concat("<div class='media-body ml-3'>");
+                    template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
+                    template = template.concat("<p class='text-small mb-0 text-muted'>" + selectedUser + ": " + element.message + "</p>");
+                    template = template.concat("</div>");
+                    template = template.concat("<p class='small text-muted'>" + element.time + "</p>");
+                    template = template.concat("</div>");
+                    template = template.concat("</div>");
+                    listchat.append(template);
+                    chatContainer.scrollTop(chatContainer[0].scrollHeight);
                 }
             });
         });
     }
 }
 
-function sendMsg(from, text) {
-    stompClient.send("/app/chat/" + selectedUser, {}, JSON.stringify({
-        fromLogin: from,
-        message: text,
-        time: "" + getCurrentTime()
-    }));
-}
-
 
 function selectUser(userName) {
-    console.log("selecting users: " + userName);
-    $(".chat-header").children().attr("src", 'https://localhost:8443/api/imageprofile/' + userName);
+    $("#userTo").text(userName);
     selectedUser = userName;
-    let isNew = document.getElementById("newMessage_" + userName) !== null;
-    if (isNew) {
-        let element = document.getElementById("newMessage_" + userName);
-        element.remove();
-        notifynum--;
-        render(newMessages.get(userName), userName);
-    }
-    $('#selectedUserId').html('');
-    $('#selectedUserId').append('Chat with ' + userName);
-    var ul = document.getElementById("messageList");
-    ul.innerHTML = "";
+    listchat.empty();
+    chatContainer.scrollTop(chatContainer[0].scrollHeight);
     $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: userName }, function (data) {
         data.forEach(element => {
-            console.log("FROM:" + element.iduser.username + " TO: " + element.iduserto.username + " message: " + element.message);
-            if (selectedUser === element.iduser.username) {
-                console.log("jhon");
-                var templateResponse = Handlebars.compile($("#message-response-template").html());
-                var contextResponse = {
-                    response: element.message,
-                    time: element.time,
-                    userName: element.iduser.username
-                };
-                $chatHistoryList.append(templateResponse(contextResponse));
+            if (selectedUser != element.iduser.username) {
+                var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
+                templateResponse = templateResponse.concat("<div class='media-body'>");
+                templateResponse = templateResponse.concat("<div class='bg-primary rounded py-2 px-3 mb-2'>");
+                templateResponse = templateResponse.concat("<p class='text-small mb-0 text-white'>you: " + element.message + "</p>");
+                templateResponse = templateResponse.concat("</div>");
+                templateResponse = templateResponse.concat("<p class='small text-muted'>" + element.time + "</p>");
+                templateResponse = templateResponse.concat("</div>");
+                templateResponse = templateResponse.concat("</div>");
+                listchat.append(templateResponse);
+                chatContainer.scrollTop(chatContainer[0].scrollHeight);
             } else {
-                console.log("no jhon");
-                var template = Handlebars.compile($("#message-template").html());
-                var context = {
-                    messageOutput: element.message,
-                    time: element.time,
-                    toUserName: element.iduser.username
-                };
-
-                $chatHistoryList.append(template(context));
+                var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + userName + "' alt='user' width='50' class='rounded-circle'>";
+                template = template.concat("<div class='media-body ml-3'>");
+                template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
+                template = template.concat("<p class='text-small mb-0 text-muted'>" + userName + ": " + element.message + "</p>");
+                template = template.concat("</div>");
+                template = template.concat("<p class='small text-muted'>" + element.time + "</p>");
+                template = template.concat("</div>");
+                template = template.concat("</div>");
+                listchat.append(template);
+                chatContainer.scrollTop(chatContainer[0].scrollHeight);
             }
         });
     });
 }
-
-
-
-
-
-
-
-//---------------------------------------------------------------------CARRROUSEL-----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-$("#clearbutton").on("click", function () {
-    $(".nott-list").empty();
-    $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
-    notifynum = 0;
-});
 
 
 $(".previous").on("click", function () {
@@ -620,16 +543,17 @@ $(".previous").on("click", function () {
                 let users = response.content;
                 let usersTemplateHTML = "";
                 for (let i = 0; i < users.length; i++) {
-                    if (users[i].username != useractual) {
-                        usersTemplateHTML = usersTemplateHTML + '<a href="#" onclick="selectUser(\'' + users[i].username + '\')"><li class="clearfix">\n' +
-                            '                <img src="https://localhost:8443/api/imageprofile/' + users[i].username + '" width="55px" height="55px" alt="avatar" />\n' +
-                            '                <div class="about">\n' +
-                            '                    <div id="userNameAppender_' + users[i].username + '" class="name">' + users[i].username + '</div>\n' +
-                            '                    <div class="status">\n' +
-                            '                        <i class="fa fa-circle offline"></i>\n' +
-                            '                    </div>\n' +
-                            '                </div>\n' +
-                            '            </li></a>';
+                    if (users[i].username != userName) {
+                        usersTemplateHTML = usersTemplateHTML.concat("<a onclick='selectUser( \"" + users[i].username + "\" )' class='list-group-item list-group-item-action list-group-item-light rounded-0'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/api/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<div class='media-body ml-4'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<div class='d-flex align-items-center justify-content-between mb-1'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<h6 class='mb-0'>" + users[i].username + "</h6><small class='small font-weight-bold'>14 Dec</small>");
+                        usersTemplateHTML = usersTemplateHTML.concat("</div>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<p class='font-italic text-muted mb-0 text-small'>Lorem ipsum dolor sit amet, consectetur. incididunt ut labore.</p>");
+                        usersTemplateHTML = usersTemplateHTML.concat("</div>");
+                        usersTemplateHTML = usersTemplateHTML.concat(" </div>");
+                        usersTemplateHTML = usersTemplateHTML.concat(" </a><br>");
                     }
                 }
                 $('#usersList').html(usersTemplateHTML);
@@ -651,16 +575,17 @@ $(".next").on("click", function () {
                 let users = response.content;
                 let usersTemplateHTML = "";
                 for (let i = 0; i < users.length; i++) {
-                    if (users[i].username != useractual) {
-                        usersTemplateHTML = usersTemplateHTML + '<a href="#" onclick="selectUser(\'' + users[i].username + '\')"><li class="clearfix">\n' +
-                            '                <img src="https://localhost:8443/api/imageprofile/' + users[i].username + '" width="55px" height="55px" alt="avatar" />\n' +
-                            '                <div class="about">\n' +
-                            '                    <div id="userNameAppender_' + users[i].username + '" class="name">' + users[i].username + '</div>\n' +
-                            '                    <div class="status">\n' +
-                            '                        <i class="fa fa-circle offline"></i>\n' +
-                            '                    </div>\n' +
-                            '                </div>\n' +
-                            '            </li></a>';
+                    if (users[i].username != userName) {
+                        usersTemplateHTML = usersTemplateHTML.concat("<a onclick='selectUser( \"" + users[i].username + "\" )' class='list-group-item list-group-item-action list-group-item-light rounded-0'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/api/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<div class='media-body ml-4'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<div class='d-flex align-items-center justify-content-between mb-1'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<h6 class='mb-0'>" + users[i].username + "</h6><small class='small font-weight-bold'>14 Dec</small>");
+                        usersTemplateHTML = usersTemplateHTML.concat("</div>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<p class='font-italic text-muted mb-0 text-small'>Lorem ipsum dolor sit amet, consectetur. incididunt ut labore.</p>");
+                        usersTemplateHTML = usersTemplateHTML.concat("</div>");
+                        usersTemplateHTML = usersTemplateHTML.concat(" </div>");
+                        usersTemplateHTML = usersTemplateHTML.concat(" </a><br>");
                     }
                 }
                 $('#usersList').html(usersTemplateHTML);
@@ -668,6 +593,15 @@ $(".next").on("click", function () {
         });
     }
 });
+
+$("#clearbutton").on("click", function () {
+    $(".nott-list").empty();
+    $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
+    notifynum = 0;
+});
+
+
+
 
 
 
@@ -683,20 +617,6 @@ $(".next").on("click", function () {
 
 
 
-
-
-let token;
-var pageprofile = 1;
-var pagecompany = 1;
-var pagepost = 1;
-var pageproduct = 1;
-var pagepostuser = 1;
-var pageproductuser = 1;
-var likes = [];
-var bookmarks = [];
-var products = [];
-var follows = [];
-
 function passToken(tk) {
     token = tk;
 }
@@ -706,7 +626,7 @@ $.ajax({
     contentType: "data",
     url: ('/api/getBookmark'),
     success: function (result) {
-        $.each(result, function (indexInArray, valueOfElement) { 
+        $.each(result, function (indexInArray, valueOfElement) {
             bookmarks.push(valueOfElement.idproduct.idproduct);
         });
     }
@@ -718,7 +638,7 @@ $.ajax({
     contentType: "data",
     url: ('/api/getLikes'),
     success: function (result) {
-        $.each(result, function (indexInArray, valueOfElement) { 
+        $.each(result, function (indexInArray, valueOfElement) {
             likes.push(valueOfElement.idpost.idpost);
         });
     }
@@ -729,7 +649,7 @@ $.ajax({
     contentType: "data",
     url: ('/api/getFollows'),
     success: function (result) {
-        $.each(result, function (indexInArray, valueOfElement) { 
+        $.each(result, function (indexInArray, valueOfElement) {
             follows.push(valueOfElement.usertwo.idusers);
         });
     }
@@ -744,11 +664,11 @@ $(".profile").on("click", function () {
         url: ('/api/moreUsers?page=' + pageprofile + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" +value.username+ "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" + value.username + "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pageprofile + 1 <= result.totalPages) {
                 pageprofile++;
-            }else{
+            } else {
                 $(".process-comm").remove();
             }
         }
@@ -764,11 +684,11 @@ $(".company").on("click", function () {
         url: ('/api/moreCompany?page=' + pagecompany + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" +value.username+ "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" + value.username + "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pagecompany + 1 <= result.totalPages) {
                 pagecompany++;
-            }else{
+            } else {
                 $(".process-comm").remove();
             }
         }
@@ -783,10 +703,10 @@ function loadPosts() {
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-heart-o";
-                if(likes.includes(value.idpost)){
+                if (likes.includes(value.idpost)) {
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='"+icon+"'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
         }
     });
@@ -800,53 +720,52 @@ function loadProducts(username) {
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-bookmark";
-                console.log(value);
-                if(bookmarks.includes(value.idproduct)){
+                if (bookmarks.includes(value.idproduct)) {
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" +value.iduser.username+ "' alt=''>";
-                base = base.concat("<div class='usy-name'><h3>" +value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li>");
-                base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='"+icon+"'></i></a></li><li><a href='./messages?to=" +value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li>");
-                base = base.concat("</ul></div><br><div class='job_descp'><h3>" +value.title+ "</h3><div class='row'>");
-                base = base.concat("<div id='carouselExampleControls-" +value.idproduct+ "' class='carousel slide' data-ride='carousel'>");
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''>";
+                base = base.concat("<div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li>");
+                base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='product" + value.idproduct + "' title=''><i onclick='mark(" + value.idproduct + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li>");
+                base = base.concat("</ul></div><br><div class='job_descp'><h3>" + value.title + "</h3><div class='row'>");
+                base = base.concat("<div id='carouselExampleControls-" + value.idproduct + "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
-                if(value.img0){
-                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
+                if (value.img0) {
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
                 }
-                if(value.img1){
-                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
+                if (value.img1) {
+                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
                 }
-                if(value.img2){
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");
+                if (value.img2) {
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
                 }
                 base = base.concat("</div>");
-                base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
+                base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
                 base = base.concat("</div>");
-                base = base.concat("</div><div class='row'><ul class='description-store'><li><p>" +value.description+ "</p></li></ul></div><br><a id='readmore" +value.idproduct+ "' class='btn btn-primary stretched-link' onclick='readmore(" +value.idproduct+ ")' title=''>view more</a>");
+                base = base.concat("</div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idproduct + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idproduct + ")' title=''>view more</a>");
                 base = base.concat("<ul class='skill-tags'>");
-                if(value.idtag != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtag.description+ "</p></a></li>");
+                if (value.idtag != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtag.description + "</p></a></li>");
                 }
-                if(value.idtagtwo != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagtwo.description+ "</p></a></li>");
+                if (value.idtagtwo != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagtwo.description + "</p></a></li>");
                 }
-                if(value.idtagthree != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagthree.description+ "</p></a></li>");
+                if (value.idtagthree != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagthree.description + "</p></a></li>");
                 }
-                if(value.idtagfour != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagfour.description+ "</p></a></li>");
+                if (value.idtagfour != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagfour.description + "</p></a></li>");
                 }
-                if(value.idtagfive != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagfive.description+ "</p></a></li>");
+                if (value.idtagfive != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagfive.description + "</p></a></li>");
                 }
                 base = base.concat("</ul>");
-                base = base.concat("</div><div class='job-status-bar' style='background-color:#ec887a;'><div class='col-lg-3'><h3>" +value.status+ "</h3></div><div class='col-lg-3'><h3> " +value.price+ " $ </h3></div></div></div><!--post-bar end-->");
+                base = base.concat("</div><div class='job-status-bar' style='background-color:#ec887a;'><div class='col-lg-3'><h3>" + value.status + "</h3></div><div class='col-lg-3'><h3> " + value.price + " $ </h3></div></div></div><!--post-bar end-->");
                 products.push(base);
             });
-            $.each(products, function (indexInArray, valueOfElement) { 
+            $.each(products, function (indexInArray, valueOfElement) {
                 $(".posts-section").append(valueOfElement);
             });
-            connectToChat(username,"null");
+            connectToChat(username, "null");
         }
     });
 }
@@ -862,17 +781,17 @@ $(".posts").on("click", function () {
             $.each(result.content, function (index, value) {
                 var icon = "la la-heart-o";
                 var type = "company";
-                if(value.iduser.userprofile){
+                if (value.iduser.userprofile) {
                     type = "user";
                 }
-                if(likes.includes(value.idpost)){
+                if (likes.includes(value.idpost)) {
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>"+type+"</span></li><li><img src='images/icon9.png' alt=''><span>"+value.iduser.city+"</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" +icon+ "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li><li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepost + 1 <= result.totalPages) {
                 pagepost++;
-            }else{
+            } else {
                 $(".process-comm").remove();
             }
         }
@@ -892,7 +811,7 @@ $(".products").on("click", function () {
                 var icon = "la la-bookmark";
                 var color = ("#228B22");
                 var type = "company";
-                if(value.iduser.userprofile){
+                if (value.iduser.userprofile) {
                     type = "user";
                 }
 
@@ -903,53 +822,53 @@ $(".products").on("click", function () {
                 if (value.status == "reserved") {
                     color = ("#FFD700");
                 }
-                if(bookmarks.includes(value.idproduct)){
+                if (bookmarks.includes(value.idproduct)) {
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/"+value.iduser.username+"'alt=''>";
-                base = base.concat("<div class='usy-name'><h3>"+value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>"+type+"</span></li>");
-                base = base.concat("<li><img src='images/icon9.png' alt=''><span>"+value.iduser.city+"</span></li></ul><ul class='bk-links'>");
-                base = base.concat("<li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='"+icon+"'></i></a></li>");
-                base = base.concat("<li><a href='./messages?to="+value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>"+value.title+"</h3>");
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "'alt=''>";
+                base = base.concat("<div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li>");
+                base = base.concat("<li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'>");
+                base = base.concat("<li><a id='product" + value.idproduct + "' title=''><i onclick='mark(" + value.idproduct + ")' class='" + icon + "'></i></a></li>");
+                base = base.concat("<li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3>");
                 base = base.concat("<div class='row'>");
-                base = base.concat("<div id='carouselExampleControls-" +value.idproduct+ "' class='carousel slide' data-ride='carousel'>");
+                base = base.concat("<div id='carouselExampleControls-" + value.idproduct + "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
-                if(value.img0){
-                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
+                if (value.img0) {
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
                 }
-                if(value.img1){
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
+                if (value.img1) {
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
                 }
-                if(value.img2){
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");
+                if (value.img2) {
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
                 }
                 base = base.concat("</div>");
-                base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
+                base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
                 base = base.concat("</div>");
-                base = base.concat("</div><div class='row'><ul class='description-store'><li><p>" +value.description+ "</p></li></ul></div><br><a id='readmore" +value.idproduct+ "' class='btn btn-primary stretched-link' onclick='readmore(" +value.idproduct+ ")' title=''>view more</a>");
+                base = base.concat("</div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idproduct + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idproduct + ")' title=''>view more</a>");
                 base = base.concat("<ul class='skill-tags'>");
-                if(value.idtag != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtag.description+ "</p></a></li>");
+                if (value.idtag != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtag.description + "</p></a></li>");
                 }
-                if(value.idtagtwo != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagtwo.description+ "</p></a></li>");
+                if (value.idtagtwo != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagtwo.description + "</p></a></li>");
                 }
-                if(value.idtagthree != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagthree.description+ "</p></a></li>");
+                if (value.idtagthree != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagthree.description + "</p></a></li>");
                 }
-                if(value.idtagfour != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagfour.description+ "</p></a></li>");
+                if (value.idtagfour != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagfour.description + "</p></a></li>");
                 }
-                if(value.idtagfive != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagfive.description+ "</p></a></li>");
+                if (value.idtagfive != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagfive.description + "</p></a></li>");
                 }
                 base = base.concat("</ul>");
-                base = base.concat("</div><div class='job-status-bar' style='background-color:"+color+";'><div class='col-lg-3'><h3>" +value.status+ "</h3></div><div class='col-lg-3'><h3> " +value.price+ " $ </h3></div></div></div><!--post-bar end-->");
+                base = base.concat("</div><div class='job-status-bar' style='background-color:" + color + ";'><div class='col-lg-3'><h3>" + value.status + "</h3></div><div class='col-lg-3'><h3> " + value.price + " $ </h3></div></div></div><!--post-bar end-->");
                 $(".posts-section").append(base);
             });
             if (pageproduct + 1 <= result.totalPages) {
                 pageproduct++;
-            }else{
+            } else {
                 $(".process-comm").remove();
             }
         }
@@ -959,28 +878,27 @@ $(".products").on("click", function () {
 
 $(".postsUser").on("click", function () {
     user = $("#usernameto").text();
-    console.log(user);
     size = 10;
     sort = 'idpost';
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/getMorePostsUser?page=' + pagepostuser + '&size=' + size + '&sort=' + sort + ',desc'+'&username='+user),
+        url: ('/api/getMorePostsUser?page=' + pagepostuser + '&size=' + size + '&sort=' + sort + ',desc' + '&username=' + user),
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-heart-o";
                 var type = "company";
-                if(value.iduser.userprofile){
+                if (value.iduser.userprofile) {
                     type = "user";
                 }
-                if(likes.includes(value.idpost)){
+                if (likes.includes(value.idpost)) {
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>"+type+"</span></li><li><img src='images/icon9.png' alt=''><span>"+value.iduser.city+"</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" +icon+ "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li><li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepostuser + 1 <= result.totalPages) {
                 pagepostuser++;
-            }else{
+            } else {
                 $(".postSpinner").remove();
             }
         }
@@ -994,14 +912,14 @@ $(".productsUser").on("click", function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/getMoreProductsUser?page=' + pageproductuser + '&size=' + size + '&sort=' + sort + ',desc'+'&username='+user),
+        url: ('/api/getMoreProductsUser?page=' + pageproductuser + '&size=' + size + '&sort=' + sort + ',desc' + '&username=' + user),
         success: function (result) {
             $.each(result.content, function (index, value) {
                 bookmarks.includes(value.idproduct)
                 var icon = "la la-bookmark";
                 var color = ("#228B22");
                 var type = "company";
-                if(value.iduser.userprofile){
+                if (value.iduser.userprofile) {
                     type = "user";
                 }
 
@@ -1012,53 +930,53 @@ $(".productsUser").on("click", function () {
                 if (value.status == "reserved") {
                     color = ("#FFD700");
                 }
-                if(bookmarks.includes(value.idproduct)){
+                if (bookmarks.includes(value.idproduct)) {
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/"+value.iduser.username+"'alt=''>";
-                base = base.concat("<div class='usy-name'><h3>"+value.iduser.username+"</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>"+type+"</span></li>");
-                base = base.concat("<li><img src='images/icon9.png' alt=''><span>"+value.iduser.city+"</span></li></ul><ul class='bk-links'>");
-                base = base.concat("<li><a id='product"+value.idproduct+"' title=''><i onclick='mark("+value.idproduct+")' class='"+icon+"'></i></a></li>");
-                base = base.concat("<li><a href='./messages?to="+value.iduser.username+"' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>"+value.title+"</h3>");
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "'alt=''>";
+                base = base.concat("<div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li>");
+                base = base.concat("<li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'>");
+                base = base.concat("<li><a id='product" + value.idproduct + "' title=''><i onclick='mark(" + value.idproduct + ")' class='" + icon + "'></i></a></li>");
+                base = base.concat("<li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3>");
                 base = base.concat("<div class='row'>");
-                base = base.concat("<div id='carouselExampleControls-" +value.idproduct+ "' class='carousel slide' data-ride='carousel'>");
+                base = base.concat("<div id='carouselExampleControls-" + value.idproduct + "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
-                if(value.img0){
-                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" +value.idproduct+ "' alt='First slide'></div>");
+                if (value.img0) {
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
                 }
-                if(value.img1){
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" +value.idproduct+ "' alt='Second slide'></div>");
+                if (value.img1) {
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
                 }
-                if(value.img2){
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" +value.idproduct+ "' alt='Third slide'></div>");
+                if (value.img2) {
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
                 }
                 base = base.concat("</div>");
-                base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" +value.idproduct+ "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
+                base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
                 base = base.concat("</div>");
-                base = base.concat("</div><div class='row'><ul class='description-store'><li><p>" +value.description+ "</p></li></ul></div><br><a id='readmore" +value.idproduct+ "' class='btn btn-primary stretched-link' onclick='readmore(" +value.idproduct+ ")' title=''>view more</a>");
+                base = base.concat("</div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idproduct + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idproduct + ")' title=''>view more</a>");
                 base = base.concat("<ul class='skill-tags'>");
-                if(value.idtag != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtag.description+ "</p></a></li>");
+                if (value.idtag != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtag.description + "</p></a></li>");
                 }
-                if(value.idtagtwo != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagtwo.description+ "</p></a></li>");
+                if (value.idtagtwo != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagtwo.description + "</p></a></li>");
                 }
-                if(value.idtagthree != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagthree.description+ "</p></a></li>");
+                if (value.idtagthree != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagthree.description + "</p></a></li>");
                 }
-                if(value.idtagfour != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagfour.description+ "</p></a></li>");
+                if (value.idtagfour != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagfour.description + "</p></a></li>");
                 }
-                if(value.idtagfive != null){
-                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" +value.idtagfive.description+ "</p></a></li>");
+                if (value.idtagfive != null) {
+                    base = base.concat("<li><a href='#' title=''><p style='color:#040500' ;>" + value.idtagfive.description + "</p></a></li>");
                 }
                 base = base.concat("</ul>");
-                base = base.concat("</div><div class='job-status-bar' style='background-color:"+color+";'><div class='col-lg-3'><h3>" +value.status+ "</h3></div><div class='col-lg-3'><h3> " +value.price+ " $ </h3></div></div></div><!--post-bar end-->");
+                base = base.concat("</div><div class='job-status-bar' style='background-color:" + color + ";'><div class='col-lg-3'><h3>" + value.status + "</h3></div><div class='col-lg-3'><h3> " + value.price + " $ </h3></div></div></div><!--post-bar end-->");
                 $(".posts-section").append(base);
             });
             if (pageproductuser + 1 <= result.totalPages) {
                 pageproductuser++;
-            }else{
+            } else {
                 $(".productSpinner").remove();
             }
         }
@@ -1105,7 +1023,6 @@ function searchBarProducts() {
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job_descp")[0];
         a = s.getElementsByTagName("h3")[0];
-        console.log(a);
         txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
@@ -1126,7 +1043,6 @@ function searchBarPosts() {
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job_descp")[0];
         a = s.getElementsByTagName("h3")[0];
-        console.log(a);
         txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
@@ -1187,7 +1103,7 @@ $("#follow").on("click", function () {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: ('/api/follow?username=' + follow+"&_csrf="+token),
+        url: ('/api/follow?username=' + follow + "&_csrf=" + token),
         success: function (response) {
             if (response) {
                 $(".flww").css("background-color", "#e44d3a");
@@ -1202,20 +1118,19 @@ function unfollow(idfollow) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: ('/api/unfollowlist?idrelation=' + idfollow+"&_csrf="+token),
+        url: ('/api/unfollowlist?idrelation=' + idfollow + "&_csrf=" + token),
         success: function (response) {
-            if(response){
-                $("#follower"+idfollow).remove();
+            if (response) {
+                $("#follower" + idfollow).remove();
             }
         }
     });
 }
 
 function dropProduct(idproduct) {
-    $.post( "/api/dropProduct?idproduct="+idproduct+"&_csrf="+token, function( response ) {
-        if(response){
-            console.log(response);
-            $("#product"+idproduct).remove();
+    $.post("/api/dropProduct?idproduct=" + idproduct + "&_csrf=" + token, function (response) {
+        if (response) {
+            $("#product" + idproduct).remove();
         }
     });
 }
@@ -1223,11 +1138,11 @@ function dropProduct(idproduct) {
 function like(idpost) {
     var s = $("#" + idpost);
     if (s.children().attr("class") == "la la-heart") {
-        $.post( "/api/unlikePost?idpost="+idpost+"&_csrf="+token, function( data ) {
+        $.post("/api/unlikePost?idpost=" + idpost + "&_csrf=" + token, function (data) {
         });
         s.children().attr("class", "la la-heart-o");
     } else {
-        $.post( "/api/likePost?idpost="+idpost+"&_csrf="+token, function( data ) {
+        $.post("/api/likePost?idpost=" + idpost + "&_csrf=" + token, function (data) {
         });
         s.children().attr("class", "la la-heart");
     }
@@ -1235,13 +1150,11 @@ function like(idpost) {
 
 function mark(idproduct) {
     if ($("#product" + idproduct).children().attr("class") == "la la-bookmark") {
-        $.post( "/api/addProduct?idproduct="+idproduct+"&_csrf="+token, function( data ) {
-            console.log(data);
+        $.post("/api/addProduct?idproduct=" + idproduct + "&_csrf=" + token, function (data) {
             $("#product" + idproduct).children().attr("class", "la la-check-circle");
         });
     } else {
-        $.post( "/api/dropProduct?idproduct="+idproduct+"&_csrf="+token, function( data ) {
-            console.log(data);
+        $.post("/api/dropProduct?idproduct=" + idproduct + "&_csrf=" + token, function (data) {
             $("#product" + idproduct).children().attr("class", "la la-bookmark");
         });
     }
@@ -1262,7 +1175,6 @@ function SearchKeyWords() {
         for (x = 0; x < p.length; x++) {
             q = p[x].getElementsByTagName("a")[0];
             a = q.getElementsByTagName("p")[0];
-            console.log(a);
             txtValue = a.textContent || a.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 li[i].style.display = "";
@@ -1332,4 +1244,52 @@ function SearchStatus3() {
             li[i].style.display = "none";
         }
     }
+}
+
+function searchCity() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = $("#menu").val();
+    filter = input.toUpperCase();
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("epi-sec")[0];
+        m = s.getElementsByClassName("descp")[0];
+        j = m.getElementsByTagName("li")[1];
+        a = j.getElementsByTagName("span")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function searchSlider() {
+    var input, filter, ul, li, a, i, txtValue, limits;
+    input = $("#sliderInput").val();
+    limits = input.split(',');
+    filter = range(limits[0], limits[1]);
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job-status-bar")[0];
+        m = s.getElementsByClassName("col-lg-3")[1];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (filter.includes(txtValue.split(' ')[1])) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function range(start, end) {
+    var ans = [];
+    for (let i = start; i <= end; i++) {
+        ans.push('' + i);
+    }
+    return ans;
 }
