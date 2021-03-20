@@ -860,10 +860,14 @@ $(".posts").on("click", function () {
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-heart-o";
+                var type = "company";
+                if(value.iduser.userprofile){
+                    type = "user";
+                }
                 if(likes.includes(value.idpost)){
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" +icon+ "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>"+type+"</span></li><li><img src='images/icon9.png' alt=''><span>"+value.iduser.city+"</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" +icon+ "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepost + 1 <= result.totalPages) {
                 pagepost++;

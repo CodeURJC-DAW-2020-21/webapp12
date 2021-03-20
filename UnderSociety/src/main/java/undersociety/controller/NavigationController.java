@@ -104,6 +104,11 @@ public class NavigationController{
 		}
 		for (Post post : p) {
 			PostModel postmodel = new PostModel();
+			if(post.getIduser().getUserprofile()) {
+				postmodel.setTypeUser("user");
+			}else {
+				postmodel.setTypeUser("company");
+			}
 			if(likes.contains(post.getIdpost())) {
 				postmodel.setLike("la la-heart");
 			}else {
@@ -143,6 +148,11 @@ public class NavigationController{
 		}
 		for (Post post : p) {
 			PostModel postmodel = new PostModel();
+			if(post.getIduser().getUserprofile()) {
+				postmodel.setTypeUser("user");
+			}else {
+				postmodel.setTypeUser("company");
+			}
 			if(likes.contains(post.getIdpost())) {
 				postmodel.setLike("la la-heart");
 			}else {
@@ -159,6 +169,11 @@ public class NavigationController{
 		}
 		for (Product product : products) {
 			ProductModel productmodel = new ProductModel();
+			if(product.getIduser().getUserprofile()) {
+				productmodel.setTypeUser("user");
+			}else {
+				productmodel.setTypeUser("company");
+			}
 			if(bookmarks.contains(product.getIdproduct())) {
 				productmodel.setBookamark("la la-check-circle");
 			}else {
@@ -210,7 +225,11 @@ public class NavigationController{
 		}
 		for (Product product : products) {
 			ProductModel productmodel = new ProductModel();
-			
+			if(product.getIduser().getUserprofile()) {
+				productmodel.setTypeUser("user");
+			}else {
+				productmodel.setTypeUser("company");
+			}
 			if(product.getStatus().equalsIgnoreCase("in stock")) {
 				productmodel.setColor("#228B22");
 			}
