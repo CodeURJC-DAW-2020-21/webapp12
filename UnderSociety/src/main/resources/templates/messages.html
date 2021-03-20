@@ -141,51 +141,49 @@
 
 
 		<section class="profile-account-setting">
-			<div class="containerchat clearfix">
-				<div class="people-list" id="people-list"><br>
-					<div class="d-flex justify-content-center">
-						<a href="#" class="previous round">&#8249;</a>
-						<a href="#" class="next round">&#8250;</a>		
-					</div>
-					<ul class="list" id="usersList">
-			
-			
-					</ul>
-				</div>
-			
-				<div class="chat">
-					<div class="chat-header clearfix">
-						<img alt="avatar" height="55px"
-							 src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg"
-							 width="55px"/>
-			
-						<div class="chat-about">
-							<div class="chat-with" id="selectedUserId"></div>
-							<div class="chat-num-messages"></div>
+			<div class="container py-5 px-4" >
+		  
+				<div class="row rounded-lg overflow-hidden shadow">
+				  <!-- Users box-->
+				  <div class="col-5 px-0">
+					<div class="bg-white">
+			  
+					  <div class="bg-gray px-4 py-2 bg-light">
+						<p class="h5 mb-0 py-1">Users</p>
+					  </div>
+			  
+					  <div class="messages-box" style="max-height: 783px; overflow-y: scroll;">
+						<div class="d-flex justify-content-center">
+							<a href="#" class="previous round">&#8249;</a>
+							<a href="#" class="next round">&#8250;</a>		
 						</div>
-						<i class="fa fa-star"></i>
-					</div> <!-- end chat-header -->
-			
-					<div class="chat-history">
-						<ul id="messageList">
-			
-						</ul>
-			
-					</div> <!-- end chat-history -->
-			
-					<div class="chat-message clearfix">
-						<textarea id="message-to-send" name="message-to-send" placeholder="Type your message" rows="3"></textarea>
-			
-						<i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-						<i class="fa fa-file-image-o"></i>
-			
-						<button id="sendBtn">Send</button>
-			
-					</div> <!-- end chat-message -->
-			
-				</div> <!-- end chat -->
-			
-			</div> <!-- end container -->
+						<div class="list-group rounded-0" id="usersList">
+
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  <!-- Chat Box-->
+				  <div class="col-7 px-0">
+					<div class="px-4 py-5 chat-box bg-white chat-history" id="messageList" style="max-width: 654.5px; max-height: 781px; width: 654.5px; height: 781px; overflow-y: scroll;">
+					  <ul>
+
+					  </ul>			  
+					</div>
+			  
+					<!-- Typing area -->
+					<form class="bg-light">
+					  <div class="input-group">
+						<textarea id="message-to-send" name="message-to-send" placeholder="Type your message" rows="3" style="width: 100%;"></textarea>
+						<div class="input-group-append">
+						  <button id="sendBtn" type="button" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+						</div>
+					  </div>
+					</form>
+			  
+				  </div>
+				</div>
+			  </div>
 		</section>
 
 
