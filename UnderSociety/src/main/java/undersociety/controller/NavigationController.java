@@ -439,11 +439,4 @@ public class NavigationController{
 		return "forgotPassword";
 	}
 	
-	
-    @GetMapping("/prueba")
-    private void prueba() {
-    	userRepository.findByusername("null").orElseThrow(() -> new NoSuchElementException("User not found"));
-    }  
-	
-	
 }
