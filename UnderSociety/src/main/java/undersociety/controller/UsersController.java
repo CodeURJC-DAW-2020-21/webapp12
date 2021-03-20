@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +35,7 @@ import undersociety.repositories.UsersRelationsRepository;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -92,7 +92,7 @@ public class UsersController {
 		user.setCompanyprofile(false);
 		user.setPass(encoder.encode(user.getPass()));
 		userRepository.save(user);
-		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found")));
+		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
 		Roles r = new Roles();
 		r.setIduser(use);
 		r.setRol("USER");
@@ -109,7 +109,7 @@ public class UsersController {
 		user.setCompanyprofile(true);
 		user.setPass(encoder.encode(user.getPass()));
 		userRepository.save(user);
-		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User not found")));
+		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
 		Roles r = new Roles();
 		r.setIduser(use);
 		r.setRol("USER");
@@ -119,7 +119,7 @@ public class UsersController {
     
     @GetMapping("/api/imageprofile")
     private ResponseEntity<Object> downloadImage(HttpServletRequest sesion) throws SQLException{
-    	Users s = userRepository.findByusername(sesion.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users s = userRepository.findByusername(sesion.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
@@ -129,7 +129,7 @@ public class UsersController {
     
     @GetMapping("/api/imageprofile/{username}")
     private ResponseEntity<Object> downloadImageProfile(@PathVariable String username) throws SQLException{
-    	Users s = userRepository.findByusername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
     	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
@@ -149,8 +149,8 @@ public class UsersController {
     
     @PostMapping("/api/follow")
     public boolean follow(HttpServletRequest request, @RequestParam String username) {
-    	Users follow = userRepository.findByusername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users follow = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+    	Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	UsersRelations save = new UsersRelations();
     	save.setUserone(actual);
     	save.setUsertwo(follow);
@@ -179,7 +179,7 @@ public class UsersController {
     @Modifying
     @PostMapping("/api/modifyUser")
     public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
-    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	
     	if(image.getOriginalFilename() != "") {
     		prev.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
@@ -212,7 +212,7 @@ public class UsersController {
     @Modifying
     @PostMapping("/api/changePassword")
     public void modifyPassword(HttpServletResponse response, HttpServletRequest request, @RequestParam String oldpassword,  @RequestParam String newpassword,  @RequestParam String repeatpassword) throws IOException {
-    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	String page = "/error";
     	if(encoder.matches(oldpassword, prev.getPass())) {
     		System.out.println("entro");
@@ -228,7 +228,7 @@ public class UsersController {
     
     @PostMapping("/api/deleteUser")
     public void deleteUser(HttpServletResponse response, HttpServletRequest request, @RequestParam String email, @RequestParam String pass, @RequestParam String explication) throws IOException {
-    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users prev = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
     	if(email.equals(prev.getEmail())) {
     		if(pass.equals(prev.getPass())) {
     			listproductrepo.deleteByIduser(prev);

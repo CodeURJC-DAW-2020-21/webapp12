@@ -3,6 +3,7 @@ package undersociety.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +18,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,7 +53,7 @@ public class StoreController {
 	
 	@PostMapping("/api/uploadProduct")
 	private void uploadProduct(HttpServletResponse response, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree, @RequestParam(required = false) boolean tagfour, @RequestParam(required = false) boolean tagfive) throws IOException {
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		Page<Tags> listag = tagsrepo.findAll(PageRequest.of(0, 10,Sort.by("idtags").ascending()));
 		if(imag0.isEmpty() == false) {
 			product.setImage0(BlobProxy.generateProxy(imag0.getInputStream(), imag0.getSize()));
@@ -106,14 +106,14 @@ public class StoreController {
 	
 	@GetMapping("/api/getBookmark")
 	public List<ListProducts> getLikes(HttpServletRequest request) {
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		List<ListProducts> lp = listproductrepo.findByiduser(s);
 		return lp;
 	}
 	
 	@GetMapping("/api/imageProduct0/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct0( @PathVariable int idproduct) throws SQLException{
-		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Product not found"));
     	Resource file = new InputStreamResource(p.getImage0().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
@@ -123,7 +123,7 @@ public class StoreController {
 	
 	@GetMapping("/api/imageProduct1/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct1( @PathVariable int idproduct) throws SQLException{
-		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Product not found"));
     	Resource file = new InputStreamResource(p.getImage1().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
@@ -133,7 +133,7 @@ public class StoreController {
 	
 	@GetMapping("/api/imageProduct2/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct2( @PathVariable int idproduct) throws SQLException{
-		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Product not found"));
     	Resource file = new InputStreamResource(p.getImage2().getBinaryStream());
     	return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
@@ -143,8 +143,8 @@ public class StoreController {
 	
 	@PostMapping("/api/addProduct")
 	public boolean addProduct(@RequestParam int idproduct, HttpServletRequest request) {
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Product not found"));
 		ListProducts lp = new ListProducts();
 		lp.setIdproduct(p);
 		lp.setIduser(s);
@@ -153,8 +153,8 @@ public class StoreController {
 	
 	@PostMapping("/api/dropProduct")
 	public boolean dropProduct(@RequestParam int idproduct, HttpServletRequest request) {
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		Product p = productrepo.findById(idproduct).orElseThrow(() -> new UsernameNotFoundException("Product not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
+		Product p = productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Product not found"));
 		ListProducts lp = listproductrepo.findByiduserAndIdproduct(s, p);
 		if(lp != null) {
 			listproductrepo.deleteById(lp.getIdproductlist());

@@ -2,12 +2,12 @@ package undersociety.controller;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,8 +35,8 @@ public class MessageController {
 
     @MessageMapping("/chat/{to}")
     public void sendMessage(@DestinationVariable String to, MessageModel message) {
-        Users f =  userRepository.findByusername(message.getFromLogin()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	Users t =  userRepository.findByusername(to).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        Users f =  userRepository.findByusername(message.getFromLogin()).orElseThrow(() -> new NoSuchElementException("User not found"));
+    	Users t =  userRepository.findByusername(to).orElseThrow(() -> new NoSuchElementException("User not found"));
     	Message m = new Message();
     	m.setIduser(f);
     	m.setIduserto(t);
@@ -51,8 +51,8 @@ public class MessageController {
     
     @GetMapping("/api/getChad")
     public List<Message> getChat(@RequestParam String from, @RequestParam String to) {
-    	Users f = userRepository.findByusername(from).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    	Users t = userRepository.findByusername(to).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users f = userRepository.findByusername(from).orElseThrow(() -> new NoSuchElementException("User not found"));
+    	Users t = userRepository.findByusername(to).orElseThrow(() -> new NoSuchElementException("User not found"));
     	List<Message> m = messagedb.findByIduserAndIduserto(t, f);
     	List<Message> m2 = messagedb.findByIduserAndIduserto(f, t);
     	m.addAll(m2);

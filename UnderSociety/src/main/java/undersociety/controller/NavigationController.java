@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -97,7 +97,7 @@ public class NavigationController{
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		Page<Post> p = postsrepo.findAll(PageRequest.of(0, 10,Sort.by("idpost").descending()));
-		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).get());
+		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found")));
 		List<PostModel> postsmodels = new ArrayList<>();
 		List<Integer> likes = new ArrayList<>();
 		for (LikeAPost like : lp) {
@@ -113,7 +113,7 @@ public class NavigationController{
 			postmodel.setPost(post);
 			postsmodels.add(postmodel);
 		}
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		List<UsersRelations> following = relationrepo.findByuserone(s);
 		List<UsersRelations> followers = relationrepo.findByusertwo(s);
 		model.addAttribute("following", following.size());
@@ -134,13 +134,13 @@ public class NavigationController{
 	private String getPageProfileUser(Model model,HttpServletRequest request, @RequestParam String username){
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Users follow = userRepository.findByusername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users follow = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+		Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		Page<Post> p = postsrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idpost").descending()));
 		Page<Product> products = productrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idproduct").descending()));
 		List<UsersRelations> following = relationrepo.findByuserone(follow);
 		List<UsersRelations> followers = relationrepo.findByusertwo(follow);
-		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(follow.getUsername()).get());
+		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(follow.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
 		List<PostModel> postsmodels = new ArrayList<>();
 		List<Integer> likes = new ArrayList<>();
 		for (LikeAPost like : lp) {
@@ -156,7 +156,7 @@ public class NavigationController{
 			postmodel.setPost(post);
 			postsmodels.add(postmodel);
 		}
-		List<ListProducts> lproduct = listproductrepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).get());
+		List<ListProducts> lproduct = listproductrepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found")));
 		List<ProductModel> productmodels = new ArrayList<>();
 		List<Integer> bookmarks = new ArrayList<>();
 		for (ListProducts bookmark : lproduct) {
@@ -202,7 +202,7 @@ public class NavigationController{
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		Page<Product> products = productrepo.findAll(PageRequest.of(0, 10,Sort.by("idproduct").descending()));
-		List<ListProducts> lp = listproductrepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).get());
+		List<ListProducts> lp = listproductrepo.findByiduser(userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found")));
 		List<ProductModel> productmodels = new ArrayList<>();
 		List<Integer> bookmarks = new ArrayList<>();
 		for (ListProducts bookmark : lp) {
@@ -263,7 +263,7 @@ public class NavigationController{
 	private String getMyProfileFeed(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users s = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		List<UsersRelations> following = relationrepo.findByuserone(s);
 		List<UsersRelations> followers = relationrepo.findByusertwo(s);
 		model.addAttribute("userfacebook", s.getLinkfacebook());
@@ -284,7 +284,7 @@ public class NavigationController{
 	private String getProfileAccountSetting(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		Users actual = userRepository.findByusername(request.getUserPrincipal().getName()).orElseThrow(() -> new NoSuchElementException("User not found"));
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		model.addAttribute("followersList", relationrepo.findByuserone(actual));
 		model.addAttribute("productsList", listproductrepo.findByiduser(actual));
@@ -411,7 +411,7 @@ public class NavigationController{
 	
     @GetMapping("/prueba")
     private void prueba() {
-    	Users s = userRepository.findByusername("null").orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    	Users s = userRepository.findByusername("null").orElseThrow(() -> new NoSuchElementException("User not found"));
     }
 	
 	
