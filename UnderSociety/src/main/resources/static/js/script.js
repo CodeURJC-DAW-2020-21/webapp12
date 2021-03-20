@@ -1,3 +1,27 @@
+let chatContainer;
+let sendButtonMessage;
+let messageText;
+let listchat;
+let stompClient;
+let selectedUser;
+let newMessages = new Map();
+var pageusers;
+var totalPages;
+var notifynum = 0;
+var useractual;
+let token;
+var pageprofile = 1;
+var pagecompany = 1;
+var pagepost = 1;
+var pageproduct = 1;
+var pagepostuser = 1;
+var pageproductuser = 1;
+var likes = [];
+var bookmarks = [];
+var products = [];
+var follows = [];
+
+
 $(window).on("load", function () {
     "use strict";
 
@@ -347,117 +371,64 @@ $(document).ready(function () {
     });
 });
 
-// -----------------------------------------------------------------------RENDER TEMPLATES-----------------------------------------------------------------
+// -----------------------------------------------------------------------CHAT LOGIC-----------------------------------------------------------------
+chatContainer = $('.chat-history');
+sendButtonMessage = $('#sendBtn');
+messageText = $('#message-to-send');
+listchat = chatContainer.find('ul');
 
 
-let $chatHistory;
-let $button;
-let $textarea;
-let $chatHistoryList;
-
-function init() {
-    cacheDOM();
-    bindEvents();
-}
-
-function bindEvents() {
-    $button.on('click', addMessage.bind(this));
-    $textarea.on('keyup', addMessageEnter.bind(this));
-}
-
-function cacheDOM() {
-    $chatHistory = $('.chat-history');
-    $button = $('#sendBtn');
-    $textarea = $('#message-to-send');
-    $chatHistoryList = $chatHistory.find('ul');
-}
-
-function render(message, userName, time) {
-    scrollDown();
-    // responses
-    var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + userName + "' alt='user' width='50' class='rounded-circle'>";
-    template = template.concat("<div class='media-body ml-3'>");
-    template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
-    template = template.concat("<p class='text-small mb-0 text-muted'>"+userName+": " + message + "</p>");
-    template = template.concat("</div>");
-    template = template.concat("<p class='small text-muted'>" + time + "</p>");
-    template = template.concat("</div>");
-    template = template.concat("</div>");
-    setTimeout(function () {
-        $chatHistoryList.append(template);
-        scrollDown();
-    }.bind(this), 1500);
-}
-
-function sendMessage(message) {
+sendButtonMessage.on('click', function () { 
     let username = $('#userName').attr("placeholder");
-    sendMsg(username, message);
-    scrollDown();
+    let message = messageText.val();
+    stompClient.send("/app/chat/" + selectedUser, {}, JSON.stringify({
+        fromLogin: username,
+        message: message,
+        time: "" + new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
+    }));
+    chatContainer.scrollTop(chatContainer[0].scrollHeight);
     if (message.trim() !== '') {
         var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
         templateResponse = templateResponse.concat("<div class='media-body'>");
         templateResponse = templateResponse.concat("<div class='bg-primary rounded py-2 px-3 mb-2'>");
         templateResponse = templateResponse.concat("<p class='text-small mb-0 text-white'>" + message + "</p>");
         templateResponse = templateResponse.concat("</div>");
-        templateResponse = templateResponse.concat("<p class='small text-muted'>" + getCurrentTime() + "</p>");
+        templateResponse = templateResponse.concat("<p class='small text-muted'>" + new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + "</p>");
         templateResponse = templateResponse.concat("</div>");
         templateResponse = templateResponse.concat("</div>");
     };
-    $chatHistoryList.append(templateResponse);
-    scrollDown();
-    $textarea.val('');
-}
-
-function scrollDown() {
-    $chatHistory.scrollTop($chatHistory[0].scrollHeight);
-}
-
-function getCurrentTime() {
-    return new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-}
-
-function addMessage() {
-    sendMessage($textarea.val());
-}
-
-function addMessageEnter(event) {
-    // enter was pressed
-    if (event.keyCode === 13) {
-        addMessage();
-    }
-}
-
-init();
-
-
-// -----------------------------------------------------------------------lOGIC CHAT-----------------------------------------------------------------
+    listchat.append(templateResponse);
+    chatContainer.scrollTop(chatContainer[0].scrollHeight);
+    messageText.val('');
+ });
 
 
 
-const url = 'https://localhost:8443';
-let stompClient;
-let selectedUser;
-let newMessages = new Map();
-var pageusers;
-var totalPages;
-var notifynum = 0;
-var useractual;
+
 
 
 function connectToChat(userName, to, tk) {
-    console.log(tk);
     token = tk;
     useractual = userName;
-    console.log("connecting to chat...")
-    let socket = new SockJS(url + '/chat');
+    let socket = new SockJS('https://localhost:8443/chat');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-        console.log("connected to: " + frame);
         stompClient.subscribe("/topic/messages/" + userName, function (response) {
             let data = JSON.parse(response.body);
-            console.log(response.body);
-            if (selectedUser === data.fromLogin) {
-                render(data.message, data.fromLogin, data.time);
+            if (selectedUser == data.fromLogin) {
+                chatContainer.scrollTop(chatContainer[0].scrollHeight);
+                var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + data.fromLogin + "' alt='user' width='50' class='rounded-circle'>";
+                template = template.concat("<div class='media-body ml-3'>");
+                template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
+                template = template.concat("<p class='text-small mb-0 text-muted'>" + data.fromLogin + ": " + data.message + "</p>");
+                template = template.concat("</div>");
+                template = template.concat("<p class='small text-muted'>" + data.time + "</p>");
+                template = template.concat("</div>");
+                template = template.concat("</div>");
+                setTimeout(function () {
+                    listchat.append(template);
+                    chatContainer.scrollTop(chatContainer[0].scrollHeight);
+                }.bind(this), 1500);
             } else {
                 if (notifynum + 1 < 4) {
                     notifynum++;
@@ -469,7 +440,7 @@ function connectToChat(userName, to, tk) {
             }
         });
     });
-    $.get(url + "/api/getUserPage?page=0&size=10&sort=username&direction=asc", function (response) {
+    $.get("https://localhost:8443/api/getUserPage?page=0&size=10&sort=username&direction=asc", function (response) {
         pageusers = response.number;
         totalPages = response.totalPages;
         let users = response.content;
@@ -490,13 +461,12 @@ function connectToChat(userName, to, tk) {
         }
         $("#usersList").html(usersTemplateHTML);
     });
-    if (to != "useractual") {
-        console.log(useractual);
+    if (to != "null") {
         selectedUser = to;
-        $chatHistoryList.empty();
+        listchat.empty();
         $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: to }, function (data) {
             data.forEach(element => {
-                if (selectedUser === element.iduser.username) {
+                if (selectedUser != element.iduser.username) {
                     var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
                     templateResponse = templateResponse.concat("<div class='media-body'>");
                     templateResponse = templateResponse.concat("<div class='bg-primary rounded py-2 px-3 mb-2'>");
@@ -505,42 +475,34 @@ function connectToChat(userName, to, tk) {
                     templateResponse = templateResponse.concat("<p class='small text-muted'>" + element.time + "</p>");
                     templateResponse = templateResponse.concat("</div>");
                     templateResponse = templateResponse.concat("</div>");
-                    $chatHistoryList.append(templateResponse);
+                    listchat.append(templateResponse);
+                    chatContainer.scrollTop(chatContainer[0].scrollHeight);
                 } else {
-                    console.log("no jhon");
-                    var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + to + "' alt='user' width='50' class='rounded-circle'>";
+                    var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + selectedUser + "' alt='user' width='50' class='rounded-circle'>";
                     template = template.concat("<div class='media-body ml-3'>");
                     template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
-                    template = template.concat("<p class='text-small mb-0 text-muted'>"+element.iduserto.username+": " + element.message + "</p>");
+                    template = template.concat("<p class='text-small mb-0 text-muted'>" + selectedUser + ": " + element.message + "</p>");
                     template = template.concat("</div>");
                     template = template.concat("<p class='small text-muted'>" + element.time + "</p>");
                     template = template.concat("</div>");
                     template = template.concat("</div>");
-                    $chatHistoryList.append(template);
+                    listchat.append(template);
+                    chatContainer.scrollTop(chatContainer[0].scrollHeight);
                 }
             });
         });
     }
 }
 
-function sendMsg(from, text) {
-    stompClient.send("/app/chat/" + selectedUser, {}, JSON.stringify({
-        fromLogin: from,
-        message: text,
-        time: "" + getCurrentTime()
-    }));
-}
-
 
 function selectUser(userName) {
-    console.log("selecting users onclik: " + userName);
     $("#userTo").text(userName);
     selectedUser = userName;
-    $chatHistoryList.empty();
+    listchat.empty();
+    chatContainer.scrollTop(chatContainer[0].scrollHeight);
     $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: userName }, function (data) {
         data.forEach(element => {
-            console.log("FROM:" + element.iduser.username + " TO: " + element.iduserto.username + " message: " + element.message);
-            if (selectedUser === element.iduser.username) {
+            if (selectedUser != element.iduser.username) {
                 var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
                 templateResponse = templateResponse.concat("<div class='media-body'>");
                 templateResponse = templateResponse.concat("<div class='bg-primary rounded py-2 px-3 mb-2'>");
@@ -549,17 +511,19 @@ function selectUser(userName) {
                 templateResponse = templateResponse.concat("<p class='small text-muted'>" + element.time + "</p>");
                 templateResponse = templateResponse.concat("</div>");
                 templateResponse = templateResponse.concat("</div>");
-                $chatHistoryList.append(templateResponse);
+                listchat.append(templateResponse);
+                chatContainer.scrollTop(chatContainer[0].scrollHeight);
             } else {
                 var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + userName + "' alt='user' width='50' class='rounded-circle'>";
                 template = template.concat("<div class='media-body ml-3'>");
                 template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
-                template = template.concat("<p class='text-small mb-0 text-muted'>"+element.iduserto.username+": " + element.message + "</p>");
+                template = template.concat("<p class='text-small mb-0 text-muted'>" + userName + ": " + element.message + "</p>");
                 template = template.concat("</div>");
                 template = template.concat("<p class='small text-muted'>" + element.time + "</p>");
                 template = template.concat("</div>");
                 template = template.concat("</div>");
-                $chatHistoryList.append(template);
+                listchat.append(template);
+                chatContainer.scrollTop(chatContainer[0].scrollHeight);
             }
         });
     });
@@ -652,20 +616,6 @@ $("#clearbutton").on("click", function () {
 
 
 
-
-
-
-let token;
-var pageprofile = 1;
-var pagecompany = 1;
-var pagepost = 1;
-var pageproduct = 1;
-var pagepostuser = 1;
-var pageproductuser = 1;
-var likes = [];
-var bookmarks = [];
-var products = [];
-var follows = [];
 
 function passToken(tk) {
     token = tk;
@@ -770,7 +720,6 @@ function loadProducts(username) {
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-bookmark";
-                console.log(value);
                 if (bookmarks.includes(value.idproduct)) {
                     icon = "la la-check-circle";
                 }
@@ -929,7 +878,6 @@ $(".products").on("click", function () {
 
 $(".postsUser").on("click", function () {
     user = $("#usernameto").text();
-    console.log(user);
     size = 10;
     sort = 'idpost';
     $.ajax({
@@ -1075,7 +1023,6 @@ function searchBarProducts() {
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job_descp")[0];
         a = s.getElementsByTagName("h3")[0];
-        console.log(a);
         txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
@@ -1096,7 +1043,6 @@ function searchBarPosts() {
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job_descp")[0];
         a = s.getElementsByTagName("h3")[0];
-        console.log(a);
         txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
@@ -1184,7 +1130,6 @@ function unfollow(idfollow) {
 function dropProduct(idproduct) {
     $.post("/api/dropProduct?idproduct=" + idproduct + "&_csrf=" + token, function (response) {
         if (response) {
-            console.log(response);
             $("#product" + idproduct).remove();
         }
     });
@@ -1206,12 +1151,10 @@ function like(idpost) {
 function mark(idproduct) {
     if ($("#product" + idproduct).children().attr("class") == "la la-bookmark") {
         $.post("/api/addProduct?idproduct=" + idproduct + "&_csrf=" + token, function (data) {
-            console.log(data);
             $("#product" + idproduct).children().attr("class", "la la-check-circle");
         });
     } else {
         $.post("/api/dropProduct?idproduct=" + idproduct + "&_csrf=" + token, function (data) {
-            console.log(data);
             $("#product" + idproduct).children().attr("class", "la la-bookmark");
         });
     }
@@ -1232,7 +1175,6 @@ function SearchKeyWords() {
         for (x = 0; x < p.length; x++) {
             q = p[x].getElementsByTagName("a")[0];
             a = q.getElementsByTagName("p")[0];
-            console.log(a);
             txtValue = a.textContent || a.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 li[i].style.display = "";
@@ -1307,7 +1249,6 @@ function SearchStatus3() {
 function searchCity() {
     var input, filter, ul, li, a, i, txtValue;
     input = $("#menu").val();
-    console.log(input);
     filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
@@ -1330,7 +1271,6 @@ function searchSlider() {
     input = $("#sliderInput").val();
     limits = input.split(',');
     filter = range(limits[0], limits[1]);
-    console.log(filter);
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
     for (i = 0; i < li.length; i++) {
