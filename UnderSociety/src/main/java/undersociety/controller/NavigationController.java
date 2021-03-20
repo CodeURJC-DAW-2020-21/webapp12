@@ -118,11 +118,7 @@ public class NavigationController{
 		List<UsersRelations> followers = relationrepo.findByusertwo(s);
 		model.addAttribute("following", following.size());
 		model.addAttribute("followers", followers.size());
-		if(s.getUserprofile()) {
-			model.addAttribute("url","/pageProfileUser?&username="+request.getUserPrincipal().getName());
-		}else {
-			model.addAttribute("url","/company-profile?&username="+request.getUserPrincipal().getName());	
-		}
+		model.addAttribute("url","/pageProfileUser?&username="+request.getUserPrincipal().getName());
 		model.addAttribute("storeList",listproductrepo.findByiduser(s));
 		model.addAttribute("posts", postsmodels);
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
@@ -173,7 +169,7 @@ public class NavigationController{
 			productmodels.add(productmodel);
 		}
 		if(follow.getImageprofile() != null) {
-			model.addAttribute("imageProfile","");
+			model.addAttribute("imageProfile","https://localhost:8443/api/imageThemeProfile");
 			
 		}else {
 			model.addAttribute("imageProfile","http://via.placeholder.com/1600x400");
@@ -187,6 +183,11 @@ public class NavigationController{
     	}else {
     		model.addAttribute("follow","#53D690");
     	}
+    	model.addAttribute("userfacebook", follow.getLinkfacebook());
+		model.addAttribute("userTwitter", follow.getLinktwitter());
+		model.addAttribute("userinstagram", follow.getLinkinstagram());
+		model.addAttribute("userInfo", follow.getUserinfo());
+		model.addAttribute("userCity", follow.getCity());
     	model.addAttribute("following", following.size());
 		model.addAttribute("followers", followers.size());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
