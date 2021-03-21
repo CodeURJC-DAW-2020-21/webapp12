@@ -50,6 +50,7 @@ Los usuarios pueden registrarse, postear, poner a la venta productos y mandar me
 # Fase 1
 
 ### Capturas de pantalla
+
 Store- En esta pantalla permitirá al usuario ver todos los productos que están a la venta así como aplicar una serie de filtros para una busqueda más concreta de los productos que desea el usuario.
 ![store](https://user-images.githubusercontent.com/63242688/109434197-6bb6aa80-7a14-11eb-8c22-5ab0df0c10f5.PNG)
 Profile-Feed- En esta pantalla permite al usuario logueado poder cambiar algunos aspectos de su perfil como por ejemplo su foto de perfil, encabezado o cambiar la información que se encuentra en su perfil.
@@ -102,9 +103,51 @@ index- En esta pantalla veremos el perfil basico del usuario o la empresa, y alg
 
 
 # Fase 2
-
 ### Navegación
 
+Store: en esta pantalla el usuario podra ver todos los diferentes productos que podrá comprar con sus descripciones, titulo, imagen, costo, estado(In stock,reserved,sold), a la izquierda estan los buscadores para encontrar alguna de las "tag" que aacabamos de mencionar tambien se le puede seguir al producto o enviar un mensaje a la compañia o usuario que lo ha colgado.
+![image](https://user-images.githubusercontent.com/61882320/111917842-6207ec00-8a82-11eb-9863-ef0e502a4b09.png)
+
+![image](https://user-images.githubusercontent.com/61882320/111917976-0853f180-8a83-11eb-8c7b-9e0329ecd285.png)
+
+Profile-feed: aqui el usuario puede sobreescribir algunos aspectos: nombre, imagen perfil, ciudad..
+![image](https://user-images.githubusercontent.com/61882320/111918030-74cef080-8a83-11eb-9333-72a3e06470a0.png)
+
+Messages: El usuario podra enviar tanto mensajes a usuarios diferentes como a las compañias
+![image](https://user-images.githubusercontent.com/61882320/111918111-d55e2d80-8a83-11eb-857b-aa7300f37307.png)
+
+User Profile Settings: Bookmark products, en esta pantalla vemos los productos que el usuario haya seguido en la pagina store
+![image](https://user-images.githubusercontent.com/61882320/111918227-63d2af00-8a84-11eb-864f-4bf9940c753a.png)
+
+User Profile Settings: Follows, en esta pantalla todos los follows que el usuario haya seleccionado en Profile User/Company  se mostraran
+![image](https://user-images.githubusercontent.com/61882320/111918308-c926a000-8a84-11eb-95b9-0eb674503c10.png)
+
+User profile Settings: modify Information User, datos mas peronales como correo y enlaces de redes sociales, ademas de su nombre, imagen de perfil.. etc. el usuario seran capaz de cambiarlo en esta pantalla
+![image](https://user-images.githubusercontent.com/61882320/111918402-35090880-8a85-11eb-8c79-efc1b5276770.png)
+
+User Profile Settings: modify contraseña, pantalla en caso de que el usuario quiera cambiar de contraseña
+![image](https://user-images.githubusercontent.com/61882320/111918471-80bbb200-8a85-11eb-8571-e53db29d08e8.png)
+
+User Profile: Todos los usuarios en la aplicacion el usuario tiene la opcion de seleccionar cualquier perfil
+![image](https://user-images.githubusercontent.com/61882320/111918557-ea3bc080-8a85-11eb-920f-2c05da9647a1.png)
+
+View of Users Profile: aqui el usuario puede ver el perfil de otros usuarios, su posts, sus productos, su informacion, podemos enviarle mensajes y seguirle.
+![image](https://user-images.githubusercontent.com/61882320/111918656-6e8e4380-8a86-11eb-8104-62b67b5a6791.png)
+
+Comapny Profile: Todos los usuarios en la aplicacion el usuario tiene la opcion de seleccionar cualquier compañia
+![image](https://user-images.githubusercontent.com/61882320/111918760-fa07d480-8a86-11eb-8037-c3553c145189.png)
+
+View of Company Profile: aqui el usuario puede ver el perfil de las compañias, su posts, sus productos, su informacion, podemos enviarle mensajes y seguirle.
+![image](https://user-images.githubusercontent.com/61882320/111918812-32a7ae00-8a87-11eb-9169-9137c87bd64b.png)
+
+Pagina principal Home: pagina principal aqui el usuario puede ver los posts, puede subir productos y posts, darle like enviar mensajes, ver los que sigues etc..
+![image](https://user-images.githubusercontent.com/61882320/111918917-a3e76100-8a87-11eb-9551-4d9d75c76429.png)
+
+Sign-In para loguearse
+![image](https://user-images.githubusercontent.com/61882320/111919003-03457100-8a88-11eb-8e78-d11b00efb062.png)
+
+Sign up registrarse desde el inicio en la aplicacion
+![image](https://user-images.githubusercontent.com/61882320/111919020-18ba9b00-8a88-11eb-9637-0d89baa1f459.png)
 
 
 ### Instrucciones de ejecución
