@@ -108,10 +108,22 @@ index- En esta pantalla veremos el perfil basico del usuario o la empresa, y alg
 
 
 ### Instrucciones de ejecución
-
+Para instalar y ejecutar la aplicación del grupo 12 se deben seguir los siguientes pasos:
+1-	Nos dirigimos al repositorio de githbub que se encuentra en este enlace: https://github.com/CodeURJC-DAW-2020-21/webapp12 (Asegurarse que nos encontramos en la rama master).
+2-	Nos dirigimos a MySQL y en nuestro servidor local creamos un schema vacío llamado “under_society_db” (Es importante que este vacío para que en la primera ejecución del programa se carguen los datos de la aplicación).
+3-	Una vez que tenemos descargado el proyecto, dentro del entorno de desarrollo Eclipse previamente preparado para trabajar con aplicaciones basadas en Spring, abrimos el archivo application.properties y ponemos la contraseña y usuario que tengamos en nuestra base de datos de MySql ejecutamos el programa.
+4-	Sin cerrar la ejecución del programa, en nuestro navegador de confianza introducimos en la URL la siguiente dirección: https://localhost:8443/
+5-	Una vez que nos cargue la pantalla de logueo, la aplicación estará lista para usarse.
+Requisitos para la ejecución del programa:
+-	Versión de java: 11
+-	Pack de Spring Boot para Eclipse u en su defecto para el entorno de desarrollo en el que se trabaje.
+-	BootStrap 3.3.7
+-	JQuery 3.1.1-1
+-	MySqlWorkbench 8.0.22
 
 
 ### Diagrama con las entidades de la base de datos
+![diagramabbdd](https://user-images.githubusercontent.com/63242688/111917648-81eae000-8a81-11eb-95c5-ad1fce0573d9.png)
 
 
 
