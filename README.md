@@ -187,13 +187,14 @@ Leyenda del diagrama:
 ##### David Montero Garcia:
 
    
-   | Número	| Descripción	| Commit | Archivos |
+  | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1  | 	| [Ver commit]() | [ProfilePageController.java]() |
+   | #2	|	| [Ver commit]() | [myprofilefeed.html]() |
+   | #3	|  | [Ver commit]() | [UsersController.java]() |
+   | #4	|	| [Ver commit]() | [NavigationController.java]() |
+   | #5	| 	| [Ver commit]() | [StoreController.java]() |
+   
    
 ##### Enrique Martín Santorcaz:
 
