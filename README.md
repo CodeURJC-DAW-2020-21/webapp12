@@ -201,11 +201,11 @@ Leyenda del diagrama:
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1  | Implements news tags and load data in admin page	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/629a58e274a4933db4d40ee670a222618186c62c) | [admin.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/resources/templates/admin.html) |
+   | #2	| Implements admin data tags	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/7991041a1bfa146f2eb08823f81a8ae7bc9f98c0) | [NavigationController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/controller/NavigationController.java) |
+   | #3	| Complete AdminPage | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/6640b741ce38960470d1d710954919ad48cbfc70) | [chart-pie-demo.js](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/resources/static/js/demo/chart-pie-demo.js) |
+   | #4	| Integration Tag, Product, Listproducts, Roles, users, post Data	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/a9916d9d197b13c73516c4235c56181b2fec4fae) | [Loader.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/models/Loader.java) |
+   | #5	| Update and complete Constructors models	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/90082a820cda4b18a829a671da23ca00cbd14110) | [Product.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/models/Product.java) |
    
 ##### Cristian Nicu Terci:
 
