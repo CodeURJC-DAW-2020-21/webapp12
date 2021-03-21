@@ -103,6 +103,83 @@ index- En esta pantalla veremos el perfil basico del usuario o la empresa, y alg
 
 # Fase 2
 
+### Navegación
+
+
+
+### Instrucciones de ejecución
+
+
+
+### Diagrama con las entidades de la base de datos
+
+
+
+### Diagrama de clases y templates
+
+
+
+### Participación de miembros
+
+##### David Montero Garcia:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+   
+##### Enrique Martín Santorcaz:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+   
+##### Cristian Nicu Terci:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+   
+##### Guillermo Martín García:
+
+Este miembro del equipo creó en paralelo la base de la aplicación (finalmente se estableció la aplicacion base de Antonio Jesus), trabajó en el cambio de datos del usuario en account settings, profile settings, modificó las vistas correspondientes, modificó el sign-in y sign-up y modificó el sistema de errores.
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | Update ProfilePageController with change functions	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/18175cfef75a75a80dc3e08d1fc258665cd4f20b) | [ProfilePageController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/controller/ProfilePageController.java) |
+   | #2	| Update myprofilefeed.html and NavigationController for view more infor	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/6ec66fed819dbb96491338484ae9fbfdf98118b8)
+   | [myprofilefeed.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/resources/templates/myprofilefeed.html) |
+   | #3	| Update change pass and updateProfile in userController	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/a1ad97b617a269a42a3d0ad007737bc7e2e4932f) | [UsersController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/controller/UsersController.java) |
+   | #4	| Implement error exception in all controller	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/dc97cbe22cd12565646b78cf67d2fd347ab272de) | [NavigationController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/controller/NavigationController.java) |
+   | #5	| Error fixed in Modify Information User	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/78f2265d7c883027cde8d986f4255d07ef24a454) | [StoreController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/controller/StoreController.java) |
+   
+##### Antonio Jesus Pajuelo Chavez:
+
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+   
+   
 # Fase 3
 
 # Fase 4
