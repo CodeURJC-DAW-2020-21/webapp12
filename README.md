@@ -171,6 +171,13 @@ Requisitos para la ejecución del programa:
 
 
 ### Diagrama de clases y templates
+Leyenda del diagrama:
+- Verde: Controladores
+- Morado: Vistas
+- Azul: Repositorios
+- Negro: Modelos
+- Rojo: Servicios
+- Azul claro: Configuraciones
 
 ![image](https://user-images.githubusercontent.com/63242688/111919104-7e0e8c00-8a88-11eb-800d-a052cf5b2e64.png)
 
