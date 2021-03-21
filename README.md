@@ -180,15 +180,15 @@ Este miembro del equipo creó en paralelo la base de la aplicación (finalmente 
    
 ##### Antonio Jesus Pajuelo Chavez:
 
-
-   
+Este miembro del equipo creó en paralelo la aplicación que finalmente se estableció como base, trabajó en la implementacion del chat, el sistema de follow, el sistema de boookmarks, la carga de elementos mediante Ajax o mustache, el sistema de most followed, el sistema de likes asi como los botones de mensajes, los controller y la construccion de los model. Ademas de la implementación del CSRF y el servicio de enviar email.    
+  
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1 | Implement Systema Likes	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/bb9584dd783197af8277adc489b6a7da22b9b78c) | [NavigationController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/controller/NavigationController.java) |
+   | #2	| Restore Mustache method	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/c1971c1e1a46bbf2c031df866bfb3a2c97ba8dfe)| [PostsController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/controller/PostsController.java) |
+   | #3	| Implement Markbooks and store in Index	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/1f9f268ef78dff9ffd3b58a2cdfec850d46d0177) | [StoreController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/controller/StoreController.java) |
+   | #4	| Init implement CSRF | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/0469a68167cd5bd5a5015d7192e6a726501d21f4) | [index.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/resources/templates/index.html) |
+   | #5	| Desing user info | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/28bc760ec927228922460d29f6d0b92ef178ac7b) | [user-profile.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/resources/templates/user-profile.html) |
    
    
 # Fase 3
