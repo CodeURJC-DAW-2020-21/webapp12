@@ -375,7 +375,7 @@ $(document).ready(function () {
 chatContainer = $('.chat-history');
 sendButtonMessage = $('#sendBtn');
 messageText = $('#message-to-send');
-listchat = chatContainer.find('ul');
+listchat = $('.chat-history').find('ul');
 
 
 sendButtonMessage.on('click', function () { 
@@ -432,7 +432,6 @@ function connectToChat(userName, to, tk) {
             } else {
                 if (notifynum + 1 < 4) {
                     notifynum++;
-                    newMessages.set(data.fromLogin, data.message);
                     $(".nott-list").find(".view-all-nots").remove();
                     $(".nott-list").append('<a href="/messages?to='+ data.fromLogin + '" title=""><div id="new' + data.fromLogin + '" class="notfication-details"><div class="noty-user-img"><img src="https://localhost:8443/api/imageprofile/' + data.fromLogin + '" alt=""></div><div class="notification-info"><h3><a href="messages" title="">' + data.fromLogin + '</a> </h3><p>' + data.message + '</p><span>' + data.time + '</span></div><!--notification-info --></div></a>');
                     $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
