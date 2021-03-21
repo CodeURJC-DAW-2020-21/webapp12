@@ -30,9 +30,6 @@ public class Loader {
 	private ProductRepository productrepo;
 
 	@Autowired
-	private ListProductsRepository listproductrepo;
-
-	@Autowired
 	private PostRepository postsrepo;
 
 	@Autowired
@@ -64,7 +61,6 @@ public class Loader {
 			PasswordEncoder encoder) {
 		super();
 		this.productrepo = productrepo;
-		this.listproductrepo = listproductrepo;
 		this.postsrepo = postsrepo;
 		this.userRepository = userRepository;
 		this.tagrepo = tagrepo;
