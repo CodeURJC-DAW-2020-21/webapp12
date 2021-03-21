@@ -172,6 +172,7 @@ Requisitos para la ejecución del programa:
 
 ### Diagrama de clases y templates
 
+![image](https://user-images.githubusercontent.com/63242688/111919104-7e0e8c00-8a88-11eb-800d-a052cf5b2e64.png)
 
 
 ### Participación de miembros
