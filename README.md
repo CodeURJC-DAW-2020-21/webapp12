@@ -198,6 +198,7 @@ Leyenda del diagrama:
    
 ##### Enrique Martín Santorcaz:
 
+Este miembro del equipo se encargo de la implentacion de la página de admin, asi como la creación de nuevos campos para la base de datos en relación a los tags, implementación de gran parte de clase Loader para ingresar datos en la aplicación y creación de los constructores en todas las clases para el correcto funcionamiento del programa.
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
