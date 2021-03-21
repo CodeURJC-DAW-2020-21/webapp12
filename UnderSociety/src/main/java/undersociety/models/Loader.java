@@ -180,7 +180,6 @@ public class Loader {
 		Resource imageCompania38 = new UrlResource(imagePathCompania38.toUri());
 		Path imagePathCompania39 = IMAGES_FOLDER.resolve("flat,750x1000,075,f.jpg");
 		Resource imageCompania39 = new UrlResource(imagePathCompania39.toUri());
-			
 		
 		
 		Blob img20 = BlobProxy.generateProxy(imageCompania20.getInputStream(), imageCompania20.contentLength());
@@ -205,122 +204,151 @@ public class Loader {
 		Blob img39 = BlobProxy.generateProxy(imageCompania39.getInputStream(), imageCompania39.contentLength());
 		
 		//Images Post
-		Blob imgpost = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost1 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost2 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost3 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost4 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost5 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost6 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost7 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost8 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost9 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost10 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost11 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost12 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost13 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost14 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost15 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost16 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost17 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost18 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
-		Blob imgpost19 = BlobProxy.generateProxy(image.getInputStream(), image.contentLength());
+		Path imagePost= IMAGES_FOLDER.resolve("chicos-estan-dibujando-casa_36356-43.jpg");
+		Resource imagepost = new UrlResource(imagePost.toUri());
+		
+		Path imagePost1= IMAGES_FOLDER.resolve("apple-keynote.jpg");
+		Resource imagepost1 = new UrlResource(imagePost1.toUri());
+		
+		Path imagePost2= IMAGES_FOLDER.resolve("c593c42617a5935a5d15def89ee0b000.jpg");
+		Resource imagepost2 = new UrlResource(imagePost2.toUri());
+		
+		Path imagePost3= IMAGES_FOLDER.resolve("580cc2da99c84a2ea9240cc0399b0be4.jpg");
+		Resource imagepost3 = new UrlResource(imagePost3.toUri());
+		
+		Path imagePost4= IMAGES_FOLDER.resolve("NIVEA-Beach-Event-Germany-2000-Beiersdorf-e1468402388669.jpg");
+		Resource imagepost4 = new UrlResource(imagePost4.toUri());
+		
+		Path imagePost5= IMAGES_FOLDER.resolve("3283b7f2e40f7e89eb9098c37d4578c4.jpg");
+		Resource imagepost5 = new UrlResource(imagePost5.toUri());
+		
+		Path imagePost6= IMAGES_FOLDER.resolve("maraton-kiPH-U601127335038my-624x385@La Rioja.jpg");
+		Resource imagepost6 = new UrlResource(imagePost6.toUri());
+		
+		Path imagePost7= IMAGES_FOLDER.resolve("SEAT-Arona-mirador-Toscana.jpg");
+		Resource imagepost7 = new UrlResource(imagePost7.toUri());
+		
+		Path imagePost8= IMAGES_FOLDER.resolve("Legolas-in-Behind-the-Scenes-of-DOS-legolas-greenleaf-36864108-604-340.jpg");
+		Resource imagepost8 = new UrlResource(imagePost8.toUri());
+						
+		Path imagePost9= IMAGES_FOLDER.resolve("graffiti-tour-madrid-mahou-wag1mag-5.jpg");
+		Resource imagepost9 = new UrlResource(imagePost9.toUri());
+		
+		Path imagePost10= IMAGES_FOLDER.resolve("gollum2.jpg");
+		Resource imagepost10 = new UrlResource(imagePost10.toUri());
+		
+		Path imagePost11= IMAGES_FOLDER.resolve("EabyGc_XYAAwSzB.jpg");
+		Resource imagepost11 = new UrlResource(imagePost11.toUri());
+		
+		Path imagePost12= IMAGES_FOLDER.resolve("zara.jpeg");
+		Resource imagepost12 = new UrlResource(imagePost12.toUri());
+		
+		Path imagePost13= IMAGES_FOLDER.resolve("gestion-documentos-teletrabajo3-scaled.jpg");
+		Resource imagepost13 = new UrlResource(imagePost13.toUri());
+		
+		Path imagePost14= IMAGES_FOLDER.resolve("meme1-1280x720.jpg");
+		Resource imagepost14 = new UrlResource(imagePost14.toUri());
+		
+		Path imagePost15= IMAGES_FOLDER.resolve("figwit__11346_orig.jpg");
+		Resource imagepost15 = new UrlResource(imagePost15.toUri());
+		
+		Path imagePost16= IMAGES_FOLDER.resolve("DoYou_H2-750x421.jpg");
+		Resource imagepost16 = new UrlResource(imagePost16.toUri());
+		
+		Path imagePost17= IMAGES_FOLDER.resolve("20057525635_0e97d61372_b.jpg");
+		Resource imagepost17 = new UrlResource(imagePost17.toUri());
+		
+		Path imagePost18= IMAGES_FOLDER.resolve("maxresdefault.jpg");
+		Resource imagepost18 = new UrlResource(imagePost18.toUri());
+		
+		Path imagePost19= IMAGES_FOLDER.resolve("DjSKyjtWsAAxYDO.jpg");
+		Resource imagepost19 = new UrlResource(imagePost19.toUri());
+		
+		Blob imgpost = BlobProxy.generateProxy(imagepost.getInputStream(), imagepost.contentLength());
+		Blob imgpost1 = BlobProxy.generateProxy(imagepost1.getInputStream(), imagepost1.contentLength());
+		Blob imgpost2 = BlobProxy.generateProxy(imagepost2.getInputStream(), imagepost2.contentLength());
+		Blob imgpost3 = BlobProxy.generateProxy(imagepost3.getInputStream(), imagepost3.contentLength());
+		Blob imgpost4 = BlobProxy.generateProxy(imagepost4.getInputStream(), imagepost4.contentLength());
+		Blob imgpost5 = BlobProxy.generateProxy(imagepost5.getInputStream(), imagepost5.contentLength());
+		Blob imgpost6 = BlobProxy.generateProxy(imagepost6.getInputStream(), imagepost6.contentLength());
+		Blob imgpost7 = BlobProxy.generateProxy(imagepost7.getInputStream(), imagepost7.contentLength());
+		Blob imgpost8 = BlobProxy.generateProxy(imagepost8.getInputStream(), imagepost8.contentLength());
+		Blob imgpost9 = BlobProxy.generateProxy(imagepost9.getInputStream(), imagepost9.contentLength());
+		Blob imgpost10 = BlobProxy.generateProxy(imagepost10.getInputStream(), imagepost10.contentLength());
+		Blob imgpost11 = BlobProxy.generateProxy(imagepost11.getInputStream(), imagepost11.contentLength());
+		Blob imgpost12 = BlobProxy.generateProxy(imagepost12.getInputStream(), imagepost12.contentLength());
+		Blob imgpost13 = BlobProxy.generateProxy(imagepost13.getInputStream(), imagepost13.contentLength());
+		Blob imgpost14 = BlobProxy.generateProxy(imagepost14.getInputStream(), imagepost14.contentLength());
+		Blob imgpost15 = BlobProxy.generateProxy(imagepost15.getInputStream(), imagepost15.contentLength());
+		Blob imgpost16 = BlobProxy.generateProxy(imagepost16.getInputStream(), imagepost16.contentLength());
+		Blob imgpost17 = BlobProxy.generateProxy(imagepost17.getInputStream(), imagepost17.contentLength());
+		Blob imgpost18 = BlobProxy.generateProxy(imagepost18.getInputStream(), imagepost18.contentLength());
+		Blob imgpost19 = BlobProxy.generateProxy(imagepost19.getInputStream(), imagepost19.contentLength());
 		
 		//Images Product
 		
 		Path imagePathProduct = IMAGES_FOLDER.resolve("wrc_spirit_disc_ultegra_2021_.jpeg");
-		Resource imageProduct = new UrlResource(imagePathProduct.toUri());
-		
+		Resource imageProduct = new UrlResource(imagePathProduct.toUri());		
 		Path imagePathProduct1 = IMAGES_FOLDER.resolve("wrc_spirit_disc_ultegra_2021._.jpg");
 		Resource imageProduct1 = new UrlResource(imagePathProduct1.toUri());
-		
 		Path imagePathProduct2 = IMAGES_FOLDER.resolve("wrc_spirit_disc_ultegra_2021.jpg");
 		Resource imageProduct2 = new UrlResource(imagePathProduct2.toUri());
-		
 		Path imagePathProduct3 = IMAGES_FOLDER.resolve("air-max-plus-zapatillas-v371c8.jpg");
-		Resource imageProduct3 = new UrlResource(imagePathProduct3.toUri());
-		
+		Resource imageProduct3 = new UrlResource(imagePathProduct3.toUri());		
 		Path imagePathProduct4 = IMAGES_FOLDER.resolve("air-max-plus-zapatillas-v371c8 (1).jpg");
 		Resource imageProduct4 = new UrlResource(imagePathProduct4.toUri());
-		
 		Path imagePathProduct5 = IMAGES_FOLDER.resolve("air-max-plus-zapatillas-v371c8 (2).jpg");
 		Resource imageProduct5 = new UrlResource(imagePathProduct5.toUri());
-		
 		Path imagePathProduct6 = IMAGES_FOLDER.resolve("1_1_2.jpg");
-		Resource imageProduct6 = new UrlResource(imagePathProduct6.toUri());
-		
+		Resource imageProduct6 = new UrlResource(imagePathProduct6.toUri());		
 		Path imagePathProduct7 = IMAGES_FOLDER.resolve("todos_accesorios.jpg");
 		Resource imageProduct7 = new UrlResource(imagePathProduct7.toUri());
-		
 		Path imagePathProduct8 = IMAGES_FOLDER.resolve("s-l225.jpg");
 		Resource imageProduct8 = new UrlResource(imagePathProduct8.toUri());
-		
 		Path imagePathProduct9 = IMAGES_FOLDER.resolve("hacha-cudeman-shark-159-m.jpg");
 		Resource imageProduct9 = new UrlResource(imagePathProduct9.toUri());
-		
 		Path imagePathProduct10 = IMAGES_FOLDER.resolve("924ac8321142029691b185ab03e95b36.jpg");
 		Resource imageProduct10 = new UrlResource(imagePathProduct10.toUri());
-		
 		Path imagePathProduct11 = IMAGES_FOLDER.resolve("il_570xN.1589575158_6pek.jpg");
 		Resource imageProduct11 = new UrlResource(imagePathProduct11.toUri());
-		
 		Path imagePathProduct12 = IMAGES_FOLDER.resolve("D_NQ_NP_811459-MLM31216665088_062019-O.jpg");
 		Resource imageProduct12 = new UrlResource(imagePathProduct12.toUri());
-		
 		Path imagePathProduct13 = IMAGES_FOLDER.resolve("hp-ordenador-portatil-250-g6.jpg");
-		Resource imageProduct13 = new UrlResource(imagePathProduct13.toUri());
-		
+		Resource imageProduct13 = new UrlResource(imagePathProduct13.toUri());	
 		Path imagePathProduct14 = IMAGES_FOLDER.resolve("c06226445_209x189.jpg");
 		Resource imageProduct14 = new UrlResource(imagePathProduct14.toUri());
-		
 		Path imagePathProduct15 = IMAGES_FOLDER.resolve("Disfraz-de-Halloween-del-mago-disfraz-personalizado-con-Peluca-de-sombrero-barba.jpg");
 		Resource imageProduct15 = new UrlResource(imagePathProduct15.toUri());
-		
 		Path imagePathProduct16 = IMAGES_FOLDER.resolve("9554415517726.jpg");
 		Resource imageProduct16 = new UrlResource(imagePathProduct16.toUri());
-		
 		Path imagePathProduct17 = IMAGES_FOLDER.resolve("91jf2m5BfTL._AC_SX679_.jpg");
 		Resource imageProduct17 = new UrlResource(imagePathProduct17.toUri());
-		
 		Path imagePathProduct18 = IMAGES_FOLDER.resolve("s-l300.jpg");
 		Resource imageProduct18 = new UrlResource(imagePathProduct18.toUri());
-		
 		Path imagePathProduct19 = IMAGES_FOLDER.resolve("s-l300 (1).jpg");
 		Resource imageProduct19 = new UrlResource(imagePathProduct19.toUri());
-		
 		Path imagePathProduct20 = IMAGES_FOLDER.resolve("71DkgRbnuzL._AC_SX679_.jpg");
 		Resource imageProduct20 = new UrlResource(imagePathProduct20.toUri());
-		
 		Path imagePathProduct21 = IMAGES_FOLDER.resolve("samsung-galaxy-a21s-0.jpg");
 		Resource imageProduct21 = new UrlResource(imagePathProduct21.toUri());
-		
 		Path imagePathProduct22 = IMAGES_FOLDER.resolve("sizing-bwc.png");
 		Resource imageProduct22 = new UrlResource(imagePathProduct22.toUri());
-		
 		Path imagePathProduct23 = IMAGES_FOLDER.resolve("s-l300 (2).jpg");
 		Resource imageProduct23 = new UrlResource(imagePathProduct23.toUri());
-		
 		Path imagePathProduct24 = IMAGES_FOLDER.resolve("51UXFM1mrSL._AC_SX425_.jpg");
 		Resource imageProduct24 = new UrlResource(imagePathProduct24.toUri());
-	
 		Path imagePathProduct25 = IMAGES_FOLDER.resolve("il_570xN.1638482480_p7u8.jpg");
 		Resource imageProduct25 = new UrlResource(imagePathProduct25.toUri());
-		
 		Path imagePathProduct26 = IMAGES_FOLDER.resolve("146914715842684601227a9a325d67df4f17e52607.jpg");
 		Resource imageProduct26 = new UrlResource(imagePathProduct26.toUri());
-		
 		Path imagePathProduct27 = IMAGES_FOLDER.resolve("42-alu-silver-sport-white-nc-s3-gallery1_GEO_ES.jpg");
 		Resource imageProduct27 = new UrlResource(imagePathProduct27.toUri());
-		
 		Path imagePathProduct28 = IMAGES_FOLDER.resolve("anduril-sword-_-ranger-sword-of-aragorn.jpg");
 		Resource imageProduct28 = new UrlResource(imagePathProduct28.toUri());
-		
 		Path imagePathProduct29 = IMAGES_FOLDER.resolve("Zapatilla_Hardcourt_Hi_Negro_FV5463_01_standard.jpg");
 		Resource imageProduct29 = new UrlResource(imagePathProduct29.toUri());
-		
 		Path imagePathProduct30 = IMAGES_FOLDER.resolve("Zapatilla_Hardcourt_Hi_Negro_FV5463_010_hover_standard.jpg");
 		Resource imageProduct30 = new UrlResource(imagePathProduct30.toUri());
-	
 		
 		
 		Blob imgproduct = BlobProxy.generateProxy(imageProduct.getInputStream(), imageProduct.contentLength());
@@ -411,7 +439,7 @@ public class Loader {
 		Users company16 = new Users("GXT@hotmail.com","GXT",encoder.encode("g"),"GXT",img35, true,false, "Madrid","","company16", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		Users company17 = new Users("bluebanana@hotmail.com","BlueBanana",encoder.encode("b"),"BlueBanana",img36, true,false, "Barcelona","","company17", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		Users company18 = new Users("mango18@hotmail.com","Mango",encoder.encode("ma"),"Mango",img37, true,false, "Malaga","","company18", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		Users company19 = new Users("hp@hotmail.com","HP",encoder.encode("h"),"Hp",img38, false,false, "Madrid","","company19", "www.facebook.com","www.twitter.com","www.instagram.com",null );
+		Users company19 = new Users("hp@hotmail.com","HP",encoder.encode("h"),"Hp",img38, true,false, "Madrid","","company19", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		Users company20 = new Users("MSI.crnt20@hotmail.com","MSI",encoder.encode("ms"),"MSI",img39, true,false, "Barcelona","","company20", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		
 		
@@ -474,56 +502,40 @@ public class Loader {
 		//Creation products
 		Product product1 = new Product(user1,"Bike Conor WRC Spirit"," He can be the great love of your life, so keep an eye out for this wonder of 2021 Conor WRC Spirit Disc Ultegra Bicycle."
 				+ "You will want to spend your whole life on top of it pedaling"
-			    , imgproduct, imgproduct1, imgproduct2, 40, tag1, tag2, tag3, null, null, "in stock", true, true, true);
-		
+			    , imgproduct, imgproduct1, imgproduct2, 40, tag1, tag2, tag3, null, null, "in stock", true, true, true);		
 		Product product2 = new Product(company2,"Nike Air Max Plus", "Let your style soar with the Nike Air Max Plus, an updated Air experience that offers stability"
 				+ "premium and incredible cushioning."
-				, imgproduct3, imgproduct4, imgproduct5, 20, null, tag2, tag3, tag4, null, "in stock", true, true, true);
-		
+				, imgproduct3, imgproduct4, imgproduct5, 20, null, tag2, tag3, tag4, null, "in stock", true, true, true);		
 		Product product3 = new Product(user2,"Hellbow Besra compound shooting bow", "With this initiation bow you can start training and learn how to shoot with the bow in no time."
-				+ "time since you can regulate it as you learn", imgproduct6, imgproduct7, imgproduct8, 15, tag1, tag2, tag3, null, tag5, "sold", true, true, true);
-		
+				+ "time since you can regulate it as you learn", imgproduct6, imgproduct7, imgproduct8, 15, tag1, tag2, tag3, null, tag5, "sold", true, true, true);	
 		Product product4 = new Product(user3,"Axe CUDEMAN SHARK", "The CUDEMAN SHARK ax has a hammer head, lever claw and bowdrill. Blade length: 7cm, ax weight: 380 / 431grams,"
-				, imgproduct9, null, null, 45, tag1, null, tag3, null, null, "reserved", true, false, false);
-		
+				, imgproduct9, null, null, 45, tag1, null, tag3, null, null, "reserved", true, false, false);		
 		Product product5 = new Product(company1,"Iguazu floor lamp", "Iguazu floor lamp with tripod base in solid pine wood with natural finish. The lampshade is made of white fabric, to give it more light."
-				, imgproduct10, null, null, 60, tag1, tag2, tag3, tag4, null, "sold", true, false, false);		
-		
+				, imgproduct10, null, null, 60, tag1, tag2, tag3, tag4, null, "sold", true, false, false);			
 		Product product6 = new Product(user5,"Shield from Boromir", "This supporting foam shield is styled on the one worn by Boromir of Gondor in The Lord of the Rings-The Fellowship of the Ring."
 				+ " It is double lined in foam."
 				, imgproduct11, null, null, 5, null, tag2, tag3, null, tag5, "in stock", true, false, true);
-		
 		Product product7 = new Product(user4,"Lord Of The Rings Ring","Unique Ring made of Tungsten. Black, Platinum Gold And Pink. "
 				+ "They are made of Tungsten Carbide", imgproduct12, null, null, 8, tag1, tag2, null, null, null, "reserved", true, false, false);		
-		
 		Product product8 = new Product(company19,"HP 250 G6 Laptop", "HP 250 G6 Laptop. Product type: Portable, Form factor: Clamshell. "
 				+ " Total storage capacity: 500 GB, Storage unit: HDD, Color of product: Black or blue", imgproduct13, imgproduct14, null, 12, tag1, tag2, tag3, tag4, null, "sold", true, true, false);		
-		
 		Product product9 = new Product(user9,"Gandalf Wizard Halloween Costume", "Character: Gandalf the gray, material: polyester, components: cape, beard, hat, warranty: 2 months"
 				+ " Brand Name: fairy dreamer", imgproduct15, null, null, 15, tag1, null, tag3, null, tag5, "in stock", true, false, false);		
-		
 		Product product10 = new Product(company4,"Cooked and deep-frozen white prawns, large and medium", " Defrosting any food should be done in the fridge from one day to the next, and not at room temperature,"
 				+ " in order to avoid contamination."
 				, imgproduct16, imgproduct17, null, 100, tag1, tag2, tag3, null, null, "in stock", true, true, false);
-		
 		Product product11 = new Product(user10,"Funko Pop Sauron The Lord Of The Ring ", " A brand-new, unused, unopened and undamaged item. A Funko Pop figure of only 10 cm tall of the great Sauron."
 				, imgproduct18, imgproduct19,null, 40, null, tag2, tag3, tag4, null, "reserved", true, false, true);		
-		
 		Product product12 = new Product(company12,"Samsung A21 Galaxy", "Immerse yourself in the large 6.5-inch Infinity-O display on the Galaxy A21s. Its wide aspect ratio fills your screen with content from side to side."
 				, imgproduct20, imgproduct21, null, 140, tag1, tag2, null, null, null, "in stock", true, true, false);
-		
 		Product product13 = new Product(company8,"Gaming keyboard\n", "If you play with the lights off to better immerse yourself in the game or to avoid disturbing your roommate,"
 				, imgproduct22, null, null, 12, tag1, null, null, null, tag5, "sold", true, false, false);
-		
 		Product product14 = new Product(user7,"LOTR Merry card from board game", "Condition: used. Character: Hobbit Merry from the ring company, 4 health points and 3"
 				+ "both defense and attack", imgproduct23, null, null, 40, null, tag2, null, tag4, null, "reserved", true, false, false);
-		
 		Product product15 = new Product(company9,"NIVEA Moisturizing Cream for Hands, Face and Body", "Intensive hydration - This cream for face, body and hands intensively nourishes and hydrates,"
 				+ "Multiple uses - NIVEA Creme canned nourishing cream is suitable for all skin types and all ages", imgproduct24, null, null, 18, tag1, null, tag3, null, null, "sold", true, false, false);
-		
 		Product product16 = new Product(user20,"Theoden King of Rohan Armor", "This costume is fully wearable and designed to be lightweight and comfortable, good for cosplay, larp, ​​and general use"
 				+ "It is made of high-density EVA foam, each piece is handcrafted and carefully engraved to match Rohan's designs.", imgproduct25, null, null, 70, null, null, null, tag4, null, "in stock", true, false, false);
-		
 		Product product17 = new Product(user16,"STAFF OF SARUMAN™ THE WHITE", "Sharp-edged and unyielding, in contrast to the twisted timber of his fellow Wizards' staves, Saruman's black staff holds a single orb of white stone amid four projecting fingers at its crown, "
 				, imgproduct26, null, null, 80, tag1, null, tag3, null, null, "sold", true, false, false);
 		Product product18 = new Product(company5,"Apple Watch", "Apple Watch is a wearable smartwatch that allows users to accomplish a variety of tasks, including making phone calls, sending text messages and reading email. .."
@@ -539,26 +551,27 @@ public class Loader {
 		
 		
 		//Creation Posts
-		Post pos1 = new Post(user1, "title 1", "description 1", imgpost);
-		Post pos2 = new Post(company5, "title 2", "description 2", imgpost1);
-		Post pos3 = new Post(user1, "title 3", "description 3", imgpost2);
-		Post pos4 = new Post(user7, "title 4", "description 4", imgpost3);
-		Post pos5 = new Post(company9, "title 5", "description 5", imgpost4);
-		Post pos6 = new Post(user17, "title 6", "description 6", imgpost5);
-		Post pos7 = new Post(user12, "title 7", "description 7", imgpost6);
-		Post pos8 = new Post(user1, "title 8", "description 8", imgpost7);
-		Post pos9 = new Post(company18, "title 9", "description 9", imgpost8);
-		Post pos10 = new Post(user1, "title 10", "description 10", imgpost9);
-		Post pos11 = new Post(user13, "title 11", "description 11", imgpost10);
-		Post pos12 = new Post(user1, "title 12", "description 12", imgpost11);
-		Post pos13 = new Post(user1, "title 13", "description 13", imgpost12);
-		Post pos14 = new Post(user12, "title 14", "description 14", imgpost13);
-		Post pos15 = new Post(company3, "title 15", "description 15", imgpost14);
-		Post pos16 = new Post(user11, "title 16", "description 16", imgpost15);
-		Post pos17 = new Post(company1, "title 17", "description 17", imgpost16);
-		Post pos18 = new Post(user10, "title 18", "description 18", imgpost17);
-		Post pos19 = new Post(user4, "title 19", "description 19", imgpost18);
-		Post pos20 = new Post(user12, "title 20", "description 20", imgpost19);
+		Post pos1 = new Post(user1, "Drawing =)", "We are making progress in the new draw it will be ready for the next week", imgpost);
+		Post pos2 = new Post(company5, "Previus to the Exposition", "We are abaut to start the new conference,"
+				+ " dont waste time and go for the online option in 10 mn!", imgpost1);
+		Post pos3 = new Post(user6, "Accidents while recording dammm...", "We were filming the scene where we lost the hobbits Merry and Pippin, and I kicked a helmet.. well here we are", imgpost2);
+		Post pos4 = new Post(user7, "15 years my friends!", "Its been 15 years since we finished The lord of the rings. Sucha a good work, i will miss it", imgpost3);
+		Post pos5 = new Post(company9, "Beach ball", "The summer its close and we are going to give one free beach ball for every 3 nivea items that you buy", imgpost4);
+		Post pos6 = new Post(user9, "Checking Email", "Even the wizards have to take a break and check the email, the wifi in the middle earth its at least good jajajaj", imgpost5);
+		Post pos7 = new Post(company10, "Run Forest Run", "We hope that the winner in the future marathon, wears an adidas, lets go runners", imgpost6);
+		Post pos8 = new Post(company13, "Wanna a trip?", "We spent a lot of time in the cities, we should leave them, take your seat and go!", imgpost7);
+		Post pos9 = new Post(user2, "Training time", "Taking lessons before an action scene, really interesting we are going here all day, let's make it worth it", imgpost8);
+		Post pos10 = new Post(company14, "Thirsty?", "Came on peopple there is now way you can miss a good cold beer, better if it is mahou trust us!", imgpost9);
+		Post pos11 = new Post(user15, "CGI", "This is it, my secret revealed thats is how you bring gollum to live, I hope you like it =)", imgpost10);
+		Post pos12 = new Post(user3, "which one is taller?", "well i am not gonna say, who could be taller me or the incredible Peter Jackson?!", imgpost11);
+		Post pos13 = new Post(company7, "We are open people!", "We just open a new store in Madrid dont waste time and take a look to the material, we hope you like it", imgpost12);
+		Post pos14 = new Post(company19, "New Printer", "The laptops are fine, but we have to keep making new produts, dont you think?", imgpost13);
+		Post pos15 = new Post(user5, "Jajajaj I love it", "I could never have imagined that this scene would generate so many memes", imgpost14);
+		Post pos16 = new Post(user11, "before the disaster", "Well we all know what is going to happen, at least I can't complain about the clothes, they were very comfortable", imgpost15);
+		Post pos17 = new Post(company11, "New Slogan?", "We are looking for new slogans, model, marketing... for the next season of summer anyone interested?", imgpost16);
+		Post pos18 = new Post(user10, "Comicon", "Fantastic Cosplay for the comiccon in San Diego this year, itsperfect keep bringing sucha pieces of art", imgpost17);
+		Post pos19 = new Post(company6, "Messi with us", "Yes, we got it, we finallly arrive to an agreement and we are all very happy", imgpost18);
+		Post pos20 = new Post(company4, "Sales", "We have new discounts this week dont miss them!!, we also have more 2x1 offers ", imgpost19);
 		
 		
 		
