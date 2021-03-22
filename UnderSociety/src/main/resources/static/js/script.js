@@ -413,7 +413,7 @@ function connectToChat(userName, to, tk) {
     let socket = new SockJS('https://localhost:8443/chat');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-        stompClient.subscribe("/topic/messages/" + userName, function (response) {
+        stompClient.subscribe("/message", function (response) {
             let data = JSON.parse(response.body);
             if (selectedUser == data.fromLogin) {
                 chatContainer.scrollTop(chatContainer[0].scrollHeight);

@@ -45,7 +45,7 @@ public class MessageController {
     	messagedb.save(m);
         boolean isExists = (t != null);
         if (isExists) {
-            simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
+            simpMessagingTemplate.convertAndSend("/message", message);
         }
     }
     
