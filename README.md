@@ -200,6 +200,7 @@ Leyenda del diagrama:
 
 ##### David Montero Garcia:
 
+Este miembro del equipo se encargó de ingresar todos los datos del loader implementado: descripciones, titulos, images..etc tanto para usuarios compañias, asi como los post y productos de cada uno, también ha implementado los buscadores de store(Reserved,In stock, Sold,Keywords), por último ha arreglado algunos errores en login/register, las traducciones de algunas de las pantallas que seguian estando es español y el css en todas las pantallas para poder colocar y administrar bien las imagenes los textos etc..
    
   | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
