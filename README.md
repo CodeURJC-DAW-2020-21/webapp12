@@ -165,6 +165,7 @@ En caso de que ocurra algun error se mostrará esta pantalla:
 
 ### Instrucciones de ejecución
 Para instalar y ejecutar la aplicación del grupo 12 se deben seguir los siguientes pasos:
+
 1-	Nos dirigimos al repositorio de githbub que se encuentra en este enlace: https://github.com/CodeURJC-DAW-2020-21/webapp12 (Asegurarse que nos encontramos en la rama master).
 2-	Nos dirigimos a MySQL y en nuestro servidor local creamos un schema vacío llamado “under_society_db” (Es importante que este vacío para que en la primera ejecución del programa se carguen los datos de la aplicación).
 3-	Una vez que tenemos descargado el proyecto, dentro del entorno de desarrollo Eclipse previamente preparado para trabajar con aplicaciones basadas en Spring, abrimos el archivo application.properties y ponemos la contraseña y usuario que tengamos en nuestra base de datos de MySql ejecutamos el programa.
