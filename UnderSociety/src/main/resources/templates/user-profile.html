@@ -511,15 +511,18 @@
 									<div class="product-feed-tab" id="info-user">
 									<div class="user-profile-ov">
 										<h3><a>Resumen</a></h3>
+										{{#userInfo}}
 										<p>{{userInfo}}</p>
+										{{/userInfo}}
 									</div>
 									<!--user-profile-ov end-->
 
 
 									<div class="user-profile-ov">
 										<h3><a>City</a></h3>
+										{{#userCity}}
 										<h4>{{userCity}}</h4>
-										
+										{{/userCity}}
 									</div>
 									<!--user-profile-ov end-->
 
