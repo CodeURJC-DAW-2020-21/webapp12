@@ -189,11 +189,11 @@ Leyenda del diagrama:
    
   | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1  | 	| [Ver commit]() | [ProfilePageController.java]() |
-   | #2	|	| [Ver commit]() | [myprofilefeed.html]() |
-   | #3	|  | [Ver commit]() | [UsersController.java]() |
-   | #4	|	| [Ver commit]() | [NavigationController.java]() |
-   | #5	| 	| [Ver commit]() | [StoreController.java]() |
+   | #1  | CSSImages Updated	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/ffc63f842fbc2e065ffbcaeff11b614b96b6980d) | [Style.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/resources/static/css/style.css) |
+   | #2	| Complete Script Filter	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/99d704795e6738d7bb7ecc5504119616b970f031) | [script.js](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/resources/static/js/script.js) |
+   | #3	| LoaderImagesUserCompany | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/f55d62bc44b0a54d8da4822d62cc2d00d69dfb97) | [Loader.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/models/Loader.java) |
+   | #4	| LoaderProductsImageDescription| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/d1202f45e744d9610af8f8b3be76c1bfda9b03ba) | [Loader.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/models/Loader.java) |
+   | #5	| LoaderPostsImages	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/a701426fe6364b0a66bdec419d3f4c5e1f7f97ac) | [Loader.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/java/undersociety/models/Loader.java) |
    
    
 ##### Enrique Martín Santorcaz:
