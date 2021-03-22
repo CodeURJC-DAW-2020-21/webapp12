@@ -116,6 +116,9 @@ Profile-feed: aqui el usuario puede sobreescribir algunos aspectos: nombre, imag
 Messages: El usuario podra enviar tanto mensajes a usuarios diferentes como a las compañias
 ![image](https://user-images.githubusercontent.com/61882320/111918111-d55e2d80-8a83-11eb-857b-aa7300f37307.png)
 
+Admin page: esta pantalla es para los usuarios admin aqui se muestran las estadisticas de los productos a si como sus estados
+![image](https://user-images.githubusercontent.com/61882320/111968315-4db30600-8af9-11eb-9215-6ca0aae0093a.png)
+
 User Profile Settings: Bookmark products, en esta pantalla vemos los productos que el usuario haya seguido en la pagina store
 ![image](https://user-images.githubusercontent.com/61882320/111918227-63d2af00-8a84-11eb-864f-4bf9940c753a.png)
 
@@ -148,6 +151,16 @@ Sign-In para loguearse
 
 Sign up registrarse desde el inicio en la aplicacion
 ![image](https://user-images.githubusercontent.com/61882320/111919020-18ba9b00-8a88-11eb-9637-0d89baa1f459.png)
+
+Forgot password: en caso de que el usuario olvide su contraseña podra poner un correo donde se le enviará la nueva contraseña
+![image](https://user-images.githubusercontent.com/61882320/111968495-7dfaa480-8af9-11eb-93e7-84a958aed844.png)
+
+En caso de que ocurra algun error se mostrará esta pantalla:
+![image](https://user-images.githubusercontent.com/61882320/111968605-9ec2fa00-8af9-11eb-90ef-6f73a9e5814f.png)
+
+###Diagrama de navegación
+![image](https://user-images.githubusercontent.com/61882320/111968775-cdd96b80-8af9-11eb-8f2e-e62df7ae0339.png)
+
 
 
 ### Instrucciones de ejecución
