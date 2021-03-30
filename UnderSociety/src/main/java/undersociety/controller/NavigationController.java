@@ -77,7 +77,6 @@ public class NavigationController{
 		model.addAttribute("token", token.getToken());
 		Users follow = userService.getUser(username);
 		Users actual = userService.getUser(request.getUserPrincipal().getName());
-		System.out.println("iMAGE: "+follow.getImageprofile());
 		if(follow.getImageprofile()!=null) {
 			model.addAttribute("imageProfile","https://localhost:8443/api/imageThemeProfile");
 			
