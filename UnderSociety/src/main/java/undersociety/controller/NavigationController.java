@@ -14,11 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import undersociety.models.Users;
 import undersociety.services.AdminService;
 import undersociety.services.PostsService;
 import undersociety.services.ProductService;
+import undersociety.services.SendMailService;
 import undersociety.services.UserService;
 
 
@@ -29,6 +31,8 @@ public class NavigationController{
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private  SendMailService sendmail;
 	
 	@Autowired
 	private UserService userService;
@@ -230,6 +234,12 @@ public class NavigationController{
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		return "forgotPassword";
+	}
+	
+	@PostMapping("forgotpasswordmail")
+	public String sendMail(@RequestParam String email) {
+		sendmail.sendMail("undersocietyprueba@gmail.com", email, "Forgot Password", "Forgot password prueba");
+		return "sign-in";
 	}
 	
 }
