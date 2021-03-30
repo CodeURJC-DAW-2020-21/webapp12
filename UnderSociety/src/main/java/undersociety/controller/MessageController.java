@@ -43,10 +43,7 @@ public class MessageController {
     	m.setMessage(message.getMessage());
     	m.setTime(message.getTime());
     	messagedb.save(m);
-        boolean isExists = (t != null);
-        if (isExists) {
-            simpMessagingTemplate.convertAndSend("/message", message);
-        }
+        simpMessagingTemplate.convertAndSend("/message/"+to, message);
     }
     
     @GetMapping("/api/getChad")
