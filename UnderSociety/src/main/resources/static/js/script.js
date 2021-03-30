@@ -308,11 +308,9 @@ $(window).on("load", function () {
 
     });
 
-
-
-
-
 });
+
+//----------------------------------------------------------------------------UPLOAD IMAGE----------------------------------------------------------------
 
 $(document).on("click", "i.del", function () {
     var input = $(this).parent().children('label').children();
@@ -320,6 +318,8 @@ $(document).on("click", "i.del", function () {
     input.val('');
     imagepreview.css("background-image", "url()");
 });
+
+
 $(function () {
     $(document).on("change", ".uploadFile", function () {
         var uploadFile = $(this);
@@ -331,19 +331,12 @@ $(function () {
             reader.readAsDataURL(files[0]); // read the local file
 
             reader.onloadend = function () { // set image data as background of div
-                //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
                 uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(" + this.result + ")");
             }
         }
 
     });
 });
-
-
-
-
-
-
 
 
 $(document).ready(function () {
@@ -407,13 +400,13 @@ sendButtonMessage.on('click', function () {
 
 
 
-function connectToChat(userName, to, tk) {
+function connectToChat(user, to, tk) {
     token = tk;
-    useractual = userName;
+    useractual = user;
     let socket = new SockJS('https://localhost:8443/chat');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-        stompClient.subscribe("/message", function (response) {
+        stompClient.subscribe("/message/"+useractual, function (response) {
             let data = JSON.parse(response.body);
             if (selectedUser == data.fromLogin) {
                 chatContainer.scrollTop(chatContainer[0].scrollHeight);
@@ -445,7 +438,7 @@ function connectToChat(userName, to, tk) {
         let users = response.content;
         let usersTemplateHTML = "";
         for (let i = 0; i < users.length; i++) {
-            if (users[i].username != userName) {
+            if (users[i].username != user) {
                 usersTemplateHTML = usersTemplateHTML.concat("<a onclick='selectUser( \"" + users[i].username + "\" )' class='list-group-item list-group-item-action list-group-item-light rounded-0'>");
                 usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/api/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
                 usersTemplateHTML = usersTemplateHTML.concat("<div class='media-body ml-4'>");
@@ -611,7 +604,7 @@ $("#clearbutton").on("click", function () {
 
 
 
-//-------------------------------------------------------------------OTHER-------------------------------------------------------------------------
+//-------------------------------------------------------------------LOADS ITEMS-------------------------------------------------------------------------
 
 
 
@@ -983,115 +976,12 @@ $(".productsUser").on("click", function () {
 });
 
 
-
-function clearAllFilter() {
-    document.getElementById('word').value = '';
-    $('.selectall').attr('checked', false);
-    $('.slider-input').attr('value', '5,50');
-    $('.high').attr('style', 'left: 149px;');
-    $('.pointer.low').attr('style', 'left: 9px;');
-    $('.selected-bar').attr('style', 'width: 140px; left: 15.5px;');
-    $('.pointer-label.high').text('50');
-    $('.pointer-label.low').text('0');
-    $('#menu option[value="0"]').attr('selected', true);
-}
-
-
-function clearSlider() {
-    $('.slider-input').attr('value', '5,50');
-    $('.high').attr('style', 'left: 149px;');
-    $('.pointer.low').attr('style', 'left: 9px;')
-    $('.selected-bar').attr('style', 'width: 140px; left: 15.5px;')
-    $('.pointer-label.high').text('50')
-    $('.pointer-label.low').text('0')
-
-}
+//------------------------------------------------------------------OTHER SYSTEM-------------------------------------------------------------------------
 
 function readmore(idpost) {
     $("#readmore" + idpost).parent().children(".row").children(".description-store").toggleClass("show");
 }
 
-function searchBarProducts() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myULS");
-    li = ul.getElementsByClassName('post-bar');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        s = li[i].getElementsByClassName("job_descp")[0];
-        a = s.getElementsByTagName("h3")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-function searchBarPosts() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByClassName('post-bar');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        s = li[i].getElementsByClassName("job_descp")[0];
-        a = s.getElementsByTagName("h3")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-function searchBarUsers() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByClassName("col-lg-3 col-md-4 col-sm-6 col-12");
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        s = li[i].getElementsByClassName("company_profile_info")[0];
-        m = s.getElementsByClassName("company-up-info")[0];
-        a = m.getElementsByTagName("h3")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-function searchBarCompany() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByClassName("col-lg-3 col-md-4 col-sm-6");
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        s = li[i].getElementsByClassName("company_profile_info")[0];
-        m = s.getElementsByClassName("company-up-info")[0];
-        a = m.getElementsByTagName("h3")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
 
 function colorFollow(color) {
     $(".flww").css("background-color", color);
@@ -1159,6 +1049,106 @@ function mark(idproduct) {
     }
 }
 
+//------------------------------------------------------BAR SEARCH-------------------------------------------------------------------------
+
+function searchBarProducts() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job_descp")[0];
+        a = s.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function searchBarPosts() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByClassName('post-bar');
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job_descp")[0];
+        a = s.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function searchBarUsers() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByClassName("col-lg-3 col-md-4 col-sm-6 col-12");
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("company_profile_info")[0];
+        m = s.getElementsByClassName("company-up-info")[0];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function searchBarCompany() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByClassName("col-lg-3 col-md-4 col-sm-6");
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("company_profile_info")[0];
+        m = s.getElementsByClassName("company-up-info")[0];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+//-----------------------------------------------------------------------FILTER----------------------------------------------------------
+
+function clearAllFilter() {
+    document.getElementById('word').value = '';
+    $('.selectall').attr('checked', false);
+    $('.slider-input').attr('value', '5,50');
+    $('.high').attr('style', 'left: 149px;');
+    $('.pointer.low').attr('style', 'left: 9px;');
+    $('.selected-bar').attr('style', 'width: 140px; left: 15.5px;');
+    $('.pointer-label.high').text('50');
+    $('.pointer-label.low').text('0');
+    $('#menu option[value="0"]').attr('selected', true);
+}
+
+
+function clearSlider() {
+    $('.slider-input').attr('value', '5,50');
+    $('.high').attr('style', 'left: 149px;');
+    $('.pointer.low').attr('style', 'left: 9px;')
+    $('.selected-bar').attr('style', 'width: 140px; left: 15.5px;')
+    $('.pointer-label.high').text('50')
+    $('.pointer-label.low').text('0')
+
+}
 
 function SearchKeyWords() {
     var input, filter, ul, li, a, i, txtValue;
@@ -1166,7 +1156,6 @@ function SearchKeyWords() {
     filter = input.value.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
-    // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job_descp")[0];
         m = s.getElementsByClassName("skill-tags")[0];
@@ -1191,7 +1180,6 @@ function SearchStatus1() {
     filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
-    // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job-status-bar")[0];
         m = s.getElementsByClassName("col-lg-3")[0];
@@ -1211,7 +1199,6 @@ function SearchStatus2() {
     filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
-    // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job-status-bar")[0];
         m = s.getElementsByClassName("col-lg-3")[0];
@@ -1231,7 +1218,6 @@ function SearchStatus3() {
     filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
-    // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job-status-bar")[0];
         m = s.getElementsByClassName("col-lg-3")[0];
