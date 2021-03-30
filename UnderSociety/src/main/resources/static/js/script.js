@@ -438,7 +438,7 @@ function connectToChat(user, to, tk) {
         let users = response.content;
         let usersTemplateHTML = "";
         for (let i = 0; i < users.length; i++) {
-            if (users[i].username != userName) {
+            if (users[i].username != user) {
                 usersTemplateHTML = usersTemplateHTML.concat("<a onclick='selectUser( \"" + users[i].username + "\" )' class='list-group-item list-group-item-action list-group-item-light rounded-0'>");
                 usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/api/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
                 usersTemplateHTML = usersTemplateHTML.concat("<div class='media-body ml-4'>");

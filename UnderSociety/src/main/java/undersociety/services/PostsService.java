@@ -1,18 +1,22 @@
 package undersociety.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import undersociety.models.LikeAPost;
 import undersociety.models.Post;
+import undersociety.models.PostModel;
 import undersociety.models.Users;
 import undersociety.repositories.LikesRepository;
 import undersociety.repositories.PostRepository;
@@ -22,7 +26,7 @@ import undersociety.repositories.UserRepository;
 public class PostsService {
 	
 	@Autowired
-	 private UserRepository userRepository;
+	private UserRepository userRepository;
 		
 	@Autowired
 	private PostRepository postsrepo;
@@ -73,4 +77,55 @@ public class PostsService {
 		return likerepo.findByiduser(s);
 	}
 	
+	public List<PostModel> getPostIndex(String username){
+		Page<Post> p = postsrepo.findAll(PageRequest.of(0, 10,Sort.by("idpost").descending()));
+		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found")));
+		List<PostModel> postsmodels = new ArrayList<>();
+		List<Integer> likes = new ArrayList<>();
+		for (LikeAPost like : lp) {
+			likes.add(like.getIdpost().getIdpost());
+		}
+		for (Post post : p) {
+			PostModel postmodel = new PostModel();
+			if(post.getIduser().getUserprofile()) {
+				postmodel.setTypeUser("user");
+			}else {
+				postmodel.setTypeUser("company");
+			}
+			if(likes.contains(post.getIdpost())) {
+				postmodel.setLike("la la-heart");
+			}else {
+				postmodel.setLike("la la-heart-o");
+			}
+			postmodel.setPost(post);
+			postsmodels.add(postmodel);
+		}
+		return postsmodels;
+	}
+	
+	public List<PostModel> getPostUserPage(Users actual, Users follow){
+		Page<Post> p = postsrepo.findByiduser(follow,PageRequest.of(0, 10,Sort.by("idpost").descending()));		
+		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(actual.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
+		List<PostModel> postsmodels = new ArrayList<>();
+		List<Integer> likes = new ArrayList<>();
+		for (LikeAPost like : lp) {
+			likes.add(like.getIdpost().getIdpost());
+		}
+		for (Post post : p) {
+			PostModel postmodel = new PostModel();
+			if(post.getIduser().getUserprofile()) {
+				postmodel.setTypeUser("user");
+			}else {
+				postmodel.setTypeUser("company");
+			}
+			if(likes.contains(post.getIdpost())) {
+				postmodel.setLike("la la-heart");
+			}else {
+				postmodel.setLike("la la-heart-o");
+			}
+			postmodel.setPost(post);
+			postsmodels.add(postmodel);
+		}
+		return postsmodels;
+	}
 }

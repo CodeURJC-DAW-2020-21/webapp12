@@ -111,7 +111,8 @@ public class UsersController {
     
     @PostMapping("/api/modifyUser")
     public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
-    	userService.modifyDataUser(user, request.getUserPrincipal().getName(), image);
+    	userService.usernameIsToken(user.getUsername());
+    	userService.modifyDataUser(user, request.getUserPrincipal().getName(), image,null);
     	response.sendRedirect("/profile-account-setting");
     }
     

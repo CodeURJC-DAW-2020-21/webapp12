@@ -1,6 +1,7 @@
 package undersociety.services;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import undersociety.models.Message;
+import undersociety.models.MessageModel;
 import undersociety.models.Roles;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
@@ -65,10 +68,17 @@ public class UserService {
 		return userRepository.findAll(page);
 	}
 	
-	public Page<Users> getUsers(){
+	public Page<Users> getAllUsers(){
         return userRepository.findAll(PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
+	public Page<Users> getUsers(){
+        return userRepository.findByuserprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
+	}
+	
+	public Page<Users> getCompanies(){
+        return userRepository.findBycompanyprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
+	}
 	
 	public void registerUsers(Users user, MultipartFile image) throws IOException {
 
@@ -147,15 +157,27 @@ public class UserService {
 		return relationrepo.findByuserone(userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found")));
 	}
 
-	@Modifying
-	public void modifyDataUser(Users user, String username, MultipartFile image) throws IOException {
-		Users prev = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+	public void usernameIsToken(String username) {
 		if(userRepository.existsIdusersByUsername(username)) {
 			throw new NoSuchElementException("USERNAME IS TOKEN");
 		}
-		if(!image.isEmpty()) {
-			prev.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+	}
+	
+	@Modifying
+	public void modifyDataUser(Users user, String username, MultipartFile image, MultipartFile imageProfilePage) throws IOException {
+		Users prev = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+		if(image != null){
+			if(!image.isEmpty()) {
+				prev.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+			}
 		}
+		
+		if(imageProfilePage != null){
+			if(!imageProfilePage.isEmpty()) {
+	    		prev.setImageprofile(BlobProxy.generateProxy(imageProfilePage.getInputStream(), imageProfilePage.getSize()));
+	    	}
+		}
+		
 		if(!user.getUsername().isEmpty()) {
 			prev.setUsername(user.getUsername());
 		}
@@ -202,5 +224,49 @@ public class UserService {
     	rolesRepository.deleteByIduser(prev);
     	userRepository.deleteById(prev.getIdusers());
 	}
+	
+	public void saveMessage(String to , MessageModel message) {
+		Users f =  userRepository.findByusername(message.getFromLogin()).orElseThrow(() -> new NoSuchElementException("User not found"));
+    	Users t =  userRepository.findByusername(to).orElseThrow(() -> new NoSuchElementException("User not found"));
+    	Message m = new Message();
+    	m.setIduser(f);
+    	m.setIduserto(t);
+    	m.setMessage(message.getMessage());
+    	m.setTime(message.getTime());
+    	messagerepo.save(m);
+	}
 
+	public List<Message> getChat(String from, String to) {
+    	Users f = userRepository.findByusername(from).orElseThrow(() -> new NoSuchElementException("User not found"));
+		Users t = userRepository.findByusername(to).orElseThrow(() -> new NoSuchElementException("User not found"));
+    	List<Message> m = messagerepo.findByIduserAndIduserto(t, f);
+    	List<Message> m2 = messagerepo.findByIduserAndIduserto(f, t);
+    	m.addAll(m2);
+    	Collections.sort(m);
+    	return m;
+	}
+	
+	public List<Users> getListMostFollowed(){
+		return relationrepo.findMostFollowers(PageRequest.of(0, 5));
+	}
+	
+	public List<UsersRelations> getFollowing(String username){
+		Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return relationrepo.findByuserone(s);
+	}
+	
+	public List<UsersRelations> getFollowers(String username){
+		Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return relationrepo.findByusertwo(s);	
+	}
+	
+	public String existsRealtion(Users actual,Users follow) {
+		String color = "#53D690";
+		UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual, follow);
+    	if(s != null) {
+    		color = "#e44d3a";
+    	}
+    	return color;
+	}
+	
 }
