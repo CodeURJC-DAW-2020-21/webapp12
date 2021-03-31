@@ -43,7 +43,7 @@ public class UsersController {
 	
     @GetMapping("/api/fetchAllUsers")
     public Page<Users> fetchAll() {
-        return userService.getUsers();
+        return userService.getUsersPage();
     }
     
     @GetMapping("/api/getUserPage")
@@ -86,7 +86,7 @@ public class UsersController {
     
     @GetMapping("/api/moreUsers")
     public Page<Users> getMoreUsers(Pageable page){    	
-    	return userService.getUsers();
+    	return userService.getUsersPage();
     }
     
     @GetMapping("/api/moreCompany")

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -76,15 +78,15 @@ public class UserService {
         return userRepository.findAll();
 	}
 	
-	public Page<Users> getAllUsers(){
+	public Page<Users> getAllUsersPage(){
         return userRepository.findAll(PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
-	public Page<Users> getUsers(){
+	public Page<Users> getUsersPage(){
         return userRepository.findByuserprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
-	public Page<Users> getCompanies(){
+	public Page<Users> getCompaniesPage(){
         return userRepository.findBycompanyprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
@@ -217,7 +219,7 @@ public class UserService {
 		userRepository.save(prev);
 	}
 	
-	
+	@Transactional
 	public void deleteUser(String username) {
     	Users prev = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
 		listproductrepo.deleteByIduser(prev);

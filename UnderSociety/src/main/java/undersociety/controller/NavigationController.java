@@ -118,7 +118,7 @@ public class NavigationController{
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		model.addAttribute("users",userService.getUsers());
+		model.addAttribute("users",userService.getUsersPage());
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "profiles";
 	}
@@ -128,7 +128,7 @@ public class NavigationController{
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		model.addAttribute("companies",userService.getCompanies());
+		model.addAttribute("companies",userService.getCompaniesPage());
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		return "companies";
 	}
