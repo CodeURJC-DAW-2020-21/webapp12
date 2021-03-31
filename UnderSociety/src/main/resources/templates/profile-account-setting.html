@@ -103,7 +103,7 @@
 					<!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="https://localhost:8443/api/imageprofile" alt="">
+							<img src="https://localhost:8443/imageprofile" alt="">
 							<a href="#" title=""></a>
 							<i class="la la-sort-down"></i>
 						</div>
@@ -181,7 +181,7 @@
 											{{#productsList}}
 											<div class="request-details" id="product{{idproduct.idproduct}}">
 												<div class="noty-user-img">
-													<img src="https://localhost:8443/api/imageProduct0/{{idproduct.idproduct}}"
+													<img src="https://localhost:8443/imageProduct0/{{idproduct.idproduct}}"
 														alt="">
 												</div>
 												<div class="request-info">
@@ -283,7 +283,7 @@
 									aria-labelledby="nav-password-tab">
 									<div class="acc-setting">
 										<h3>Account Setting</h3>
-										<form action="/api/changePassword" method="POST">
+										<form action="/changePassword" method="POST">
 											<div class="cp-field">
 												<h5>Old Password</h5>
 												<div class="cpp-fiel">
@@ -437,7 +437,7 @@
 											{{#followersList}}
 											<div class="request-details" id="follower{{iduserrelation}}">
 												<div class="noty-user-img">
-													<img src="https://localhost:8443/api/imageprofile/{{usertwo.username}}"
+													<img src="https://localhost:8443/imageprofile/{{usertwo.username}}"
 														alt="">
 												</div>
 												<div class="request-info">
@@ -463,7 +463,7 @@
 									aria-labelledby="nav-deactivate-tab">
 									<div class="acc-setting">
 										<h3>Deactivate Account</h3>
-										<form action="/api/deleteUser" method="POST">
+										<form action="/deleteUser" method="POST">
 											<div class="cp-field">
 												<h5>Email</h5>
 												<div class="cpp-fiel">
@@ -498,7 +498,7 @@
 									aria-labelledby="nav-modify-tab">
 									<div class="acc-setting">
 										<h3>Information User</h3>
-										<form action="/api/modifyUser" method="POST" enctype="multipart/form-data">
+										<form action="/modifyUser" method="POST" enctype="multipart/form-data">
 											<div class="cp-field">
 												<h5>Image Profile</h5>
 												<div class="cpp-fiel">
@@ -506,7 +506,7 @@
 														<div class="row">
 															<div class="col-md-3 imgUp">
 																<div class="imagePreview"
-																	style="background-image: url(https://localhost:8443/api/imageprofile);">
+																	style="background-image: url(https://localhost:8443/imageprofile);">
 																</div>
 																<label class="btn btn-primary">Upload<input
 																		name="image" type="file" class="uploadFile img"

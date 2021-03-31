@@ -41,30 +41,30 @@ public class UsersController {
 	private PasswordEncoder encoder;
 
 	
-    @GetMapping("/api/fetchAllUsers")
+    @GetMapping("/fetchAllUsers")
     public Page<Users> fetchAll() {
         return userService.getUsersPage();
     }
     
-    @GetMapping("/api/getUserPage")
+    @GetMapping("/getUserPage")
     public Page<Users> getUserPage(Pageable page) {
         return userService.getUsersPage(page);
     }
     
-    @PostMapping("/api/registerUser")
+    @PostMapping("/registerUser")
 	private void registerUser(Users user,HttpServletResponse response , HttpServletRequest sesion, @RequestParam(required = false) MultipartFile image) throws IOException, SQLException {
     	userService.registerUsers(user, image);
     	response.sendRedirect("/sign-in");
     }
     
-    @PostMapping("/api/registerCompany")
+    @PostMapping("/registerCompany")
 	private void registerCompany(Users user,HttpServletResponse response, HttpServletRequest sesion, @RequestParam(required = false) MultipartFile image) throws IOException {
     	userService.registerCompanies(user, image);
     	response.sendRedirect("/sign-in");
     }
     
     
-    @GetMapping("/api/imageprofile")
+    @GetMapping("/imageprofile")
     private ResponseEntity<Object> downloadImage(HttpServletRequest request) throws SQLException, IOException{
     	Users s = userService.getUser(request.getUserPrincipal().getName());
     	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
@@ -74,7 +74,7 @@ public class UsersController {
 				.body(file);
     }
     
-    @GetMapping("/api/imageprofile/{username}")
+    @GetMapping("/imageprofile/{username}")
     private ResponseEntity<Object> downloadImageProfile(@PathVariable String username) throws SQLException, IOException{
     	Users s = userService.getUser(username);
     	Resource file = new InputStreamResource(s.getUserimg().getBinaryStream());
@@ -84,22 +84,22 @@ public class UsersController {
 				.body(file);
     }
     
-    @GetMapping("/api/moreUsers")
+    @GetMapping("/moreUsers")
     public Page<Users> getMoreUsers(Pageable page){    	
     	return userService.getUsersPage();
     }
     
-    @GetMapping("/api/moreCompany")
+    @GetMapping("/moreCompany")
     public Page<Users> getMoreCompany(Pageable page){    	
     	return userService.getCompanies(page);
     }
     
-    @PostMapping("/api/follow")
+    @PostMapping("/follow")
     public boolean follow(HttpServletRequest request, @RequestParam String username) {
     	return userService.follow(request.getUserPrincipal().getName(), username);
     }
     
-    @PostMapping("/api/unfollowlist")
+    @PostMapping("/unfollowlist")
     public boolean unfollow(@RequestParam int idrelation) {
     	return userService.unfollow(idrelation);
     }
@@ -109,14 +109,14 @@ public class UsersController {
 		return userService.getFollows(request.getUserPrincipal().getName());
 	}
     
-    @PostMapping("/api/modifyUser")
+    @PostMapping("/modifyUser")
     public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
     	userService.usernameIsToken(user.getUsername());
     	userService.modifyDataUser(user, request.getUserPrincipal().getName(), image,null);
     	response.sendRedirect("/profile-account-setting");
     }
     
-    @PostMapping("/api/changePassword")
+    @PostMapping("/changePassword")
     public void modifyPassword(HttpServletResponse response, HttpServletRequest request, @RequestParam String oldpassword,  @RequestParam String newpassword,  @RequestParam String repeatpassword) throws IOException {
     	Users prev = userService.getUser(request.getUserPrincipal().getName());
     	String page = "/error";
@@ -130,7 +130,7 @@ public class UsersController {
     	response.sendRedirect(page);
     }
     
-    @PostMapping("/api/deleteUser")
+    @PostMapping("/deleteUser")
     public void deleteUser(HttpServletResponse response, HttpServletRequest request, @RequestParam String email, @RequestParam String pass, @RequestParam String explication) throws IOException {
     	Users prev = userService.getUser(request.getUserPrincipal().getName());
     	if(email.equals(prev.getEmail())) {
