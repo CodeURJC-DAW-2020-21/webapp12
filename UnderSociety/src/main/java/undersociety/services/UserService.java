@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
-
+import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,12 +60,20 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	public Optional<Users> getUserId(int id){
+		return userRepository.findById(id);
+	}
+	
 	public Users getUser(String username) {
 		return (userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found")));
 	}
 	
 	public Page<Users> getUsersPage(Pageable page){
 		return userRepository.findAll(page);
+	}
+	
+	public List<Users> getAll(){
+        return userRepository.findAll();
 	}
 	
 	public Page<Users> getAllUsers(){

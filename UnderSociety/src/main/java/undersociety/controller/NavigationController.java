@@ -47,7 +47,7 @@ public class NavigationController{
 	private String getSignIn(Model model,HttpServletRequest request) throws IOException {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		adminService.loadDataBase();
+		/*adminService.loadDataBase();*/
 		return "sign-in";
 	}
     

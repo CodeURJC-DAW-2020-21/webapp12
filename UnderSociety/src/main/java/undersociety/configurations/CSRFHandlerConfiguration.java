@@ -9,7 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
+/*
 @SuppressWarnings("deprecation")
 @Configuration
 public class CSRFHandlerConfiguration extends WebMvcConfigurerAdapter {
@@ -30,4 +30,4 @@ class CSRFHandlerInterceptor implements HandlerInterceptor {
 			}
 		}
 	}
-}
+}*/
