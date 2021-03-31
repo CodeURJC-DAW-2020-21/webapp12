@@ -1,4 +1,4 @@
-package undersociety.api.users;
+package undersociety.controller.api.users;
 
 import java.io.IOException;
 import java.net.URI;
