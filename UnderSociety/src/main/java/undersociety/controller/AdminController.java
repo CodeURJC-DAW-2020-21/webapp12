@@ -28,7 +28,7 @@ public class AdminController {
 	
 	
 	
-	@GetMapping("/api/admin")
+	@GetMapping("/admindata")
 	public AdminData getAdminData() {
 		AdminData d = new AdminData();
 	

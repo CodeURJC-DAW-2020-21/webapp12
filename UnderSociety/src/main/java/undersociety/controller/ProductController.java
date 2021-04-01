@@ -33,28 +33,28 @@ public class ProductController {
 	@Autowired
 	 private ProductService productService;
 	
-	@PostMapping("/api/uploadProduct")
+	@PostMapping("/uploadProduct")
 	private void uploadProduct(HttpServletResponse response, HttpServletRequest request, Product product, @RequestParam(required = false) MultipartFile imag0, @RequestParam(required = false) MultipartFile imag1, @RequestParam(required = false) MultipartFile imag2, @RequestParam(required = false) boolean tag, @RequestParam(required = false) boolean tagtwo, @RequestParam(required = false) boolean tagthree, @RequestParam(required = false) boolean tagfour, @RequestParam(required = false) boolean tagfive) throws IOException {
 		productService.saveProduct(request.getUserPrincipal().getName(), product, imag0, imag1, imag2, tag, tagtwo, tagthree, tagfour, tagfive);
 		response.sendRedirect("/index");
 	}
 	
-	@GetMapping("/api/getMoreProducts")
+	@GetMapping("/getMoreProducts")
 	private Page<Product> getMoreProduct(Pageable page){
 		return productService.getProductsPage(page);
 	}
 	
-	@GetMapping("/api/getMoreProductsUser")
+	@GetMapping("/getMoreProductsUser")
 	private Page<Product> getMoreProductsUser(Pageable page, @RequestParam String username){
 		return productService.getProductsPageByUser(username, page);
 	}
 	
-	@GetMapping("/api/getProducts")
+	@GetMapping("/getProducts")
 	private Page<Product> getProducts(Pageable page){
 		return productService.getProductsPage(page);
 	}
 	
-	@GetMapping("/api/imageProduct0/{idproduct}")
+	@GetMapping("/imageProduct0/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct0( @PathVariable int idproduct) throws SQLException{
 		Product p = productService.getProduct(idproduct);
     	Resource file = new InputStreamResource(p.getImage0().getBinaryStream());
@@ -64,7 +64,7 @@ public class ProductController {
 				.body(file);
     }
 	
-	@GetMapping("/api/imageProduct1/{idproduct}")
+	@GetMapping("/imageProduct1/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct1( @PathVariable int idproduct) throws SQLException{
 		Product p = productService.getProduct(idproduct);
 		Resource file = new InputStreamResource(p.getImage1().getBinaryStream());
@@ -74,7 +74,7 @@ public class ProductController {
 				.body(file);
     }
 	
-	@GetMapping("/api/imageProduct2/{idproduct}")
+	@GetMapping("/imageProduct2/{idproduct}")
     private ResponseEntity<Object> downloadImageProduct2( @PathVariable int idproduct) throws SQLException{
 		Product p = productService.getProduct(idproduct);
 		Resource file = new InputStreamResource(p.getImage2().getBinaryStream());
@@ -84,19 +84,19 @@ public class ProductController {
 				.body(file);
     }
 	
-	@GetMapping("/api/getBookmark")
+	@GetMapping("/getBookmark")
 	public List<ListProducts> getLikes(HttpServletRequest request) {
 		return productService.getBookmarks(request.getUserPrincipal().getName());
 	}
 	
-	@PostMapping("/api/addProduct")
+	@PostMapping("/addProduct")
 	public boolean addProduct(@RequestParam int idproduct, HttpServletRequest request) {
 		boolean succes = true;
 		productService.addBookmark(request.getUserPrincipal().getName(), idproduct);
 		return succes;
 	}
 	
-	@PostMapping("/api/dropProduct")
+	@PostMapping("/dropProduct")
 	public boolean dropProduct(@RequestParam int idproduct, HttpServletRequest request) {
 		boolean succes = true;
 		productService.dropBookmark(request.getUserPrincipal().getName(), idproduct);

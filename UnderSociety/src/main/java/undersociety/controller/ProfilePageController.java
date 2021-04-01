@@ -34,21 +34,21 @@ public class ProfilePageController {
 	@Autowired
 	private UserService userService;
 	
-    @PostMapping("/api/changeImageProfile")
+    @PostMapping("/changeImageProfile")
     public void modifyimageThemeProfile(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
 		Users prev = userService.getUser(request.getUserPrincipal().getName());
     	userService.modifyDataUser(prev, request.getUserPrincipal().getName(), null, imageFile);
     	response.sendRedirect("/my-profile-feed");
     }
 	
-    @PostMapping("/api/changeUserImage")
+    @PostMapping("/changeUserImage")
     public void modifyUserImg(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile imageUserFile) throws IOException {
 		Users prev = userService.getUser(request.getUserPrincipal().getName());
     	userService.modifyDataUser(prev, request.getUserPrincipal().getName(), imageUserFile, null);
     	response.sendRedirect("/my-profile-feed");
     }
 	
-	@PostMapping("/api/changeUserInfo")
+	@PostMapping("/changeUserInfo")
 	public void modifyUserInfo(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) String userInfo) throws IOException {
 		Users prev = userService.getUser(request.getUserPrincipal().getName());
     	if(userInfo != null) {
@@ -59,7 +59,7 @@ public class ProfilePageController {
     }
 	
 	@Modifying
-	@PostMapping("/api/changeUserCity")
+	@PostMapping("/changeUserCity")
 	public void modifyUserCity(HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) String userCity) throws IOException {
     	Users prev = userService.getUser(request.getUserPrincipal().getName());
     	if(userCity != null) {
@@ -70,7 +70,7 @@ public class ProfilePageController {
     	response.sendRedirect("/my-profile-feed");
     }
 	
-	@GetMapping("/api/imageThemeProfile")
+	@GetMapping("/imageThemeProfile")
     private ResponseEntity<Object> downloadImage(HttpServletRequest request) throws SQLException{
     	Users s = userService.getUser(request.getUserPrincipal().getName());
     	Resource file = new InputStreamResource(s.getImageprofile().getBinaryStream());

@@ -41,15 +41,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers( "/fonts/**").permitAll();
 		 http.authorizeRequests().antMatchers( "/ajax/**").permitAll();
 		 http.authorizeRequests().antMatchers("/sign-in").permitAll();
-		 http.authorizeRequests().antMatchers("/api/registerUser").permitAll();
-		 http.authorizeRequests().antMatchers("/api/registerCompany").permitAll();
+		 http.authorizeRequests().antMatchers("/registerUser").permitAll();
+		 http.authorizeRequests().antMatchers("/registerCompany").permitAll();
 		 http.authorizeRequests().antMatchers("/forgotPassword").permitAll();
 		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
 		 http.authorizeRequests().antMatchers("/error").permitAll();
 		 http.authorizeRequests().antMatchers("httpss://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js").permitAll();
-		 http.authorizeRequests().antMatchers("/api/**").hasAnyRole("USER");
-		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
+		 http.authorizeRequests().antMatchers("/api/**").permitAll();
 
+		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
 
@@ -59,10 +59,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.formLogin().defaultSuccessUrl("/index",true);
 		 http.formLogin().failureUrl("/sign-in");
 		 
-
 		 http.logout().logoutUrl("/logout");
 		 http.logout().logoutSuccessUrl("/");		 
 		 // Disable CSRF at the moment
+		/*http.csrf().disable();*/
 	}
 
 }

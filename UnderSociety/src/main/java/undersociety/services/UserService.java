@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import javax.transaction.Transactional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,10 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	public Optional<Users> getUserId(int id){
+		return userRepository.findById(id);
+	}
+	
 	public Users getUser(String username) {
 		return (userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found")));
 	}
@@ -68,15 +74,19 @@ public class UserService {
 		return userRepository.findAll(page);
 	}
 	
-	public Page<Users> getAllUsers(){
+	public List<Users> getAll(){
+        return userRepository.findAll();
+	}
+	
+	public Page<Users> getAllUsersPage(){
         return userRepository.findAll(PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
-	public Page<Users> getUsers(){
+	public Page<Users> getUsersPage(){
         return userRepository.findByuserprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
-	public Page<Users> getCompanies(){
+	public Page<Users> getCompaniesPage(){
         return userRepository.findBycompanyprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
@@ -209,7 +219,7 @@ public class UserService {
 		userRepository.save(prev);
 	}
 	
-	
+	@Transactional
 	public void deleteUser(String username) {
     	Users prev = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
 		listproductrepo.deleteByIduser(prev);
@@ -268,5 +278,20 @@ public class UserService {
     	}
     	return color;
 	}
+
+	public void saveRelation(UsersRelations relation) {
+		relationrepo.save(relation);
+	}
 	
+	public List<UsersRelations> getAllRelations(){
+        return relationrepo.findAll();
+	}
+	
+	public Optional<UsersRelations> getRelations(int id){
+        return relationrepo.findById(id);
+	}
+
+	public void deleteRelation(UsersRelations usersRelations) {
+		relationrepo.delete(usersRelations);
+	}
 }

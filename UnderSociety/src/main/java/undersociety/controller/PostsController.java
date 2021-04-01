@@ -33,28 +33,28 @@ public class PostsController {
 	 private PostsService postService;
 			
 	
-	@PostMapping("/api/uploadPost")
+	@PostMapping("/uploadPost")
 	private void uploadPost(Model model,HttpServletResponse response, HttpServletRequest request,Post post,  @RequestParam(required = false) MultipartFile imag0) throws IOException {
 		postService.savePost(request.getUserPrincipal().getName(), post, imag0);
 		response.sendRedirect("/index");
 	}
 	
-	@GetMapping("/api/getPosts")
+	@GetMapping("/getPosts")
 	private Page<Post> getPosts(Pageable page){
 		return postService.getPosts(page);
 	}
 	
-	@GetMapping("/api/getMorePosts")
+	@GetMapping("/getMorePosts")
 	private Page<Post> getMorePost(Pageable page){
 		return postService.getPosts(page);
 	}
 	
-	@GetMapping("/api/getMorePostsUser")
+	@GetMapping("/getMorePostsUser")
 	private Page<Post> getMorePostUser(Pageable page, @RequestParam String username){
 		return postService.getPostsByUsername(username, page);
 	}
 	
-	@GetMapping("/api/imagepost/{idpost}")
+	@GetMapping("/imagepost/{idpost}")
     private ResponseEntity<Object> downloadImagePost( @PathVariable int idpost) throws SQLException, IOException{
 		Post p = postService.getPost(idpost);
     	Resource file = new InputStreamResource(p.getImage().getBinaryStream());
@@ -64,21 +64,21 @@ public class PostsController {
 				.body(file);
     }
 	
-	@PostMapping("/api/likePost")
+	@PostMapping("/likePost")
 	public boolean likePost(@RequestParam int idpost, HttpServletRequest request){
 		boolean win = true;
 		postService.likePost(request.getUserPrincipal().getName(), idpost);
 		return win;
 	}
 	
-	@PostMapping("/api/unlikePost")
+	@PostMapping("/unlikePost")
 	public boolean unlikePost(@RequestParam int idpost, HttpServletRequest request){
 		boolean win = true;
 		postService.unLikePosts(request.getUserPrincipal().getName(), idpost);
 		return win;
 	}
 	
-	@GetMapping("/api/getLikes")
+	@GetMapping("/getLikes")
 	public List<LikeAPost> getLikes(HttpServletRequest request) {
 		return postService.getLikes(request.getUserPrincipal().getName());
 	}
