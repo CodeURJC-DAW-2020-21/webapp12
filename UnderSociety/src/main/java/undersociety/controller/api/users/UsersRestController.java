@@ -85,12 +85,12 @@ public class UsersRestController {
 	}
 	
 	@GetMapping("/users")
-	public Page<Users> getUsers(@RequestBody Pageable page){
+	public Page<Users> getUsers( Pageable page){
 		return userService.getUsersPage(page);
 	}
 	
 	@GetMapping("/companies")
-	public Page<Users> getCompanies(@RequestBody Pageable page){
+	public Page<Users> getCompanies( Pageable page){
 		return userService.getCompanies(page);
 	}
 	
