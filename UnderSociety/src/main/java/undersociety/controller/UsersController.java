@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -53,7 +54,7 @@ public class UsersController {
     
     @PostMapping("/registerUser")
 	private void registerUser(Users user,HttpServletResponse response , HttpServletRequest sesion, @RequestParam(required = false) MultipartFile image) throws IOException, SQLException {
-    	userService.registerUsers(user, image);
+    	userService.registerUsers(user, image, null);
     	response.sendRedirect("/sign-in");
     }
     
@@ -110,10 +111,11 @@ public class UsersController {
 	}
     
     @PostMapping("/modifyUser")
-    public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException {
+    public void modifyUserSetting(Users user,HttpServletResponse response, HttpServletRequest request, @RequestParam(required = false) MultipartFile image) throws IOException, ServletException {
     	userService.usernameIsToken(user.getUsername());
     	userService.modifyDataUser(user, request.getUserPrincipal().getName(), image,null);
-    	response.sendRedirect("/profile-account-setting");
+    	request.logout();
+    	response.sendRedirect("/sign-in");
     }
     
     @PostMapping("/changePassword")

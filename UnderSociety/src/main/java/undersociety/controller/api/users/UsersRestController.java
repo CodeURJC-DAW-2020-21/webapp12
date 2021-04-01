@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
@@ -55,7 +58,7 @@ public class UsersRestController {
 	
 	@PostMapping("/")
 	public ResponseEntity<Users> registerUser(@RequestBody Users user) throws IOException{
-		userService.registerUsers(user, null);
+		userService.saveUser(user);
 		user = userService.getUser(user.getUsername());
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getIdusers()).toUri();
 		return ResponseEntity.created(location).body(user);
@@ -65,7 +68,7 @@ public class UsersRestController {
 	public ResponseEntity<Users> replaceUser(@PathVariable int id,@RequestBody Users user) throws IOException{
 		Optional<Users> use = userService.getUserId(id);
 		if(!use.isEmpty()) {
-			userService.modifyDataUser(user, use.get().getUsername(), null, null);
+			userService.saveUser(user);
 			user = userService.getUserId(id).get();
 			return ResponseEntity.ok(user);
 		}else {
@@ -85,12 +88,12 @@ public class UsersRestController {
 	}
 	
 	@GetMapping("/users")
-	public Page<Users> getUsers(@RequestBody Pageable page){
+	public Page<Users> getUsers( Pageable page){
 		return userService.getUsersPage(page);
 	}
 	
 	@GetMapping("/companies")
-	public Page<Users> getCompanies(@RequestBody Pageable page){
+	public Page<Users> getCompanies( Pageable page){
 		return userService.getCompanies(page);
 	}
 	
@@ -122,6 +125,40 @@ public class UsersRestController {
 						.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
 						.contentLength(s.get().getImageprofile().length())
 						.body(file);
+	    	}else {
+	    		return ResponseEntity.noContent().build();
+	    	}
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@PostMapping("/{id}/imageProfile")
+	public ResponseEntity<Object> uploadImageProfile(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
+		Optional<Users> user = userService.getUserId(id);
+		if(user.isPresent()) {
+			if(image != null) {
+				user.get().setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				userService.saveUser(user.get());
+				URI location = fromCurrentRequest().build().toUri();
+				return ResponseEntity.created(location).build();
+	    	}else {
+	    		return ResponseEntity.noContent().build();
+	    	}
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@PostMapping("/{id}/imageThemeProfile")
+	public ResponseEntity<Object> uploadImageThemeProfile(@PathVariable int id, @RequestParam MultipartFile image) throws SQLException, IOException{
+		Optional<Users> user = userService.getUserId(id);
+		if(user.isPresent()) {
+			if(image != null) {
+				user.get().setImageprofile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				userService.saveUser(user.get());
+				URI location = fromCurrentRequest().build().toUri();
+				return ResponseEntity.created(location).build();
 	    	}else {
 	    		return ResponseEntity.noContent().build();
 	    	}
