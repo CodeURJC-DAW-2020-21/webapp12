@@ -104,7 +104,7 @@ public class UsersController {
     	return userService.unfollow(idrelation);
     }
     
-    @GetMapping("api/getFollows")
+    @GetMapping("/getFollows")
 	public List<UsersRelations> getFollows(HttpServletRequest request) {
 		return userService.getFollows(request.getUserPrincipal().getName());
 	}

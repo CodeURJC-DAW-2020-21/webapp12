@@ -278,5 +278,20 @@ public class UserService {
     	}
     	return color;
 	}
+
+	public void saveRelation(UsersRelations relation) {
+		relationrepo.save(relation);
+	}
 	
+	public List<UsersRelations> getAllRelations(){
+        return relationrepo.findAll();
+	}
+	
+	public Optional<UsersRelations> getRelations(int id){
+        return relationrepo.findById(id);
+	}
+
+	public void deleteRelation(UsersRelations usersRelations) {
+		relationrepo.delete(usersRelations);
+	}
 }

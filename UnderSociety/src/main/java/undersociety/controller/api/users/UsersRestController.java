@@ -2,10 +2,16 @@ package undersociety.controller.api.users;
 
 import java.io.IOException;
 import java.net.URI;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,7 +80,52 @@ public class UsersRestController {
 			return ResponseEntity.ok(s.get());
 		}else {
 			return ResponseEntity.notFound().build();
-
+		}
+	}
+	
+	@GetMapping("/users")
+	public Page<Users> getUsers(@RequestBody Pageable page){
+		return userService.getUsersPage(page);
+	}
+	
+	@GetMapping("/companies")
+	public Page<Users> getCompanies(@RequestBody Pageable page){
+		return userService.getCompanies(page);
+	}
+	
+	@GetMapping("/{id}/imageprofile")
+	public ResponseEntity<Object> getImageProfile(@PathVariable int id) throws SQLException{
+		Optional<Users> s = userService.getUserId(id);
+		if(s.isPresent()) {
+			if(s.get().getUserimg() != null) {
+				Resource file = new InputStreamResource(s.get().getUserimg().getBinaryStream());
+				return ResponseEntity.ok()
+						.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+						.contentLength(s.get().getUserimg().length())
+						.body(file);
+	    	}else {
+	    		return ResponseEntity.noContent().build();
+	    	}
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@GetMapping("/{id}/imageThemeProfile")
+	public ResponseEntity<Object> getImageThemeProfile(@PathVariable int id) throws SQLException{
+		Optional<Users> s = userService.getUserId(id);
+		if(s.isPresent()) {
+			if(s.get().getImageprofile() != null) {
+				Resource file = new InputStreamResource(s.get().getImageprofile().getBinaryStream());
+				return ResponseEntity.ok()
+						.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+						.contentLength(s.get().getImageprofile().length())
+						.body(file);
+	    	}else {
+	    		return ResponseEntity.noContent().build();
+	    	}
+		}else {
+			return ResponseEntity.notFound().build();
 		}
 	}
 }
