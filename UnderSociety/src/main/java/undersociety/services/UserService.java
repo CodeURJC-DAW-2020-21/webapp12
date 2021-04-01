@@ -90,13 +90,16 @@ public class UserService {
         return userRepository.findBycompanyprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
-	public void registerUsers(Users user, MultipartFile image) throws IOException {
+	public void registerUsers(Users user, MultipartFile image, MultipartFile theme) throws IOException {
 
 		if(userRepository.existsIdusersByUsername(user.getUsername())) {
 			throw new NoSuchElementException("USERNAME IS TOKEN");
 		}else {
 			if(image != null) {
 				user.setUserimg(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+			}
+			if(theme != null) {
+				user.setImageprofile(BlobProxy.generateProxy(theme.getInputStream(), theme.getSize()));
 			}
 			user.setCity("");
 			user.setUserinfo("");
@@ -293,5 +296,9 @@ public class UserService {
 
 	public void deleteRelation(UsersRelations usersRelations) {
 		relationrepo.delete(usersRelations);
+	}
+
+	public void saveUser(Users user) {
+		userRepository.save(user);
 	}
 }

@@ -54,7 +54,7 @@ public class UsersController {
     
     @PostMapping("/registerUser")
 	private void registerUser(Users user,HttpServletResponse response , HttpServletRequest sesion, @RequestParam(required = false) MultipartFile image) throws IOException, SQLException {
-    	userService.registerUsers(user, image);
+    	userService.registerUsers(user, image, null);
     	response.sendRedirect("/sign-in");
     }
     
