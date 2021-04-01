@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
+import undersociety.models.Message;
 import undersociety.models.Users;
 import undersociety.services.UserService;
 
@@ -93,7 +94,7 @@ public class UsersRestController {
 		return userService.getCompanies(page);
 	}
 	
-	@GetMapping("/{id}/imageprofile")
+	@GetMapping("/{id}/imageProfile")
 	public ResponseEntity<Object> getImageProfile(@PathVariable int id) throws SQLException{
 		Optional<Users> s = userService.getUserId(id);
 		if(s.isPresent()) {
@@ -127,5 +128,12 @@ public class UsersRestController {
 		}else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	@GetMapping("/{id}/chats/{to}")
+	public List<Message> getChat(@PathVariable int id, @PathVariable int to){
+		Optional<Users> from = userService.getUserId(id);
+		Optional<Users> destiny = userService.getUserId(to);
+		return userService.getChat(from.get().getUsername(), destiny.get().getUsername());
 	}
 }
