@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+
 
 import undersociety.models.ListProducts;
 import undersociety.models.Product;
@@ -40,7 +43,14 @@ public class ProductService {
 	private ProductRepository productrepo;
 	
 	public Product getProduct(int idproduct) {
-		return productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Post not found"));
+		return productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Product not found"));
+	}
+	
+	public Optional<Product> getProductById(int idproduct){
+		
+		return productrepo.findById(idproduct);
+		
+		
 	}
 	
 	public Page<Product> getProductsPage(Pageable page){
@@ -50,6 +60,14 @@ public class ProductService {
 	public Page<Product> getProductsPageByUser(String username,Pageable page){
 		Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
 		return productrepo.findByiduser(s,page);
+	}
+	public void save (Product product) {
+		productrepo.save(product);
+	}	
+	
+	public Product getProductByTitle (String title) {
+
+		return productrepo.findBytitle(title);
 	}
 	
 	public void saveProduct(String username, Product product, MultipartFile imag0, MultipartFile imag1, MultipartFile imag2, boolean tag, boolean tagtwo, boolean tagthree, boolean tagfour, boolean tagfive) throws IOException {
