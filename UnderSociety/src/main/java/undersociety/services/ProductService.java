@@ -189,4 +189,11 @@ public class ProductService {
 		}
 		return productmodels;
 	}
+	
+	public List<Product> getAll(){
+		
+		return productrepo.findAll();
+		
+		
+	}
 }
