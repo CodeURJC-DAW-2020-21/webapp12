@@ -19,5 +19,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	public List<Product> findByidtagfour(Tags idtagfour);
 	public List<Product> findByidtagfive(Tags idtagfive);
 	public List<Product> findBystatus(String status);
+	public List<Product> findByiduser(Users user);
 	
 }

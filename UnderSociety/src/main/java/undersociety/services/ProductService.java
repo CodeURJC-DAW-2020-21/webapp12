@@ -39,6 +39,11 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productrepo;
 	
+	public List<Product> getProductsByUser(int idUser){
+		Users user = userRepository.findById(idUser).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return productrepo.findByiduser(user);
+	}
+	
 	public Product getProduct(int idproduct) {
 		return productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Post not found"));
 	}

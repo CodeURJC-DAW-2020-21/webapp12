@@ -29,7 +29,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import undersociety.models.Message;
+import undersociety.models.Post;
+import undersociety.models.Product;
 import undersociety.models.Users;
+import undersociety.services.PostsService;
+import undersociety.services.ProductService;
 import undersociety.services.UserService;
 
 @RestController
@@ -38,6 +42,12 @@ public class UsersRestController {
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private PostsService postsService;
+	
+	@Autowired
+	private ProductService productsService;
 	
 	@JsonView(Users.Detailed.class)
 	@GetMapping("/")
@@ -172,5 +182,15 @@ public class UsersRestController {
 		Optional<Users> from = userService.getUserId(id);
 		Optional<Users> destiny = userService.getUserId(to);
 		return userService.getChat(from.get().getUsername(), destiny.get().getUsername());
+	}
+	
+	@GetMapping("/{id}/posts")
+	public List<Post> getPost(@PathVariable int id){
+		return postsService.getPostsByUser(id);
+	}
+	
+	@GetMapping("/{id}/products")
+	public List<Product> getProducts(@PathVariable int id){
+		return productsService.getProductsByUser(id);
 	}
 }
