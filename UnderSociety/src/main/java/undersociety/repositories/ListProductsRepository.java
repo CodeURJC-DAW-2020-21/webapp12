@@ -13,4 +13,5 @@ public interface ListProductsRepository extends JpaRepository<ListProducts, Inte
 	public ListProducts findByiduserAndIdproduct(Users iduser, Product idproduct);
 	public Long deleteByIduser(Users iduser);
 	public Long deleteByIdproduct (Product idproduct);
+	
 }

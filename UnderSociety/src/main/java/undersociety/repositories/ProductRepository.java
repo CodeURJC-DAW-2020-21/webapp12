@@ -23,5 +23,4 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	public Product findBytitle (String title);
 	public Optional<Product> findBydescription (String description);
 	
-	
 }

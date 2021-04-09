@@ -76,7 +76,26 @@ public class ProductService {
 		
 		
 	}
+public List<ListProducts> getAllbookmarks(){
+		
+		return bookmarkrepo.findAll();
+		
+	}
+
+public void savebookmark (ListProducts bookmark) {
+	bookmarkrepo.save(bookmark);
 	
+}
+
+public ListProducts getBookmarksapi (ListProducts bookmark){
+	ListProducts product = bookmarkrepo.findByiduserAndIdproduct(bookmark.getIduser(), bookmark.getIdproduct());
+	return product;
+}
+
+public Optional<ListProducts> getBookmarksbyid (int id){
+	return bookmarkrepo.findById(id);
+}
+
 	
 	//////////////////////////////////////////////////////NORMAL METHODS////////////////////////////////////////////////////////////////////////
 	public Page<Product> getProductsPage(Pageable page){
