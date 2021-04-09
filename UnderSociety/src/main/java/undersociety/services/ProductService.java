@@ -42,6 +42,17 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productrepo;
 	
+	@Autowired
+	private ListProductsRepository bookmarkrepo;
+	
+	
+/////////////////////////////////////////////////////API METHODS////////////////////////////////////////////////////////////////////////
+	public List<Product> getAll(){
+		
+		return productrepo.findAll();
+		
+	}
+	
 	public Product getProduct(int idproduct) {
 		return productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Product not found"));
 	}
@@ -50,9 +61,24 @@ public class ProductService {
 		
 		return productrepo.findById(idproduct);
 		
+	}
+	
+	public void deleteProduct (String description) {
+		Product prev = productrepo.findBydescription(description).orElseThrow(() -> new NoSuchElementException("Product not found"));
+		productrepo.deleteById(prev.getIdproduct());
+		bookmarkrepo.deleteByIdproduct(prev);
+		
 		
 	}
 	
+	public void saveProduct (Product newproduct) {
+		productrepo.save(newproduct);
+		
+		
+	}
+	
+	
+	//////////////////////////////////////////////////////NORMAL METHODS////////////////////////////////////////////////////////////////////////
 	public Page<Product> getProductsPage(Pageable page){
 		return productrepo.findAll(page);
 	}
@@ -69,6 +95,7 @@ public class ProductService {
 
 		return productrepo.findBytitle(title);
 	}
+	
 	
 	public void saveProduct(String username, Product product, MultipartFile imag0, MultipartFile imag1, MultipartFile imag2, boolean tag, boolean tagtwo, boolean tagthree, boolean tagfour, boolean tagfive) throws IOException {
 		Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
@@ -207,11 +234,7 @@ public class ProductService {
 		}
 		return productmodels;
 	}
+
 	
-	public List<Product> getAll(){
-		
-		return productrepo.findAll();
-		
-		
-	}
+	
 }
