@@ -58,10 +58,10 @@ public class BookmarksRestController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ListProducts> deletebookmark(@PathVariable int id){
-		Optional<Product> product = productService.getProductById(id);
-		if(product.isPresent()){
-			productService.deleteProduct(product.get().getDescription());
-			return ResponseEntity.ok(product.get());
+		Optional<ListProducts> bookmark = productService.getBookmarksbyid(id);
+		if(bookmark.isPresent()){
+			productService.deletebookmarkbyid(id);
+			return ResponseEntity.ok(bookmark.get());
 		}else {
 			return ResponseEntity.notFound().build();
 		}

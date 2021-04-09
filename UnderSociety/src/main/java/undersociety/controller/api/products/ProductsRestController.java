@@ -74,7 +74,7 @@ public class ProductsRestController {
 	public ResponseEntity<Product> deleteProduct(@PathVariable int id){
 		Optional<Product> product = productService.getProductById(id);
 		if(product.isPresent()){
-			productService.deleteProduct(product.get().getDescription());
+			productService.deleteProductbyid(product.get().getIdproduct());
 			return ResponseEntity.ok(product.get());
 		}else {
 			return ResponseEntity.notFound().build();
