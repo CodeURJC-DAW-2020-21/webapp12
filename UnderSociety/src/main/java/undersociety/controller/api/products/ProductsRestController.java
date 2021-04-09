@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -55,7 +58,7 @@ public class ProductsRestController {
 		return ResponseEntity.created(location).body(product);
 	}
 	
-
+	@JsonView(ProductDetails.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> getProduct (@PathVariable int id) throws IOException{
 		Optional<Product> product = productService.getProductById(id);
@@ -112,13 +115,13 @@ public class ProductsRestController {
 	
 	@GetMapping("/{id}/image1")
 	public ResponseEntity<Object> getImage1(@PathVariable int id) throws SQLException{
-		Optional<Users> s = userService.getUserId(id);
-		if(s.isPresent()) {
-			if(s.get().getUserimg() != null) {
-				Resource file = new InputStreamResource(s.get().getUserimg().getBinaryStream());
+		Optional<Product> product = productService.getProductById(id);
+		if(product.isPresent()) {
+			if(product.get().getImage1() != null) {
+				Resource file = new InputStreamResource(product.get().getImage1().getBinaryStream());
 				return ResponseEntity.ok()
 						.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-						.contentLength(s.get().getUserimg().length())
+						.contentLength(product.get().getImage1().length())
 						.body(file);
 	    	}else {
 	    		return ResponseEntity.noContent().build();
@@ -130,14 +133,65 @@ public class ProductsRestController {
 	
 	@GetMapping("/{id}/image2")
 	public ResponseEntity<Object> getImage2(@PathVariable int id) throws SQLException{
-		Optional<Users> s = userService.getUserId(id);
-		if(s.isPresent()) {
-			if(s.get().getUserimg() != null) {
-				Resource file = new InputStreamResource(s.get().getUserimg().getBinaryStream());
+		Optional<Product> product = productService.getProductById(id);
+		if(product.isPresent()) {
+			if(product.get().getImage2() != null) {
+				Resource file = new InputStreamResource(product.get().getImage2().getBinaryStream());
 				return ResponseEntity.ok()
 						.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-						.contentLength(s.get().getUserimg().length())
+						.contentLength(product.get().getImage2().length())
 						.body(file);
+	    	}else {
+	    		return ResponseEntity.noContent().build();
+	    	}
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@PostMapping("/{id}/image0")
+	public ResponseEntity<Object> uploadImage0(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
+		Optional<Product> product = productService.getProductById(id);
+		if(product.isPresent()) {
+			if(image != null) {
+				product.get().setImage0(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				productService.saveProduct(product.get());
+				URI location = fromCurrentRequest().build().toUri();
+				return ResponseEntity.created(location).build();
+	    	}else {
+	    		return ResponseEntity.noContent().build();
+	    	}
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@PostMapping("/{id}/image1")
+	public ResponseEntity<Object> uploadImage1(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
+		Optional<Product> product = productService.getProductById(id);
+		if(product.isPresent()) {
+			if(image != null) {
+				product.get().setImage1(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				productService.saveProduct(product.get());
+				URI location = fromCurrentRequest().build().toUri();
+				return ResponseEntity.created(location).build();
+	    	}else {
+	    		return ResponseEntity.noContent().build();
+	    	}
+		}else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@PostMapping("/{id}/image2")
+	public ResponseEntity<Object> uploadImage2(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
+		Optional<Product> product = productService.getProductById(id);
+		if(product.isPresent()) {
+			if(image != null) {
+				product.get().setImage2(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				productService.saveProduct(product.get());
+				URI location = fromCurrentRequest().build().toUri();
+				return ResponseEntity.created(location).build();
 	    	}else {
 	    		return ResponseEntity.noContent().build();
 	    	}
