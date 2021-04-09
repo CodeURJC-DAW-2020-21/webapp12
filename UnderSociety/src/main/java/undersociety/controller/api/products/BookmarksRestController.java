@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import undersociety.models.ListProducts;
-import undersociety.models.Product;
+
 import undersociety.services.ProductService;
 
 @RestController
@@ -68,13 +68,13 @@ public class BookmarksRestController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<ListProducts> replacebookmark(@PathVariable int id,@RequestBody Product newproduct) throws IOException{
-		Optional<Product> product = productService.getProductById(id);
-		if(!product.isEmpty()) {
-			newproduct.setIdproduct(id);
-			productService.saveProduct(newproduct);
-			newproduct = productService.getProductById(id).get();
-			return ResponseEntity.ok(newproduct);
+	public ResponseEntity<ListProducts> replacebookmark(@PathVariable int id,@RequestBody ListProducts newbookmark) throws IOException{
+		Optional<ListProducts> bookmark = productService.getBookmarksbyid(id);
+		if(!bookmark.isEmpty()) {
+			newbookmark.setIdproductlist(id);
+			productService.savebookmark(newbookmark);
+			newbookmark = productService.getBookmarksbyid(id).get();
+			return ResponseEntity.ok(newbookmark);
 		}else {
 			return ResponseEntity.notFound().build();
 		}
