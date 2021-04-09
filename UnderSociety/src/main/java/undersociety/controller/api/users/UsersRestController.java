@@ -34,7 +34,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
-import undersociety.models.Message;
 import undersociety.models.Post;
 import undersociety.models.Product;
 import undersociety.models.Users;
