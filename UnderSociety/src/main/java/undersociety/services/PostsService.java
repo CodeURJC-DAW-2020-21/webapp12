@@ -38,7 +38,12 @@ public class PostsService {
 		return postsrepo.findById(idpost).orElseThrow(() -> new NoSuchElementException("Post not found"));
 	}
 	
-	public List<Post> getPostsByUser(int idUser){
+	public Page<Post> getPostsByUser(int idUser,String page, int size){
+		Users user = userRepository.findById(idUser).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return postsrepo.findByiduser(user, PageRequest.of(Integer.parseInt(page), size));
+	}
+	
+	public List<Post> getAllPostsByUser(int idUser){
 		Users user = userRepository.findById(idUser).orElseThrow(() -> new NoSuchElementException("User not found"));
 		return postsrepo.findByiduser(user);
 	}

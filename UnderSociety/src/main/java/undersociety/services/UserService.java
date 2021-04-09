@@ -90,6 +90,14 @@ public class UserService {
         return userRepository.findBycompanyprofile(true, PageRequest.of(0, 10,Sort.by("username").ascending()));
 	}
 	
+	public List<Users> getAllUsers() {
+		return userRepository.findBycompanyprofile(false);
+	}
+
+	public List<Users> getAllCompanies() {
+		return userRepository.findBycompanyprofile(true);
+	}
+	
 	public void registerUsers(Users user, MultipartFile image, MultipartFile theme) throws IOException {
 
 		if(userRepository.existsIdusersByUsername(user.getUsername())) {

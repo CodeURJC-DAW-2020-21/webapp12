@@ -10,8 +10,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -97,14 +96,22 @@ public class UsersRestController {
 		}
 	}
 	
-	@GetMapping("/users")
-	public Page<Users> getUsers( Pageable page){
-		return userService.getUsersPage(page);
+	@GetMapping("/customers")
+	public List<Users> getUsers( @RequestParam(required = false) String page){
+		if(page != null) {
+			return userService.getUsersPage(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+		}else {
+			return userService.getAllUsers();
+		}
 	}
 	
 	@GetMapping("/companies")
-	public Page<Users> getCompanies( Pageable page){
-		return userService.getCompanies(page);
+	public List<Users> getCompanies(  @RequestParam(required = false) String page){
+		if(page != null) {
+			return userService.getCompanies(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+		}else {
+			return userService.getAllCompanies();
+		}
 	}
 	
 	@GetMapping("/{id}/imageProfile")
@@ -144,7 +151,7 @@ public class UsersRestController {
 	}
 	
 	@PostMapping("/{id}/imageProfile")
-	public ResponseEntity<Object> uploadImageProfile(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
+	public ResponseEntity<Object> uploadImageProfile(@PathVariable int id, @RequestParam MultipartFile image) throws SQLException, IOException{
 		Optional<Users> user = userService.getUserId(id);
 		if(user.isPresent()) {
 			if(image != null) {
@@ -185,12 +192,21 @@ public class UsersRestController {
 	}
 	
 	@GetMapping("/{id}/posts")
-	public List<Post> getPost(@PathVariable int id){
-		return postsService.getPostsByUser(id);
+	public List<Post> getAllPost(@PathVariable int id, @RequestParam(required = false) String page){
+		if(page != null) {
+			return postsService.getPostsByUser(id,page,5).getContent();
+		}else {
+			return postsService.getAllPostsByUser(id);
+		}
 	}
 	
 	@GetMapping("/{id}/products")
-	public List<Product> getProducts(@PathVariable int id){
-		return productsService.getProductsByUser(id);
+	public List<Product> getAllProducts(@PathVariable int id, @RequestParam(required = false) String page){
+		if(page != null) {
+			return productsService.getProductsByUser(id,page,5).getContent();
+		}else {
+			return productsService.getAllProductsByUser(id);
+		}
 	}
+	
 }

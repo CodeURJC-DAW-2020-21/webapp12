@@ -39,7 +39,12 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productrepo;
 	
-	public List<Product> getProductsByUser(int idUser){
+	public Page<Product> getProductsByUser(int idUser, String page, int size){
+		Users user = userRepository.findById(idUser).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return productrepo.findByiduser(user, PageRequest.of(Integer.parseInt(page), size));
+	}
+	
+	public List<Product> getAllProductsByUser(int idUser){
 		Users user = userRepository.findById(idUser).orElseThrow(() -> new NoSuchElementException("User not found"));
 		return productrepo.findByiduser(user);
 	}
