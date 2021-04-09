@@ -26,7 +26,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
 		auth.userDetailsService(userDetailServices).passwordEncoder(passwordEncoder());
 	 }
 	
@@ -44,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers("/registerUser").permitAll();
 		 http.authorizeRequests().antMatchers("/registerCompany").permitAll();
 		 http.authorizeRequests().antMatchers("/forgotPassword").permitAll();
+		 http.authorizeRequests().antMatchers("/login").permitAll();
 		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
 		 http.authorizeRequests().antMatchers("/error").permitAll();
 		 http.authorizeRequests().antMatchers("httpss://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js").permitAll();
@@ -55,18 +55,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.csrf().ignoringAntMatchers("/api/**");
 		 http.csrf().ignoringAntMatchers("/swagger-ui/**");
 		 http.csrf().ignoringAntMatchers("/v3/**");
+		 http.csrf().ignoringAntMatchers("/login");
 		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
 
-		 http.formLogin().loginPage("/sign-in");
+		 http.formLogin().loginPage("/login");
 		 http.formLogin().usernameParameter("username");
 		 http.formLogin().passwordParameter("password");
 		 http.formLogin().defaultSuccessUrl("/index",true);
 		 http.formLogin().failureUrl("/sign-in");
 		 
 		 http.logout().logoutUrl("/logout");
-		 http.logout().logoutSuccessUrl("/");		
+		 http.logout().logoutSuccessUrl("/sign-in");		
 		 
 	}
 
