@@ -55,7 +55,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/imageProduct0/{idproduct}")
-    private ResponseEntity<Object> downloadImageProduct0( @PathVariable int idproduct) throws SQLException{
+    private ResponseEntity<Object> downloadImageProduct0(@PathVariable int idproduct) throws SQLException{
 		Product p = productService.getProduct(idproduct);
     	Resource file = new InputStreamResource(p.getImage0().getBinaryStream());
     	return ResponseEntity.ok()

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+
 
 import undersociety.models.ListProducts;
 import undersociety.models.Product;
@@ -39,10 +42,43 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productrepo;
 	
-	public Product getProduct(int idproduct) {
-		return productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Post not found"));
+	@Autowired
+	private ListProductsRepository bookmarkrepo;
+	
+	
+/////////////////////////////////////////////////////API METHODS////////////////////////////////////////////////////////////////////////
+	public List<Product> getAll(){
+		
+		return productrepo.findAll();
+		
 	}
 	
+	public Product getProduct(int idproduct) {
+		return productrepo.findById(idproduct).orElseThrow(() -> new NoSuchElementException("Product not found"));
+	}
+	
+	public Optional<Product> getProductById(int idproduct){
+		
+		return productrepo.findById(idproduct);
+		
+	}
+	
+	public void deleteProduct (String description) {
+		Product prev = productrepo.findBydescription(description).orElseThrow(() -> new NoSuchElementException("Product not found"));
+		productrepo.deleteById(prev.getIdproduct());
+		bookmarkrepo.deleteByIdproduct(prev);
+		
+		
+	}
+	
+	public void saveProduct (Product newproduct) {
+		productrepo.save(newproduct);
+		
+		
+	}
+	
+	
+	//////////////////////////////////////////////////////NORMAL METHODS////////////////////////////////////////////////////////////////////////
 	public Page<Product> getProductsPage(Pageable page){
 		return productrepo.findAll(page);
 	}
@@ -51,6 +87,15 @@ public class ProductService {
 		Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
 		return productrepo.findByiduser(s,page);
 	}
+	public void save (Product product) {
+		productrepo.save(product);
+	}	
+	
+	public Product getProductByTitle (String title) {
+
+		return productrepo.findBytitle(title);
+	}
+	
 	
 	public void saveProduct(String username, Product product, MultipartFile imag0, MultipartFile imag1, MultipartFile imag2, boolean tag, boolean tagtwo, boolean tagthree, boolean tagfour, boolean tagfive) throws IOException {
 		Users s = userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
@@ -189,4 +234,7 @@ public class ProductService {
 		}
 		return productmodels;
 	}
+
+	
+	
 }
