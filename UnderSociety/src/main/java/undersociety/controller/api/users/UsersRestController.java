@@ -89,7 +89,7 @@ public class UsersRestController {
 	public ResponseEntity<Users> deleteUser(@PathVariable int id){
 		Optional<Users> s = userService.getUserId(id);
 		if(s.isPresent()){
-			userService.deleteUser(s.get().getUsername());
+			userService.deleteUserById(id);
 			return ResponseEntity.ok(s.get());
 		}else {
 			return ResponseEntity.notFound().build();

@@ -314,4 +314,8 @@ public class UserService {
 		UsersRelations rela = relationrepo.findByuseroneAndUsertwo(relation.getUserone(), relation.getUsertwo());
 		return rela.getIduserrelation();
 	}
+
+	public void deleteUserById(int id) {
+		userRepository.deleteById(id);
+	}
 }
