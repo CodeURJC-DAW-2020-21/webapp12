@@ -57,6 +57,7 @@ public class RelationsRestController {
 	@PostMapping("/")
 	public ResponseEntity<UsersRelations> registerRelation(@RequestBody UsersRelations relation) throws IOException{
 		userService.saveRelation(relation);
+		relation.setIduserrelation( userService.getRelationId(relation) );
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(relation.getIduserrelation()).toUri();
 		return ResponseEntity.created(location).body(relation);
 	}

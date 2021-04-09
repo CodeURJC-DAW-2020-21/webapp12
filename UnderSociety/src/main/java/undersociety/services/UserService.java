@@ -309,4 +309,9 @@ public class UserService {
 	public void saveUser(Users user) {
 		userRepository.save(user);
 	}
+
+	public int getRelationId(UsersRelations relation) {
+		UsersRelations rela = relationrepo.findByuseroneAndUsertwo(relation.getUserone(), relation.getUsertwo());
+		return rela.getIduserrelation();
+	}
 }

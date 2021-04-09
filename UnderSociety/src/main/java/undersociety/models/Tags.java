@@ -9,8 +9,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import undersociety.models.Product.Simple;
-
 @Entity
 @Table(name="tags")
 public class Tags {
