@@ -25,6 +25,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import undersociety.models.Message;
@@ -54,9 +61,29 @@ public class UsersRestController {
 		return userService.getAll();
 	}
 	
+	@Operation(summary = "Get a user by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the User", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "400", 
+	 description = "Invalid id supplied", 
+	 content = @Content
+	 ), 
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "User not found", 
+	 content = @Content
+	 ) 
+	})
 	@JsonView(Users.Detailed.class)
 	@GetMapping("/{id}")
-	public ResponseEntity<Users> getUsersById(@PathVariable int id){
+	public ResponseEntity<Users> getUsersById(@Parameter(description="id of user to be searched") @PathVariable int id){
 		Optional<Users> user = userService.getUserId(id);
 		if(!user.isEmpty()){
 			return ResponseEntity.ok(user.get());

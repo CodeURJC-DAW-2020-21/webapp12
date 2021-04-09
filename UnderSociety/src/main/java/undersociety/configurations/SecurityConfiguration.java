@@ -48,7 +48,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers("/error").permitAll();
 		 http.authorizeRequests().antMatchers("httpss://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js").permitAll();
 		 http.authorizeRequests().antMatchers("/api/**").permitAll();
+		 http.authorizeRequests().antMatchers("/swagger-ui.html/**").permitAll();
+		 http.authorizeRequests().antMatchers("/swagger-ui/**").permitAll();
+
 		 http.csrf().ignoringAntMatchers("/api/**");
+		 http.csrf().ignoringAntMatchers("/swagger-ui/**");
 		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
