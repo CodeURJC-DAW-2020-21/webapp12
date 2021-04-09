@@ -182,6 +182,7 @@ public class UsersRestController {
 	 )}
 	 ) 
 	})
+	@JsonView(Users.Detailed.class)
 	@GetMapping("/customers")
 	public List<Users> getUsers( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
@@ -201,6 +202,7 @@ public class UsersRestController {
 	 )}
 	 ) 
 	})
+	@JsonView(Users.Detailed.class)
 	@GetMapping("/companies")
 	public List<Users> getCompanies( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
@@ -349,6 +351,7 @@ public class UsersRestController {
 	 )}
 	 ) 
 	})
+	@JsonView(Product.Simple.class)
 	@GetMapping("/{id}/products")
 	public List<Product> getAllProducts( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {

@@ -50,11 +50,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
 		 http.authorizeRequests().antMatchers("/v3/**").permitAll();
 		 http.authorizeRequests().antMatchers("/swagger-ui/**").permitAll();
+		 
+		 http.authorizeRequests().antMatchers("/api/**").permitAll();
 
 		 http.csrf().ignoringAntMatchers("/api/**");
 		 http.csrf().ignoringAntMatchers("/swagger-ui/**");
 		 http.csrf().ignoringAntMatchers("/v3/**");
-		 http.csrf().ignoringAntMatchers("/login");
 		 http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
 		 
 		 http.authorizeRequests().anyRequest().authenticated();
