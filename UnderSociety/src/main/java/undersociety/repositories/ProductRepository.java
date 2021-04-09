@@ -24,5 +24,4 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	public Optional<Product> findBydescription (String description);
 	public List<Product> findByiduser(Users user);
 	
-	
 }
