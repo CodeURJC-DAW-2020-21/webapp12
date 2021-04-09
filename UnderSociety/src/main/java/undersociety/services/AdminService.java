@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import undersociety.models.AdminData;
 import undersociety.models.Post;
 import undersociety.models.Product;
 import undersociety.models.Roles;
@@ -48,6 +49,18 @@ public class AdminService {
 
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	public AdminData getAdminData() {
+		AdminData d = new AdminData();
+	
+		d.setUsers(userRepository.findByuserprofile(true).size());
+		d.setCompanies(userRepository.findBycompanyprofile(true).size());
+		d.setProducts(productrepo.findAll().size());
+		d.setPosts(postsrepo.findAll().size());
+		d.setRoles(rolesRepository.findAll().size());
+		
+		return d;
+	}
 	
 	public void loadDataBase() throws IOException {
 		Path imagePath = IMAGES_FOLDER.resolve("FOndo2.jpeg");
