@@ -47,7 +47,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers("/forgotpasswordmail").permitAll();
 		 http.authorizeRequests().antMatchers("/error").permitAll();
 		 http.authorizeRequests().antMatchers("httpss://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js").permitAll();
-		 http.authorizeRequests().antMatchers("/api/**").permitAll();
 		 http.authorizeRequests().antMatchers("/swagger-ui.html").permitAll();
 		 http.authorizeRequests().antMatchers("/v3/**").permitAll();
 		 http.authorizeRequests().antMatchers("/swagger-ui/**").permitAll();
