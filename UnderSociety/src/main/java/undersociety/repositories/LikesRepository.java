@@ -13,4 +13,5 @@ public interface LikesRepository extends JpaRepository<LikeAPost, Integer>{
 	public List<LikeAPost> findByiduser(Users iduser);
 	public LikeAPost findByidpostAndIduser(Post idpost, Users iduser);
 	public Long deleteByIduser(Users iduser);
+	public Long deleteByIdpost (Post idpost);
 }

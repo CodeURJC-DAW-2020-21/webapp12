@@ -16,8 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import undersociety.models.LikeAPost;
+import undersociety.models.ListProducts;
 import undersociety.models.Post;
 import undersociety.models.PostModel;
+import undersociety.models.Product;
 import undersociety.models.Users;
 import undersociety.repositories.LikesRepository;
 import undersociety.repositories.PostRepository;
@@ -42,7 +44,39 @@ public class PostsService {
 	
 	}
 	
+	public Page<Post> getPostsByUserRest(int idUser, String page, int size){
+		Users user = userRepository.findById(idUser).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return postsrepo.findByiduser(user, PageRequest.of(Integer.parseInt(page), size));
+	}
 	
+	public List<Post> getAllPostsByUserRest(int idUser){
+		Users user = userRepository.findById(idUser).orElseThrow(() -> new NoSuchElementException("User not found"));
+		return postsrepo.findByiduser(user);
+	}
+	
+
+	public Post getPostRest(int idPost) {
+		return postsrepo.findById(idPost).orElseThrow(() -> new NoSuchElementException("Post not found"));
+	}
+
+	public Optional<Post> getPostById(int idPost) {
+
+		return postsrepo.findById(idPost);
+
+	}
+
+	public void deletePostbyid(int id) {
+		Post prev = postsrepo.findById(id).orElseThrow(() -> new NoSuchElementException("Post not found"));
+		postsrepo.deleteById(prev.getIdpost());
+		likerepo.deleteByIdpost(prev);
+
+	}
+
+
+	public void savePost(Post newPost) {
+		postsrepo.save(newPost);
+
+	}
 
 //////////////////////////////////////////////////////NORMAL METHODS/////////////////////////////////////////////////////////////////////
 	
