@@ -106,13 +106,9 @@ public class UsersRestController {
 	 content = {@Content(
 	 mediaType = "application/json"
 	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "User not found", 
-	 content = @Content
 	 ) 
 	})
+	@JsonView(Users.Detailed.class)
 	@PostMapping("/")
 	public ResponseEntity<Users> registerUser(@Parameter(description="Object Json Type Users") @RequestBody Users user) throws IOException{
 		userService.saveUser(user);

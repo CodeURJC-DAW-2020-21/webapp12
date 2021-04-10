@@ -39,19 +39,15 @@ public class Product {
 	@JsonView(Simple.class)
 	@Column
 	private String description;
-	@JsonView(Simple.class)
 	@Lob
 	@JsonIgnore
 	private Blob image0;
-	@JsonView(Simple.class)
 	@Lob
 	@JsonIgnore
 	private Blob image1;
-	@JsonView(Simple.class)
 	@Lob
 	@JsonIgnore
 	private Blob image2;
-	@JsonView(Simple.class)
 	@Column
 	private int price;
 	@JsonView(Multiple.class)

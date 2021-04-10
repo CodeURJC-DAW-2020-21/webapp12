@@ -61,6 +61,16 @@ public class ProductsRestController {
 	}
 	
 	
+	@Operation(summary = "Create a Products")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful Products creation", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 )
+	})
 	@JsonView(Product.ProductDetails.class)
 	@PostMapping("/")
 	public ResponseEntity<Product> registerProduct(@RequestBody Product product) throws IOException{
