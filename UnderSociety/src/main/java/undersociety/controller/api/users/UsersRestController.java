@@ -13,6 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
-import undersociety.models.Message;
 import undersociety.models.Post;
 import undersociety.models.Product;
 import undersociety.models.Users;
@@ -43,6 +43,7 @@ import undersociety.services.ProductService;
 import undersociety.services.UserService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/users")
 public class UsersRestController {
 	
@@ -55,6 +56,16 @@ public class UsersRestController {
 	@Autowired
 	private ProductService productsService;
 	
+	@Operation(summary = "Get a all users")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Users", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
 	@JsonView(Users.Detailed.class)
 	@GetMapping("/")
 	public List<Users> getAllUsers(){
@@ -70,11 +81,6 @@ public class UsersRestController {
 	 mediaType = "application/json"
 	 )}
 	 ),
-	 @ApiResponse(
-	 responseCode = "400", 
-	 description = "Invalid id supplied", 
-	 content = @Content
-	 ), 
 	 @ApiResponse(
 	 responseCode = "404", 
 	 description = "User not found", 
@@ -92,16 +98,46 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "Create a user")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful user creation", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "User not found", 
+	 content = @Content
+	 ) 
+	})
 	@PostMapping("/")
-	public ResponseEntity<Users> registerUser(@RequestBody Users user) throws IOException{
+	public ResponseEntity<Users> registerUser(@Parameter(description="Object Json Type Users") @RequestBody Users user) throws IOException{
 		userService.saveUser(user);
 		user = userService.getUser(user.getUsername());
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getIdusers()).toUri();
 		return ResponseEntity.created(location).body(user);
 	}
 	
+	@Operation(summary = "Modify a user")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful user modification", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "User not found", 
+	 content = @Content
+	 ) 
+	})
 	@PutMapping("/{id}")
-	public ResponseEntity<Users> replaceUser(@PathVariable int id,@RequestBody Users user) throws IOException{
+	public ResponseEntity<Users> replaceUser(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="Object Json Type Users") @RequestBody Users user) throws IOException{
 		Optional<Users> use = userService.getUserId(id);
 		if(!use.isEmpty()) {
 			userService.saveUser(user);
@@ -112,8 +148,23 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "Delete a user")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Successful user delete", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "User not found", 
+	 content = @Content
+	 ) 
+	})
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Users> deleteUser(@PathVariable int id){
+	public ResponseEntity<Users> deleteUser(@Parameter(description="id of user to be searched") @PathVariable int id){
 		Optional<Users> s = userService.getUserId(id);
 		if(s.isPresent()){
 			userService.deleteUserById(id);
@@ -123,8 +174,19 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "Get a all users type customers")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Users type customers", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
+	@JsonView(Users.Detailed.class)
 	@GetMapping("/customers")
-	public List<Users> getUsers( @RequestParam(required = false) String page){
+	public List<Users> getUsers( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
 			return userService.getUsersPage(PageRequest.of(Integer.parseInt(page), 5)).getContent();
 		}else {
@@ -132,8 +194,19 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "Get a all users type companies")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Users type companies", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
+	@JsonView(Users.Detailed.class)
 	@GetMapping("/companies")
-	public List<Users> getCompanies(  @RequestParam(required = false) String page){
+	public List<Users> getCompanies( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
 			return userService.getCompanies(PageRequest.of(Integer.parseInt(page), 5)).getContent();
 		}else {
@@ -141,6 +214,16 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "Get a profile image user by id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Image Profile", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
 	@GetMapping("/{id}/imageProfile")
 	public ResponseEntity<Object> getImageProfile(@PathVariable int id) throws SQLException{
 		Optional<Users> s = userService.getUserId(id);
@@ -159,8 +242,18 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "Get a profile theme image user by id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Image Profile Theme", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
 	@GetMapping("/{id}/imageThemeProfile")
-	public ResponseEntity<Object> getImageThemeProfile(@PathVariable int id) throws SQLException{
+	public ResponseEntity<Object> getImageThemeProfile( @Parameter(description="id of user to be searched") @PathVariable int id) throws SQLException{
 		Optional<Users> s = userService.getUserId(id);
 		if(s.isPresent()) {
 			if(s.get().getImageprofile() != null) {
@@ -177,8 +270,18 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "create a profile image user by id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Create the ImageProfile", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
 	@PostMapping("/{id}/imageProfile")
-	public ResponseEntity<Object> uploadImageProfile(@PathVariable int id, @RequestParam MultipartFile image) throws SQLException, IOException{
+	public ResponseEntity<Object> uploadImageProfile( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="user profile picture") @RequestParam MultipartFile image) throws SQLException, IOException{
 		Optional<Users> user = userService.getUserId(id);
 		if(user.isPresent()) {
 			if(image != null) {
@@ -194,8 +297,18 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "create a profile image theme user by id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Create the ImageProfile Theme", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
 	@PostMapping("/{id}/imageThemeProfile")
-	public ResponseEntity<Object> uploadImageThemeProfile(@PathVariable int id, @RequestParam MultipartFile image) throws SQLException, IOException{
+	public ResponseEntity<Object> uploadImageThemeProfile( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="user theme page picture") @RequestParam MultipartFile image) throws SQLException, IOException{
 		Optional<Users> user = userService.getUserId(id);
 		if(user.isPresent()) {
 			if(image != null) {
@@ -211,15 +324,18 @@ public class UsersRestController {
 		}
 	}
 	
-	@GetMapping("/{id}/chats/{to}")
-	public List<Message> getChat(@PathVariable int id, @PathVariable int to){
-		Optional<Users> from = userService.getUserId(id);
-		Optional<Users> destiny = userService.getUserId(to);
-		return userService.getChat(from.get().getUsername(), destiny.get().getUsername());
-	}
-	
+	@Operation(summary = "get all posts by user")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "found all posts by user id", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
 	@GetMapping("/{id}/posts")
-	public List<Post> getAllPost(@PathVariable int id, @RequestParam(required = false) String page){
+	public List<Post> getAllPost( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
 			return postsService.getPostsByUser(id,page,5).getContent();
 		}else {
@@ -227,8 +343,19 @@ public class UsersRestController {
 		}
 	}
 	
+	@Operation(summary = "get all Products by user")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "found all products by user id", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
+	@JsonView(Product.Simple.class)
 	@GetMapping("/{id}/products")
-	public List<Product> getAllProducts(@PathVariable int id, @RequestParam(required = false) String page){
+	public List<Product> getAllProducts( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
 			return productsService.getProductsByUser(id,page,5).getContent();
 		}else {
