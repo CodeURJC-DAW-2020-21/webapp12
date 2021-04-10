@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -73,7 +74,7 @@ public class ProductsRestController {
 	})
 	@JsonView(Product.ProductDetails.class)
 	@PostMapping("/")
-	public ResponseEntity<Product> registerProduct(@RequestBody Product product) throws IOException{
+	public ResponseEntity<Product> registerProduct( @Parameter(description="Object Type Product") @RequestBody Product product) throws IOException{
 		productService.save(product); 
 		product = productService.getProductByTitle(product.getTitle());
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(product.getIdproduct()).toUri();
@@ -97,7 +98,7 @@ public class ProductsRestController {
 	})
 	@JsonView(Product.ProductDetails.class)
 	@GetMapping("/{id}")
-	public ResponseEntity<Product> getProduct (@PathVariable int id) throws IOException{
+	public ResponseEntity<Product> getProduct ( @Parameter(description="id of Product to be searched") @PathVariable int id) throws IOException{
 		Optional<Product> product = productService.getProductById(id);
 		if(!product.isEmpty()) {
 			return ResponseEntity.ok(product.get());
@@ -123,7 +124,7 @@ public class ProductsRestController {
 	})
 	@JsonView(Product.ProductDetails.class)
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Product> deleteProduct(@PathVariable int id){
+	public ResponseEntity<Product> deleteProduct( @Parameter(description="id of Product to be searched") @PathVariable int id){
 		Optional<Product> product = productService.getProductById(id);
 		if(product.isPresent()){
 			productService.deleteProductbyid(product.get().getIdproduct());
@@ -150,7 +151,7 @@ public class ProductsRestController {
 	})
 	@JsonView(Product.ProductDetails.class)
 	@PutMapping("/{id}")
-	public ResponseEntity<Product> replaceProduct(@PathVariable int id,@RequestBody Product newproduct) throws IOException{
+	public ResponseEntity<Product> replaceProduct( @Parameter(description="id of Product to be searched") @PathVariable int id, @Parameter(description="Object Type Product") @RequestBody Product newproduct) throws IOException{
 		Optional<Product> product = productService.getProductById(id);
 		if(!product.isEmpty()) {
 			newproduct.setIdproduct(id);
@@ -175,10 +176,15 @@ public class ProductsRestController {
 	 responseCode = "404", 
 	 description = "Product not found", 
 	 content = @Content
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@GetMapping("/{id}/image0")
-	public ResponseEntity<Object> getImage0(@PathVariable int id) throws SQLException{
+	public ResponseEntity<Object> getImage0( @Parameter(description="id of Product to be searched") @PathVariable int id) throws SQLException{
 		Optional<Product> product = productService.getProductById(id);
 		if(product.isPresent()) {
 			if(product.get().getImage0() != null) {
@@ -208,10 +214,15 @@ public class ProductsRestController {
 	 responseCode = "404", 
 	 description = "Product not found", 
 	 content = @Content
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@GetMapping("/{id}/image1")
-	public ResponseEntity<Object> getImage1(@PathVariable int id) throws SQLException{
+	public ResponseEntity<Object> getImage1( @Parameter(description="id of Product to be searched") @PathVariable int id) throws SQLException{
 		Optional<Product> product = productService.getProductById(id);
 		if(product.isPresent()) {
 			if(product.get().getImage1() != null) {
@@ -241,10 +252,15 @@ public class ProductsRestController {
 	 responseCode = "404", 
 	 description = "Product not found", 
 	 content = @Content
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@GetMapping("/{id}/image2")
-	public ResponseEntity<Object> getImage2(@PathVariable int id) throws SQLException{
+	public ResponseEntity<Object> getImage2( @Parameter(description="id of Product to be searched") @PathVariable int id) throws SQLException{
 		Optional<Product> product = productService.getProductById(id);
 		if(product.isPresent()) {
 			if(product.get().getImage2() != null) {
@@ -274,10 +290,15 @@ public class ProductsRestController {
 	 responseCode = "404", 
 	 description = "Product not found", 
 	 content = @Content
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@PostMapping("/{id}/image0")
-	public ResponseEntity<Object> uploadImage0(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
+	public ResponseEntity<Object> uploadImage0( @Parameter(description="id of Product to be searched") @PathVariable int id, @Parameter(description="Image 0 Product") @RequestParam() MultipartFile image) throws SQLException, IOException{
 		Optional<Product> product = productService.getProductById(id);
 		if(product.isPresent()) {
 			if(image != null) {
@@ -306,10 +327,15 @@ public class ProductsRestController {
 	 responseCode = "404", 
 	 description = "Product not found", 
 	 content = @Content
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@PostMapping("/{id}/image1")
-	public ResponseEntity<Object> uploadImage1(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
+	public ResponseEntity<Object> uploadImage1( @Parameter(description="id of Product to be searched") @PathVariable int id, @Parameter(description="Image 1 Product") @RequestParam() MultipartFile image) throws SQLException, IOException{
 		Optional<Product> product = productService.getProductById(id);
 		if(product.isPresent()) {
 			if(image != null) {
@@ -338,10 +364,15 @@ public class ProductsRestController {
 	 responseCode = "404", 
 	 description = "Product not found", 
 	 content = @Content
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@PostMapping("/{id}/image2")
-	public ResponseEntity<Object> uploadImage2(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
+	public ResponseEntity<Object> uploadImage2( @Parameter(description="id of Product to be searched") @PathVariable int id, @Parameter(description="Image 2 Product") @RequestParam() MultipartFile image) throws SQLException, IOException{
 		Optional<Product> product = productService.getProductById(id);
 		if(product.isPresent()) {
 			if(image != null) {

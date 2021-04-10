@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -65,7 +66,7 @@ public class BookmarksRestController {
 	})
 	@JsonView(ListProducts.Basic.class)
 	@PostMapping("/")
-	public ResponseEntity<ListProducts> registerbookmark(@RequestBody ListProducts bookmark) throws IOException{
+	public ResponseEntity<ListProducts> registerbookmark(@Parameter(description="Object Type ListProducts") @RequestBody ListProducts bookmark) throws IOException{
 		productService.savebookmark(bookmark);
 		bookmark = productService.getBookmarksapi(bookmark);
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(bookmark.getIdproduct()).toUri();
@@ -89,7 +90,7 @@ public class BookmarksRestController {
 	})
 	@JsonView(ListProducts.Basic.class)
 	@GetMapping("/{id}")
-	public ResponseEntity<ListProducts> getbookmark (@PathVariable int id) throws IOException{
+	public ResponseEntity<ListProducts> getbookmark ( @Parameter(description="id of bookmark to be searched") @PathVariable int id) throws IOException{
 		Optional<ListProducts> bookmark = productService.getBookmarksbyid(id);
 		if(!bookmark.isEmpty()) {
 			return ResponseEntity.ok(bookmark.get());
@@ -115,7 +116,7 @@ public class BookmarksRestController {
 	})
 	@JsonView(ListProducts.Basic.class)
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ListProducts> deletebookmark(@PathVariable int id){
+	public ResponseEntity<ListProducts> deletebookmark( @Parameter(description="id of bookmark to be searched") @PathVariable int id){
 		Optional<ListProducts> bookmark = productService.getBookmarksbyid(id);
 		if(bookmark.isPresent()){
 			productService.deletebookmarkbyid(id);
@@ -142,7 +143,7 @@ public class BookmarksRestController {
 	})
 	@JsonView(ListProducts.Basic.class)
 	@PutMapping("/{id}")
-	public ResponseEntity<ListProducts> replacebookmark(@PathVariable int id,@RequestBody ListProducts newbookmark) throws IOException{
+	public ResponseEntity<ListProducts> replacebookmark( @Parameter(description="id of bookmark to be searched") @PathVariable int id, @Parameter(description="Object Type ListProducts") @RequestBody ListProducts newbookmark) throws IOException{
 		Optional<ListProducts> bookmark = productService.getBookmarksbyid(id);
 		if(!bookmark.isEmpty()) {
 			newbookmark.setIdproductlist(id);

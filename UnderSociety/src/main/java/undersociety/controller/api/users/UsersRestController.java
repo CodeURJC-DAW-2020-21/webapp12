@@ -218,10 +218,15 @@ public class UsersRestController {
 	 content = {@Content(
 	 mediaType = "application/json"
 	 )}
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@GetMapping("/{id}/imageProfile")
-	public ResponseEntity<Object> getImageProfile(@PathVariable int id) throws SQLException{
+	public ResponseEntity<Object> getImageProfile(@Parameter(description="id of user to be searched") @PathVariable int id) throws SQLException{
 		Optional<Users> s = userService.getUserId(id);
 		if(s.isPresent()) {
 			if(s.get().getUserimg() != null) {
@@ -246,7 +251,12 @@ public class UsersRestController {
 	 content = {@Content(
 	 mediaType = "application/json"
 	 )}
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@GetMapping("/{id}/imageThemeProfile")
 	public ResponseEntity<Object> getImageThemeProfile( @Parameter(description="id of user to be searched") @PathVariable int id) throws SQLException{
@@ -274,7 +284,12 @@ public class UsersRestController {
 	 content = {@Content(
 	 mediaType = "application/json"
 	 )}
-	 ) 
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
 	})
 	@PostMapping("/{id}/imageProfile")
 	public ResponseEntity<Object> uploadImageProfile( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="user profile picture") @RequestParam MultipartFile image) throws SQLException, IOException{
@@ -301,6 +316,11 @@ public class UsersRestController {
 	 content = {@Content(
 	 mediaType = "application/json"
 	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
 	 ) 
 	})
 	@PostMapping("/{id}/imageThemeProfile")
