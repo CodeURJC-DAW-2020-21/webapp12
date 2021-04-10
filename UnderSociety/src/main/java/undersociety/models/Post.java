@@ -17,17 +17,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 
-
-
-
-
-
-
 @Entity
 @Table(name = "post")
 public class Post {
 	public interface Simple{}
 	public interface Multiple{}
+	public interface PostDetails extends Post.Simple, Post.Multiple, Users.Basic{}
 
 	@JsonView(Simple.class)
 	@Id

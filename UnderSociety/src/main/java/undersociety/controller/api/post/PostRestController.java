@@ -21,9 +21,9 @@ public class PostRestController {
 	
 	@Autowired
 	private PostsService postService;
-	public interface PostDetails extends Post.Simple, Post.Multiple, Users.Basic{}
+
 	
-	@JsonView(PostDetails.class)
+	@JsonView(Post.PostDetails.class)
 	@GetMapping("/")
 	public List<Post> getAllPosts(){
 		return postService.getAll();
