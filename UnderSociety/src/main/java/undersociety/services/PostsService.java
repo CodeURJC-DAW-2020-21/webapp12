@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,17 @@ public class PostsService {
 	
 	@Autowired
 	private LikesRepository likerepo;
+	
+/////////////////////////////////////////////////////API METHODS////////////////////////////////////////////////////////////////////////
+	public List<Post> getAll() {
+	
+	return postsrepo.findAll();
+	
+	}
+	
+	
+
+//////////////////////////////////////////////////////NORMAL METHODS/////////////////////////////////////////////////////////////////////
 	
 	public Post getPost(int idpost) {
 		return postsrepo.findById(idpost).orElseThrow(() -> new NoSuchElementException("Post not found"));
