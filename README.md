@@ -105,7 +105,6 @@ index- En esta pantalla veremos el perfil basico del usuario o la empresa, y alg
 ### Prueba de documentación
 https://raw.githack.com/CodeURJC-DAW-2020-21/webapp12/api-docs/api-docs.html
 
-https://raw.githack.com/CodeURJC-DAW-2020-21/webapp12/api-docs/develop/api-docs.html
 
 # Fase 3
 
