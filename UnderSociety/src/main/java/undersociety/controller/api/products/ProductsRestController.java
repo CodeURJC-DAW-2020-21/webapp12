@@ -28,9 +28,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import undersociety.models.Product;
-import undersociety.models.Tags;
-import undersociety.models.Users;
 import undersociety.services.ProductService;
 
 @RestController
@@ -40,18 +42,26 @@ public class ProductsRestController {
 	
 	
 	@Autowired
-	private ProductService productService;
-	public interface ProductDetails extends Product.Simple, Product.Multiple, Users.Basic, Tags.Simple{}
+	private ProductService productService;	
 	
-	
-	
-	@JsonView(ProductDetails.class)
+	@Operation(summary = "Get a all Products")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Products", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
+	@JsonView(Product.ProductDetails.class)
 	@GetMapping("/")
 	public List<Product> getAllProducts(){
 		return productService.getAll();
 	}
 	
 	
+	@JsonView(Product.ProductDetails.class)
 	@PostMapping("/")
 	public ResponseEntity<Product> registerProduct(@RequestBody Product product) throws IOException{
 		productService.save(product); 
@@ -60,7 +70,22 @@ public class ProductsRestController {
 		return ResponseEntity.created(location).body(product);
 	}
 	
-	@JsonView(ProductDetails.class)
+	@Operation(summary = "Get a products by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Product", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
+	@JsonView(Product.ProductDetails.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> getProduct (@PathVariable int id) throws IOException{
 		Optional<Product> product = productService.getProductById(id);
@@ -71,7 +96,22 @@ public class ProductsRestController {
 		}
 	}
 	
-
+	@Operation(summary = "Create a Product")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful Product creation", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
+	@JsonView(Product.ProductDetails.class)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Product> deleteProduct(@PathVariable int id){
 		Optional<Product> product = productService.getProductById(id);
@@ -83,7 +123,22 @@ public class ProductsRestController {
 		}
 	}
 	
-	
+	@Operation(summary = "Modify a Product")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful Product modification", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
+	@JsonView(Product.ProductDetails.class)
 	@PutMapping("/{id}")
 	public ResponseEntity<Product> replaceProduct(@PathVariable int id,@RequestBody Product newproduct) throws IOException{
 		Optional<Product> product = productService.getProductById(id);
@@ -97,6 +152,21 @@ public class ProductsRestController {
 		}
 	}
 	
+	@Operation(summary = "Get a Image 0 Product by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Image Product", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
 	@GetMapping("/{id}/image0")
 	public ResponseEntity<Object> getImage0(@PathVariable int id) throws SQLException{
 		Optional<Product> product = productService.getProductById(id);
@@ -115,6 +185,21 @@ public class ProductsRestController {
 		}
 	}
 	
+	@Operation(summary = "Get a Image 1 Product by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Image Product", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
 	@GetMapping("/{id}/image1")
 	public ResponseEntity<Object> getImage1(@PathVariable int id) throws SQLException{
 		Optional<Product> product = productService.getProductById(id);
@@ -133,6 +218,21 @@ public class ProductsRestController {
 		}
 	}
 	
+	@Operation(summary = "Get a Image 2 Product by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Image Product", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
 	@GetMapping("/{id}/image2")
 	public ResponseEntity<Object> getImage2(@PathVariable int id) throws SQLException{
 		Optional<Product> product = productService.getProductById(id);
@@ -151,6 +251,21 @@ public class ProductsRestController {
 		}
 	}
 	
+	@Operation(summary = "Create a Image 0 Product by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Create the Image Product", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
 	@PostMapping("/{id}/image0")
 	public ResponseEntity<Object> uploadImage0(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
 		Optional<Product> product = productService.getProductById(id);
@@ -168,6 +283,21 @@ public class ProductsRestController {
 		}
 	}
 	
+	@Operation(summary = "Create a Image 1 Product by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Create the Image Product", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
 	@PostMapping("/{id}/image1")
 	public ResponseEntity<Object> uploadImage1(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
 		Optional<Product> product = productService.getProductById(id);
@@ -185,6 +315,21 @@ public class ProductsRestController {
 		}
 	}
 	
+	@Operation(summary = "Create a Image 2 Product by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Create the Image Product", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Product not found", 
+	 content = @Content
+	 ) 
+	})
 	@PostMapping("/{id}/image2")
 	public ResponseEntity<Object> uploadImage2(@PathVariable int id, @RequestParam() MultipartFile image) throws SQLException, IOException{
 		Optional<Product> product = productService.getProductById(id);
@@ -200,10 +345,6 @@ public class ProductsRestController {
 		}else {
 			return ResponseEntity.notFound().build();
 		}
-	}
-	
-	
-	
-	
+	}	
 	
 }

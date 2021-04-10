@@ -22,7 +22,8 @@ public class Product {
 	
 	public interface Simple{}
 	public interface Multiple{}
-	
+	public interface ProductDetails extends Product.Simple, Product.Multiple, Users.Basic, Tags.Simple{}
+
 	
 	@JsonView(Simple.class)
 	@Id
