@@ -261,7 +261,7 @@ Este miembro del equipo creó en paralelo la aplicación que finalmente se estab
    
 # Fase 3
 
-https://raw.githack.com/CodeURJC-DAW-2020-21/webapp12/blob/master/api-docs/api-docs.html
+https://raw.githack.com/CodeURJC-DAW-2020-21/webapp12/master/api-docs/api-docs.html
 
 # Fase 4
 
