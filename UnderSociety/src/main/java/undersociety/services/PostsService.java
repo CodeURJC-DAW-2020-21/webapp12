@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import undersociety.models.LikeAPost;
+import undersociety.models.ListProducts;
 import undersociety.models.Post;
 import undersociety.models.PostModel;
-import undersociety.models.Product;
 import undersociety.models.Users;
 import undersociety.repositories.LikesRepository;
 import undersociety.repositories.PostRepository;
@@ -81,6 +81,32 @@ public class PostsService {
 	public Post getPostByTitle(String title) {
 
 		return postsrepo.findBytitle(title);
+	}
+	
+	
+	public List<LikeAPost> getAllLikes() {
+
+		return likerepo.findAll();
+
+	}
+
+	public void saveLike(LikeAPost like) {
+		likerepo.save(like);
+
+	}
+
+	public LikeAPost getLikesapi(LikeAPost like) {
+		LikeAPost Post = likerepo.findByidpostAndIduser(like.getIdpost(), like.getIduser());
+		return Post;
+	}
+
+	public Optional<LikeAPost> getLikesbyid(int id) {
+		return likerepo.findById(id);
+	}
+	
+	public void deleteLikesbyid(int id) {
+		likerepo.deleteById(id);
+
 	}
 //////////////////////////////////////////////////////NORMAL METHODS/////////////////////////////////////////////////////////////////////
 	

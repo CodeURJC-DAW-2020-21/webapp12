@@ -8,15 +8,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import undersociety.models.ListProducts.ProductDetails;
+import undersociety.models.Post.Simple;
+
 @Entity
 @Table(name = "Post_likes")
 public class LikeAPost {
+	
+	public interface PostDetails extends Post.Simple, Post.Multiple, Users.Basic{}
+	public interface Basic extends PostDetails, Users.Basic{}
+	
+	@JsonView(Simple.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idlike;
+	@JsonView(Basic.class)
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
 	private Users iduser;
+	@JsonView(Basic.class)
 	@OneToOne
 	@JoinColumn(name = "idpost", referencedColumnName = "idpost")
 	private Post idpost;
