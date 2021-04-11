@@ -29,7 +29,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonView;
 
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import undersociety.models.Post;
 import undersociety.services.PostsService;
@@ -42,12 +46,37 @@ public class PostRestController {
 	@Autowired
 	private PostsService postService;
 
+	@Operation(summary = "Get a all Post")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Post", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
 	@JsonView(Post.PostDetails.class)
 	@GetMapping("/")
 	public List<Post> getAllPosts(){
 		return postService.getAll();
 	}
 	
+	@Operation(summary = "Create a Post")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful Post creation", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Post not found", 
+	 content = @Content
+	 ) 
+	})
 	@JsonView(Post.PostDetails.class)
 	@PostMapping("/")
 	public ResponseEntity<Post> registerPost( @Parameter(description="Object Type Post") @RequestBody Post post) throws IOException{
@@ -57,6 +86,21 @@ public class PostRestController {
 		return ResponseEntity.created(location).body(post);
 	}
 	
+	@Operation(summary = "Get a products by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Post", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Post not found", 
+	 content = @Content
+	 ) 
+	})
 	@JsonView(Post.PostDetails.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Post> getPost ( @Parameter(description="id of Post to be searched") @PathVariable int id) throws IOException{
@@ -68,6 +112,21 @@ public class PostRestController {
 		}
 	}
 
+	@Operation(summary = "Delete a Post")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful Post delete", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Post not found", 
+	 content = @Content
+	 ) 
+	})
 	@JsonView(Post.PostDetails.class)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Post> deletePost( @Parameter(description="id of Post to be searched") @PathVariable int id){
@@ -80,6 +139,21 @@ public class PostRestController {
 		}
 	}
 	
+	@Operation(summary = "Modify a Post")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful Post modification", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Post not found", 
+	 content = @Content
+	 ) 
+	})
 	@JsonView(Post.PostDetails.class)
 	@PutMapping("/{id}")
 	public ResponseEntity<Post> replacePost( @Parameter(description="id of Post to be searched") @PathVariable int id, @Parameter(description="Object Type Post") @RequestBody Post newpost) throws IOException{
@@ -94,6 +168,26 @@ public class PostRestController {
 		}
 	}
 	
+	@Operation(summary = "Get a Image Post by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Image Post", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Post not found", 
+	 content = @Content
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
+	})
 	@GetMapping("/{id}/image")
 	public ResponseEntity<Object> getPostImage( @Parameter(description="id of Post to be searched") @PathVariable int id) throws SQLException{
 		Optional<Post> post = postService.getPostById(id);
@@ -112,6 +206,27 @@ public class PostRestController {
 		}
 	}
 	
+	
+	@Operation(summary = "Create a Image Post by its id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Create the Image Post", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Post not found", 
+	 content = @Content
+	 ),
+	 @ApiResponse(
+	 responseCode = "204", 
+	 description = "Image not found", 
+	 content = @Content
+	 )
+	})
 	@PostMapping("/{id}/image")
 	public ResponseEntity<Object> uploadPostImage( @Parameter(description="id of Post to be searched") @PathVariable int id, @Parameter(description="Image Post") @RequestParam() MultipartFile image) throws SQLException, IOException{
 		Optional<Post> post = postService.getPostById(id);
@@ -129,5 +244,3 @@ public class PostRestController {
 		}
 	}
 }
-
-	
