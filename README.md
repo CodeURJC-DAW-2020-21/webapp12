@@ -266,6 +266,13 @@ Archivo yaml: https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/api-d
 Documentación API REST:https://raw.githack.com/CodeURJC-DAW-2020-21/webapp12/master/api-docs/api-docs.html
 
 ### Diagrama de clases:
+Leyenda del diagrama:
+
+Gris: Controladores
+Verde: Controladores APIREST
+Naranja: Vistas
+Azul: Repositorios
+Rojo: Servicios
 ![diagrama de clases](https://user-images.githubusercontent.com/63242688/114317935-ca3e7080-9b0a-11eb-895f-b0c45386ad7e.PNG)
 
 
