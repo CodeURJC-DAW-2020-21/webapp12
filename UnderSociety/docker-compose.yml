@@ -1,0 +1,10 @@
+web:
+    build: .
+    ports:
+    - "5000:5000"
+    volumes:
+    - .:/usr/app
+    links:
+    - db
+db:
+    image: mysql
