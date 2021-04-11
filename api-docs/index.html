@@ -201,6 +201,24 @@
   <li><a href="#registerbookmark"><code><span class="http-method">post</span> /api/bookmarks/</code></a></li>
   <li><a href="#replacebookmark"><code><span class="http-method">put</span> /api/bookmarks/{id}</code></a></li>
   </ul>
+  <h4><a href="#LikesRestController">LikesRestController</a></h4>
+  <ul>
+  <li><a href="#deletelike"><code><span class="http-method">delete</span> /api/Like/{id}</code></a></li>
+  <li><a href="#getAllLikes"><code><span class="http-method">get</span> /api/Like/</code></a></li>
+  <li><a href="#getlike"><code><span class="http-method">get</span> /api/Like/{id}</code></a></li>
+  <li><a href="#registerLike"><code><span class="http-method">post</span> /api/Like/</code></a></li>
+  <li><a href="#replacelike"><code><span class="http-method">put</span> /api/Like/{id}</code></a></li>
+  </ul>
+  <h4><a href="#PostRestController">PostRestController</a></h4>
+  <ul>
+  <li><a href="#deletePost"><code><span class="http-method">delete</span> /api/post/{id}</code></a></li>
+  <li><a href="#getAllPosts"><code><span class="http-method">get</span> /api/post/</code></a></li>
+  <li><a href="#getPost"><code><span class="http-method">get</span> /api/post/{id}</code></a></li>
+  <li><a href="#getPostImage"><code><span class="http-method">get</span> /api/post/{id}/image</code></a></li>
+  <li><a href="#registerPost"><code><span class="http-method">post</span> /api/post/</code></a></li>
+  <li><a href="#replacePost"><code><span class="http-method">put</span> /api/post/{id}</code></a></li>
+  <li><a href="#uploadPostImage"><code><span class="http-method">post</span> /api/post/{id}/image</code></a></li>
+  </ul>
   <h4><a href="#ProductsRestController">ProductsRestController</a></h4>
   <ul>
   <li><a href="#deleteProduct"><code><span class="http-method">delete</span> /api/products/{id}</code></a></li>
@@ -446,6 +464,508 @@
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
+  <h1><a name="LikesRestController">LikesRestController</a></h1>
+  <div class="method"><a name="deletelike"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/Like/{id}</code></pre></div>
+    <div class="method-summary">Delete a Like (<span class="nickname">deletelike</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of like to be searched format: int32</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Like not found
+        <a href="#"></a>
+    <h4 class="field-label">200</h4>
+    Successful Like delete
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllLikes"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/Like/</code></pre></div>
+    <div class="method-summary">Get a all Likes (<span class="nickname">getAllLikes</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#String">String</a>
+    <h4 class="field-label">200</h4>
+    Found the Likes
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getlike"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/Like/{id}</code></pre></div>
+    <div class="method-summary">Get a Like by id (<span class="nickname">getlike</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of like to be searched format: int32</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Like not found
+        <a href="#"></a>
+    <h4 class="field-label">200</h4>
+    Found the Like
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="registerLike"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/Like/</code></pre></div>
+    <div class="method-summary">Create Like (<span class="nickname">registerLike</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#LikeAPost_Basic">LikeAPost_Basic</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#String">String</a>
+    <h4 class="field-label">201</h4>
+    Successful Like creation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="replacelike"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/Like/{id}</code></pre></div>
+    <div class="method-summary">Modify a Like (<span class="nickname">replacelike</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of like to be searched format: int32</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#LikeAPost_Basic">LikeAPost_Basic</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Like not found
+        <a href="#"></a>
+    <h4 class="field-label">201</h4>
+    Successful Like modification
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="PostRestController">PostRestController</a></h1>
+  <div class="method"><a name="deletePost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /api/post/{id}</code></pre></div>
+    <div class="method-summary">Delete a Post (<span class="nickname">deletePost</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of Post to be searched format: int32</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Post not found
+        <a href="#"></a>
+    <h4 class="field-label">201</h4>
+    Successful Post delete
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllPosts"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/post/</code></pre></div>
+    <div class="method-summary">Get a all Post (<span class="nickname">getAllPosts</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#String">String</a>
+    <h4 class="field-label">200</h4>
+    Found the Post
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/post/{id}</code></pre></div>
+    <div class="method-summary">Get a products by its id (<span class="nickname">getPost</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of Post to be searched format: int32</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Post not found
+        <a href="#"></a>
+    <h4 class="field-label">200</h4>
+    Found the Post
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPostImage"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/post/{id}/image</code></pre></div>
+    <div class="method-summary">Get a Image Post by its id (<span class="nickname">getPostImage</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of Post to be searched format: int32</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Post not found
+        <a href="#"></a>
+    <h4 class="field-label">200</h4>
+    Found the Image Post
+        <a href="#"></a>
+    <h4 class="field-label">204</h4>
+    Image not found
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="registerPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/post/</code></pre></div>
+    <div class="method-summary">Create a Post (<span class="nickname">registerPost</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Post_PostDetails">Post_PostDetails</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Post not found
+        <a href="#"></a>
+    <h4 class="field-label">201</h4>
+    Successful Post creation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="replacePost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /api/post/{id}</code></pre></div>
+    <div class="method-summary">Modify a Post (<span class="nickname">replacePost</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of Post to be searched format: int32</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Post_PostDetails">Post_PostDetails</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Post not found
+        <a href="#"></a>
+    <h4 class="field-label">201</h4>
+    Successful Post modification
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="uploadPostImage"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/post/{id}/image</code></pre></div>
+    <div class="method-summary">Create a Image Post by its id (<span class="nickname">uploadPostImage</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of Post to be searched format: int32</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#body_5">body_5</a> (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">404</h4>
+    Post not found
+        <a href="#"></a>
+    <h4 class="field-label">201</h4>
+    Create the Image Post
+        <a href="#"></a>
+    <h4 class="field-label">204</h4>
+    Image not found
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <h1><a name="ProductsRestController">ProductsRestController</a></h1>
   <div class="method"><a name="deleteProduct"></a>
     <div class="method-path">
@@ -552,11 +1072,11 @@
     <h4 class="field-label">404</h4>
     Product not found
         <a href="#"></a>
-    <h4 class="field-label">200</h4>
-    Found the Image Product
-        <a href="#"></a>
     <h4 class="field-label">204</h4>
     Image not found
+        <a href="#"></a>
+    <h4 class="field-label">200</h4>
+    Found the Image Product
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -593,11 +1113,11 @@
     <h4 class="field-label">404</h4>
     Product not found
         <a href="#"></a>
-    <h4 class="field-label">200</h4>
-    Found the Image Product
-        <a href="#"></a>
     <h4 class="field-label">204</h4>
     Image not found
+        <a href="#"></a>
+    <h4 class="field-label">200</h4>
+    Found the Image Product
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -634,11 +1154,11 @@
     <h4 class="field-label">404</h4>
     Product not found
         <a href="#"></a>
-    <h4 class="field-label">200</h4>
-    Found the Image Product
-        <a href="#"></a>
     <h4 class="field-label">204</h4>
     Image not found
+        <a href="#"></a>
+    <h4 class="field-label">200</h4>
+    Found the Image Product
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -818,11 +1338,11 @@
     <h4 class="field-label">404</h4>
     Product not found
         <a href="#"></a>
-    <h4 class="field-label">204</h4>
-    Image not found
-        <a href="#"></a>
     <h4 class="field-label">201</h4>
     Create the Image Product
+        <a href="#"></a>
+    <h4 class="field-label">204</h4>
+    Image not found
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -870,11 +1390,11 @@
     <h4 class="field-label">404</h4>
     Product not found
         <a href="#"></a>
-    <h4 class="field-label">204</h4>
-    Image not found
-        <a href="#"></a>
     <h4 class="field-label">201</h4>
     Create the Image Product
+        <a href="#"></a>
+    <h4 class="field-label">204</h4>
+    Image not found
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -922,11 +1442,11 @@
     <h4 class="field-label">404</h4>
     Product not found
         <a href="#"></a>
-    <h4 class="field-label">204</h4>
-    Image not found
-        <a href="#"></a>
     <h4 class="field-label">201</h4>
     Create the Image Product
+        <a href="#"></a>
+    <h4 class="field-label">204</h4>
+    Image not found
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1716,11 +2236,11 @@
     <h4 class="field-label">404</h4>
     Not Found
         <a href="#String">String</a>
-    <h4 class="field-label">204</h4>
-    Image not found
-        <a href="#"></a>
     <h4 class="field-label">201</h4>
     Create the ImageProfile Theme
+        <a href="#"></a>
+    <h4 class="field-label">204</h4>
+    Image not found
         <a href="#"></a>
   </div> <!-- method -->
   <hr/>
@@ -1730,7 +2250,10 @@
 
   <h3>Table of Contents</h3>
   <ol>
+    <li><a href="#LikeAPost_Basic"><code>LikeAPost_Basic</code></a></li>
     <li><a href="#ListProducts_Basic"><code>ListProducts_Basic</code></a></li>
+    <li><a href="#Post_Basic"><code>Post_Basic</code></a></li>
+    <li><a href="#Post_PostDetails"><code>Post_PostDetails</code></a></li>
     <li><a href="#Product_Basic"><code>Product_Basic</code></a></li>
     <li><a href="#Product_ProductDetails"><code>Product_ProductDetails</code></a></li>
     <li><a href="#Tags_Basic"><code>Tags_Basic</code></a></li>
@@ -1739,14 +2262,25 @@
     <li><a href="#UsersRelations"><code>UsersRelations</code></a></li>
     <li><a href="#Users_Basic"><code>Users_Basic</code></a></li>
     <li><a href="#Users_Detailed"><code>Users_Detailed</code></a></li>
+    <li><a href="#Users_PostDetails"><code>Users_PostDetails</code></a></li>
     <li><a href="#Users_ProductDetails"><code>Users_ProductDetails</code></a></li>
     <li><a href="#body"><code>body</code></a></li>
     <li><a href="#body_1"><code>body_1</code></a></li>
     <li><a href="#body_2"><code>body_2</code></a></li>
     <li><a href="#body_3"><code>body_3</code></a></li>
     <li><a href="#body_4"><code>body_4</code></a></li>
+    <li><a href="#body_5"><code>body_5</code></a></li>
   </ol>
 
+  <div class="model">
+    <h3><a name="LikeAPost_Basic"><code>LikeAPost_Basic</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Object Type LikeAPost</div>
+    <div class="field-items">
+      <div class="param">idlike (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">iduser (optional)</div><div class="param-desc"><span class="param-type"><a href="#Users_Basic">Users_Basic</a></span>  </div>
+<div class="param">idpost (optional)</div><div class="param-desc"><span class="param-type"><a href="#Post_Basic">Post_Basic</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
   <div class="model">
     <h3><a name="ListProducts_Basic"><code>ListProducts_Basic</code></a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'>Object Type ListProducts</div>
@@ -1754,6 +2288,26 @@
       <div class="param">idproductlist (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
 <div class="param">iduser (optional)</div><div class="param-desc"><span class="param-type"><a href="#Users_Basic">Users_Basic</a></span>  </div>
 <div class="param">idproduct (optional)</div><div class="param-desc"><span class="param-type"><a href="#Product_Basic">Product_Basic</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Post_Basic"><code>Post_Basic</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">idpost (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">iduser (optional)</div><div class="param-desc"><span class="param-type"><a href="#Users_Basic">Users_Basic</a></span>  </div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Post_PostDetails"><code>Post_PostDetails</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Object Type Post</div>
+    <div class="field-items">
+      <div class="param">idpost (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">iduser (optional)</div><div class="param-desc"><span class="param-type"><a href="#Users_PostDetails">Users_PostDetails</a></span>  </div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
@@ -1877,6 +2431,19 @@
     </div>  <!-- field-items -->
   </div>
   <div class="model">
+    <h3><a name="Users_PostDetails"><code>Users_PostDetails</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">idusers (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">companyprofile (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">userprofile (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">userportimg (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
     <h3><a name="Users_ProductDetails"><code>Users_ProductDetails</code></a> <a class="up" href="#__Models">Up</a></h3>
     
     <div class="field-items">
@@ -1922,6 +2489,13 @@
     
     <div class="field-items">
       <div class="param">image (optional)</div><div class="param-desc"><span class="param-type"><a href="#binary">byte[]</a></span> Image 0 Product format: binary</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="body_5"><code>body_5</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">image (optional)</div><div class="param-desc"><span class="param-type"><a href="#binary">byte[]</a></span> Image Post format: binary</div>
     </div>  <!-- field-items -->
   </div>
   </body>
