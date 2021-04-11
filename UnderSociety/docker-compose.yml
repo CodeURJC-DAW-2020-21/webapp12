@@ -2,9 +2,14 @@ version: "3.3"
 services:
   db:
       image: mysql:latest
+      ports:
+        - "3306:3306"
+      restart: always
       environment:
           - MYSQL_ROOT_PASSWORD=holo
           - MYSQL_DATABASE=under_society_db
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=holo
   web:
       build: .
       ports:
@@ -13,4 +18,4 @@ services:
       volumes:
       - .:/usr/app
       depends_on:
-      - "db"
+      - db
