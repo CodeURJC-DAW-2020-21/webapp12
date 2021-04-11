@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import undersociety.models.ListProducts.ProductDetails;
 import undersociety.models.Post.Simple;
 
 @Entity

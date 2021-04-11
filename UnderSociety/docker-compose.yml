@@ -1,13 +1,16 @@
-web:
-    build: .
-    ports:
-    - "8443:8443"
-    volumes:
-    - .:/usr/app
-    links:
-    - db
-db:
-    image: mysql:latest
-    environment:
-        - MYSQL_ROOT_PASSWORD=holo
-        - MYSQL_DATABASE=under_society_db
+version: "3.3"
+services:
+  db:
+      image: mysql:latest
+      environment:
+          - MYSQL_ROOT_PASSWORD=holo
+          - MYSQL_DATABASE=under_society_db
+  web:
+      build: .
+      ports:
+      - "8443:8443"
+      restart: always
+      volumes:
+      - .:/usr/app
+      depends_on:
+      - "db"
