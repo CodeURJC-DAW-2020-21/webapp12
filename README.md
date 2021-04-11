@@ -275,6 +275,55 @@ Azul: Repositorios
 Rojo: Servicios
 ![diagrama de clases](https://user-images.githubusercontent.com/63242688/114317935-ca3e7080-9b0a-11eb-895f-b0c45386ad7e.PNG)
 
+### Instrucciones de ejecución de la aplicación dockerizada:
 
+### Documentación para construcción de la imagen docker:
+
+### Participación de miembros:
+
+##### David Montero Garcia:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+   
+##### Enrique Martín Santorcaz:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+   
+##### Guillermo Martín García:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+   
+##### Antonio Jesus Pajuelo Chavez:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+   
 # Fase 4
 
