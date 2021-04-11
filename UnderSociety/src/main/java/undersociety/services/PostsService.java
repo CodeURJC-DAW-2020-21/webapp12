@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import undersociety.models.LikeAPost;
-import undersociety.models.ListProducts;
 import undersociety.models.Post;
 import undersociety.models.PostModel;
 import undersociety.models.Users;
