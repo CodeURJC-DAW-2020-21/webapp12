@@ -262,6 +262,7 @@ Este miembro del equipo creó en paralelo la aplicación que finalmente se estab
 # Fase 3
 ### Documentación de la API REST:
 Archivo yaml: https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/api-docs/api-docs.yaml
+
 Documentación API REST:https://raw.githack.com/CodeURJC-DAW-2020-21/webapp12/master/api-docs/api-docs.html
 
 # Fase 4
