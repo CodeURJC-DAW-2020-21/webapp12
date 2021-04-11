@@ -21,8 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import undersociety.models.LikeAPost;
 import undersociety.services.PostsService;
 
@@ -35,14 +38,32 @@ public class LikesRestController {
 	private PostsService postService;
 	
 	
-	
+	@Operation(summary = "Get a all Likes")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Likes", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ) 
+	})
 	@JsonView(LikeAPost.Basic.class)
 	@GetMapping("/")
 	public List<LikeAPost> getAllLikes(){
 		return postService.getAllLikes();
 	}
 	
-	
+	@Operation(summary = "Create Like")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful Like creation", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 )  
+	})
 	@JsonView(LikeAPost.Basic.class)
 	@PostMapping("/")
 	public ResponseEntity<LikeAPost> registerLike(@Parameter(description="Object Type LikeAPost") @RequestBody LikeAPost like) throws IOException{
@@ -52,10 +73,24 @@ public class LikesRestController {
 		return ResponseEntity.created(location).body(like);
 	}
 	
-	
+	@Operation(summary = "Get a Like by id")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the Like", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Like not found", 
+	 content = @Content
+	 )  
+	})
 	@JsonView(LikeAPost.Basic.class)
 	@GetMapping("/{id}")
-	public ResponseEntity<LikeAPost> getbookmark ( @Parameter(description="id of like to be searched") @PathVariable int id) throws IOException{
+	public ResponseEntity<LikeAPost> getlike ( @Parameter(description="id of like to be searched") @PathVariable int id) throws IOException{
 		Optional<LikeAPost> like = postService.getLikesbyid(id);
 		if(!like.isEmpty()) {
 			return ResponseEntity.ok(like.get());
@@ -64,7 +99,21 @@ public class LikesRestController {
 		}
 	}
 	
-	
+	@Operation(summary = "Delete a Like")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Successful Like delete", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Like not found", 
+	 content = @Content
+	 ) 
+	})
 	@JsonView(LikeAPost.Basic.class)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<LikeAPost> deletelike( @Parameter(description="id of like to be searched") @PathVariable int id){
@@ -77,7 +126,21 @@ public class LikesRestController {
 		}
 	}
 	
-	
+	@Operation(summary = "Modify a Like")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "201", 
+	 description = "Successful Like modification", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "Like not found", 
+	 content = @Content
+	 ) 
+	})
 	@JsonView(LikeAPost.Basic.class)
 	@PutMapping("/{id}")
 	public ResponseEntity<LikeAPost> replacelike( @Parameter(description="id of like to be searched") @PathVariable int id, @Parameter(description="Object Type LikeAPost") @RequestBody LikeAPost newlike) throws IOException{
