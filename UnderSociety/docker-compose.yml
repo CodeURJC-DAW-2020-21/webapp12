@@ -1,22 +1,13 @@
-version: '3'
-services:
-    db:
-        image: mysql:latest
-        ports:
-            - 3306:3306
-        restart: always
-        environment:
-            - MYSQL_ROOT_PASSWORD=holo
-            - MYSQL_DATABASE=under_society_db
-    web:
-        build: .
-        ports:
-        - "8443:8443"
-        volumes:
-        - .:/usr/src/
-        depends_on:
-            - "db"
-        environment:
-            - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/under_society_db?useSSL=false
-            - SPRING_DATASOURCE_USERNAME=root
-            - SPRING_DATASOURCE_PASSWORD=holo
+web:
+    build: .
+    ports:
+    - "8443:8443"
+    volumes:
+    - .:/usr/app
+    links:
+    - db
+db:
+    image: mysql:latest
+    environment:
+        - MYSQL_ROOT_PASSWORD=holo
+        - MYSQL_DATABASE=under_society_db
