@@ -1,15 +1,13 @@
 package undersociety.services;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Blob;
 import java.util.List;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,10 +26,7 @@ import undersociety.repositories.TagsRepository;
 import undersociety.repositories.UserRepository;
 
 @Service
-public class AdminService {
-
-	private static final Path IMAGES_FOLDER = Paths.get(System.getProperty("user.dir"), "src/main/resources/static/images/");
-	
+public class AdminService {	
 	@Autowired
 	private ProductRepository productrepo;
 	
@@ -49,7 +44,7 @@ public class AdminService {
 
 	@Autowired
 	private PasswordEncoder encoder;
-	
+		
 	public AdminData getAdminData() {
 		AdminData d = new AdminData();
 	
@@ -63,46 +58,26 @@ public class AdminService {
 	}
 	
 	public void loadDataBase() throws IOException {
-		Path imagePath = IMAGES_FOLDER.resolve("FOndo2.jpeg");
-		Resource image = new UrlResource(imagePath.toUri());
-		Path imagePathUser1 = IMAGES_FOLDER.resolve("legolas_z9w5.jpg");
-		Resource imageUser1 = new UrlResource(imagePathUser1.toUri());
-		Path imagePathUser2 = IMAGES_FOLDER.resolve("maxresdefault-1-e1510939930531-1024x663.jpg.webp");
-		Resource imageUser2 = new UrlResource(imagePathUser2.toUri());
-		Path imagePathUser3 = IMAGES_FOLDER.resolve("frodo_smc7.jpg");
-		Resource imageUser3 = new UrlResource(imagePathUser3.toUri());
-		Path imagePathUser4 = IMAGES_FOLDER.resolve("lord-of-the-rings-sean-bean-boromir-1584636601.jpg");
-		Resource imageUser4 = new UrlResource(imagePathUser4.toUri());
-		Path imagePathUser5 = IMAGES_FOLDER.resolve("unnamed.jpg");
-		Resource imageUser5 = new UrlResource(imagePathUser5.toUri());
-		Path imagePathUser6 = IMAGES_FOLDER.resolve("201b8814bc242568936940c34180eb6e--lotr-quotes-frodo-baggins.jpg");
-		Resource imageUser6 = new UrlResource(imagePathUser6.toUri());
-		Path imagePathUser7 = IMAGES_FOLDER.resolve("Pippinprintscreen.jpg");
-		Resource imageUser7 = new UrlResource(imagePathUser7.toUri());
-		Path imagePathUser8 = IMAGES_FOLDER.resolve("ian-mckellen-hobbit-an-unexpected-journey-gandalf.jpg");
-		Resource imageUser8 = new UrlResource(imagePathUser8.toUri());
-		Path imagePathUser9 = IMAGES_FOLDER.resolve("tipos-magia3_1.jpg");
-		Resource imageUser9 = new UrlResource(imagePathUser9.toUri());
-		Path imagePathUser10 = IMAGES_FOLDER.resolve("4a08dfec8bfb49ef9565217ffe22cbda.jpg");
-		Resource imageUser10 = new UrlResource(imagePathUser10.toUri());
-		Path imagePathUser11 = IMAGES_FOLDER.resolve("Faramir-movie.jpg");
-		Resource imageUser11 = new UrlResource(imagePathUser11.toUri());
-		Path imagePathUser12 = IMAGES_FOLDER.resolve("martin-freeman-hobbit.jpg");
-		Resource imageUser12 = new UrlResource(imagePathUser12.toUri());
-		Path imagePathUser13 = IMAGES_FOLDER.resolve("64aab6e1c836e7d79b132ab1cf66df1e.jpg");
-		Resource imageUser13 = new UrlResource(imagePathUser13.toUri());
-		Path imagePathUser14 = IMAGES_FOLDER.resolve("the-lord-of-the-rings-the-return-of-the-king-gollum-1553685731.jpg");
-		Resource imageUser14 = new UrlResource(imagePathUser14.toUri());
-		Path imagePathUser15 = IMAGES_FOLDER.resolve("1366055.jpg");
-		Resource imageUser15 = new UrlResource(imagePathUser15.toUri());
-		Path imagePathUser16 = IMAGES_FOLDER.resolve("Radagast_the_Brown.jpg");
-		Resource imageUser16 = new UrlResource(imagePathUser16.toUri());
-		Path imagePathUser17 = IMAGES_FOLDER.resolve("unnamed (1).jpg");
-		Resource imageUser17 = new UrlResource(imagePathUser17.toUri());
-		Path imagePathUser18 = IMAGES_FOLDER.resolve("8da0f0135b32ac6c26067c09498685f8.jpg");
-		Resource imageUser18 = new UrlResource(imagePathUser18.toUri());
-		Path imagePathUser19 = IMAGES_FOLDER.resolve("f3d3931074bef5d59f3639e55818dbea.jpg");
-		Resource imageUser19 = new UrlResource(imagePathUser19.toUri());
+		Resource image = new ClassPathResource("/static/images/FOndo2.jpeg");
+		Resource imageUser1 = new ClassPathResource("/static/images/legolas_z9w5.jpg");
+		Resource imageUser2 = new ClassPathResource("/static/images/maxresdefault-1-e1510939930531-1024x663.jpg.webp");
+		Resource imageUser3 = new ClassPathResource("/static/images/frodo_smc7.jpg");
+		Resource imageUser4 = new ClassPathResource("/static/images/lord-of-the-rings-sean-bean-boromir-1584636601.jpg");
+		Resource imageUser5 = new ClassPathResource("/static/images/unnamed.jpg");
+		Resource imageUser6 = new ClassPathResource("/static/images/201b8814bc242568936940c34180eb6e--lotr-quotes-frodo-baggins.jpg");
+		Resource imageUser7 = new ClassPathResource("/static/images/Pippinprintscreen.jpg");
+		Resource imageUser8 = new ClassPathResource("/static/images/ian-mckellen-hobbit-an-unexpected-journey-gandalf.jpg");
+		Resource imageUser9 = new ClassPathResource("/static/images/tipos-magia3_1.jpg");
+		Resource imageUser10 = new ClassPathResource("/static/images/4a08dfec8bfb49ef9565217ffe22cbda.jpg");
+		Resource imageUser11 = new ClassPathResource("/static/images/Faramir-movie.jpg");
+		Resource imageUser12 = new ClassPathResource("/static/images/martin-freeman-hobbit.jpg");
+		Resource imageUser13 = new ClassPathResource("/static/images/64aab6e1c836e7d79b132ab1cf66df1e.jpg");
+		Resource imageUser14 = new ClassPathResource("/static/images/the-lord-of-the-rings-the-return-of-the-king-gollum-1553685731.jpg");
+		Resource imageUser15 = new ClassPathResource("/static/images/1366055.jpg");
+		Resource imageUser16 = new ClassPathResource("/static/images/Radagast_the_Brown.jpg");
+		Resource imageUser17 = new ClassPathResource("/static/images/unnamed (1).jpg");
+		Resource imageUser18 = new ClassPathResource("/static/images/8da0f0135b32ac6c26067c09498685f8.jpg");
+		Resource imageUser19 = new ClassPathResource("/static/images/f3d3931074bef5d59f3639e55818dbea.jpg");
 		
 		
 				
@@ -127,48 +102,27 @@ public class AdminService {
 		Blob img18 = BlobProxy.generateProxy(imageUser18.getInputStream(), imageUser18.contentLength());
 		Blob img19 = BlobProxy.generateProxy(imageUser19.getInputStream(), imageUser19.contentLength());
 		
-		
 		//Images Companies 
-		Path imagePathCompania20 = IMAGES_FOLDER.resolve("3rgMnSKT_400x400_1.png");
-		Resource imageCompania20 = new UrlResource(imagePathCompania20.toUri());
-		Path imagePathCompania21 = IMAGES_FOLDER.resolve("nike12.jpg");
-		Resource imageCompania21 = new UrlResource(imagePathCompania21.toUri());
-		Path imagePathCompania22 = IMAGES_FOLDER.resolve("png-transparent-volkswagen-group-car-volkswagen-emissions-scandal-volkswagen-golf-germany-emblem-trademark-logo.png");
-		Resource imageCompania22 = new UrlResource(imagePathCompania22.toUri());
-		Path imagePathCompania23 = IMAGES_FOLDER.resolve("descarga1.jpg");
-		Resource imageCompania23 = new UrlResource(imagePathCompania23.toUri());
-		Path imagePathCompania24 = IMAGES_FOLDER.resolve("apple-logo.jpg");
-		Resource imageCompania24 = new UrlResource(imagePathCompania24.toUri());
-		Path imagePathCompania25 = IMAGES_FOLDER.resolve("ff8080814dd21b23014de3186e4701aa-large.png");
-		Resource imageCompania25 = new UrlResource(imagePathCompania25.toUri());
-		Path imagePathCompania26 = IMAGES_FOLDER.resolve("zara-new-logo-06022019in2.png");
-		Resource imageCompania26 = new UrlResource(imagePathCompania26.toUri());
-		Path imagePathCompania27 = IMAGES_FOLDER.resolve("PFJP6V4AWNEFFEVBLJ6WGX3L2I.jpg");
-		Resource imageCompania27 = new UrlResource(imagePathCompania27.toUri());
-		Path imagePathCompania28 = IMAGES_FOLDER.resolve("366201-1596732976821.jpg");
-		Resource imageCompania28 = new UrlResource(imagePathCompania28.toUri());
-		Path imagePathCompania29 = IMAGES_FOLDER.resolve("adidas-logo.jpg");
-		Resource imageCompania29 = new UrlResource(imagePathCompania29.toUri());
-		Path imagePathCompania30 = IMAGES_FOLDER.resolve("186153b44d408d68738794ee51704837.jpg");
-		Resource imageCompania30 = new UrlResource(imagePathCompania30.toUri());
-		Path imagePathCompania31 = IMAGES_FOLDER.resolve("thumb-1920-588106.png");
-		Resource imageCompania31 = new UrlResource(imagePathCompania31.toUri());
-		Path imagePathCompania32 = IMAGES_FOLDER.resolve("seat-logo.jpg");
-		Resource imageCompania32 = new UrlResource(imagePathCompania32.toUri());
-		Path imagePathCompania33 = IMAGES_FOLDER.resolve("mahou-logo.jpg");
-		Resource imageCompania33 = new UrlResource(imagePathCompania33.toUri());
-		Path imagePathCompania34 = IMAGES_FOLDER.resolve("descarga.png");
-		Resource imageCompania34 = new UrlResource(imagePathCompania34.toUri());
-		Path imagePathCompania35 = IMAGES_FOLDER.resolve("images.png");
-		Resource imageCompania35 = new UrlResource(imagePathCompania35.toUri());
-		Path imagePathCompania36 = IMAGES_FOLDER.resolve("42367_24102018081432778016_opt_520.jpg");
-		Resource imageCompania36 = new UrlResource(imagePathCompania36.toUri());
-		Path imagePathCompania37 = IMAGES_FOLDER.resolve("mango-1541664133.jpg");
-		Resource imageCompania37 = new UrlResource(imagePathCompania37.toUri());
-		Path imagePathCompania38 = IMAGES_FOLDER.resolve("thumb-hp-logo-hewlett-packard-black-background-minimal-lines-texture.jpg");
-		Resource imageCompania38 = new UrlResource(imagePathCompania38.toUri());
-		Path imagePathCompania39 = IMAGES_FOLDER.resolve("flat,750x1000,075,f.jpg");
-		Resource imageCompania39 = new UrlResource(imagePathCompania39.toUri());
+		Resource imageCompania20 = new ClassPathResource("/static/images/3rgMnSKT_400x400_1.png");
+		Resource imageCompania21 = new ClassPathResource("/static/images/nike12.jpg");
+		Resource imageCompania22 = new ClassPathResource("/static/images/png-transparent-volkswagen-group-car-volkswagen-emissions-scandal-volkswagen-golf-germany-emblem-trademark-logo.png");
+		Resource imageCompania23 = new ClassPathResource("/static/images/descarga1.jpg");
+		Resource imageCompania24 = new ClassPathResource("/static/images/apple-logo.jpg");
+		Resource imageCompania25 = new ClassPathResource("/static/images/ff8080814dd21b23014de3186e4701aa-large.png");
+		Resource imageCompania26 = new ClassPathResource("/static/images/zara-new-logo-06022019in2.png");
+		Resource imageCompania27 = new ClassPathResource("/static/images/PFJP6V4AWNEFFEVBLJ6WGX3L2I.jpg");
+		Resource imageCompania28 = new ClassPathResource("/static/images/366201-1596732976821.jpg");
+		Resource imageCompania29 = new ClassPathResource("/static/images/adidas-logo.jpg");
+		Resource imageCompania30 = new ClassPathResource("/static/images/186153b44d408d68738794ee51704837.jpg");
+		Resource imageCompania31 = new ClassPathResource("/static/images/thumb-1920-588106.png");
+		Resource imageCompania32 = new ClassPathResource("/static/images/seat-logo.jpg");
+		Resource imageCompania33 = new ClassPathResource("/static/images/mahou-logo.jpg");
+		Resource imageCompania34 = new ClassPathResource("/static/images/descarga.png");
+		Resource imageCompania35 = new ClassPathResource("/static/images/images.png");
+		Resource imageCompania36 = new ClassPathResource("/static/images/42367_24102018081432778016_opt_520.jpg");
+		Resource imageCompania37 = new ClassPathResource("/static/images/mango-1541664133.jpg");
+		Resource imageCompania38 = new ClassPathResource("/static/images/thumb-hp-logo-hewlett-packard-black-background-minimal-lines-texture.jpg");
+		Resource imageCompania39 = new ClassPathResource("/static/images/flat,750x1000,075,f.jpg");
 		
 		
 		Blob img20 = BlobProxy.generateProxy(imageCompania20.getInputStream(), imageCompania20.contentLength());
@@ -193,65 +147,45 @@ public class AdminService {
 		Blob img39 = BlobProxy.generateProxy(imageCompania39.getInputStream(), imageCompania39.contentLength());
 		
 		//Images Post
-		Path imagePost= IMAGES_FOLDER.resolve("chicos-estan-dibujando-casa_36356-43.jpg");
-		Resource imagepost = new UrlResource(imagePost.toUri());
+		Resource imagepost = new ClassPathResource("/static/images/chicos-estan-dibujando-casa_36356-43.jpg");
 		
-		Path imagePost1= IMAGES_FOLDER.resolve("apple-keynote.jpg");
-		Resource imagepost1 = new UrlResource(imagePost1.toUri());
+		Resource imagepost1 = new ClassPathResource("/static/images/apple-keynote.jpg");
 		
-		Path imagePost2= IMAGES_FOLDER.resolve("c593c42617a5935a5d15def89ee0b000.jpg");
-		Resource imagepost2 = new UrlResource(imagePost2.toUri());
+		Resource imagepost2 = new ClassPathResource("/static/images/c593c42617a5935a5d15def89ee0b000.jpg");
 		
-		Path imagePost3= IMAGES_FOLDER.resolve("580cc2da99c84a2ea9240cc0399b0be4.jpg");
-		Resource imagepost3 = new UrlResource(imagePost3.toUri());
+		Resource imagepost3 = new ClassPathResource("/static/images/580cc2da99c84a2ea9240cc0399b0be4.jpg");
 		
-		Path imagePost4= IMAGES_FOLDER.resolve("NIVEA-Beach-Event-Germany-2000-Beiersdorf-e1468402388669.jpg");
-		Resource imagepost4 = new UrlResource(imagePost4.toUri());
+		Resource imagepost4 = new ClassPathResource("/static/images/NIVEA-Beach-Event-Germany-2000-Beiersdorf-e1468402388669.jpg");
 		
-		Path imagePost5= IMAGES_FOLDER.resolve("3283b7f2e40f7e89eb9098c37d4578c4.jpg");
-		Resource imagepost5 = new UrlResource(imagePost5.toUri());
+		Resource imagepost5 = new ClassPathResource("/static/images/3283b7f2e40f7e89eb9098c37d4578c4.jpg");
 		
-		Path imagePost6= IMAGES_FOLDER.resolve("maraton-kiPH-U601127335038my-624x385@La Rioja.jpg");
-		Resource imagepost6 = new UrlResource(imagePost6.toUri());
+		Resource imagepost6 = new ClassPathResource("/static/images/maraton-kiPH-U601127335038my-624x385@La Rioja.jpg");
 		
-		Path imagePost7= IMAGES_FOLDER.resolve("SEAT-Arona-mirador-Toscana.jpg");
-		Resource imagepost7 = new UrlResource(imagePost7.toUri());
+		Resource imagepost7 = new ClassPathResource("/static/images/SEAT-Arona-mirador-Toscana.jpg");
 		
-		Path imagePost8= IMAGES_FOLDER.resolve("Legolas-in-Behind-the-Scenes-of-DOS-legolas-greenleaf-36864108-604-340.jpg");
-		Resource imagepost8 = new UrlResource(imagePost8.toUri());
+		Resource imagepost8 = new ClassPathResource("/static/images/Legolas-in-Behind-the-Scenes-of-DOS-legolas-greenleaf-36864108-604-340.jpg");
 						
-		Path imagePost9= IMAGES_FOLDER.resolve("graffiti-tour-madrid-mahou-wag1mag-5.jpg");
-		Resource imagepost9 = new UrlResource(imagePost9.toUri());
+		Resource imagepost9 = new ClassPathResource("/static/images/graffiti-tour-madrid-mahou-wag1mag-5.jpg");
 		
-		Path imagePost10= IMAGES_FOLDER.resolve("gollum2.jpg");
-		Resource imagepost10 = new UrlResource(imagePost10.toUri());
+		Resource imagepost10 = new ClassPathResource("/static/images/gollum2.jpg");
 		
-		Path imagePost11= IMAGES_FOLDER.resolve("EabyGc_XYAAwSzB.jpg");
-		Resource imagepost11 = new UrlResource(imagePost11.toUri());
+		Resource imagepost11 = new ClassPathResource("/static/images/EabyGc_XYAAwSzB.jpg");
 		
-		Path imagePost12= IMAGES_FOLDER.resolve("zara.jpeg");
-		Resource imagepost12 = new UrlResource(imagePost12.toUri());
+		Resource imagepost12 = new ClassPathResource("/static/images/zara.jpeg");
 		
-		Path imagePost13= IMAGES_FOLDER.resolve("gestion-documentos-teletrabajo3-scaled.jpg");
-		Resource imagepost13 = new UrlResource(imagePost13.toUri());
+		Resource imagepost13 = new ClassPathResource("/static/images/gestion-documentos-teletrabajo3-scaled.jpg");
 		
-		Path imagePost14= IMAGES_FOLDER.resolve("meme1-1280x720.jpg");
-		Resource imagepost14 = new UrlResource(imagePost14.toUri());
+		Resource imagepost14 = new ClassPathResource("/static/images/meme1-1280x720.jpg");
 		
-		Path imagePost15= IMAGES_FOLDER.resolve("figwit__11346_orig.jpg");
-		Resource imagepost15 = new UrlResource(imagePost15.toUri());
+		Resource imagepost15 = new ClassPathResource("/static/images/figwit__11346_orig.jpg");
 		
-		Path imagePost16= IMAGES_FOLDER.resolve("DoYou_H2-750x421.jpg");
-		Resource imagepost16 = new UrlResource(imagePost16.toUri());
+		Resource imagepost16 = new ClassPathResource("/static/images/DoYou_H2-750x421.jpg");
 		
-		Path imagePost17= IMAGES_FOLDER.resolve("20057525635_0e97d61372_b.jpg");
-		Resource imagepost17 = new UrlResource(imagePost17.toUri());
+		Resource imagepost17 = new ClassPathResource("/static/images/20057525635_0e97d61372_b.jpg");
 		
-		Path imagePost18= IMAGES_FOLDER.resolve("maxresdefault.jpg");
-		Resource imagepost18 = new UrlResource(imagePost18.toUri());
+		Resource imagepost18 = new ClassPathResource("/static/images/maxresdefault.jpg");
 		
-		Path imagePost19= IMAGES_FOLDER.resolve("DjSKyjtWsAAxYDO.jpg");
-		Resource imagepost19 = new UrlResource(imagePost19.toUri());
+		Resource imagepost19 = new ClassPathResource("/static/images/DjSKyjtWsAAxYDO.jpg");
 		
 		Blob imgpost = BlobProxy.generateProxy(imagepost.getInputStream(), imagepost.contentLength());
 		Blob imgpost1 = BlobProxy.generateProxy(imagepost1.getInputStream(), imagepost1.contentLength());
@@ -276,68 +210,39 @@ public class AdminService {
 		
 		//Images Product
 		
-		Path imagePathProduct = IMAGES_FOLDER.resolve("wrc_spirit_disc_ultegra_2021_.jpeg");
-		Resource imageProduct = new UrlResource(imagePathProduct.toUri());		
-		Path imagePathProduct1 = IMAGES_FOLDER.resolve("wrc_spirit_disc_ultegra_2021._.jpg");
-		Resource imageProduct1 = new UrlResource(imagePathProduct1.toUri());
-		Path imagePathProduct2 = IMAGES_FOLDER.resolve("wrc_spirit_disc_ultegra_2021.jpg");
-		Resource imageProduct2 = new UrlResource(imagePathProduct2.toUri());
-		Path imagePathProduct3 = IMAGES_FOLDER.resolve("air-max-plus-zapatillas-v371c8.jpg");
-		Resource imageProduct3 = new UrlResource(imagePathProduct3.toUri());		
-		Path imagePathProduct4 = IMAGES_FOLDER.resolve("air-max-plus-zapatillas-v371c8 (1).jpg");
-		Resource imageProduct4 = new UrlResource(imagePathProduct4.toUri());
-		Path imagePathProduct5 = IMAGES_FOLDER.resolve("air-max-plus-zapatillas-v371c8 (2).jpg");
-		Resource imageProduct5 = new UrlResource(imagePathProduct5.toUri());
-		Path imagePathProduct6 = IMAGES_FOLDER.resolve("1_1_2.jpg");
-		Resource imageProduct6 = new UrlResource(imagePathProduct6.toUri());		
-		Path imagePathProduct7 = IMAGES_FOLDER.resolve("todos_accesorios.jpg");
-		Resource imageProduct7 = new UrlResource(imagePathProduct7.toUri());
-		Path imagePathProduct8 = IMAGES_FOLDER.resolve("s-l225.jpg");
-		Resource imageProduct8 = new UrlResource(imagePathProduct8.toUri());
-		Path imagePathProduct9 = IMAGES_FOLDER.resolve("hacha-cudeman-shark-159-m.jpg");
-		Resource imageProduct9 = new UrlResource(imagePathProduct9.toUri());
-		Path imagePathProduct10 = IMAGES_FOLDER.resolve("924ac8321142029691b185ab03e95b36.jpg");
-		Resource imageProduct10 = new UrlResource(imagePathProduct10.toUri());
-		Path imagePathProduct11 = IMAGES_FOLDER.resolve("il_570xN.1589575158_6pek.jpg");
-		Resource imageProduct11 = new UrlResource(imagePathProduct11.toUri());
-		Path imagePathProduct12 = IMAGES_FOLDER.resolve("D_NQ_NP_811459-MLM31216665088_062019-O.jpg");
-		Resource imageProduct12 = new UrlResource(imagePathProduct12.toUri());
-		Path imagePathProduct13 = IMAGES_FOLDER.resolve("hp-ordenador-portatil-250-g6.jpg");
-		Resource imageProduct13 = new UrlResource(imagePathProduct13.toUri());	
-		Path imagePathProduct14 = IMAGES_FOLDER.resolve("c06226445_209x189.jpg");
-		Resource imageProduct14 = new UrlResource(imagePathProduct14.toUri());
-		Path imagePathProduct15 = IMAGES_FOLDER.resolve("Disfraz-de-Halloween-del-mago-disfraz-personalizado-con-Peluca-de-sombrero-barba.jpg");
-		Resource imageProduct15 = new UrlResource(imagePathProduct15.toUri());
-		Path imagePathProduct16 = IMAGES_FOLDER.resolve("9554415517726.jpg");
-		Resource imageProduct16 = new UrlResource(imagePathProduct16.toUri());
-		Path imagePathProduct17 = IMAGES_FOLDER.resolve("91jf2m5BfTL._AC_SX679_.jpg");
-		Resource imageProduct17 = new UrlResource(imagePathProduct17.toUri());
-		Path imagePathProduct18 = IMAGES_FOLDER.resolve("s-l300.jpg");
-		Resource imageProduct18 = new UrlResource(imagePathProduct18.toUri());
-		Path imagePathProduct19 = IMAGES_FOLDER.resolve("s-l300 (1).jpg");
-		Resource imageProduct19 = new UrlResource(imagePathProduct19.toUri());
-		Path imagePathProduct20 = IMAGES_FOLDER.resolve("71DkgRbnuzL._AC_SX679_.jpg");
-		Resource imageProduct20 = new UrlResource(imagePathProduct20.toUri());
-		Path imagePathProduct21 = IMAGES_FOLDER.resolve("samsung-galaxy-a21s-0.jpg");
-		Resource imageProduct21 = new UrlResource(imagePathProduct21.toUri());
-		Path imagePathProduct22 = IMAGES_FOLDER.resolve("sizing-bwc.png");
-		Resource imageProduct22 = new UrlResource(imagePathProduct22.toUri());
-		Path imagePathProduct23 = IMAGES_FOLDER.resolve("s-l300 (2).jpg");
-		Resource imageProduct23 = new UrlResource(imagePathProduct23.toUri());
-		Path imagePathProduct24 = IMAGES_FOLDER.resolve("51UXFM1mrSL._AC_SX425_.jpg");
-		Resource imageProduct24 = new UrlResource(imagePathProduct24.toUri());
-		Path imagePathProduct25 = IMAGES_FOLDER.resolve("il_570xN.1638482480_p7u8.jpg");
-		Resource imageProduct25 = new UrlResource(imagePathProduct25.toUri());
-		Path imagePathProduct26 = IMAGES_FOLDER.resolve("146914715842684601227a9a325d67df4f17e52607.jpg");
-		Resource imageProduct26 = new UrlResource(imagePathProduct26.toUri());
-		Path imagePathProduct27 = IMAGES_FOLDER.resolve("42-alu-silver-sport-white-nc-s3-gallery1_GEO_ES.jpg");
-		Resource imageProduct27 = new UrlResource(imagePathProduct27.toUri());
-		Path imagePathProduct28 = IMAGES_FOLDER.resolve("anduril-sword-_-ranger-sword-of-aragorn.jpg");
-		Resource imageProduct28 = new UrlResource(imagePathProduct28.toUri());
-		Path imagePathProduct29 = IMAGES_FOLDER.resolve("Zapatilla_Hardcourt_Hi_Negro_FV5463_01_standard.jpg");
-		Resource imageProduct29 = new UrlResource(imagePathProduct29.toUri());
-		Path imagePathProduct30 = IMAGES_FOLDER.resolve("Zapatilla_Hardcourt_Hi_Negro_FV5463_010_hover_standard.jpg");
-		Resource imageProduct30 = new UrlResource(imagePathProduct30.toUri());
+		Resource imageProduct = new ClassPathResource("/static/images/wrc_spirit_disc_ultegra_2021_.jpeg");		
+		Resource imageProduct1 = new ClassPathResource("/static/images/wrc_spirit_disc_ultegra_2021._.jpg");
+		Resource imageProduct2 = new ClassPathResource("/static/images/wrc_spirit_disc_ultegra_2021.jpg");
+		Resource imageProduct3 = new ClassPathResource("/static/images/air-max-plus-zapatillas-v371c8.jpg");		
+		Resource imageProduct4 = new ClassPathResource("/static/images/air-max-plus-zapatillas-v371c8 (1).jpg");
+		Resource imageProduct5 = new ClassPathResource("/static/images/air-max-plus-zapatillas-v371c8 (2).jpg");
+		Resource imageProduct6 = new ClassPathResource("/static/images/1_1_2.jpg");		
+		Resource imageProduct7 = new ClassPathResource("/static/images/todos_accesorios.jpg");
+		Resource imageProduct8 = new ClassPathResource("/static/images/s-l225.jpg");
+		Resource imageProduct9 = new ClassPathResource("/static/images/hacha-cudeman-shark-159-m.jpg");
+		Resource imageProduct10 = new ClassPathResource("/static/images/924ac8321142029691b185ab03e95b36.jpg");
+		Resource imageProduct11 = new ClassPathResource("/static/images/il_570xN.1589575158_6pek.jpg");
+		Resource imageProduct12 = new ClassPathResource("/static/images/D_NQ_NP_811459-MLM31216665088_062019-O.jpg");
+		Resource imageProduct13 = new ClassPathResource("/static/images/hp-ordenador-portatil-250-g6.jpg");	
+		Resource imageProduct14 = new ClassPathResource("/static/images/c06226445_209x189.jpg");
+		Resource imageProduct15 = new ClassPathResource("/static/images/Disfraz-de-Halloween-del-mago-disfraz-personalizado-con-Peluca-de-sombrero-barba.jpg");
+		Resource imageProduct16 = new ClassPathResource("/static/images/9554415517726.jpg");
+		Resource imageProduct17 = new ClassPathResource("/static/images/91jf2m5BfTL._AC_SX679_.jpg");
+		Resource imageProduct18 = new ClassPathResource("/static/images/s-l300.jpg");
+		Resource imageProduct19 = new ClassPathResource("/static/images/s-l300 (1).jpg");
+		
+		
+		Resource imageProduct20 = new ClassPathResource("/static/images/71DkgRbnuzL._AC_SX679_.jpg");
+		Resource imageProduct21 = new ClassPathResource("/static/images/samsung-galaxy-a21s-0.jpg");
+		Resource imageProduct22 = new ClassPathResource("/static/images/sizing-bwc.png");
+		Resource imageProduct23 = new ClassPathResource("/static/images/s-l300 (2).jpg");
+		Resource imageProduct24 = new ClassPathResource("/static/images/51UXFM1mrSL._AC_SX425_.jpg");
+		Resource imageProduct25 = new ClassPathResource("/static/images/il_570xN.1638482480_p7u8.jpg");
+		Resource imageProduct26 = new ClassPathResource("/static/images/146914715842684601227a9a325d67df4f17e52607.jpg");
+		Resource imageProduct27 = new ClassPathResource("/static/images/42-alu-silver-sport-white-nc-s3-gallery1_GEO_ES.jpg");
+		Resource imageProduct28 = new ClassPathResource("/static/images/anduril-sword-_-ranger-sword-of-aragorn.jpg");
+		Resource imageProduct29 = new ClassPathResource("/static/images/Zapatilla_Hardcourt_Hi_Negro_FV5463_01_standard.jpg");
+		Resource imageProduct30 = new ClassPathResource("/static/images/Zapatilla_Hardcourt_Hi_Negro_FV5463_010_hover_standard.jpg");
 		
 		
 		Blob imgproduct = BlobProxy.generateProxy(imageProduct.getInputStream(), imageProduct.contentLength());
@@ -373,7 +278,7 @@ public class AdminService {
 		Blob imgproduct30 = BlobProxy.generateProxy(imageProduct30.getInputStream(), imageProduct30.contentLength());
 		
 		
-		
+
 		//Tags Creations
 		Tags tag1 = new Tags();
 		Tags tag2 = new Tags();
@@ -409,7 +314,6 @@ public class AdminService {
 		Users user18 = new Users("Arwen@hotmail.com","Arwen",encoder.encode("h"),"Arwen Water",img17, false,true, "Honolulu","","usuArwen", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		Users user19 = new Users("Sam@hotmail.com","Sam",encoder.encode("h"),"Sam SagazGamyi",img18, false,true, "Denver","","usuSam", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		Users user20 = new Users("Theoden@hotmail.com","Theoden",encoder.encode("h"),"Theoden King",img19, false,true, "Los angeles","","usuTheoden", "www.facebook.com","www.twitter.com","www.instagram.com",null );
-		
 		Users company1 = new Users("ikea@hotmail.com","Ikea",encoder.encode("i"),"Ikea",img20, true,false, "Madrid","","company1", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		Users company2 = new Users("nike@hotmail.com","Nike",encoder.encode("n"),"Nike",img21, true,false, "Barcelona","","company2", "www.facebook.com","www.twitter.com","www.instagram.com",null );
 		Users company3 = new Users("golf@hotmail.com","Golf",encoder.encode("g"),"Golf",img22, true,false, "Malaga","","company3", "www.facebook.com","www.twitter.com","www.instagram.com",null );
