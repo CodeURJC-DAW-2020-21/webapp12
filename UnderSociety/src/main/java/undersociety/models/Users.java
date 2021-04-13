@@ -14,21 +14,31 @@ import javax.persistence.Table;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 
 @Entity
 @Table(name = "users")
 public class Users {
+	
+	public interface Basic{}
+	public interface Detailed extends Users.Basic{}
+	
+	@JsonView(Basic.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idusers;
+	@JsonView(Basic.class)
 	@Column
 	private String email;
+	@JsonView(Basic.class)
 	@Column
 	private String username;
+	@JsonView(Detailed.class)
 	@Column
 	private String pass;
+	@JsonView(Basic.class)
 	@Column
 	private String name;
 	@Lob
@@ -38,19 +48,23 @@ public class Users {
 	private boolean companyprofile;
 	@Column
 	private boolean userprofile;
+	@JsonView(Detailed.class)
 	@Column
 	private String city;
 	@Column
 	private String userportimg;
+	@JsonView(Detailed.class)
 	@Column
 	private String userinfo;
+	@JsonView(Detailed.class)
 	@Column
 	private String linkfacebook;
+	@JsonView(Detailed.class)
 	@Column
 	private String linktwitter;
+	@JsonView(Detailed.class)
 	@Column
 	private String linkinstagram;
-
 	@Lob
 	@JsonIgnore
 	private Blob imageprofile;

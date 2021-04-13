@@ -101,7 +101,7 @@
 					<!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							<img src="https://localhost:8443/api/imageprofile" alt="">
+							<img src="https://localhost:8443/imageprofile" alt="">
 							<a href="#" title=""></a>
 							<i class="la la-sort-down"></i>
 						</div>
@@ -138,7 +138,7 @@
 
 
 		<section class="cover-sec">
-			<form class="cover-sec" method="POST" action="/api/changeImageProfile" enctype="multipart/form-data">
+			<form class="cover-sec" method="POST" action="/changeImageProfile" enctype="multipart/form-data">
 				<img src="{{imageProfile}}" alt="">
 				<a>
 					<i class="fa fa-camera"></i>
@@ -159,9 +159,9 @@
 									<div class="user_profile">
 										<div class="user-pro-img">
 											
-											<img src="https://localhost:8443/api/imageprofile" alt="">
+											<img src="https://localhost:8443/imageprofile" alt="">
 											<section class="cover-sec">
-												<form class="cover-sec" method="POST" action="/api/changeUserImage" enctype="multipart/form-data">
+												<form class="cover-sec" method="POST" action="/changeUserImage" enctype="multipart/form-data">
 													<a>
 														<i class="fa fa-camera"></i>
 														<label for="imgPro" class="btn">Changed Image</label>
@@ -281,7 +281,7 @@
 		<div class="overview-edit">
 			<h3>Resumen</h3>
 			<span>5000 caracteres máximo</span>
-			<form method="POST" action="/api/changeUserInfo">
+			<form method="POST" action="/changeUserInfo">
 				<textarea name="userInfo"></textarea>
 				<button type="submit" class="save">Guardar</button><input type="hidden" name="_csrf" value="{{token}}"/>
 				<button type="reset" class="cancel">Cancelar</button>
@@ -302,7 +302,7 @@
 		<div class="overview-edit">
 			<h3>City</h3>
 			<i class="fa fa-map-marker"></i>
-			<form method="POST" action="/api/changeUserCity">
+			<form method="POST" action="/changeUserCity">
 				<div class="datefm">
 					<textarea name="userCity"></textarea>
 				</div>

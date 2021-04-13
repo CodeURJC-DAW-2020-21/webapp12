@@ -13,18 +13,30 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name="product")
 public class Product {
+	
+	public interface Simple{}
+	public interface Multiple{}
+	public interface ProductDetails extends Product.Simple, Product.Multiple, Users.Basic, Tags.Simple{}
+
+	
+	@JsonView(Simple.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idproduct;
+	@JsonView(Multiple.class)
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
 	private Users iduser;
+	@JsonView(Simple.class)
 	@Column
 	private String title;
+	@JsonView(Simple.class)
 	@Column
 	private String description;
 	@Lob
@@ -38,27 +50,36 @@ public class Product {
 	private Blob image2;
 	@Column
 	private int price;
+	@JsonView(Multiple.class)
 	@OneToOne
 	@JoinColumn(name = "idtagone", referencedColumnName = "idtags")
 	private Tags idtagone;
+	@JsonView(Multiple.class)
 	@OneToOne
 	@JoinColumn(name = "idtagtwo", referencedColumnName = "idtags")
 	private Tags idtagtwo;
+	@JsonView(Multiple.class)
 	@OneToOne
 	@JoinColumn(name = "idtagthree", referencedColumnName = "idtags")
 	private Tags idtagthree;
+	@JsonView(Multiple.class)
 	@OneToOne
 	@JoinColumn(name = "idtagfour", referencedColumnName = "idtags")
 	private Tags idtagfour;
+	@JsonView(Multiple.class)
 	@OneToOne
 	@JoinColumn(name = "idtagfive", referencedColumnName = "idtags")
 	private Tags idtagfive;
+	@JsonView(Simple.class)
 	@Column
 	private String status;
+	@JsonView(Simple.class)
 	@Column
 	private Boolean img0;
+	@JsonView(Simple.class)
 	@Column
 	private Boolean img1;
+	@JsonView(Simple.class)
 	@Column
 	private Boolean img2;
 	

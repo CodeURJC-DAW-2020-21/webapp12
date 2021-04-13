@@ -104,6 +104,8 @@ index- En esta pantalla veremos el perfil basico del usuario o la empresa, y alg
 
 # Fase 2
 ### Navegación
+### Prueba de documentación
+https://raw.githack.com/CodeURJC-DAW-2020-21/webapp12/develop/api-docs/api-docs.html
 
 Store: en esta pantalla el usuario podra ver todos los diferentes productos que podrá comprar con sus descripciones, titulo, imagen, costo, estado(In stock,reserved,sold), a la izquierda estan los buscadores para encontrar alguna de las "tag" que aacabamos de mencionar tambien se le puede seguir al producto o enviar un mensaje a la compañia o usuario que lo ha colgado.
 ![image](https://user-images.githubusercontent.com/61882320/111917842-6207ec00-8a82-11eb-9863-ef0e502a4b09.png)
@@ -259,6 +261,7 @@ Este miembro del equipo creó en paralelo la aplicación que finalmente se estab
    | #5	| Desing user info | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/28bc760ec927228922460d29f6d0b92ef178ac7b) | [user-profile.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/UnderSociety/src/main/resources/templates/user-profile.html) |
    
    
+
 # Fase 3
 ### Documentación de la API REST:
 Archivo yaml: https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/api-docs/api-docs.yaml

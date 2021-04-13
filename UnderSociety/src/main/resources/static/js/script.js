@@ -308,11 +308,9 @@ $(window).on("load", function () {
 
     });
 
-
-
-
-
 });
+
+//----------------------------------------------------------------------------UPLOAD IMAGE----------------------------------------------------------------
 
 $(document).on("click", "i.del", function () {
     var input = $(this).parent().children('label').children();
@@ -320,6 +318,8 @@ $(document).on("click", "i.del", function () {
     input.val('');
     imagepreview.css("background-image", "url()");
 });
+
+
 $(function () {
     $(document).on("change", ".uploadFile", function () {
         var uploadFile = $(this);
@@ -331,19 +331,12 @@ $(function () {
             reader.readAsDataURL(files[0]); // read the local file
 
             reader.onloadend = function () { // set image data as background of div
-                //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
                 uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(" + this.result + ")");
             }
         }
 
     });
 });
-
-
-
-
-
-
 
 
 $(document).ready(function () {
@@ -407,17 +400,17 @@ sendButtonMessage.on('click', function () {
 
 
 
-function connectToChat(userName, to, tk) {
+function connectToChat(user, to, tk) {
     token = tk;
-    useractual = userName;
+    useractual = user;
     let socket = new SockJS('https://localhost:8443/chat');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-        stompClient.subscribe("/topic/messages/" + userName, function (response) {
+        stompClient.subscribe("/message/"+useractual, function (response) {
             let data = JSON.parse(response.body);
             if (selectedUser == data.fromLogin) {
                 chatContainer.scrollTop(chatContainer[0].scrollHeight);
-                var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + data.fromLogin + "' alt='user' width='50' class='rounded-circle'>";
+                var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/imageprofile/" + data.fromLogin + "' alt='user' width='50' class='rounded-circle'>";
                 template = template.concat("<div class='media-body ml-3'>");
                 template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
                 template = template.concat("<p class='text-small mb-0 text-muted'>" + data.fromLogin + ": " + data.message + "</p>");
@@ -433,21 +426,21 @@ function connectToChat(userName, to, tk) {
                 if (notifynum + 1 < 4) {
                     notifynum++;
                     $(".nott-list").find(".view-all-nots").remove();
-                    $(".nott-list").append('<a href="/messages?to='+ data.fromLogin + '" title=""><div id="new' + data.fromLogin + '" class="notfication-details"><div class="noty-user-img"><img src="https://localhost:8443/api/imageprofile/' + data.fromLogin + '" alt=""></div><div class="notification-info"><h3><a href="messages" title="">' + data.fromLogin + '</a> </h3><p>' + data.message + '</p><span>' + data.time + '</span></div><!--notification-info --></div></a>');
+                    $(".nott-list").append('<a href="/messages?to='+ data.fromLogin + '" title=""><div id="new' + data.fromLogin + '" class="notfication-details"><div class="noty-user-img"><img src="https://localhost:8443/imageprofile/' + data.fromLogin + '" alt=""></div><div class="notification-info"><h3><a href="messages" title="">' + data.fromLogin + '</a> </h3><p>' + data.message + '</p><span>' + data.time + '</span></div><!--notification-info --></div></a>');
                     $(".nott-list").append('<div class="view-all-nots"><a href="messages" title="">View All Messsages</a></div>');
                 }
             }
         });
     });
-    $.get("https://localhost:8443/api/getUserPage?page=0&size=10&sort=username&direction=asc", function (response) {
+    $.get("https://localhost:8443/getUserPage?page=0&size=10&sort=username&direction=asc", function (response) {
         pageusers = response.number;
         totalPages = response.totalPages;
         let users = response.content;
         let usersTemplateHTML = "";
         for (let i = 0; i < users.length; i++) {
-            if (users[i].username != userName) {
+            if (users[i].username != user) {
                 usersTemplateHTML = usersTemplateHTML.concat("<a onclick='selectUser( \"" + users[i].username + "\" )' class='list-group-item list-group-item-action list-group-item-light rounded-0'>");
-                usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/api/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
+                usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
                 usersTemplateHTML = usersTemplateHTML.concat("<div class='media-body ml-4'>");
                 usersTemplateHTML = usersTemplateHTML.concat("<div class='d-flex align-items-center justify-content-between mb-1'>");
                 usersTemplateHTML = usersTemplateHTML.concat("<h6 class='mb-0'>" + users[i].username + "</h6><small class='small font-weight-bold'>14 Dec</small>");
@@ -463,7 +456,7 @@ function connectToChat(userName, to, tk) {
     if (to != "null") {
         selectedUser = to;
         listchat.empty();
-        $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: to }, function (data) {
+        $.get("getChad", { from: $('#userName').attr("placeholder"), to: to }, function (data) {
             data.forEach(element => {
                 if (selectedUser != element.iduser.username) {
                     var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
@@ -477,7 +470,7 @@ function connectToChat(userName, to, tk) {
                     listchat.append(templateResponse);
                     chatContainer.scrollTop(chatContainer[0].scrollHeight);
                 } else {
-                    var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + selectedUser + "' alt='user' width='50' class='rounded-circle'>";
+                    var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/imageprofile/" + selectedUser + "' alt='user' width='50' class='rounded-circle'>";
                     template = template.concat("<div class='media-body ml-3'>");
                     template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
                     template = template.concat("<p class='text-small mb-0 text-muted'>" + selectedUser + ": " + element.message + "</p>");
@@ -499,7 +492,7 @@ function selectUser(userName) {
     selectedUser = userName;
     listchat.empty();
     chatContainer.scrollTop(chatContainer[0].scrollHeight);
-    $.get("api/getChad", { from: $('#userName').attr("placeholder"), to: userName }, function (data) {
+    $.get("getChad", { from: $('#userName').attr("placeholder"), to: userName }, function (data) {
         data.forEach(element => {
             if (selectedUser != element.iduser.username) {
                 var templateResponse = "<div class='media w-50 ml-auto mb-3'>";
@@ -513,7 +506,7 @@ function selectUser(userName) {
                 listchat.append(templateResponse);
                 chatContainer.scrollTop(chatContainer[0].scrollHeight);
             } else {
-                var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/api/imageprofile/" + userName + "' alt='user' width='50' class='rounded-circle'>";
+                var template = "<div class='media w-50 mb-3'><img src='https://localhost:8443/imageprofile/" + userName + "' alt='user' width='50' class='rounded-circle'>";
                 template = template.concat("<div class='media-body ml-3'>");
                 template = template.concat("<div class='bg-light rounded py-2 px-3 mb-2'>");
                 template = template.concat("<p class='text-small mb-0 text-muted'>" + userName + ": " + element.message + "</p>");
@@ -537,14 +530,14 @@ $(".previous").on("click", function () {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: ('/api/getUserPage?page=' + pageusers + '&size=' + size + '&sort=' + sort + '&direction=asc'),
+            url: ('/getUserPage?page=' + pageusers + '&size=' + size + '&sort=' + sort + '&direction=asc'),
             success: function (response) {
                 let users = response.content;
                 let usersTemplateHTML = "";
                 for (let i = 0; i < users.length; i++) {
                     if (users[i].username != userName) {
                         usersTemplateHTML = usersTemplateHTML.concat("<a onclick='selectUser( \"" + users[i].username + "\" )' class='list-group-item list-group-item-action list-group-item-light rounded-0'>");
-                        usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/api/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
                         usersTemplateHTML = usersTemplateHTML.concat("<div class='media-body ml-4'>");
                         usersTemplateHTML = usersTemplateHTML.concat("<div class='d-flex align-items-center justify-content-between mb-1'>");
                         usersTemplateHTML = usersTemplateHTML.concat("<h6 class='mb-0'>" + users[i].username + "</h6><small class='small font-weight-bold'>14 Dec</small>");
@@ -569,14 +562,14 @@ $(".next").on("click", function () {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: ('/api/getUserPage?page=' + pageusers + '&size=' + size + '&sort=' + sort + '&direction=asc'),
+            url: ('/getUserPage?page=' + pageusers + '&size=' + size + '&sort=' + sort + '&direction=asc'),
             success: function (response) {
                 let users = response.content;
                 let usersTemplateHTML = "";
                 for (let i = 0; i < users.length; i++) {
                     if (users[i].username != userName) {
                         usersTemplateHTML = usersTemplateHTML.concat("<a onclick='selectUser( \"" + users[i].username + "\" )' class='list-group-item list-group-item-action list-group-item-light rounded-0'>");
-                        usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/api/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
+                        usersTemplateHTML = usersTemplateHTML.concat("<div class='media'><img src='https://localhost:8443/imageprofile/" + users[i].username + "' alt='user' width='50' class='rounded-circle'>");
                         usersTemplateHTML = usersTemplateHTML.concat("<div class='media-body ml-4'>");
                         usersTemplateHTML = usersTemplateHTML.concat("<div class='d-flex align-items-center justify-content-between mb-1'>");
                         usersTemplateHTML = usersTemplateHTML.concat("<h6 class='mb-0'>" + users[i].username + "</h6><small class='small font-weight-bold'>14 Dec</small>");
@@ -611,7 +604,7 @@ $("#clearbutton").on("click", function () {
 
 
 
-//-------------------------------------------------------------------OTHER-------------------------------------------------------------------------
+//-------------------------------------------------------------------LOADS ITEMS-------------------------------------------------------------------------
 
 
 
@@ -623,7 +616,7 @@ function passToken(tk) {
 $.ajax({
     type: "GET",
     contentType: "data",
-    url: ('/api/getBookmark'),
+    url: ('/getBookmark'),
     success: function (result) {
         $.each(result, function (indexInArray, valueOfElement) {
             bookmarks.push(valueOfElement.idproduct.idproduct);
@@ -635,7 +628,7 @@ $.ajax({
 $.ajax({
     type: "GET",
     contentType: "data",
-    url: ('/api/getLikes'),
+    url: ('/getLikes'),
     success: function (result) {
         $.each(result, function (indexInArray, valueOfElement) {
             likes.push(valueOfElement.idpost.idpost);
@@ -646,7 +639,7 @@ $.ajax({
 $.ajax({
     type: "GET",
     contentType: "data",
-    url: ('/api/getFollows'),
+    url: ('/getFollows'),
     success: function (result) {
         $.each(result, function (indexInArray, valueOfElement) {
             follows.push(valueOfElement.usertwo.idusers);
@@ -660,10 +653,10 @@ $(".profile").on("click", function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/moreUsers?page=' + pageprofile + '&size=' + size + '&sort=' + sort + '&direction=asc'),
+        url: ('/moreUsers?page=' + pageprofile + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" + value.username + "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" + value.username + "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pageprofile + 1 <= result.totalPages) {
                 pageprofile++;
@@ -680,10 +673,10 @@ $(".company").on("click", function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/moreCompany?page=' + pagecompany + '&size=' + size + '&sort=' + sort + '&direction=asc'),
+        url: ('/moreCompany?page=' + pagecompany + '&size=' + size + '&sort=' + sort + '&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
-                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/api/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" + value.username + "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
+                $(".row").append("<div class='col-lg-3 col-md-4 col-sm-6 col-12'> <div class='company_profile_info'><div class='company-up-info'><img src='https://localhost:8443/imageprofile/" + value.username + "' alt=''><h3>" + value.username + "</h3><ul></ul></div><a href='/pageProfileUser?&username=" + value.username + "' title='' class='view-more-pro'>View Profile</a></div><!--company_profile_info end--></div>");
             });
             if (pagecompany + 1 <= result.totalPages) {
                 pagecompany++;
@@ -698,14 +691,14 @@ function loadPosts() {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/getPosts?page=0&size=10&sort=idpost&direction=asc'),
+        url: ('/getPosts?page=0&size=10&sort=idpost&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-heart-o";
                 if (likes.includes(value.idpost)) {
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li><li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
         }
     });
@@ -715,27 +708,27 @@ function loadProducts(username) {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/getProducts?page=0&size=10&sort=idproduct&direction=asc'),
+        url: ('/getProducts?page=0&size=10&sort=idproduct&direction=asc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-bookmark";
                 if (bookmarks.includes(value.idproduct)) {
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''>";
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/imageprofile/" + value.iduser.username + "' alt=''>";
                 base = base.concat("<div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>Empresa</span></li>");
                 base = base.concat("<li><img src='images/icon9.png' alt=''><span>Madrid</span></li></ul><ul class='bk-links'><li><a id='product" + value.idproduct + "' title=''><i onclick='mark(" + value.idproduct + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li>");
                 base = base.concat("</ul></div><br><div class='job_descp'><h3>" + value.title + "</h3><div class='row'>");
                 base = base.concat("<div id='carouselExampleControls-" + value.idproduct + "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
                 if (value.img0) {
-                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
                 }
                 if (value.img1) {
-                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
+                    base = base.concat("div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
                 }
                 if (value.img2) {
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
                 }
                 base = base.concat("</div>");
                 base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
@@ -775,7 +768,7 @@ $(".posts").on("click", function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/getMorePosts?page=' + pagepost + '&size=' + size + '&sort=' + sort + ',desc'),
+        url: ('/getMorePosts?page=' + pagepost + '&size=' + size + '&sort=' + sort + ',desc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-heart-o";
@@ -786,7 +779,7 @@ $(".posts").on("click", function () {
                 if (likes.includes(value.idpost)) {
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li><li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li><li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepost + 1 <= result.totalPages) {
                 pagepost++;
@@ -803,7 +796,7 @@ $(".products").on("click", function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/getMoreProducts?page=' + pageproduct + '&size=' + size + '&sort=' + sort + ',desc'),
+        url: ('/getMoreProducts?page=' + pageproduct + '&size=' + size + '&sort=' + sort + ',desc'),
         success: function (result) {
             $.each(result.content, function (index, value) {
                 bookmarks.includes(value.idproduct)
@@ -824,7 +817,7 @@ $(".products").on("click", function () {
                 if (bookmarks.includes(value.idproduct)) {
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "'alt=''>";
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/imageprofile/" + value.iduser.username + "'alt=''>";
                 base = base.concat("<div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li>");
                 base = base.concat("<li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'>");
                 base = base.concat("<li><a id='product" + value.idproduct + "' title=''><i onclick='mark(" + value.idproduct + ")' class='" + icon + "'></i></a></li>");
@@ -833,13 +826,13 @@ $(".products").on("click", function () {
                 base = base.concat("<div id='carouselExampleControls-" + value.idproduct + "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
                 if (value.img0) {
-                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
                 }
                 if (value.img1) {
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
                 }
                 if (value.img2) {
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
                 }
                 base = base.concat("</div>");
                 base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
@@ -882,7 +875,7 @@ $(".postsUser").on("click", function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/getMorePostsUser?page=' + pagepostuser + '&size=' + size + '&sort=' + sort + ',desc' + '&username=' + user),
+        url: ('/getMorePostsUser?page=' + pagepostuser + '&size=' + size + '&sort=' + sort + ',desc' + '&username=' + user),
         success: function (result) {
             $.each(result.content, function (index, value) {
                 var icon = "la la-heart-o";
@@ -893,7 +886,7 @@ $(".postsUser").on("click", function () {
                 if (likes.includes(value.idpost)) {
                     icon = "la la-heart";
                 }
-                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li><li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/api/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
+                $(".posts-section").append("<div class='post-bar'><div class='post_topbar'><div class='row usy-dt'><div class='user-post-icon'><img src='https://localhost:8443/imageprofile/" + value.iduser.username + "' alt=''></div><div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li><li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'><li><a id='" + value.idpost + "' title=''><i onclick='like(" + value.idpost + ")' class='" + icon + "'></i></a></li><li><a href='./messages?to=" + value.iduser.username + "' title=''><i class='la la-envelope'></i></a></li></ul></div><div class='job_descp'><h3>" + value.title + "</h3><div class='row'><ul class='image-store'><li><img src='https://localhost:8443/imagepost/" + value.idpost + "' alt=''></li></ul></div><div class='row'><ul class='description-store'><li><p>" + value.description + "</p></li></ul></div><br><a id='readmore" + value.idpost + "' class='btn btn-primary stretched-link' onclick='readmore(" + value.idpost + ")' title=''>view more</a></div></div>");
             });
             if (pagepostuser + 1 <= result.totalPages) {
                 pagepostuser++;
@@ -911,7 +904,7 @@ $(".productsUser").on("click", function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: ('/api/getMoreProductsUser?page=' + pageproductuser + '&size=' + size + '&sort=' + sort + ',desc' + '&username=' + user),
+        url: ('/getMoreProductsUser?page=' + pageproductuser + '&size=' + size + '&sort=' + sort + ',desc' + '&username=' + user),
         success: function (result) {
             $.each(result.content, function (index, value) {
                 bookmarks.includes(value.idproduct)
@@ -932,7 +925,7 @@ $(".productsUser").on("click", function () {
                 if (bookmarks.includes(value.idproduct)) {
                     icon = "la la-check-circle";
                 }
-                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/api/imageprofile/" + value.iduser.username + "'alt=''>";
+                var base = "<div class='post-bar'><div class='post_topbar'><div class='usy-dt'><img src='https://localhost:8443/imageprofile/" + value.iduser.username + "'alt=''>";
                 base = base.concat("<div class='usy-name'><h3>" + value.iduser.username + "</h3></div></div></div><div class='epi-sec'><ul class='descp'><li><img src='images/icon8.png' alt=''><span>" + type + "</span></li>");
                 base = base.concat("<li><img src='images/icon9.png' alt=''><span>" + value.iduser.city + "</span></li></ul><ul class='bk-links'>");
                 base = base.concat("<li><a id='product" + value.idproduct + "' title=''><i onclick='mark(" + value.idproduct + ")' class='" + icon + "'></i></a></li>");
@@ -941,13 +934,13 @@ $(".productsUser").on("click", function () {
                 base = base.concat("<div id='carouselExampleControls-" + value.idproduct + "' class='carousel slide' data-ride='carousel'>");
                 base = base.concat("<div class='carousel-inner'>");
                 if (value.img0) {
-                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/api/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
+                    base = base.concat("<div class='carousel-item active'><img class='img-thumbnail' src='https://localhost:8443/imageProduct0/" + value.idproduct + "' alt='First slide'></div>");
                 }
                 if (value.img1) {
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/imageProduct1/" + value.idproduct + "' alt='Second slide'></div>");
                 }
                 if (value.img2) {
-                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/api/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
+                    base = base.concat("<div class='carousel-item'><img class='img-thumbnail ' src='https://localhost:8443/imageProduct2/" + value.idproduct + "' alt='Third slide'></div>");
                 }
                 base = base.concat("</div>");
                 base = base.concat("<a class='carousel-control-prev' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='sr-only'>Previous</span></a><a class='carousel-control-next' href='#carouselExampleControls-" + value.idproduct + "' role='button' data-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='sr-only'>Next</span></a>");
@@ -983,6 +976,156 @@ $(".productsUser").on("click", function () {
 });
 
 
+//------------------------------------------------------------------OTHER SYSTEM-------------------------------------------------------------------------
+
+function readmore(idpost) {
+    $("#readmore" + idpost).parent().children(".row").children(".description-store").toggleClass("show");
+}
+
+
+function colorFollow(color) {
+    $(".flww").css("background-color", color);
+}
+
+$("#follow").on("click", function () {
+    let follow = $("#usernameto").text();
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: ('/follow?username=' + follow + "&_csrf=" + token),
+        success: function (response) {
+            if (response) {
+                $(".flww").css("background-color", "#e44d3a");
+            } else {
+                $(".flww").css("background-color", "#53D690");
+            }
+        }
+    });
+});
+
+function unfollow(idfollow) {
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: ('/unfollowlist?idrelation=' + idfollow + "&_csrf=" + token),
+        success: function (response) {
+            if (response) {
+                $("#follower" + idfollow).remove();
+            }
+        }
+    });
+}
+
+function dropProduct(idproduct) {
+    $.post("/dropProduct?idproduct=" + idproduct + "&_csrf=" + token, function (response) {
+        if (response) {
+            $("#product" + idproduct).remove();
+        }
+    });
+}
+
+function like(idpost) {
+    var s = $("#" + idpost);
+    if (s.children().attr("class") == "la la-heart") {
+        $.post("/unlikePost?idpost=" + idpost + "&_csrf=" + token, function (data) {
+        });
+        s.children().attr("class", "la la-heart-o");
+    } else {
+        $.post("/likePost?idpost=" + idpost + "&_csrf=" + token, function (data) {
+        });
+        s.children().attr("class", "la la-heart");
+    }
+}
+
+function mark(idproduct) {
+    if ($("#product" + idproduct).children().attr("class") == "la la-bookmark") {
+        $.post("/addProduct?idproduct=" + idproduct + "&_csrf=" + token, function (data) {
+            $("#product" + idproduct).children().attr("class", "la la-check-circle");
+        });
+    } else {
+        $.post("/dropProduct?idproduct=" + idproduct + "&_csrf=" + token, function (data) {
+            $("#product" + idproduct).children().attr("class", "la la-bookmark");
+        });
+    }
+}
+
+//------------------------------------------------------BAR SEARCH-------------------------------------------------------------------------
+
+function searchBarProducts() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myULS");
+    li = ul.getElementsByClassName('post-bar');
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job_descp")[0];
+        a = s.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function searchBarPosts() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByClassName('post-bar');
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("job_descp")[0];
+        a = s.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function searchBarUsers() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByClassName("col-lg-3 col-md-4 col-sm-6 col-12");
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("company_profile_info")[0];
+        m = s.getElementsByClassName("company-up-info")[0];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function searchBarCompany() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByClassName("col-lg-3 col-md-4 col-sm-6");
+    for (i = 0; i < li.length; i++) {
+        s = li[i].getElementsByClassName("company_profile_info")[0];
+        m = s.getElementsByClassName("company-up-info")[0];
+        a = m.getElementsByTagName("h3")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+//-----------------------------------------------------------------------FILTER----------------------------------------------------------
 
 function clearAllFilter() {
     document.getElementById('word').value = '';
@@ -1007,166 +1150,12 @@ function clearSlider() {
 
 }
 
-function readmore(idpost) {
-    $("#readmore" + idpost).parent().children(".row").children(".description-store").toggleClass("show");
-}
-
-function searchBarProducts() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myULS");
-    li = ul.getElementsByClassName('post-bar');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        s = li[i].getElementsByClassName("job_descp")[0];
-        a = s.getElementsByTagName("h3")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-function searchBarPosts() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByClassName('post-bar');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        s = li[i].getElementsByClassName("job_descp")[0];
-        a = s.getElementsByTagName("h3")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-function searchBarUsers() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByClassName("col-lg-3 col-md-4 col-sm-6 col-12");
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        s = li[i].getElementsByClassName("company_profile_info")[0];
-        m = s.getElementsByClassName("company-up-info")[0];
-        a = m.getElementsByTagName("h3")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-function searchBarCompany() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByClassName("col-lg-3 col-md-4 col-sm-6");
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        s = li[i].getElementsByClassName("company_profile_info")[0];
-        m = s.getElementsByClassName("company-up-info")[0];
-        a = m.getElementsByTagName("h3")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-function colorFollow(color) {
-    $(".flww").css("background-color", color);
-}
-
-$("#follow").on("click", function () {
-    let follow = $("#usernameto").text();
-    $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: ('/api/follow?username=' + follow + "&_csrf=" + token),
-        success: function (response) {
-            if (response) {
-                $(".flww").css("background-color", "#e44d3a");
-            } else {
-                $(".flww").css("background-color", "#53D690");
-            }
-        }
-    });
-});
-
-function unfollow(idfollow) {
-    $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: ('/api/unfollowlist?idrelation=' + idfollow + "&_csrf=" + token),
-        success: function (response) {
-            if (response) {
-                $("#follower" + idfollow).remove();
-            }
-        }
-    });
-}
-
-function dropProduct(idproduct) {
-    $.post("/api/dropProduct?idproduct=" + idproduct + "&_csrf=" + token, function (response) {
-        if (response) {
-            $("#product" + idproduct).remove();
-        }
-    });
-}
-
-function like(idpost) {
-    var s = $("#" + idpost);
-    if (s.children().attr("class") == "la la-heart") {
-        $.post("/api/unlikePost?idpost=" + idpost + "&_csrf=" + token, function (data) {
-        });
-        s.children().attr("class", "la la-heart-o");
-    } else {
-        $.post("/api/likePost?idpost=" + idpost + "&_csrf=" + token, function (data) {
-        });
-        s.children().attr("class", "la la-heart");
-    }
-}
-
-function mark(idproduct) {
-    if ($("#product" + idproduct).children().attr("class") == "la la-bookmark") {
-        $.post("/api/addProduct?idproduct=" + idproduct + "&_csrf=" + token, function (data) {
-            $("#product" + idproduct).children().attr("class", "la la-check-circle");
-        });
-    } else {
-        $.post("/api/dropProduct?idproduct=" + idproduct + "&_csrf=" + token, function (data) {
-            $("#product" + idproduct).children().attr("class", "la la-bookmark");
-        });
-    }
-}
-
-
 function SearchKeyWords() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('word');
     filter = input.value.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
-    // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job_descp")[0];
         m = s.getElementsByClassName("skill-tags")[0];
@@ -1191,7 +1180,6 @@ function SearchStatus1() {
     filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
-    // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job-status-bar")[0];
         m = s.getElementsByClassName("col-lg-3")[0];
@@ -1211,7 +1199,6 @@ function SearchStatus2() {
     filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
-    // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job-status-bar")[0];
         m = s.getElementsByClassName("col-lg-3")[0];
@@ -1231,7 +1218,6 @@ function SearchStatus3() {
     filter = input.toUpperCase();
     ul = document.getElementById("myULS");
     li = ul.getElementsByClassName('post-bar');
-    // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         s = li[i].getElementsByClassName("job-status-bar")[0];
         m = s.getElementsByClassName("col-lg-3")[0];

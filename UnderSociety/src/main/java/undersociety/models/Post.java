@@ -14,20 +14,28 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 @Entity
 @Table(name = "post")
 public class Post {
+	public interface Simple{}
+	public interface Multiple{}
+	public interface PostDetails extends Post.Simple, Post.Multiple, Users.Basic{}
 
+	@JsonView(Simple.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idpost;
+	@JsonView(Multiple.class)
 	@OneToOne
 	@JoinColumn(name = "iduser", referencedColumnName = "idusers")
 	private Users iduser;
+	@JsonView(Simple.class)
 	@Column
 	private String title;
+	@JsonView(Simple.class)
 	@Column
 	private String description;
 	@Lob

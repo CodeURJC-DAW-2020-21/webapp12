@@ -7,13 +7,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name="tags")
 public class Tags {
+	
+	public interface Simple{}
+	
+	@JsonView(Simple.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idtags;
 	@Column
+	@JsonView(Simple.class)
 	private String description;
 	
 	

@@ -4,7 +4,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
 
-$.get("/api/admin", function (data, textStatus, jqXHR) {
+$.get("/admindata", function (data, textStatus, jqXHR) {
   users = data;
   var ctx = document.getElementById("myPieChart");
   var myPieChart = new Chart(ctx, {
@@ -39,7 +39,7 @@ $.get("/api/admin", function (data, textStatus, jqXHR) {
 
 });
 
-$.get("/api/admin", function (data, textStatus, jqXHR) {
+$.get("/admindata", function (data, textStatus, jqXHR) {
   users = data;
   var ctx = document.getElementById("myPieChart2");
   var myPieChart = new Chart(ctx, {
