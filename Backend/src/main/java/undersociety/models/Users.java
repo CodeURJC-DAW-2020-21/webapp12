@@ -29,7 +29,7 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idusers;
-	@JsonView(Basic.class)
+	@JsonView(Detailed.class)
 	@Column
 	private String email;
 	@JsonView(Basic.class)
@@ -38,7 +38,7 @@ public class Users {
 	@JsonView(Detailed.class)
 	@Column
 	private String pass;
-	@JsonView(Basic.class)
+	@JsonView(Detailed.class)
 	@Column
 	private String name;
 	@Lob

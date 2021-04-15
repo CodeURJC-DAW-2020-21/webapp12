@@ -143,7 +143,7 @@ public class UserService {
 		}
 	}
 
-	public Page<Users> getUsers(Pageable page){
+	public Page<Users> getCustomers(Pageable page){
 		return userRepository.findByuserprofile(true,page);
 
 	}

@@ -87,7 +87,7 @@ public class UsersController {
     
     @GetMapping("/moreUsers")
     public Page<Users> getMoreUsers(Pageable page){    	
-    	return userService.getUsersPage();
+    	return userService.getCustomers(page);
     }
     
     @GetMapping("/moreCompany")

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -125,35 +124,5 @@ public class BookmarksRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
-	@Operation(summary = "Modify a Bookmark")
-	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful Bookmark modification", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Bookmark not found", 
-	 content = @Content
-	 ) 
-	})
-	@JsonView(ListProducts.Basic.class)
-	@PutMapping("/{id}")
-	public ResponseEntity<ListProducts> replacebookmark( @Parameter(description="id of bookmark to be searched") @PathVariable int id, @Parameter(description="Object Type ListProducts") @RequestBody ListProducts newbookmark) throws IOException{
-		Optional<ListProducts> bookmark = productService.getBookmarksbyid(id);
-		if(!bookmark.isEmpty()) {
-			newbookmark.setIdproductlist(id);
-			productService.savebookmark(newbookmark);
-			newbookmark = productService.getBookmarksbyid(id).get();
-			return ResponseEntity.ok(newbookmark);
-		}else {
-			return ResponseEntity.notFound().build();
-		}
-	}
-	
 	
 }

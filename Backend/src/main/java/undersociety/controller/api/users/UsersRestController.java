@@ -38,6 +38,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 import undersociety.models.Post;
 import undersociety.models.Product;
 import undersociety.models.Users;
+import undersociety.models.UsersRelations;
 import undersociety.services.PostsService;
 import undersociety.services.ProductService;
 import undersociety.services.UserService;
@@ -132,6 +133,7 @@ public class UsersRestController {
 	 content = @Content
 	 ) 
 	})
+	@JsonView(Users.Detailed.class)
 	@PutMapping("/{id}")
 	public ResponseEntity<Users> replaceUser(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="Object Json Type Users") @RequestBody Users user) throws IOException{
 		Optional<Users> use = userService.getUserId(id);
@@ -159,6 +161,7 @@ public class UsersRestController {
 	 content = @Content
 	 ) 
 	})
+	@JsonView(Users.Detailed.class)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Users> deleteUser(@Parameter(description="id of user to be searched") @PathVariable int id){
 		Optional<Users> s = userService.getUserId(id);
@@ -184,7 +187,7 @@ public class UsersRestController {
 	@GetMapping("/customers")
 	public List<Users> getUsers( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
-			return userService.getUsersPage(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+			return userService.getCustomers(PageRequest.of(Integer.parseInt(page), 5)).getContent();
 		}else {
 			return userService.getAllUsers();
 		}
@@ -350,6 +353,7 @@ public class UsersRestController {
 	 )}
 	 ) 
 	})
+	@JsonView(Post.PostDetails.class)
 	@GetMapping("/{id}/posts")
 	public List<Post> getAllPost( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
@@ -377,6 +381,45 @@ public class UsersRestController {
 		}else {
 			return productsService.getAllProductsByUser(id);
 		}
+	}
+
+	@Operation(summary = "Get a followings by id users")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the followings", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 )  
+	})
+	@JsonView(UsersRelations.Basic.class)
+	@GetMapping("/{id}/followings")
+	public List<UsersRelations> getUserRelations( @Parameter(description="id of relation to be searched") @PathVariable int id){
+		Optional<Users> user = userService.getUserId(id);
+		return userService.getFollowing(user.get().getUsername());
+	}
+	
+	@Operation(summary = "Get a followers by id users")
+	@ApiResponses(value = { 
+	@ApiResponse(
+	 responseCode = "200", 
+	 description = "Found the followers", 
+	 content = {@Content(
+	 mediaType = "application/json"
+	 )}
+	 ),
+	 @ApiResponse(
+	 responseCode = "404", 
+	 description = "User not found", 
+	 content = @Content
+	 )  
+	})
+	@JsonView(UsersRelations.Basic.class)
+	@GetMapping("/{id}/followers")
+	public List<UsersRelations> getRelationsUser( @Parameter(description="id of relation to be searched") @PathVariable int id){
+		Optional<Users> user = userService.getUserId(id);
+		return userService.getFollowers(user.get().getUsername());
 	}
 	
 }

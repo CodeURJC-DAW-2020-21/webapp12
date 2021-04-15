@@ -126,33 +126,4 @@ public class LikesRestController {
 		}
 	}
 	
-	@Operation(summary = "Modify a Like")
-	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful Like modification", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Like not found", 
-	 content = @Content
-	 ) 
-	})
-	@JsonView(LikeAPost.Basic.class)
-	@PutMapping("/{id}")
-	public ResponseEntity<LikeAPost> replacelike( @Parameter(description="id of like to be searched") @PathVariable int id, @Parameter(description="Object Type LikeAPost") @RequestBody LikeAPost newlike) throws IOException{
-		Optional<LikeAPost> like = postService.getLikesbyid(id);
-		if(!like.isEmpty()) {
-			postService.saveLike(newlike);
-			newlike = postService.getLikesbyid(id).get();
-			return ResponseEntity.ok(newlike);
-		}else {
-			return ResponseEntity.notFound().build();
-		}
-	}
-	
-	
 }

@@ -23,7 +23,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import undersociety.models.Users;
 import undersociety.models.UsersRelations;
 import undersociety.services.UserService;
 
@@ -72,43 +71,6 @@ public class RelationsRestController {
 		}else {
 			return ResponseEntity.notFound().build();
 		}
-	}
-	
-	@Operation(summary = "Get a followings by id users")
-	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the followings", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 )  
-	})
-	@GetMapping("/users/{id}/following")
-	public List<UsersRelations> getUserRelations( @Parameter(description="id of relation to be searched") @PathVariable int id){
-		Optional<Users> user = userService.getUserId(id);
-		return userService.getFollowing(user.get().getUsername());
-	}
-	
-	@Operation(summary = "Get a followers by id users")
-	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the followers", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "User not found", 
-	 content = @Content
-	 )  
-	})
-	@GetMapping("/users/{id}/followers")
-	public List<UsersRelations> getRelationsUser( @Parameter(description="id of relation to be searched") @PathVariable int id){
-		Optional<Users> user = userService.getUserId(id);
-		return userService.getFollowers(user.get().getUsername());
 	}
 	
 	@Operation(summary = "Create relation")
