@@ -31,7 +31,7 @@ import undersociety.services.PostsService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/Like")
+@RequestMapping("api/likes")
 public class LikesRestController {
 	
 	@Autowired
