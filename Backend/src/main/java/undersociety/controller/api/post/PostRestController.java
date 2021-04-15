@@ -40,7 +40,7 @@ import undersociety.services.PostsService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/post")
+@RequestMapping("api/posts")
 public class PostRestController {
 	
 	@Autowired
