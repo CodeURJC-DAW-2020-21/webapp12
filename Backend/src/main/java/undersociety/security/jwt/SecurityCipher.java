@@ -1,4 +1,4 @@
-package undersociety.configurations.jwt;
+package undersociety.security.jwt;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

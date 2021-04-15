@@ -1,4 +1,4 @@
-package undersociety.configurations.jwt;
+package undersociety.security.jwt;
 
 import org.springframework.http.HttpCookie;
 import org.springframework.http.ResponseCookie;

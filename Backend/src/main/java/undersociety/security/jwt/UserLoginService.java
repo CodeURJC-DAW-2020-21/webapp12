@@ -1,4 +1,4 @@
-package undersociety.configurations.jwt;
+package undersociety.security.jwt;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

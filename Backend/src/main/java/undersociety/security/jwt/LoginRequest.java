@@ -1,4 +1,4 @@
-package undersociety.configurations.jwt;
+package undersociety.security.jwt;
 
 public class LoginRequest {
 
