@@ -12,6 +12,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,46 +48,46 @@ import undersociety.services.UserService;
 @CrossOrigin
 @RequestMapping("api/users")
 public class UsersRestController {
-	
+
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private PostsService postsService;
-	
+
 	@Autowired
 	private ProductService productsService;
-	
+
 	@Operation(summary = "Get a all users")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Users", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Users", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
 	})
 	@JsonView(Users.Detailed.class)
 	@GetMapping("/")
 	public List<Users> getAllUsers(){
 		return userService.getAll();
 	}
-	
+
 	@Operation(summary = "Get a user by its id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the User", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "User not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the User", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					) 
 	})
 	@JsonView(Users.Detailed.class)
 	@GetMapping("/{id}")
@@ -98,68 +99,105 @@ public class UsersRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "Create a user")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful user creation", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Successful user creation", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "406 ", 
+					description = "Not Acceptable user creation the username is token", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					)
 	})
 	@JsonView(Users.Detailed.class)
 	@PostMapping("/")
 	public ResponseEntity<Users> registerUser(@Parameter(description="Object Json Type Users") @RequestBody Users user) throws IOException{
-		userService.saveUser(user);
-		user = userService.getUser(user.getUsername());
-		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getIdusers()).toUri();
-		return ResponseEntity.created(location).body(user);
+		if(!userService.existsUser(user.getUsername())) {
+			userService.saveUser(user);
+			user = userService.getUser(user.getUsername());
+			URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getIdusers()).toUri();
+			return ResponseEntity.created(location).body(user);
+		}else {
+			return new ResponseEntity<>(user,HttpStatus.NOT_ACCEPTABLE);
+		}
 	}
-	
+
 	@Operation(summary = "Modify a user")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful user modification", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "User not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Successful user modification", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "406 ", 
+					description = "Not Acceptable user creation the username is token", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					)
 	})
 	@JsonView(Users.Detailed.class)
 	@PutMapping("/{id}")
 	public ResponseEntity<Users> replaceUser(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="Object Json Type Users") @RequestBody Users user) throws IOException{
 		Optional<Users> use = userService.getUserId(id);
 		if(!use.isEmpty()) {
-			userService.saveUser(user);
-			user = userService.getUserId(id).get();
-			return ResponseEntity.ok(user);
+			if(user.getUsername() == null) {
+				user.setUsername(use.get().getUsername());
+				user.setIdusers(id);
+				userService.modifyDataUser(user, use.get().getUsername(),null,null);
+				if(user.getPass() != null) {
+					userService.modifyPass(user.getUsername(), user.getPass());
+				}
+				user = userService.getUserId(id).get();
+				return ResponseEntity.ok(user);
+			}else {
+				if(!userService.existsUser(user.getUsername())) {
+					user.setIdusers(id);
+					userService.modifyDataUser(user, use.get().getUsername(),null,null);
+					if(user.getPass() != null) {
+						userService.modifyPass(user.getUsername(), user.getPass());
+					}
+					user = userService.getUserId(id).get();
+					return ResponseEntity.ok(user);
+				}else {
+					return new ResponseEntity<>(user,HttpStatus.NOT_ACCEPTABLE);
+				}
+			}
 		}else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "Delete a user")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Successful user delete", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "User not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Successful user delete", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					) 
 	})
 	@JsonView(Users.Detailed.class)
 	@DeleteMapping("/{id}")
@@ -172,16 +210,16 @@ public class UsersRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "Get a all users type customers")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Users type customers", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Users type customers", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
 	})
 	@JsonView(Users.Detailed.class)
 	@GetMapping("/customers")
@@ -192,16 +230,16 @@ public class UsersRestController {
 			return userService.getAllUsers();
 		}
 	}
-	
+
 	@Operation(summary = "Get a all users type companies")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Users type companies", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Users type companies", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
 	})
 	@JsonView(Users.Detailed.class)
 	@GetMapping("/companies")
@@ -212,21 +250,21 @@ public class UsersRestController {
 			return userService.getAllCompanies();
 		}
 	}
-	
+
 	@Operation(summary = "Get a profile image user by id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Image Profile", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "204", 
-	 description = "Image not found", 
-	 content = @Content
-	 )
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Image Profile", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "204", 
+					description = "Image not found", 
+					content = @Content
+					)
 	})
 	@GetMapping("/{id}/imageProfile")
 	public ResponseEntity<Object> getImageProfile(@Parameter(description="id of user to be searched") @PathVariable int id) throws SQLException{
@@ -238,28 +276,28 @@ public class UsersRestController {
 						.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
 						.contentLength(s.get().getUserimg().length())
 						.body(file);
-	    	}else {
-	    		return ResponseEntity.noContent().build();
-	    	}
+			}else {
+				return ResponseEntity.noContent().build();
+			}
 		}else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "Get a profile theme image user by id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Image Profile Theme", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "204", 
-	 description = "Image not found", 
-	 content = @Content
-	 )
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Image Profile Theme", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "204", 
+					description = "Image not found", 
+					content = @Content
+					)
 	})
 	@GetMapping("/{id}/imageThemeProfile")
 	public ResponseEntity<Object> getImageThemeProfile( @Parameter(description="id of user to be searched") @PathVariable int id) throws SQLException{
@@ -271,28 +309,28 @@ public class UsersRestController {
 						.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
 						.contentLength(s.get().getImageprofile().length())
 						.body(file);
-	    	}else {
-	    		return ResponseEntity.noContent().build();
-	    	}
+			}else {
+				return ResponseEntity.noContent().build();
+			}
 		}else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "create a profile image user by id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Create the ImageProfile", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "204", 
-	 description = "Image not found", 
-	 content = @Content
-	 )
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Create the ImageProfile", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "204", 
+					description = "Image not found", 
+					content = @Content
+					)
 	})
 	@PostMapping("/{id}/imageProfile")
 	public ResponseEntity<Object> uploadImageProfile( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="user profile picture") @RequestParam MultipartFile image) throws SQLException, IOException{
@@ -303,28 +341,28 @@ public class UsersRestController {
 				userService.saveUser(user.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();
-	    	}else {
-	    		return ResponseEntity.noContent().build();
-	    	}
+			}else {
+				return ResponseEntity.noContent().build();
+			}
 		}else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "create a profile image theme user by id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Create the ImageProfile Theme", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "204", 
-	 description = "Image not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Create the ImageProfile Theme", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "204", 
+					description = "Image not found", 
+					content = @Content
+					) 
 	})
 	@PostMapping("/{id}/imageThemeProfile")
 	public ResponseEntity<Object> uploadImageThemeProfile( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="user theme page picture") @RequestParam MultipartFile image) throws SQLException, IOException{
@@ -335,23 +373,23 @@ public class UsersRestController {
 				userService.saveUser(user.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();
-	    	}else {
-	    		return ResponseEntity.noContent().build();
-	    	}
+			}else {
+				return ResponseEntity.noContent().build();
+			}
 		}else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "get all posts by user")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "found all posts by user id", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "found all posts by user id", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
 	})
 	@JsonView(Post.PostDetails.class)
 	@GetMapping("/{id}/posts")
@@ -362,16 +400,16 @@ public class UsersRestController {
 			return postsService.getAllPostsByUser(id);
 		}
 	}
-	
+
 	@Operation(summary = "get all Products by user")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "found all products by user id", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "found all products by user id", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
 	})
 	@JsonView(Product.Simple.class)
 	@GetMapping("/{id}/products")
@@ -385,13 +423,13 @@ public class UsersRestController {
 
 	@Operation(summary = "Get a followings by id users")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the followings", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 )  
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the followings", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					)  
 	})
 	@JsonView(UsersRelations.Basic.class)
 	@GetMapping("/{id}/followings")
@@ -399,21 +437,21 @@ public class UsersRestController {
 		Optional<Users> user = userService.getUserId(id);
 		return userService.getFollowing(user.get().getUsername());
 	}
-	
+
 	@Operation(summary = "Get a followers by id users")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the followers", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "User not found", 
-	 content = @Content
-	 )  
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the followers", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)  
 	})
 	@JsonView(UsersRelations.Basic.class)
 	@GetMapping("/{id}/followers")
@@ -421,5 +459,5 @@ public class UsersRestController {
 		Optional<Users> user = userService.getUserId(id);
 		return userService.getFollowers(user.get().getUsername());
 	}
-	
+
 }

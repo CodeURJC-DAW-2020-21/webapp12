@@ -198,28 +198,48 @@ public class UserService {
 	    		prev.setImageprofile(BlobProxy.generateProxy(imageProfilePage.getInputStream(), imageProfilePage.getSize()));
 	    	}
 		}
+		if(user.getUsername() != null) {
+			if(!user.getUsername().isEmpty()) {
+				prev.setUsername(user.getUsername());
+			}
+		}
 		
-		if(!user.getUsername().isEmpty()) {
-			prev.setUsername(user.getUsername());
+		if(user.getEmail() != null) {
+			if(!user.getEmail().isEmpty()) {
+				prev.setEmail(user.getEmail());
+			}
 		}
-		if(!user.getEmail().isEmpty()) {
-			prev.setEmail(user.getEmail());
+		
+		if(user.getName() != null) {
+			if(!user.getName().isEmpty()) {
+				prev.setName(user.getName());
+			}
+		}	
+			
+		if(user.getCity() != null) {
+			if(!user.getCity().isEmpty()) {
+				prev.setCity(user.getCity());
+			}
 		}
-		if(!user.getName().isEmpty()) {
-			prev.setName(user.getName());
+		
+		if(user.getLinkfacebook() != null) {
+			if(!user.getLinkfacebook().isEmpty()) {
+				prev.setLinkfacebook(user.getLinkfacebook());
+			}
 		}
-		if(!user.getCity().isEmpty()) {
-			prev.setCity(user.getCity());
+		
+		if(user.getLinkinstagram() != null) {
+			if(!user.getLinkinstagram().isEmpty()) {
+				prev.setLinkinstagram(user.getLinkinstagram());
+			}
 		}
-		if(!user.getLinkfacebook().isEmpty()) {
-			prev.setLinkfacebook(user.getLinkfacebook());
+		
+		if(user.getLinktwitter() != null) {
+			if(!user.getLinktwitter().isEmpty()) {
+				prev.setLinktwitter(user.getLinktwitter());
+			}
 		}
-		if(!user.getLinkinstagram().isEmpty()) {
-			prev.setLinkinstagram(user.getLinkinstagram());
-		}
-		if(!user.getLinktwitter().isEmpty()) {
-			prev.setLinktwitter(user.getLinktwitter());
-		}
+		
 		userRepository.save(prev);
 	}
 
@@ -289,6 +309,11 @@ public class UserService {
     	}
     	return color;
 	}
+	
+	public boolean existsRelationUsers(Users actual,Users follow) {
+		UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual, follow);
+		return (s != null);
+	}
 
 	public void saveRelation(UsersRelations relation) {
 		relationrepo.save(relation);
@@ -307,6 +332,7 @@ public class UserService {
 	}
 
 	public void saveUser(Users user) {
+		user.setPass(encoder.encode(user.getPass()));
 		userRepository.save(user);
 	}
 
@@ -317,5 +343,9 @@ public class UserService {
 
 	public void deleteUserById(int id) {
 		userRepository.deleteById(id);
+	}
+
+	public boolean existsUser(String username) {
+		return userRepository.existsIdusersByUsername(username);
 	}
 }
