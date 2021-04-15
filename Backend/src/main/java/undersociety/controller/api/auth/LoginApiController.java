@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import undersociety.configurations.jwt.AuthResponse;
-import undersociety.configurations.jwt.AuthResponse.Status;
-import undersociety.configurations.jwt.LoginRequest;
-import undersociety.configurations.jwt.UserLoginService;
+import undersociety.security.jwt.AuthResponse;
+import undersociety.security.jwt.LoginRequest;
+import undersociety.security.jwt.UserLoginService;
+import undersociety.security.jwt.AuthResponse.Status;
 
 @RestController
 @RequestMapping("/api/auth")
