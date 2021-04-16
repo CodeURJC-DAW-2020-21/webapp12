@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +28,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import undersociety.models.LikeAPost;
 import undersociety.services.PostsService;
+import undersociety.services.UserService;
 
 @RestController
 @CrossOrigin
@@ -36,6 +38,8 @@ public class LikesRestController {
 	@Autowired
 	private PostsService postService;
 
+	@Autowired
+	private UserService userService;
 
 	@Operation(summary = "Get a all Likes")
 	@ApiResponses(value = { 
@@ -61,15 +65,38 @@ public class LikesRestController {
 					content = {@Content(
 							mediaType = "application/json"
 							)}
-					)  
+					),
+			@ApiResponse(
+					responseCode = "406", 
+					description = "Not Acceptable Like exists", 
+					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Not Found Posts or User", 
+					content = @Content
+					) 
 	})
 	@JsonView(LikeAPost.Basic.class)
 	@PostMapping("/")
 	public ResponseEntity<LikeAPost> registerLike(@Parameter(description="Object Type LikeAPost") @RequestBody LikeAPost like) throws IOException{
-		postService.saveLike(like);
-		like = postService.getLikesapi(like);
-		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(like.getIdpost()).toUri();
-		return ResponseEntity.created(location).body(like);
+		
+		if(!userService.existsUserById(like.getIduser())) {
+			return new ResponseEntity<LikeAPost>(like,HttpStatus.NOT_FOUND);
+		}
+		
+		if (!postService.existsPostById(like.getIdpost())) {
+			return new ResponseEntity<LikeAPost>(like,HttpStatus.NOT_FOUND);
+		}
+		
+		if(!postService.existsLike(like)) {
+			postService.saveLike(like);
+			like = postService.getLikesapi(like);
+			URI location = fromCurrentRequest().path("/{id}").buildAndExpand(like.getIdpost()).toUri();
+			return ResponseEntity.created(location).body(like);
+		}else {
+			return new ResponseEntity<LikeAPost>(like,HttpStatus.NOT_ACCEPTABLE);
+		}
 	}
 
 	@Operation(summary = "Get a Like by id")

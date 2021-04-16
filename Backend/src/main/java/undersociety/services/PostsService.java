@@ -90,7 +90,9 @@ public class PostsService {
 	}
 
 	public void saveLike(LikeAPost like) {
-		likerepo.save(like);
+		Optional<Post> post = postsrepo.findById(like.getIdpost().getIdpost());
+		Optional<Users> user = userRepository.findById(like.getIduser().getIdusers());
+		likerepo.save( new LikeAPost(user.get(), post.get()));
 
 	}
 
@@ -212,5 +214,20 @@ public class PostsService {
 			postsmodels.add(postmodel);
 		}
 		return postsmodels;
+	}
+
+	public boolean existsPost(String title) {
+		return postsrepo.existsIdpostsByTitle(title);
+	}
+
+	public boolean existsLike(LikeAPost like) {
+		Optional<Post> post = postsrepo.findById(like.getIdpost().getIdpost());
+		Optional<Users> user = userRepository.findById(like.getIduser().getIdusers());
+		return likerepo.existsIdlikeByiduserAndIdpost(user.get(), post.get());
+	}
+
+	public boolean existsPostById(Post post) {
+		Optional<Post> posts = postsrepo.findById(post.getIdpost());
+		return posts.isPresent();
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -75,11 +76,22 @@ public class ProductsRestController {
 					content = {@Content(
 							mediaType = "application/json"
 							)}
-					)
+					),
+			@ApiResponse(
+					responseCode = "406", 
+					description = "Not Acceptable Post title exists", 
+					content = @Content
+					) 
 	})
 	@JsonView(Product.ProductDetails.class)
 	@PostMapping("/")
 	public ResponseEntity<Product> registerProduct( @Parameter(description="Object Type Product") @RequestBody Product product) throws IOException{
+		if (productService.existsProduct(product.getTitle())) {
+			return new ResponseEntity<Product>(product,HttpStatus.NOT_ACCEPTABLE);
+		}
+		product.setImg0(false);
+		product.setImg1(false);
+		product.setImg2(false);
 		productService.save(product); 
 		product = productService.getProductByTitle(product.getTitle());
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(product.getIdproduct()).toUri();
@@ -152,11 +164,19 @@ public class ProductsRestController {
 					responseCode = "404", 
 					description = "Product not found", 
 					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "406", 
+					description = "Not Acceptable Post title exists", 
+					content = @Content
 					) 
 	})
 	@JsonView(Product.ProductDetails.class)
 	@PutMapping("/{id}")
 	public ResponseEntity<Product> replaceProduct( @Parameter(description="id of Product to be searched") @PathVariable int id, @Parameter(description="Object Type Product") @RequestBody Product newproduct) throws IOException{
+		if (productService.existsProduct(newproduct.getTitle())) {
+			return new ResponseEntity<Product>(newproduct,HttpStatus.NOT_ACCEPTABLE);
+		}
 		Optional<Product> product = productService.getProductById(id);
 		if(!product.isEmpty()) {
 			newproduct.setIdproduct(id);
@@ -308,6 +328,7 @@ public class ProductsRestController {
 		if(product.isPresent()) {
 			if(image != null) {
 				product.get().setImage0(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				product.get().setImg0(true);
 				productService.saveProduct(product.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();
@@ -345,6 +366,7 @@ public class ProductsRestController {
 		if(product.isPresent()) {
 			if(image != null) {
 				product.get().setImage1(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				product.get().setImg1(true);
 				productService.saveProduct(product.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();
@@ -382,6 +404,7 @@ public class ProductsRestController {
 		if(product.isPresent()) {
 			if(image != null) {
 				product.get().setImage2(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				product.get().setImg2(true);
 				productService.saveProduct(product.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();

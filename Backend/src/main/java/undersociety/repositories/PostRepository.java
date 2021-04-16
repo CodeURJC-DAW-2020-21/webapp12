@@ -15,4 +15,5 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
 	public Long deleteByIduser(Users iduser);
 	public List<Post> findByiduser(Users user);
 	public Post findBytitle (String title);
-	}
+	public boolean existsIdpostsByTitle(String title);
+}

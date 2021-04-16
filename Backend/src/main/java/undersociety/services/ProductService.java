@@ -91,7 +91,9 @@ public class ProductService {
 	}
 
 	public void savebookmark(ListProducts bookmark) {
-		bookmarkrepo.save(bookmark);
+		Optional<Product> product = productrepo.findById(bookmark.getIdproduct().getIdproduct());
+		Optional<Users> user = userRepository.findById(bookmark.getIduser().getIdusers());
+		bookmarkrepo.save(new ListProducts(user.get(), product.get()));
 
 	}
 
@@ -276,6 +278,21 @@ public class ProductService {
 			productmodels.add(productmodel);
 		}
 		return productmodels;
+	}
+
+	public boolean existsProduct(String title) {
+		return productrepo.existsIdproductByTitle(title);
+	}
+
+	public boolean existsBookmark(ListProducts bookmark) {
+		Optional<Product> product = productrepo.findById(bookmark.getIdproduct().getIdproduct());
+		Optional<Users> user = userRepository.findById(bookmark.getIduser().getIdusers());
+		return bookmarkrepo.existsIdproductlistByiduserAndIdproduct(user.get(),product.get());
+	}
+
+	public boolean existsProductById(Product idproduct) {
+		Optional<Product> product = productrepo.findById(idproduct.getIdproduct());
+		return product.isPresent();
 	}
 
 }
