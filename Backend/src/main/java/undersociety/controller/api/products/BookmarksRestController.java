@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +28,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import undersociety.models.ListProducts;
 import undersociety.services.ProductService;
+import undersociety.services.UserService;
 
 @RestController
 @CrossOrigin
@@ -35,6 +37,9 @@ public class BookmarksRestController {
 
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private UserService userService;
 
 
 	@Operation(summary = "Get a all Bookmarks")
@@ -61,15 +66,37 @@ public class BookmarksRestController {
 					content = {@Content(
 							mediaType = "application/json"
 							)}
-					)  
+					),
+			@ApiResponse(
+					responseCode = "406", 
+					description = "Not Acceptable Bookmark exists", 
+					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Not Found Product or User", 
+					content = @Content
+					) 
 	})
 	@JsonView(ListProducts.Basic.class)
 	@PostMapping("/")
 	public ResponseEntity<ListProducts> registerbookmark(@Parameter(description="Object Type ListProducts") @RequestBody ListProducts bookmark) throws IOException{
-		productService.savebookmark(bookmark);
-		bookmark = productService.getBookmarksapi(bookmark);
-		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(bookmark.getIdproduct()).toUri();
-		return ResponseEntity.created(location).body(bookmark);
+		
+		if (!productService.existsProduct(bookmark.getIdproduct().getTitle())) {
+			return new ResponseEntity<ListProducts>(bookmark,HttpStatus.NOT_FOUND);
+		}
+		
+		if(!userService.existsUser(bookmark.getIduser().getUsername())) {
+			return new ResponseEntity<ListProducts>(bookmark,HttpStatus.NOT_FOUND);
+		}
+		if(!productService.existsBookmark(bookmark)) {
+			productService.savebookmark(bookmark);
+			bookmark = productService.getBookmarksapi(bookmark);
+			URI location = fromCurrentRequest().path("/{id}").buildAndExpand(bookmark.getIdproduct()).toUri();
+			return ResponseEntity.created(location).body(bookmark);
+		}else {
+			return new ResponseEntity<ListProducts>(bookmark,HttpStatus.NOT_ACCEPTABLE);
+		}
 	}
 
 	@Operation(summary = "Get a Bookmark by id")

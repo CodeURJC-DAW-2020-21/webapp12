@@ -217,4 +217,8 @@ public class PostsService {
 	public boolean existsPost(String title) {
 		return postsrepo.existsIdpostsByTitle(title);
 	}
+
+	public boolean existsLike(LikeAPost like) {
+		return likerepo.existsIdlikeByiduserAndIdpost(like.getIduser(), like.getIdpost());
+	}
 }

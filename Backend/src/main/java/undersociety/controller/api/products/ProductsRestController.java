@@ -89,6 +89,9 @@ public class ProductsRestController {
 		if (productService.existsProduct(product.getTitle())) {
 			return new ResponseEntity<Product>(product,HttpStatus.NOT_ACCEPTABLE);
 		}
+		product.setImg0(false);
+		product.setImg1(false);
+		product.setImg2(false);
 		productService.save(product); 
 		product = productService.getProductByTitle(product.getTitle());
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(product.getIdproduct()).toUri();
@@ -325,6 +328,7 @@ public class ProductsRestController {
 		if(product.isPresent()) {
 			if(image != null) {
 				product.get().setImage0(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				product.get().setImg0(true);
 				productService.saveProduct(product.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();
@@ -362,6 +366,7 @@ public class ProductsRestController {
 		if(product.isPresent()) {
 			if(image != null) {
 				product.get().setImage1(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				product.get().setImg1(true);
 				productService.saveProduct(product.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();
@@ -399,6 +404,7 @@ public class ProductsRestController {
 		if(product.isPresent()) {
 			if(image != null) {
 				product.get().setImage2(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				product.get().setImg2(true);
 				productService.saveProduct(product.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();

@@ -282,4 +282,8 @@ public class ProductService {
 		return productrepo.existsIdproductByTitle(title);
 	}
 
+	public boolean existsBookmark(ListProducts bookmark) {
+		return bookmarkrepo.existsIdproductlistByiduserAndIdproduct(bookmark.getIduser(), bookmark.getIdproduct());
+	}
+
 }
