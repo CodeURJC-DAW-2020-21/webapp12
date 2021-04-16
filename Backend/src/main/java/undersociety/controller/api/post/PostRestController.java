@@ -12,6 +12,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -58,8 +59,12 @@ public class PostRestController {
 	})
 	@JsonView(Post.PostDetails.class)
 	@GetMapping("/")
-	public List<Post> getAllPosts(){
-		return postService.getAll();
+	public List<Post> getAllPosts( @Parameter(description="page") @RequestParam(required = false) String page ){
+		if(page != null) {
+			return postService.getPosts(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+		}else {
+			return postService.getAll();
+		}
 	}
 	
 	@Operation(summary = "Create a Post")

@@ -12,6 +12,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,8 +58,12 @@ public class ProductsRestController {
 	})
 	@JsonView(Product.ProductDetails.class)
 	@GetMapping("/")
-	public List<Product> getAllProducts(){
-		return productService.getAll();
+	public List<Product> getAllProducts( @Parameter(description="page") @RequestParam(required = false) String page ){
+		if(page != null) {
+			return productService.getProductsPage(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+		}else {
+			return productService.getAll();
+		}
 	}
 	
 	
