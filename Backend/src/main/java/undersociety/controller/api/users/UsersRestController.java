@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
@@ -126,6 +127,8 @@ public class UsersRestController {
 			}
 		}
 		if(!userService.existsUser(user.getUsername())) {
+			Resource imagedefault = new ClassPathResource("/static/images/avatar.png");
+			user.setUserimg(BlobProxy.generateProxy(imagedefault.getInputStream(), imagedefault.contentLength()));
 			userService.saveUser(user);
 			user = userService.getUser(user.getUsername());
 			URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getIdusers()).toUri();

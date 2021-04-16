@@ -340,9 +340,21 @@ public class UserService {
 		UsersRelations rela = relationrepo.findByuseroneAndUsertwo(relation.getUserone(), relation.getUsertwo());
 		return rela.getIduserrelation();
 	}
-
+	
+	@Transactional
 	public void deleteUserById(int id) {
-		userRepository.deleteById(id);
+		Users prev = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found"));
+		listproductrepo.deleteByIduser(prev);
+    	relationrepo.deleteByUserone(prev);
+    	relationrepo.deleteByUsertwo(prev);
+    	messagerepo.deleteByIduser(prev);
+    	messagerepo.deleteByIduserto(prev);
+    	likerepo.deleteByIduser(prev);
+    	postsrepo.deleteByIduser(prev);
+    	productrepo.deleteByIduser(prev);
+    	relationrepo.deleteByUserone(prev);
+    	rolesRepository.deleteByIduser(prev);
+    	userRepository.deleteById(prev.getIdusers());
 	}
 
 	public boolean existsUser(String username) {
