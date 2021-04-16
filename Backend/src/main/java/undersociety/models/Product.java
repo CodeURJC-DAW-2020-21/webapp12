@@ -73,13 +73,10 @@ public class Product {
 	@JsonView(Simple.class)
 	@Column
 	private String status;
-	@JsonView(Simple.class)
 	@Column
 	private Boolean img0;
-	@JsonView(Simple.class)
 	@Column
 	private Boolean img1;
-	@JsonView(Simple.class)
 	@Column
 	private Boolean img2;
 	
