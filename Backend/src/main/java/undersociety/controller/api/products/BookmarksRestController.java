@@ -82,11 +82,11 @@ public class BookmarksRestController {
 	@PostMapping("/")
 	public ResponseEntity<ListProducts> registerbookmark(@Parameter(description="Object Type ListProducts") @RequestBody ListProducts bookmark) throws IOException{
 		
-		if (!productService.existsProduct(bookmark.getIdproduct().getTitle())) {
+		if (!productService.existsProductById(bookmark.getIdproduct())) {
 			return new ResponseEntity<ListProducts>(bookmark,HttpStatus.NOT_FOUND);
 		}
 		
-		if(!userService.existsUser(bookmark.getIduser().getUsername())) {
+		if(!userService.existsUserById(bookmark.getIduser())) {
 			return new ResponseEntity<ListProducts>(bookmark,HttpStatus.NOT_FOUND);
 		}
 		if(!productService.existsBookmark(bookmark)) {

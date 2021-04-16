@@ -81,11 +81,11 @@ public class LikesRestController {
 	@PostMapping("/")
 	public ResponseEntity<LikeAPost> registerLike(@Parameter(description="Object Type LikeAPost") @RequestBody LikeAPost like) throws IOException{
 		
-		if(!userService.existsUser(like.getIduser().getUsername())) {
+		if(!userService.existsUserById(like.getIduser())) {
 			return new ResponseEntity<LikeAPost>(like,HttpStatus.NOT_FOUND);
 		}
 		
-		if (!postService.existsPost(like.getIdpost().getTitle())) {
+		if (!postService.existsPostById(like.getIdpost())) {
 			return new ResponseEntity<LikeAPost>(like,HttpStatus.NOT_FOUND);
 		}
 		

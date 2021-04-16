@@ -364,4 +364,9 @@ public class UserService {
 	public boolean existEmail(String email) {
 		return userRepository.existsIdusersByEmail(email);
 	}
+
+	public boolean existsUserById(Users iduser) {
+		Optional<Users> user = userRepository.findById(iduser.getIdusers());
+		return user.isPresent();
+	}
 }
