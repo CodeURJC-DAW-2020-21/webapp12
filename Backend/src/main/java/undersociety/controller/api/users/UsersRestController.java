@@ -111,7 +111,7 @@ public class UsersRestController {
 					),
 			@ApiResponse(
 					responseCode = "406 ", 
-					description = "Not Acceptable user creation the username is token", 
+					description = "Not Acceptable user creation the username or email is token", 
 					content = {@Content(
 							mediaType = "application/json"
 							)}
@@ -120,6 +120,11 @@ public class UsersRestController {
 	@JsonView(Users.Detailed.class)
 	@PostMapping("/")
 	public ResponseEntity<Users> registerUser(@Parameter(description="Object Json Type Users") @RequestBody Users user) throws IOException{
+		if(user.getEmail() != null) {
+			if(userService.existEmail(user.getEmail())) {
+				return new ResponseEntity<>(user,HttpStatus.NOT_ACCEPTABLE);
+			}
+		}
 		if(!userService.existsUser(user.getUsername())) {
 			userService.saveUser(user);
 			user = userService.getUser(user.getUsername());
@@ -146,7 +151,7 @@ public class UsersRestController {
 					),
 			@ApiResponse(
 					responseCode = "406 ", 
-					description = "Not Acceptable user creation the username is token", 
+					description = "Not Acceptable user creation the username or email is token", 
 					content = {@Content(
 							mediaType = "application/json"
 							)}
@@ -157,6 +162,11 @@ public class UsersRestController {
 	public ResponseEntity<Users> replaceUser(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="Object Json Type Users") @RequestBody Users user) throws IOException{
 		Optional<Users> use = userService.getUserId(id);
 		if(!use.isEmpty()) {
+			if(user.getEmail() != null) {
+				if(userService.existEmail(user.getEmail())) {
+					return new ResponseEntity<>(user,HttpStatus.NOT_ACCEPTABLE);
+				}
+			}
 			if(user.getUsername() == null) {
 				user.setUsername(use.get().getUsername());
 				user.setIdusers(id);

@@ -348,4 +348,8 @@ public class UserService {
 	public boolean existsUser(String username) {
 		return userRepository.existsIdusersByUsername(username);
 	}
+
+	public boolean existEmail(String email) {
+		return userRepository.existsIdusersByEmail(email);
+	}
 }
