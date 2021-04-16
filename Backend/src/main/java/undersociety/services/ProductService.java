@@ -278,4 +278,8 @@ public class ProductService {
 		return productmodels;
 	}
 
+	public boolean existsProduct(String title) {
+		return productrepo.existsIdproductByTitle(title);
+	}
+
 }

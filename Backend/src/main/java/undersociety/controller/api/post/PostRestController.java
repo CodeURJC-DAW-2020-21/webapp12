@@ -14,6 +14,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -77,14 +78,17 @@ public class PostRestController {
 							)}
 					),
 			@ApiResponse(
-					responseCode = "404", 
-					description = "Post not found", 
+					responseCode = "406", 
+					description = "Not Acceptable Post title exists", 
 					content = @Content
 					) 
 	})
 	@JsonView(Post.PostDetails.class)
 	@PostMapping("/")
 	public ResponseEntity<Post> registerPost( @Parameter(description="Object Type Post") @RequestBody Post post) throws IOException{
+		if(postService.existsPost(post.getTitle())) {
+			return new ResponseEntity<Post>(post,HttpStatus.NOT_ACCEPTABLE);
+		}
 		postService.savePost(post); 
 		post = postService.getPostByTitle(post.getTitle());
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(post.getIdpost()).toUri();
@@ -157,11 +161,19 @@ public class PostRestController {
 					responseCode = "404", 
 					description = "Post not found", 
 					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "406", 
+					description = "Not Acceptable Post title exists", 
+					content = @Content
 					) 
 	})
 	@JsonView(Post.PostDetails.class)
 	@PutMapping("/{id}")
 	public ResponseEntity<Post> replacePost( @Parameter(description="id of Post to be searched") @PathVariable int id, @Parameter(description="Object Type Post") @RequestBody Post newpost) throws IOException{
+		if(postService.existsPost(newpost.getTitle())) {
+			return new ResponseEntity<Post>(newpost,HttpStatus.NOT_ACCEPTABLE);
+		}
 		Optional<Post> post = postService.getPostById(id);
 		if(!post.isEmpty()) {
 			newpost.setIdpost(id);

@@ -213,4 +213,8 @@ public class PostsService {
 		}
 		return postsmodels;
 	}
+
+	public boolean existsPost(String title) {
+		return postsrepo.existsIdpostsByTitle(title);
+	}
 }
