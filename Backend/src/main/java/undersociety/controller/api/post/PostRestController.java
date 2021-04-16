@@ -43,19 +43,19 @@ import undersociety.services.PostsService;
 @CrossOrigin
 @RequestMapping("api/posts")
 public class PostRestController {
-	
+
 	@Autowired
 	private PostsService postService;
 
 	@Operation(summary = "Get a all Post")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Post", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Post", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
 	})
 	@JsonView(Post.PostDetails.class)
 	@GetMapping("/")
@@ -66,21 +66,21 @@ public class PostRestController {
 			return postService.getAll();
 		}
 	}
-	
+
 	@Operation(summary = "Create a Post")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful Post creation", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Post not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Successful Post creation", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Post not found", 
+					content = @Content
+					) 
 	})
 	@JsonView(Post.PostDetails.class)
 	@PostMapping("/")
@@ -90,21 +90,21 @@ public class PostRestController {
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(post.getIdpost()).toUri();
 		return ResponseEntity.created(location).body(post);
 	}
-	
+
 	@Operation(summary = "Get a products by its id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Post", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Post not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Post", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Post not found", 
+					content = @Content
+					) 
 	})
 	@JsonView(Post.PostDetails.class)
 	@GetMapping("/{id}")
@@ -119,18 +119,18 @@ public class PostRestController {
 
 	@Operation(summary = "Delete a Post")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful Post delete", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Post not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Successful Post delete", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Post not found", 
+					content = @Content
+					) 
 	})
 	@JsonView(Post.PostDetails.class)
 	@DeleteMapping("/{id}")
@@ -143,21 +143,21 @@ public class PostRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "Modify a Post")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful Post modification", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Post not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Successful Post modification", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Post not found", 
+					content = @Content
+					) 
 	})
 	@JsonView(Post.PostDetails.class)
 	@PutMapping("/{id}")
@@ -172,26 +172,26 @@ public class PostRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "Get a Image Post by its id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Image Post", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Post not found", 
-	 content = @Content
-	 ),
-	 @ApiResponse(
-	 responseCode = "204", 
-	 description = "Image not found", 
-	 content = @Content
-	 )
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Image Post", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Post not found", 
+					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "204", 
+					description = "Image not found", 
+					content = @Content
+					)
 	})
 	@GetMapping("/{id}/image")
 	public ResponseEntity<Object> getPostImage( @Parameter(description="id of Post to be searched") @PathVariable int id) throws SQLException{
@@ -203,34 +203,34 @@ public class PostRestController {
 						.header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
 						.contentLength(post.get().getImage().length())
 						.body(file);
-	    	}else {
-	    		return ResponseEntity.noContent().build();
-	    	}
+			}else {
+				return ResponseEntity.noContent().build();
+			}
 		}else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
-	
+
+
 	@Operation(summary = "Create a Image Post by its id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Create the Image Post", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Post not found", 
-	 content = @Content
-	 ),
-	 @ApiResponse(
-	 responseCode = "204", 
-	 description = "Image not found", 
-	 content = @Content
-	 )
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Create the Image Post", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Post not found", 
+					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "204", 
+					description = "Image not found", 
+					content = @Content
+					)
 	})
 	@PostMapping("/{id}/image")
 	public ResponseEntity<Object> uploadPostImage( @Parameter(description="id of Post to be searched") @PathVariable int id, @Parameter(description="Image Post") @RequestParam() MultipartFile image) throws SQLException, IOException{
@@ -241,9 +241,9 @@ public class PostRestController {
 				postService.savePost(post.get());
 				URI location = fromCurrentRequest().build().toUri();
 				return ResponseEntity.created(location).build();
-	    	}else {
-	    		return ResponseEntity.noContent().build();
-	    	}
+			}else {
+				return ResponseEntity.noContent().build();
+			}
 		}else {
 			return ResponseEntity.notFound().build();
 		}
