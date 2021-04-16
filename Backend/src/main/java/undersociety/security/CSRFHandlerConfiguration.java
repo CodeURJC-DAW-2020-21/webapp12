@@ -1,4 +1,4 @@
-package undersociety.configurations;
+package undersociety.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

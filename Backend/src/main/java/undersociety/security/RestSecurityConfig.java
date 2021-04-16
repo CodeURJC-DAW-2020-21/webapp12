@@ -1,4 +1,4 @@
-package undersociety.configurations;
+package undersociety.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import undersociety.configurations.jwt.JwtRequestFilter;
+import undersociety.security.jwt.JwtRequestFilter;
 
 @Configuration
 @Order(1)

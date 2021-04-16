@@ -9,7 +9,7 @@ services:
           - MYSQL_ROOT_PASSWORD=holo
           - MYSQL_DATABASE=under_society_db
   web:
-      build: .
+      image: dawpractica21/springboot:spring
       ports:
       - "8443:8443"
       restart: always

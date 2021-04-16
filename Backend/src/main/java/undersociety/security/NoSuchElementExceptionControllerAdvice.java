@@ -1,4 +1,4 @@
-package undersociety.configurations;
+package undersociety.security;
 
 import java.util.NoSuchElementException;
 

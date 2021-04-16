@@ -1,4 +1,4 @@
-package undersociety.configurations.jwt;
+package undersociety.security.jwt;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

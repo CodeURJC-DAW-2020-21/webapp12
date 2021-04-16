@@ -143,7 +143,7 @@ public class UserService {
 		}
 	}
 
-	public Page<Users> getUsers(Pageable page){
+	public Page<Users> getCustomers(Pageable page){
 		return userRepository.findByuserprofile(true,page);
 
 	}
@@ -198,28 +198,48 @@ public class UserService {
 	    		prev.setImageprofile(BlobProxy.generateProxy(imageProfilePage.getInputStream(), imageProfilePage.getSize()));
 	    	}
 		}
+		if(user.getUsername() != null) {
+			if(!user.getUsername().isEmpty()) {
+				prev.setUsername(user.getUsername());
+			}
+		}
 		
-		if(!user.getUsername().isEmpty()) {
-			prev.setUsername(user.getUsername());
+		if(user.getEmail() != null) {
+			if(!user.getEmail().isEmpty()) {
+				prev.setEmail(user.getEmail());
+			}
 		}
-		if(!user.getEmail().isEmpty()) {
-			prev.setEmail(user.getEmail());
+		
+		if(user.getName() != null) {
+			if(!user.getName().isEmpty()) {
+				prev.setName(user.getName());
+			}
+		}	
+			
+		if(user.getCity() != null) {
+			if(!user.getCity().isEmpty()) {
+				prev.setCity(user.getCity());
+			}
 		}
-		if(!user.getName().isEmpty()) {
-			prev.setName(user.getName());
+		
+		if(user.getLinkfacebook() != null) {
+			if(!user.getLinkfacebook().isEmpty()) {
+				prev.setLinkfacebook(user.getLinkfacebook());
+			}
 		}
-		if(!user.getCity().isEmpty()) {
-			prev.setCity(user.getCity());
+		
+		if(user.getLinkinstagram() != null) {
+			if(!user.getLinkinstagram().isEmpty()) {
+				prev.setLinkinstagram(user.getLinkinstagram());
+			}
 		}
-		if(!user.getLinkfacebook().isEmpty()) {
-			prev.setLinkfacebook(user.getLinkfacebook());
+		
+		if(user.getLinktwitter() != null) {
+			if(!user.getLinktwitter().isEmpty()) {
+				prev.setLinktwitter(user.getLinktwitter());
+			}
 		}
-		if(!user.getLinkinstagram().isEmpty()) {
-			prev.setLinkinstagram(user.getLinkinstagram());
-		}
-		if(!user.getLinktwitter().isEmpty()) {
-			prev.setLinktwitter(user.getLinktwitter());
-		}
+		
 		userRepository.save(prev);
 	}
 
@@ -289,6 +309,11 @@ public class UserService {
     	}
     	return color;
 	}
+	
+	public boolean existsRelationUsers(Users actual,Users follow) {
+		UsersRelations s =  relationrepo.findByuseroneAndUsertwo(actual, follow);
+		return (s != null);
+	}
 
 	public void saveRelation(UsersRelations relation) {
 		relationrepo.save(relation);
@@ -307,6 +332,7 @@ public class UserService {
 	}
 
 	public void saveUser(Users user) {
+		user.setPass(encoder.encode(user.getPass()));
 		userRepository.save(user);
 	}
 
@@ -314,8 +340,33 @@ public class UserService {
 		UsersRelations rela = relationrepo.findByuseroneAndUsertwo(relation.getUserone(), relation.getUsertwo());
 		return rela.getIduserrelation();
 	}
-
+	
+	@Transactional
 	public void deleteUserById(int id) {
-		userRepository.deleteById(id);
+		Users prev = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found"));
+		listproductrepo.deleteByIduser(prev);
+    	relationrepo.deleteByUserone(prev);
+    	relationrepo.deleteByUsertwo(prev);
+    	messagerepo.deleteByIduser(prev);
+    	messagerepo.deleteByIduserto(prev);
+    	likerepo.deleteByIduser(prev);
+    	postsrepo.deleteByIduser(prev);
+    	productrepo.deleteByIduser(prev);
+    	relationrepo.deleteByUserone(prev);
+    	rolesRepository.deleteByIduser(prev);
+    	userRepository.deleteById(prev.getIdusers());
+	}
+
+	public boolean existsUser(String username) {
+		return userRepository.existsIdusersByUsername(username);
+	}
+
+	public boolean existEmail(String email) {
+		return userRepository.existsIdusersByEmail(email);
+	}
+
+	public boolean existsUserById(Users iduser) {
+		Optional<Users> user = userRepository.findById(iduser.getIdusers());
+		return user.isPresent();
 	}
 }

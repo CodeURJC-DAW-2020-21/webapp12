@@ -18,6 +18,7 @@ public class ListProducts {
 	public interface ProductDetails extends Product.Simple, Product.Multiple, Users.Basic, Tags.Simple{}
 	public interface Basic extends ProductDetails, Users.Basic{}
 	
+	@JsonView(Basic.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idproductlist;
