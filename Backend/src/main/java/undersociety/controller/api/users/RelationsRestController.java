@@ -89,12 +89,12 @@ public class RelationsRestController {
 					),
 			@ApiResponse(
 					responseCode = "404", 
-					description = "User not found", 
+					description = "Users not found", 
 					content = @Content
 					),
 			@ApiResponse(
 					responseCode = "406 ", 
-					description = "Not Acceptable relation creation the relation exists", 
+					description = "Not Acceptable the relation exists", 
 					content = {@Content(
 							mediaType = "application/json"
 							)}

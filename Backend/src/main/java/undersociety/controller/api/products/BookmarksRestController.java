@@ -32,36 +32,36 @@ import undersociety.services.ProductService;
 @CrossOrigin
 @RequestMapping("api/bookmarks")
 public class BookmarksRestController {
-	
+
 	@Autowired
 	private ProductService productService;
-	
-	
+
+
 	@Operation(summary = "Get a all Bookmarks")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Bookmarks", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Bookmarks", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
 	})
 	@JsonView(ListProducts.Basic.class)
 	@GetMapping("/")
 	public List<ListProducts> getAllbookmarks(){
 		return productService.getAllbookmarks();
 	}
-	
+
 	@Operation(summary = "Create Bookmark")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful Bookmark creation", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 )  
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Successful Bookmark creation", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					)  
 	})
 	@JsonView(ListProducts.Basic.class)
 	@PostMapping("/")
@@ -71,21 +71,21 @@ public class BookmarksRestController {
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(bookmark.getIdproduct()).toUri();
 		return ResponseEntity.created(location).body(bookmark);
 	}
-	
+
 	@Operation(summary = "Get a Bookmark by id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Bookmark", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Bookmark not found", 
-	 content = @Content
-	 )  
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Bookmark", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Bookmark not found", 
+					content = @Content
+					)  
 	})
 	@JsonView(ListProducts.Basic.class)
 	@GetMapping("/{id}")
@@ -97,21 +97,21 @@ public class BookmarksRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "Delete a Bookmark")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Successful Bookmark delete", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Bookmark not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Successful Bookmark delete", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Bookmark not found", 
+					content = @Content
+					) 
 	})
 	@JsonView(ListProducts.Basic.class)
 	@DeleteMapping("/{id}")
@@ -124,5 +124,5 @@ public class BookmarksRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 }

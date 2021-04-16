@@ -32,36 +32,36 @@ import undersociety.services.PostsService;
 @CrossOrigin
 @RequestMapping("api/likes")
 public class LikesRestController {
-	
+
 	@Autowired
 	private PostsService postService;
-	
-	
+
+
 	@Operation(summary = "Get a all Likes")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Likes", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Likes", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
 	})
 	@JsonView(LikeAPost.Basic.class)
 	@GetMapping("/")
 	public List<LikeAPost> getAllLikes(){
 		return postService.getAllLikes();
 	}
-	
+
 	@Operation(summary = "Create Like")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "201", 
-	 description = "Successful Like creation", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 )  
+			@ApiResponse(
+					responseCode = "201", 
+					description = "Successful Like creation", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					)  
 	})
 	@JsonView(LikeAPost.Basic.class)
 	@PostMapping("/")
@@ -71,21 +71,21 @@ public class LikesRestController {
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(like.getIdpost()).toUri();
 		return ResponseEntity.created(location).body(like);
 	}
-	
+
 	@Operation(summary = "Get a Like by id")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Found the Like", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Like not found", 
-	 content = @Content
-	 )  
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Like", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Like not found", 
+					content = @Content
+					)  
 	})
 	@JsonView(LikeAPost.Basic.class)
 	@GetMapping("/{id}")
@@ -97,21 +97,21 @@ public class LikesRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Operation(summary = "Delete a Like")
 	@ApiResponses(value = { 
-	@ApiResponse(
-	 responseCode = "200", 
-	 description = "Successful Like delete", 
-	 content = {@Content(
-	 mediaType = "application/json"
-	 )}
-	 ),
-	 @ApiResponse(
-	 responseCode = "404", 
-	 description = "Like not found", 
-	 content = @Content
-	 ) 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Successful Like delete", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "Like not found", 
+					content = @Content
+					) 
 	})
 	@JsonView(LikeAPost.Basic.class)
 	@DeleteMapping("/{id}")
@@ -124,5 +124,5 @@ public class LikesRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 }
