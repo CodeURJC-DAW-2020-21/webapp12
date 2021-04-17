@@ -195,7 +195,8 @@ Leyenda del diagrama:
 - Rojo: Servicios
 - Azul claro: Configuraciones
 
-![image](https://user-images.githubusercontent.com/63242688/111919104-7e0e8c00-8a88-11eb-800d-a052cf5b2e64.png)
+![diagrama de clases](https://user-images.githubusercontent.com/63242688/115124516-f6eb0000-9fc2-11eb-941b-ef442c784dcd.PNG)
+
 
 
 ### Participación de miembros
