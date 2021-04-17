@@ -195,8 +195,7 @@ Leyenda del diagrama:
 - Rojo: Servicios
 - Azul claro: Configuraciones
 
-![diagrama de clases](https://user-images.githubusercontent.com/63242688/115124516-f6eb0000-9fc2-11eb-941b-ef442c784dcd.PNG)
-
+![diagrama de clases](https://user-images.githubusercontent.com/63242688/111919104-7e0e8c00-8a88-11eb-800d-a052cf5b2e64.png)
 
 
 ### Participación de miembros
@@ -278,7 +277,8 @@ Leyenda del diagrama:
 - Azul: Repositorios
 - Rojo: Servicios
 
-![diagrama de clases](https://user-images.githubusercontent.com/63242688/114317935-ca3e7080-9b0a-11eb-895f-b0c45386ad7e.PNG)
+![diagrama de clases](https://user-images.githubusercontent.com/63242688/115125340-c8bbef00-9fc7-11eb-9828-26dff714bb17.PNG)
+
 
 ### Instrucciones de ejecución de la aplicación dockerizada:
 Es necesaria la instalacion de docker y docker compose, abrir la terminal navegar hasta la carpeta Docker y escribir el comando: "docker-compose up --build" 
