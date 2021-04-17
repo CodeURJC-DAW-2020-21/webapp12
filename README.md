@@ -329,15 +329,15 @@ Este miembro ha realizado: La creación de los Api Controller relacionados con l
    | #5	| 	|  |  |
    
 ##### Antonio Jesus Pajuelo Chavez:
-
+Este miembro del equipo ha realizado las peticiones Postman, la apirest de los users y sus relaciones ademas de su dto, la generacion del docker-compose, el script y una configuracion basica de la seguridad que posteriormente seria mejorada por David.
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1 | Implements StatisticsRestController	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/e10d46f85d129f5d43343c480b22487714c7f3b4) | [RelationsRestController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Backend/src/main/java/undersociety/controller/api/users/RelationsRestController.java) |
+   | #2	| Fixe Api Rest	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/5314d9571bef25a57c855537172941b0544725b2) | [UsersRestController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Backend/src/main/java/undersociety/controller/api/users/UsersRestController.java) |
+   | #3	| Spring Security Basic	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/73f1aea78daa32b38a76fc1f4394078354d0174d) | [Users.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Backend/src/main/java/undersociety/models/Users.java) |
+   | #4	| Docker Loader Fixe	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/16d3a2b5254e0dc450a69c3c9259516db7c83897) | [UsersRelations.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Backend/src/main/java/undersociety/models/UsersRelations.java) |
+   | #5	| Implement Pageable Methods	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3bd151a7fe8dfa1ee0d2b32c79b5e1aeac327e80) | [UserService.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Backend/src/main/java/undersociety/services/UserService.java) |
    
 # Fase 4
 
