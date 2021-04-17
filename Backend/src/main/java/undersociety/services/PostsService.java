@@ -109,6 +109,30 @@ public class PostsService {
 		likerepo.deleteById(id);
 
 	}
+	
+	public boolean existsPost(String title) {
+		return postsrepo.existsIdpostsByTitle(title);
+	}
+
+	public boolean existsLike(LikeAPost like) {
+		Optional<Post> post = postsrepo.findById(like.getIdpost().getIdpost());
+		Optional<Users> user = userRepository.findById(like.getIduser().getIdusers());
+		return likerepo.existsIdlikeByiduserAndIdpost(user.get(), post.get());
+	}
+
+	public boolean existsPostById(Post post) {
+		Optional<Post> posts = postsrepo.findById(post.getIdpost());
+		return posts.isPresent();
+	}
+
+	public List<LikeAPost> getLikesByUser(int id) {
+		Optional<Users> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			return likerepo.findByiduser(user.get());
+		}else {
+			return null;
+		}
+	}
 //////////////////////////////////////////////////////NORMAL METHODS/////////////////////////////////////////////////////////////////////
 	
 	public Post getPost(int idpost) {
@@ -216,18 +240,4 @@ public class PostsService {
 		return postsmodels;
 	}
 
-	public boolean existsPost(String title) {
-		return postsrepo.existsIdpostsByTitle(title);
-	}
-
-	public boolean existsLike(LikeAPost like) {
-		Optional<Post> post = postsrepo.findById(like.getIdpost().getIdpost());
-		Optional<Users> user = userRepository.findById(like.getIduser().getIdusers());
-		return likerepo.existsIdlikeByiduserAndIdpost(user.get(), post.get());
-	}
-
-	public boolean existsPostById(Post post) {
-		Optional<Post> posts = postsrepo.findById(post.getIdpost());
-		return posts.isPresent();
-	}
 }

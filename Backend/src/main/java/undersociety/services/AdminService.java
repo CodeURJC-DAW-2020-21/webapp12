@@ -17,6 +17,7 @@ import undersociety.models.AdminData;
 import undersociety.models.Post;
 import undersociety.models.Product;
 import undersociety.models.Roles;
+import undersociety.models.Statistics;
 import undersociety.models.Tags;
 import undersociety.models.Users;
 import undersociety.repositories.PostRepository;
@@ -55,6 +56,42 @@ public class AdminService {
 		d.setRoles(rolesRepository.findAll().size());
 		
 		return d;
+	}
+	
+	public Statistics getStatics() {
+		List<Product> p = productrepo.findAll();
+		List<Tags> tag = tagrepo.findAll(Sort.by("idtags"));
+		double elec = 0;
+		double fur = 0;
+		double appli = 0;
+		double book = 0;
+		double clot = 0;
+		double instock = 0; 
+		double sold = 0;
+		double reserved = 0;
+		double tuser = userRepository.findAll().size();
+		double user = rolesRepository.findByrol("USER").size();
+		double admin = rolesRepository.findByrol("ADMIN").size();
+		int sum = 0;
+		int tproduct = p.size();
+		int tposts = postsrepo.findAll().size();
+		int customers = userRepository.findBycompanyprofile(false).size();
+		int companies = userRepository.findBycompanyprofile(true).size();
+		for (Product product : p) {
+			sum = sum + product.getPrice();
+		}
+		
+		if(tproduct > 0) {
+			elec = ( productrepo.findByidtagone(tag.get(0)).size() * 100)/tproduct;
+			fur = ( productrepo.findByidtagtwo(tag.get(1)).size() * 100)/tproduct;
+			appli = ( productrepo.findByidtagthree(tag.get(2)).size() * 100)/tproduct;
+			book = ( productrepo.findByidtagfour(tag.get(3)).size() * 100)/tproduct;
+			clot = ( productrepo.findByidtagfive(tag.get(4)).size() * 100)/tproduct;
+			instock = ( productrepo.findBystatus("in stock").size() * 100)/tproduct; 
+			sold = ( productrepo.findBystatus("sold").size() * 100)/tproduct;
+			reserved = ( productrepo.findBystatus("reserved").size() * 100)/tproduct;	
+		}
+		return new Statistics(elec,fur,appli,book,clot,instock,sold,reserved,tuser,user,admin,sum,tproduct,tposts,customers,companies);
 	}
 	
 	public void loadDataBase() throws IOException {
