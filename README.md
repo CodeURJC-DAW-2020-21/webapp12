@@ -280,21 +280,30 @@ Leyenda del diagrama:
 ![diagrama de clases](https://user-images.githubusercontent.com/63242688/114317935-ca3e7080-9b0a-11eb-895f-b0c45386ad7e.PNG)
 
 ### Instrucciones de ejecución de la aplicación dockerizada:
+Es necesaria la instalacion de docker y docker compose, abrir la terminal navegar hasta la carpeta Docker y escribir el comando: "docker-compose up --build" 
+Una vez finalizado el proceso de construcción de docker abrir el navegador y escribir:"https://localhost:8443/" una vez escrita te redirigida a la pantalla de registro de la aplicacion: "https://localhost:8443/sign-in" una vez se cargue estará lista para ser utilizada.
 
 ### Documentación para construcción de la imagen docker:
+LINUX:
+1.Clonar repositorio mediante git clone "https://github.com/CodeURJC-DAW-2020-21/webapp12.git"
+2.Descargar Docker 
+3.Descargar Docker Compose
+4.Navegar hasta la carpeta Docker
+5.Ejecutar el comando: "chmod 777 create_image.sh"
+6.Ejecutar el comando: "./create_image.sh"
 
 ### Participación de miembros:
 
 ##### David Montero Garcia:
-
+Este miembro ha realizado: El Docker junto con las modificaciones en pom, asi como el DockerFile,Docker-compose.Yml... También implementó toda la seguridad en el Docker.Modificaciones en las URL´S y en el POM debido a la seguridad del Docker y correcciones en las versiones para que funcionara el Docker correctamente
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1  | Creación del Docker  	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/9acec10dba1c69e2b8898b3b5da027fade22f3fa) | [Dockerfile](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Docker/Dockerfile) |
+   | #2	| Correccion Version y Snapshot en DockerFile	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/9eec673f0dc036736a827cb321637649db058c9a) |[pom.xml](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/pom.xml)  |
+   | #3	|   URL'S arregladas		|  [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/d5fe8aa2d4168be2d099b39b3429dd2726950153) | [LikesRestController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/controller/api/post/LikesRestController.java) |
+   | #4	| Implemets Security en el Docker 	|  [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/7efe54c6d0d85e272fdde96c1b97374b99647a0d)| [RestSecurityConfig.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/security/RestSecurityConfig.java) |
+   | #5	|Security añadido|  [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3e72386ecfd1ff15b0e6a39c99bd85d45a084869)  | [LoginApiController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/controller/api/auth/LoginApiController.java) |
    
 ##### Enrique Martín Santorcaz:
 
