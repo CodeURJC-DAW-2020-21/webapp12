@@ -286,7 +286,9 @@ Leyenda del diagrama:
 
 2. Abrir la terminal navegar hasta la carpeta Docker. 
 
-3. Escribir el comando: "docker-compose up --build". 
+3.1 Windows: Escribir el comando: "docker-compose up --build". 
+
+3.2 Linux: Escribir el comando: "sudo docker-compose up --build".
 
 4. Una vez finalizado el proceso de construcción de docker abrir el navegador y escribir:"https://localhost:8443/". 
 
