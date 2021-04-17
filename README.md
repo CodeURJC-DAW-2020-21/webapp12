@@ -281,17 +281,31 @@ Leyenda del diagrama:
 
 
 ### Instrucciones de ejecución de la aplicación dockerizada:
-Es necesaria la instalacion de docker y docker compose, abrir la terminal navegar hasta la carpeta Docker y escribir el comando: "docker-compose up --build" 
-Una vez finalizado el proceso de construcción de docker abrir el navegador y escribir:"https://localhost:8443/" una vez escrita te redirigida a la pantalla de registro de la aplicacion: "https://localhost:8443/sign-in" una vez se cargue estará lista para ser utilizada.
+
+1. Es necesaria la instalacion de docker y docker compose. 
+
+2. Abrir la terminal navegar hasta la carpeta Docker. 
+
+3. Escribir el comando: "docker-compose up --build". 
+
+4. Una vez finalizado el proceso de construcción de docker abrir el navegador y escribir:"https://localhost:8443/". 
+
+5. Una vez escrita te redirigida a la pantalla de registro de la aplicacion: "https://localhost:8443/sign-in" una vez se cargue estará lista para ser utilizada.
 
 ### Documentación para construcción de la imagen docker:
 LINUX:
-1.Clonar repositorio mediante git clone "https://github.com/CodeURJC-DAW-2020-21/webapp12.git"
-2.Descargar Docker 
-3.Descargar Docker Compose
-4.Navegar hasta la carpeta Docker
-5.Ejecutar el comando: "chmod 777 create_image.sh"
-6.Ejecutar el comando: "./create_image.sh"
+
+1. Clonar repositorio mediante git clone "https://github.com/CodeURJC-DAW-2020-21/webapp12.git"
+
+2. Descargar Docker 
+
+3. Descargar Docker Compose
+
+4. Navegar hasta la carpeta Docker
+
+5. Ejecutar el comando: "chmod 777 create_image.sh"
+
+6. Ejecutar el comando: "./create_image.sh"
 
 ### Participación de miembros:
 
