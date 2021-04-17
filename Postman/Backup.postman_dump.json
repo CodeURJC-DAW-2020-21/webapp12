@@ -1,0 +1,1717 @@
+{
+	"version": 1,
+	"collections": [
+		{
+			"id": "06e0140c-fee3-48c4-92cb-8bba44fcef37",
+			"name": "Relations",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"39c13164-ea18-447a-82d6-2c18f17838b6",
+				"0af2694a-9aca-42aa-9213-717ee08f567f",
+				"9a39c552-55cb-4a16-ad04-981c2fdd7174",
+				"15bb2c17-5a71-4834-bb40-5bb25d81359c"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"folders": [],
+			"requests": [
+				{
+					"id": "0af2694a-9aca-42aa-9213-717ee08f567f",
+					"name": "https://localhost:8443/api/relations/",
+					"url": "https://localhost:8443/api/relations/",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "06e0140c-fee3-48c4-92cb-8bba44fcef37",
+					"rawModeData": "{\r\n    \"userone\": {\r\n        \"idusers\": 2,\r\n        \"username\": \"Legolas\"    \r\n    },\r\n    \"usertwo\": {\r\n        \"idusers\": 1,\r\n        \"email\": \"sr.crnt@hotmail.com\",\r\n        \"username\": \"h\",\r\n        \"pass\": \"$2a$10$Y89jriqYPaW8s/NMGsO5XuThzG3hl66DJFKj0ywu29HbpTbQz3Sni\",\r\n        \"name\": \"h\",\r\n        \"companyprofile\": false,\r\n        \"userprofile\": true,\r\n        \"city\": \"Madrid\",\r\n        \"userportimg\": \"\",\r\n        \"userinfo\": \"usu1\",\r\n        \"linkfacebook\": \"www.facebook.com\",\r\n        \"linktwitter\": \"www.twitter.com\",\r\n        \"linkinstagram\": \"www.instagram.com\"\r\n    }\r\n}",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "15bb2c17-5a71-4834-bb40-5bb25d81359c",
+					"name": "https://localhost:8443/api/relations/1",
+					"url": "https://localhost:8443/api/relations/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "06e0140c-fee3-48c4-92cb-8bba44fcef37",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "39c13164-ea18-447a-82d6-2c18f17838b6",
+					"name": "https://localhost:8443/api/relations/",
+					"url": "https://localhost:8443/api/relations/",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "06e0140c-fee3-48c4-92cb-8bba44fcef37",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "9a39c552-55cb-4a16-ad04-981c2fdd7174",
+					"name": "https://localhost:8443/api/relations/1",
+					"url": "https://localhost:8443/api/relations/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "06e0140c-fee3-48c4-92cb-8bba44fcef37",
+					"headers": "",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "181c1036-657c-4e90-b7d7-79d47fa523d9",
+			"name": "Login",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"e0f73605-f3ce-46ed-a13c-2b84144aabbe",
+				"15b6cf78-0097-4aa6-999c-072ce125c6cf",
+				"15f27c85-509c-4f68-9fa3-8b4def6e53c3"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"folders": [],
+			"requests": [
+				{
+					"id": "15b6cf78-0097-4aa6-999c-072ce125c6cf",
+					"name": "https://localhost:8443/api/auth/refresh",
+					"url": "https://localhost:8443/api/auth/refresh",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "181c1036-657c-4e90-b7d7-79d47fa523d9",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "15f27c85-509c-4f68-9fa3-8b4def6e53c3",
+					"name": "https://localhost:8443/api/auth/logout",
+					"url": "https://localhost:8443/api/auth/logout",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "181c1036-657c-4e90-b7d7-79d47fa523d9",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "e0f73605-f3ce-46ed-a13c-2b84144aabbe",
+					"name": "https://localhost:8443/api/auth/login",
+					"url": "https://localhost:8443/api/auth/login",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "181c1036-657c-4e90-b7d7-79d47fa523d9",
+					"rawModeData": "{ \"username\": \"h\", \"password\": \"h\" }",
+					"headers": "",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "4ccb0975-2362-4515-9770-d32fff4e6388",
+			"name": "Products",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"a4258b8a-4466-4209-b70e-c404c0902087",
+				"c6a316d4-0363-40b2-a2b8-da9832cb828f",
+				"9b5108c3-fc2a-4d52-8d55-67848604dedc",
+				"9ebc2170-e1c6-445e-927e-cbf4e4b34070",
+				"b847e8c2-1634-4ff4-bb24-6c380a7088fb",
+				"15089047-ef1c-4886-869c-1b0ccd30920a",
+				"b5dace09-972e-4311-8d1b-83147bc588c5",
+				"52755f29-5a56-4e52-a492-ed8051e38dab",
+				"8f55aaa9-836b-4153-8cbd-ba4e0f320c37",
+				"e2a859f3-784f-4753-bb1d-37e97c70dcf9",
+				"f5d6de4a-833c-41f5-900a-fef07db3929a",
+				"fc7a9ada-5ea2-43d0-90fd-847a3d92dd01"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"folders": [],
+			"requests": [
+				{
+					"id": "15089047-ef1c-4886-869c-1b0ccd30920a",
+					"name": "https://localhost:8443/api/products/1",
+					"url": "https://localhost:8443/api/products/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "52755f29-5a56-4e52-a492-ed8051e38dab",
+					"name": "https://localhost:8443/api/products/2/image1",
+					"url": "https://localhost:8443/api/products/2/image1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "8f55aaa9-836b-4153-8cbd-ba4e0f320c37",
+					"name": "https://localhost:8443/api/products/2/image2",
+					"url": "https://localhost:8443/api/products/2/image2",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "9b5108c3-fc2a-4d52-8d55-67848604dedc",
+					"name": "https://localhost:8443/api/products/",
+					"url": "https://localhost:8443/api/products/",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"rawModeData": "{\r\n        \"iduser\": {\r\n            \"idusers\": 1,\r\n            \"email\": \"sr.crnt@hotmail.com\",\r\n            \"username\": \"h\",\r\n            \"name\": \"h\"\r\n        },\r\n        \"title\": \"bikes\",\r\n        \"description\": \" He can be the great love of your life, so keep an eye out for this wonder of 2021 Conor WRC Spirit Disc Ultegra Bicycle.You will want to spend your whole life on top of it pedaling\",\r\n        \"idtagone\": {\r\n            \"idtags\": 1,\r\n            \"description\": \"Electronics\"\r\n        },\r\n        \"idtagtwo\": {\r\n            \"idtags\": 2,\r\n            \"description\": \"Furniture\"\r\n        },\r\n        \"idtagthree\": {\r\n            \"idtags\": 3,\r\n            \"description\": \"Appliance\"\r\n        },\r\n        \"idtagfour\": null,\r\n        \"idtagfive\": null,\r\n        \"status\": \"in stock\",\r\n        \"img0\": true,\r\n        \"img1\": true,\r\n        \"img2\": true\r\n    }",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "9ebc2170-e1c6-445e-927e-cbf4e4b34070",
+					"name": "https://localhost:8443/api/products/1",
+					"url": "https://localhost:8443/api/products/1",
+					"description": null,
+					"data": [
+						{
+							"key": "username",
+							"value": "h",
+							"description": "",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "password",
+							"value": "h",
+							"description": "",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "_csrf\n",
+							"value": "0dad17fd-3e9d-4a59-a835-695f0929e9c1",
+							"description": "",
+							"type": "text",
+							"enabled": false
+						}
+					],
+					"dataOptions": {
+						"params": {}
+					},
+					"dataMode": "params",
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "basic",
+						"basic": [
+							{
+								"key": "password",
+								"value": "h",
+								"type": "string"
+							},
+							{
+								"key": "username",
+								"value": "h",
+								"type": "string"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"currentHelper": "basicAuth",
+					"helperAttributes": {
+						"id": "basic",
+						"username": "h",
+						"password": "h"
+					},
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "a4258b8a-4466-4209-b70e-c404c0902087",
+					"name": "https://localhost:8443/api/products/",
+					"url": "https://localhost:8443/api/products/",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "b5dace09-972e-4311-8d1b-83147bc588c5",
+					"name": "https://localhost:8443/api/products/2/image0",
+					"url": "https://localhost:8443/api/products/2/image0",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "b847e8c2-1634-4ff4-bb24-6c380a7088fb",
+					"name": "https://localhost:8443/api/products/1",
+					"url": "https://localhost:8443/api/products/1",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "PUT",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"rawModeData": "{\r\n    \"idproduct\": 1,\r\n    \"iduser\": {\r\n        \"idusers\": 1,\r\n        \"email\": \"sr.crnt@hotmail.com\",\r\n        \"username\": \"h\",\r\n        \"name\": \"h\"\r\n    },\r\n    \"title\": \"Bike Conor WRC Spirit\",\r\n    \"description\": \" He can be the great love of your life, so keep an eye out for this wonder of 2021 Conor WRC Spirit Disc Ultegra Bicycle.You will want to spend your whole life on top of it pedaling\",\r\n    \"idtagone\": {\r\n        \"idtags\": 1,\r\n        \"description\": \"Electronics\"\r\n    },\r\n    \"idtagtwo\": {\r\n        \"idtags\": 2,\r\n        \"description\": \"Furniture\"\r\n    },\r\n    \"idtagthree\": {\r\n        \"idtags\": 3,\r\n        \"description\": \"Appliance\"\r\n    },\r\n    \"idtagfour\": null,\r\n    \"idtagfive\": null,\r\n    \"status\": \"in stock\",\r\n    \"img0\": false,\r\n    \"img1\": false,\r\n    \"img2\": false\r\n}",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "c6a316d4-0363-40b2-a2b8-da9832cb828f",
+					"name": "https://localhost:8443/api/products/?page=1",
+					"url": "https://localhost:8443/api/products/?page=1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "e2a859f3-784f-4753-bb1d-37e97c70dcf9",
+					"name": "https://localhost:8443/api/products/2/image0",
+					"url": "https://localhost:8443/api/products/2/image0",
+					"description": null,
+					"data": [
+						{
+							"key": "image",
+							"value": "/C:/Users/zectr/Pictures/FondoEscritorio.jpg",
+							"type": "file",
+							"enabled": true
+						}
+					],
+					"dataOptions": {
+						"params": {}
+					},
+					"dataMode": "params",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "f5d6de4a-833c-41f5-900a-fef07db3929a",
+					"name": "https://localhost:8443/api/products/2/image1",
+					"url": "https://localhost:8443/api/products/2/image1",
+					"description": null,
+					"data": [
+						{
+							"key": "image",
+							"value": "/C:/Users/zectr/Pictures/spice.jpg",
+							"type": "file",
+							"enabled": true
+						}
+					],
+					"dataOptions": {
+						"params": {}
+					},
+					"dataMode": "params",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "fc7a9ada-5ea2-43d0-90fd-847a3d92dd01",
+					"name": "https://localhost:8443/api/products/2/image2",
+					"url": "https://localhost:8443/api/products/2/image2",
+					"description": null,
+					"data": [
+						{
+							"key": "image",
+							"value": "/C:/Users/zectr/Pictures/FondoEscritorio.jpg",
+							"type": "file",
+							"enabled": true
+						}
+					],
+					"dataOptions": {
+						"params": {}
+					},
+					"dataMode": "params",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "4ccb0975-2362-4515-9770-d32fff4e6388",
+					"headers": "",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "5f70016a-039d-48e3-8e7b-776d6186f684",
+			"name": "Likes",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"43b33994-b688-497e-8819-7363d4473797",
+				"e98b1b4b-a4c5-4b94-a0e9-bc54deb5f6ae",
+				"f220b692-f4f8-4b69-b3f3-64d5ec30c6a8",
+				"e29e2742-9fed-4d34-9a20-a34b6c3cb414"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"folders": [],
+			"requests": [
+				{
+					"id": "43b33994-b688-497e-8819-7363d4473797",
+					"name": "https://localhost:8443/api/likes/",
+					"url": "https://localhost:8443/api/likes/",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "5f70016a-039d-48e3-8e7b-776d6186f684",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "e29e2742-9fed-4d34-9a20-a34b6c3cb414",
+					"name": "https://localhost:8443/api/likes/1",
+					"url": "https://localhost:8443/api/likes/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "5f70016a-039d-48e3-8e7b-776d6186f684",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "e98b1b4b-a4c5-4b94-a0e9-bc54deb5f6ae",
+					"name": "https://localhost:8443/api/likes/",
+					"url": "https://localhost:8443/api/likes/",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "5f70016a-039d-48e3-8e7b-776d6186f684",
+					"rawModeData": "{\r\n    \"iduser\": {\r\n        \"idusers\": 1,\r\n        \"email\": \"sr.crnt@hotmail.com\",\r\n        \"username\": \"h\",\r\n        \"name\": \"h\"\r\n    },\r\n    \"idpost\": {\r\n        \"idpost\": 20,\r\n        \"iduser\": {\r\n            \"idusers\": 24,\r\n            \"email\": \"alcampo@hotmail.com\",\r\n            \"username\": \"Alcampo\",\r\n            \"name\": \"Alcampo\"\r\n        },\r\n        \"title\": \"Sales\",\r\n        \"description\": \"We have new discounts this week dont miss them!!, we also have more 2x1 offers \"\r\n    }\r\n}",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "f220b692-f4f8-4b69-b3f3-64d5ec30c6a8",
+					"name": "https://localhost:8443/api/likes/1",
+					"url": "https://localhost:8443/api/likes/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "5f70016a-039d-48e3-8e7b-776d6186f684",
+					"headers": "",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "749a8173-b721-4471-914f-d1c9a2c12da0",
+			"name": "Posts",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"561731c7-aa91-4343-9bda-152e4821c901",
+				"67879a42-f8b7-4032-ae1e-3d1850feeaf4",
+				"00dc7372-20c0-43dd-a96a-0cce9aaa1caf",
+				"192d374a-d83f-4590-a619-4943756fc283",
+				"3f7cc25f-bf04-4d27-931e-5340cde10b0a",
+				"49aee7df-1636-49be-8caa-4f829140dfc4",
+				"3d909432-0ecc-43c1-86eb-a9c72ef69dad",
+				"c15c2a5d-d0e9-41cd-9ae7-bbc6533fe3ac"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"folders": [],
+			"requests": [
+				{
+					"id": "00dc7372-20c0-43dd-a96a-0cce9aaa1caf",
+					"name": "https://localhost:8443/api/posts/",
+					"url": "https://localhost:8443/api/posts/",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "749a8173-b721-4471-914f-d1c9a2c12da0",
+					"rawModeData": "{\r\n        \"iduser\": {\r\n            \"idusers\": 1,\r\n            \"email\": \"sr.crnt@hotmail.com\",\r\n            \"username\": \"h\",\r\n            \"name\": \"h\"\r\n        },\r\n        \"title\": \"Kemono\",\r\n        \"description\": \"new post\"\r\n    }",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "192d374a-d83f-4590-a619-4943756fc283",
+					"name": "https://localhost:8443/api/posts/1",
+					"url": "https://localhost:8443/api/posts/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "749a8173-b721-4471-914f-d1c9a2c12da0",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "3d909432-0ecc-43c1-86eb-a9c72ef69dad",
+					"name": "https://localhost:8443/api/posts/2/image",
+					"url": "https://localhost:8443/api/posts/2/image",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "749a8173-b721-4471-914f-d1c9a2c12da0",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "3f7cc25f-bf04-4d27-931e-5340cde10b0a",
+					"name": "https://localhost:8443/api/posts/1",
+					"url": "https://localhost:8443/api/posts/1",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "PUT",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "749a8173-b721-4471-914f-d1c9a2c12da0",
+					"rawModeData": "{\r\n    \"iduser\": {\r\n        \"idusers\": 1,\r\n        \"email\": \"sr.crnt@hotmail.com\",\r\n        \"username\": \"h\",\r\n        \"name\": \"h\"\r\n    },\r\n    \"title\": \"Hitman\",\r\n    \"description\": \"Change description\"\r\n}",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "49aee7df-1636-49be-8caa-4f829140dfc4",
+					"name": "https://localhost:8443/api/posts/1",
+					"url": "https://localhost:8443/api/posts/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "749a8173-b721-4471-914f-d1c9a2c12da0",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "561731c7-aa91-4343-9bda-152e4821c901",
+					"name": "https://localhost:8443/api/posts/",
+					"url": "https://localhost:8443/api/posts/",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "749a8173-b721-4471-914f-d1c9a2c12da0",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "67879a42-f8b7-4032-ae1e-3d1850feeaf4",
+					"name": "https://localhost:8443/api/posts/?page=1",
+					"url": "https://localhost:8443/api/posts/?page=1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "749a8173-b721-4471-914f-d1c9a2c12da0",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "c15c2a5d-d0e9-41cd-9ae7-bbc6533fe3ac",
+					"name": "https://localhost:8443/api/posts/2/image",
+					"url": "https://localhost:8443/api/posts/2/image",
+					"description": null,
+					"data": [
+						{
+							"key": "image",
+							"value": "/home/antonio/Imágenes/Fondos de escritorio/Fondo escritotio.png",
+							"description": "",
+							"type": "file",
+							"enabled": true
+						}
+					],
+					"dataOptions": {
+						"params": {}
+					},
+					"dataMode": "params",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "749a8173-b721-4471-914f-d1c9a2c12da0",
+					"headers": "",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+			"name": "Users",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"2695e7a1-26bd-4c54-a298-4b6f58c7f76d",
+				"49c21508-1fac-4abd-b53f-ec7ae278fece",
+				"a21fdff7-f16e-4bc4-89c9-9c7e11e62f76",
+				"8e01ca0d-dd73-4832-bf9d-3414de3a35c0",
+				"770ab4c2-acd2-495e-ba1f-a5b8e1b990cb",
+				"1cb3549c-120b-4159-af37-766b1ad3a7b3",
+				"f0986a38-b85e-459d-912c-aad6766fddfb",
+				"006e8f03-5304-4542-bf24-95518dddce2e",
+				"41011e33-fbc2-4dda-803f-6bcb1e099065",
+				"98790ecd-6251-438a-b4a0-9d39ead8790e",
+				"dfdcb5d2-0780-45d8-8522-8f3ffb28fa8f",
+				"8f6e12db-bab2-4a68-a7f1-01489a90d8a7",
+				"7a482704-18d6-4ebc-a03f-9480d9c6e567",
+				"b6693ed6-bff2-41e1-9c65-20e068a01430",
+				"1df75611-70ab-4ebe-bccc-afafa601cd7b",
+				"c1cffd7a-4cef-4bf3-96b6-9ded2e6b07d4",
+				"668700ae-6ab3-48c3-aa5a-0c7af59c7c3b",
+				"c1b5658e-3313-4794-b4b6-bc73980ac1b0",
+				"1be046b7-2b81-4f19-acfa-4779dc8a5705",
+				"c3724052-9980-4b69-aee8-029864208f20",
+				"441ac765-8e45-4e69-80c6-9c45f7d86562"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"folders": [],
+			"requests": [
+				{
+					"id": "006e8f03-5304-4542-bf24-95518dddce2e",
+					"name": "https://localhost:8443/api/users/companies",
+					"url": "https://localhost:8443/api/users/companies",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "1be046b7-2b81-4f19-acfa-4779dc8a5705",
+					"name": "https://localhost:8443/api/users/1/followers",
+					"url": "https://localhost:8443/api/users/1/followers",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "1cb3549c-120b-4159-af37-766b1ad3a7b3",
+					"name": "https://localhost:8443/api/users/customers",
+					"url": "https://localhost:8443/api/users/customers",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "1df75611-70ab-4ebe-bccc-afafa601cd7b",
+					"name": "https://localhost:8443/api/users/2/posts?page=1&size=10&sort=idpost&direction=asc",
+					"url": "https://localhost:8443/api/users/2/posts?page=1&size=10&sort=idpost&direction=asc",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "sort",
+							"value": "idpost",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "direction",
+							"value": "asc",
+							"equals": true,
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "2695e7a1-26bd-4c54-a298-4b6f58c7f76d",
+					"name": "https://localhost:8443/api/users/",
+					"url": "https://localhost:8443/api/users/",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text",
+							"enabled": false
+						}
+					],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "//Content-Type: application/json\n",
+					"pathVariables": {}
+				},
+				{
+					"id": "41011e33-fbc2-4dda-803f-6bcb1e099065",
+					"name": "https://localhost:8443/api/users/companies?page=1&size=10&sort=idusers&direction=asc",
+					"url": "https://localhost:8443/api/users/companies?page=1&size=10&sort=idusers&direction=asc",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "sort",
+							"value": "idusers",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "direction",
+							"value": "asc",
+							"equals": true,
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "441ac765-8e45-4e69-80c6-9c45f7d86562",
+					"name": "https://localhost:8443/api/users/1/likes",
+					"url": "https://localhost:8443/api/users/1/likes",
+					"description": "",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"pathVariables": {}
+				},
+				{
+					"id": "49c21508-1fac-4abd-b53f-ec7ae278fece",
+					"name": "https://localhost:8443/api/users/",
+					"url": "https://localhost:8443/api/users/",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"rawModeData": "{\r\n    \"username\" : \"z\",\r\n    \"pass\" : \"z\"\r\n}",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "668700ae-6ab3-48c3-aa5a-0c7af59c7c3b",
+					"name": "https://localhost:8443/api/users/1/products?page=0&size=10&sort=idproduct&direction=asc",
+					"url": "https://localhost:8443/api/users/1/products?page=0&size=10&sort=idproduct&direction=asc",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [
+						{
+							"key": "page",
+							"value": "0",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "sort",
+							"value": "idproduct",
+							"equals": true,
+							"enabled": true
+						},
+						{
+							"key": "direction",
+							"value": "asc",
+							"equals": true,
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "770ab4c2-acd2-495e-ba1f-a5b8e1b990cb",
+					"name": "https://localhost:8443/api/users/2",
+					"url": "https://localhost:8443/api/users/2",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "7a482704-18d6-4ebc-a03f-9480d9c6e567",
+					"name": "https://localhost:8443/api/users/1/imageThemeProfile",
+					"url": "https://localhost:8443/api/users/1/imageThemeProfile",
+					"description": null,
+					"data": [
+						{
+							"key": "image",
+							"value": "/C:/Users/zectr/Pictures/spice.jpg",
+							"description": "",
+							"type": "file",
+							"enabled": true
+						}
+					],
+					"dataOptions": {
+						"params": {}
+					},
+					"dataMode": "params",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "8e01ca0d-dd73-4832-bf9d-3414de3a35c0",
+					"name": "https://localhost:8443/api/users/1",
+					"url": "https://localhost:8443/api/users/1",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "PUT",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"rawModeData": "{\r\n    \"pass\" : \"z\"\r\n}",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "8f6e12db-bab2-4a68-a7f1-01489a90d8a7",
+					"name": "https://localhost:8443/api/users/1/imageThemeProfile",
+					"url": "https://localhost:8443/api/users/1/imageThemeProfile",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "98790ecd-6251-438a-b4a0-9d39ead8790e",
+					"name": "https://localhost:8443/api/users/1/imageProfile",
+					"url": "https://localhost:8443/api/users/1/imageProfile",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "a21fdff7-f16e-4bc4-89c9-9c7e11e62f76",
+					"name": "https://localhost:8443/api/users/1",
+					"url": "https://localhost:8443/api/users/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "b6693ed6-bff2-41e1-9c65-20e068a01430",
+					"name": "https://localhost:8443/api/users/1/posts",
+					"url": "https://localhost:8443/api/users/1/posts",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "c1b5658e-3313-4794-b4b6-bc73980ac1b0",
+					"name": "https://localhost:8443/api/users/1/followings",
+					"url": "https://localhost:8443/api/users/2/followings",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "c1cffd7a-4cef-4bf3-96b6-9ded2e6b07d4",
+					"name": "https://localhost:8443/api/users/1/products",
+					"url": "https://localhost:8443/api/users/1/products",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "c3724052-9980-4b69-aee8-029864208f20",
+					"name": "https://localhost:8443/api/users/1/bookmarks",
+					"url": "https://localhost:8443/api/users/1/bookmarks",
+					"description": "",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"pathVariables": {}
+				},
+				{
+					"id": "dfdcb5d2-0780-45d8-8522-8f3ffb28fa8f",
+					"name": "https://localhost:8443/api/users/1/imageProfile",
+					"url": "https://localhost:8443/api/users/1/imageProfile",
+					"description": null,
+					"data": [
+						{
+							"key": "image",
+							"value": "/C:/Users/zectr/Pictures/Fondo.jpg",
+							"type": "file",
+							"enabled": true
+						},
+						{
+							"key": "username",
+							"value": "Hikari",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "pass",
+							"value": "h",
+							"type": "text",
+							"enabled": false
+						},
+						{
+							"key": "imageTheme",
+							"value": [],
+							"type": "file",
+							"enabled": false
+						}
+					],
+					"dataOptions": {
+						"params": {}
+					},
+					"dataMode": "params",
+					"headerData": [
+						{
+							"enabled": false,
+							"key": "Content-Type",
+							"type": "text",
+							"value": "application/json"
+						}
+					],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "noauth"
+					},
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"headers": "//Content-Type: application/json\n",
+					"pathVariables": {}
+				},
+				{
+					"id": "f0986a38-b85e-459d-912c-aad6766fddfb",
+					"name": "https://localhost:8443/api/users/customers?page=1&size=10&sort=idusers&direction=asc",
+					"url": "https://localhost:8443/api/users/customers?page=1&size=10&sort=idusers&direction=asc",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"type": "text",
+							"enabled": false
+						}
+					],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"description": null,
+							"enabled": true
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"equals": true,
+							"description": null,
+							"enabled": true
+						},
+						{
+							"key": "sort",
+							"value": "idusers",
+							"equals": true,
+							"description": null,
+							"enabled": true
+						},
+						{
+							"key": "direction",
+							"value": "asc",
+							"equals": true,
+							"description": null,
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "8cdc1071-0ada-4c21-9a78-e4fea9978f20",
+					"rawModeData": "{\n    \"image\": \"hola\"\n}",
+					"headers": "//Content-Type: application/json\n",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "dabf495b-e4c8-4939-9870-722479eda66a",
+			"name": "Bookmarks",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"9233d98d-420c-4321-a6b7-5018dd162ab0",
+				"04b6b8a2-41f0-45ac-9263-13c946152d00",
+				"3d0aeace-8b1a-40c0-a2a8-f2ef8b018de8",
+				"c3d67c65-b80d-4063-8772-5b3af6b3314a"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"folders": [],
+			"requests": [
+				{
+					"id": "04b6b8a2-41f0-45ac-9263-13c946152d00",
+					"name": "https://localhost:8443/api/bookmarks/",
+					"url": "https://localhost:8443/api/bookmarks/",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "dabf495b-e4c8-4939-9870-722479eda66a",
+					"rawModeData": "{\r\n    \"iduser\": {\r\n        \"idusers\": 1,\r\n        \"username\": \"h\"\r\n    },\r\n    \"idproduct\": {\r\n        \"idproduct\": 19,\r\n        \"iduser\": {\r\n            \"idusers\": 6,\r\n            \"username\": \"Aragorn\"\r\n        },\r\n        \"title\": \"Anduril & Ranger Sword of Aragorn\",\r\n        \"description\": \"We are offering Replica Sword of Isildur and Aragorn Ranger Sword,It reforged again and turned into many pieces. Another sword that Aragorn has was Ranger Sword. You will be pleased that we have both blades at an affordable price. \",\r\n        \"idtagone\": {\r\n            \"idtags\": 1,\r\n            \"description\": \"Electronics\"\r\n        },\r\n        \"idtagtwo\": {\r\n            \"idtags\": 2,\r\n            \"description\": \"Furniture\"\r\n        },\r\n        \"idtagthree\": null,\r\n        \"idtagfour\": null,\r\n        \"idtagfive\": null,\r\n        \"status\": \"in stock\"\r\n    }\r\n}",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "3d0aeace-8b1a-40c0-a2a8-f2ef8b018de8",
+					"name": "https://localhost:8443/api/bookmarks/1",
+					"url": "https://localhost:8443/api/bookmarks/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "dabf495b-e4c8-4939-9870-722479eda66a",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "9233d98d-420c-4321-a6b7-5018dd162ab0",
+					"name": "https://localhost:8443/api/bookmarks/",
+					"url": "https://localhost:8443/api/bookmarks/",
+					"description": null,
+					"data": [
+						{
+							"key": "username",
+							"value": "h",
+							"description": "",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "password",
+							"value": "h",
+							"description": "",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "_csrf\n",
+							"value": "0dad17fd-3e9d-4a59-a835-695f0929e9c1",
+							"description": "",
+							"type": "text",
+							"enabled": false
+						}
+					],
+					"dataOptions": {
+						"params": {}
+					},
+					"dataMode": "params",
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "basic",
+						"basic": [
+							{
+								"key": "password",
+								"value": "h",
+								"type": "string"
+							},
+							{
+								"key": "username",
+								"value": "h",
+								"type": "string"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"currentHelper": "basicAuth",
+					"helperAttributes": {
+						"id": "basic",
+						"username": "h",
+						"password": "h"
+					},
+					"collectionId": "dabf495b-e4c8-4939-9870-722479eda66a",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "c3d67c65-b80d-4063-8772-5b3af6b3314a",
+					"name": "https://localhost:8443/api/bookmarks/1",
+					"url": "https://localhost:8443/api/bookmarks/1",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "dabf495b-e4c8-4939-9870-722479eda66a",
+					"headers": "",
+					"pathVariables": {}
+				}
+			]
+		}
+	],
+	"environments": [
+		{
+			"id": "8c959bfe-0487-4a30-b1d6-66c4dd429fa8",
+			"name": "New Environment",
+			"values": []
+		},
+		{
+			"id": "66fb673b-b1f6-4fea-a7a9-14a641718aeb",
+			"name": "My Workspace - globals",
+			"values": []
+		}
+	],
+	"headerPresets": [],
+	"globals": []
+}

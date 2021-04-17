@@ -37,6 +37,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
+import undersociety.models.LikeAPost;
+import undersociety.models.ListProducts;
 import undersociety.models.Post;
 import undersociety.models.Product;
 import undersociety.models.Users;
@@ -472,5 +474,46 @@ public class UsersRestController {
 		Optional<Users> user = userService.getUserId(id);
 		return userService.getFollowers(user.get().getUsername());
 	}
+	
+	@Operation(summary = "Get a Bookmarks by id users")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the bookmarks", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)  
+	})
+	@GetMapping("/{id}/bookmarks")
+	public List<ListProducts> getBookmarks(@Parameter(description="id of user to be searched") @PathVariable int id){
+		return productsService.getBookmarksByUser(id);
+	}
+	
+	@Operation(summary = "Get a Likes by id users")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the likes", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)  
+	})
+	@GetMapping("/{id}/likes")
+	public List<LikeAPost> getLike(@Parameter(description="id of user to be searched") @PathVariable int id){
+		return postsService.getLikesByUser(id);
+	}
+
 
 }

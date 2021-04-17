@@ -111,6 +111,31 @@ public class ProductService {
 
 	}
 	
+	public boolean existsProduct(String title) {
+		return productrepo.existsIdproductByTitle(title);
+	}
+
+	public boolean existsBookmark(ListProducts bookmark) {
+		Optional<Product> product = productrepo.findById(bookmark.getIdproduct().getIdproduct());
+		Optional<Users> user = userRepository.findById(bookmark.getIduser().getIdusers());
+		return bookmarkrepo.existsIdproductlistByiduserAndIdproduct(user.get(),product.get());
+	}
+
+	public boolean existsProductById(Product idproduct) {
+		Optional<Product> product = productrepo.findById(idproduct.getIdproduct());
+		return product.isPresent();
+	}
+
+	public List<ListProducts> getBookmarksByUser(int id) {
+		Optional<Users> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			return bookmarkrepo.findByiduser(user.get());
+		}else {
+			return null;
+		}
+		
+	}
+
 	
 	////////////////////////////////////////////////////// NORMAL
 	////////////////////////////////////////////////////// METHODS////////////////////////////////////////////////////////////////////////
@@ -278,21 +303,6 @@ public class ProductService {
 			productmodels.add(productmodel);
 		}
 		return productmodels;
-	}
-
-	public boolean existsProduct(String title) {
-		return productrepo.existsIdproductByTitle(title);
-	}
-
-	public boolean existsBookmark(ListProducts bookmark) {
-		Optional<Product> product = productrepo.findById(bookmark.getIdproduct().getIdproduct());
-		Optional<Users> user = userRepository.findById(bookmark.getIduser().getIdusers());
-		return bookmarkrepo.existsIdproductlistByiduserAndIdproduct(user.get(),product.get());
-	}
-
-	public boolean existsProductById(Product idproduct) {
-		Optional<Product> product = productrepo.findById(idproduct.getIdproduct());
-		return product.isPresent();
 	}
 
 }
