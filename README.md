@@ -307,15 +307,15 @@ Este miembro ha realizado: El Docker junto con las modificaciones en pom, asi co
    | #5	|Security añadido|  [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3e72386ecfd1ff15b0e6a39c99bd85d45a084869)  | [LoginApiController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/controller/api/auth/LoginApiController.java) |
    
 ##### Enrique Martín Santorcaz:
-
+Este miembro ha realizado: La creación de los Api Controller relacionados con los productos creando el bookmark y product rest controllers asi como la creación del DTO de product asi como la preparación de la documentación de los api docs y la creación de los archivos pertinentes
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1 | Implemets DTO Products	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/388a03bdba3acfafbca15d32b0df1cb7ee2afc94) | [Product.java] https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/models/Product.java  |
+   | #2	| First image implement and finish id methods	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/388a03bdba3acfafbca15d32b0df1cb7ee2afc94) | [ProductsRestController.java] https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/controller/api/products/ProductsRestController.java  |
+   | #3	| complete productapicontroller	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/388a03bdba3acfafbca15d32b0df1cb7ee2afc94) | [BookmarksRestController.java] https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/controller/api/products/BookmarksRestController.java  |
+   | #4	| Created api bookmark basic	|  | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/388a03bdba3acfafbca15d32b0df1cb7ee2afc94) | [ListProducts.java] https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/models/ListProducts.java |
+   | #5	| changes apidocs	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/388a03bdba3acfafbca15d32b0df1cb7ee2afc94) | [api-docs.yaml]https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/api-docs/api-docs.yaml |
    
 ##### Guillermo Martín García:
 
