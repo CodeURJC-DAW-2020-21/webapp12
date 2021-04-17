@@ -279,6 +279,11 @@ public class UsersRestController {
 					responseCode = "204", 
 					description = "Image not found", 
 					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
 					)
 	})
 	@GetMapping("/{id}/imageProfile")
@@ -311,6 +316,11 @@ public class UsersRestController {
 			@ApiResponse(
 					responseCode = "204", 
 					description = "Image not found", 
+					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
 					content = @Content
 					)
 	})
@@ -345,6 +355,11 @@ public class UsersRestController {
 					responseCode = "204", 
 					description = "Image not found", 
 					content = @Content
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
 					)
 	})
 	@PostMapping("/{id}/imageProfile")
@@ -377,7 +392,12 @@ public class UsersRestController {
 					responseCode = "204", 
 					description = "Image not found", 
 					content = @Content
-					) 
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)
 	})
 	@PostMapping("/{id}/imageThemeProfile")
 	public ResponseEntity<Object> uploadImageThemeProfile( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="user theme page picture") @RequestParam MultipartFile image) throws SQLException, IOException{
@@ -404,15 +424,24 @@ public class UsersRestController {
 					content = {@Content(
 							mediaType = "application/json"
 							)}
-					) 
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)
 	})
 	@JsonView(Post.PostDetails.class)
 	@GetMapping("/{id}/posts")
-	public List<Post> getAllPost( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
+	public ResponseEntity<List<Post>> getAllPost( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
+		Optional<Users> user = userService.getUserId(id);
+		if(!user.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
 		if(page != null) {
-			return postsService.getPostsByUser(id,page,5).getContent();
+			return ResponseEntity.ok(postsService.getPostsByUser(id,page,5).getContent());
 		}else {
-			return postsService.getAllPostsByUser(id);
+			return ResponseEntity.ok(postsService.getAllPostsByUser(id));
 		}
 	}
 
@@ -424,15 +453,24 @@ public class UsersRestController {
 					content = {@Content(
 							mediaType = "application/json"
 							)}
-					) 
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)
 	})
 	@JsonView(Product.Simple.class)
 	@GetMapping("/{id}/products")
-	public List<Product> getAllProducts( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
+	public ResponseEntity<List<Product>> getAllProducts( @Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
+		Optional<Users> user = userService.getUserId(id);
+		if(!user.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
 		if(page != null) {
-			return productsService.getProductsByUser(id,page,5).getContent();
+			return ResponseEntity.ok( productsService.getProductsByUser(id,page,5).getContent() );
 		}else {
-			return productsService.getAllProductsByUser(id);
+			return ResponseEntity.ok(productsService.getAllProductsByUser(id));
 		}
 	}
 
@@ -444,13 +482,22 @@ public class UsersRestController {
 					content = {@Content(
 							mediaType = "application/json"
 							)}
-					)  
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)
 	})
 	@JsonView(UsersRelations.Basic.class)
 	@GetMapping("/{id}/followings")
-	public List<UsersRelations> getUserRelations( @Parameter(description="id of relation to be searched") @PathVariable int id){
+	public ResponseEntity<List<UsersRelations>> getUserRelations( @Parameter(description="id of relation to be searched") @PathVariable int id){
 		Optional<Users> user = userService.getUserId(id);
-		return userService.getFollowing(user.get().getUsername());
+		if(user.isPresent()) {
+			return ResponseEntity.ok(userService.getFollowing(user.get().getUsername()));
+		}else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@Operation(summary = "Get a followers by id users")
@@ -466,13 +513,17 @@ public class UsersRestController {
 					responseCode = "404", 
 					description = "User not found", 
 					content = @Content
-					)  
+					)
 	})
 	@JsonView(UsersRelations.Basic.class)
 	@GetMapping("/{id}/followers")
-	public List<UsersRelations> getRelationsUser( @Parameter(description="id of relation to be searched") @PathVariable int id){
+	public ResponseEntity<List<UsersRelations>> getRelationsUser( @Parameter(description="id of relation to be searched") @PathVariable int id){
 		Optional<Users> user = userService.getUserId(id);
-		return userService.getFollowers(user.get().getUsername());
+		if(user.isPresent()) {
+			return  ResponseEntity.ok(userService.getFollowers(user.get().getUsername()));
+		}else {
+			return  ResponseEntity.notFound().build();
+		}
 	}
 	
 	@Operation(summary = "Get a Bookmarks by id users")
@@ -488,11 +539,15 @@ public class UsersRestController {
 					responseCode = "404", 
 					description = "User not found", 
 					content = @Content
-					)  
+					)
 	})
 	@GetMapping("/{id}/bookmarks")
-	public List<ListProducts> getBookmarks(@Parameter(description="id of user to be searched") @PathVariable int id){
-		return productsService.getBookmarksByUser(id);
+	public ResponseEntity<List<ListProducts>> getBookmarks(@Parameter(description="id of user to be searched") @PathVariable int id){
+		Optional<Users> user = userService.getUserId(id);
+		if(!user.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(productsService.getBookmarksByUser(id));
 	}
 	
 	@Operation(summary = "Get a Likes by id users")
@@ -508,11 +563,15 @@ public class UsersRestController {
 					responseCode = "404", 
 					description = "User not found", 
 					content = @Content
-					)  
+					)
 	})
 	@GetMapping("/{id}/likes")
-	public List<LikeAPost> getLike(@Parameter(description="id of user to be searched") @PathVariable int id){
-		return postsService.getLikesByUser(id);
+	public ResponseEntity<List<LikeAPost>> getLike(@Parameter(description="id of user to be searched") @PathVariable int id){
+		Optional<Users> user = userService.getUserId(id);
+		if(!user.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(postsService.getLikesByUser(id));
 	}
 
 
