@@ -312,7 +312,7 @@ LINUX:
 ### Participación de miembros:
 
 ##### David Montero Garcia:
-Este miembro ha realizado: El Docker junto con las modificaciones en pom, asi como el DockerFile,Docker-compose.Yml... También implementó toda la seguridad en el Docker.Modificaciones en las URL´S y en el POM debido a la seguridad del Docker y correcciones en las versiones para que funcionara el Docker correctamente
+Este miembro ha realizado: El Docker junto con las modificaciones en pom, asi como el DockerFile,Docker-compose.Yml... También implementó toda la seguridad en el Docker.Modificaciones en las URL´S y en el POM debido a la seguridad del Docker y correcciones en las versiones para que funcionara el Docker correctamente.
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
@@ -323,7 +323,7 @@ Este miembro ha realizado: El Docker junto con las modificaciones en pom, asi co
    | #5	|Security añadido|  [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3e72386ecfd1ff15b0e6a39c99bd85d45a084869)  | [LoginApiController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Backend/src/main/java/undersociety/controller/api/auth/LoginApiController.java) |
    
 ##### Enrique Martín Santorcaz:
-Este miembro ha realizado: La creación de los Api Controller relacionados con los productos creando el bookmark y product rest controllers asi como la creación del DTO de product asi como la preparación de la documentación de los api docs y la creación de los archivos pertinentes
+Este miembro ha realizado: La creación de los Api Controller relacionados con los productos creando el bookmark y product rest controllers asi como la creación del DTO de product asi como la preparación de la documentación de los api docs y la creación de los archivos pertinentes.
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
@@ -334,15 +334,15 @@ Este miembro ha realizado: La creación de los Api Controller relacionados con l
    | #5	| changes apidocs	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/388a03bdba3acfafbca15d32b0df1cb7ee2afc94) | [api-docs.yaml](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/api-docs/api-docs.yaml) |
    
 ##### Guillermo Martín García:
-
+Este miembro ha realizado la creación de los Api Controller relacionados con los posts, creando el like y post rest controllers asi como la creación del DTO de post asi como la preparación de la documentación de los api docs, y se ha documentado en docker para en caso de ser necesario ayudar al resto de miembros del equipo.
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1  | Implement LikesResController documentation | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/9d908269272d9785708848c0134d92105ffd9133) | [LikesRestController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/9d908269272d9785708848c0134d92105ffd9133/UnderSociety/src/main/java/undersociety/controller/api/post/LikesRestController.java) |
+   | #2	| Implement LikesRestController | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/1eac6231f82c9e0785723525f56f2f8d45831e16) | [LikeAPost.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/1eac6231f82c9e0785723525f56f2f8d45831e16/UnderSociety/src/main/java/undersociety/models/LikeAPost.java) |
+   | #3	| Implement PostRestController documentation	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/215cf4cc39e73c61df9a9d8cb03ffd44523c984f) | [PostRestController.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/215cf4cc39e73c61df9a9d8cb03ffd44523c984f/UnderSociety/src/main/java/undersociety/controller/api/post/PostRestController.java) |
+   | #4	| Implement service methods | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/ce312b4fc5b241efc7666eb733ea47d6d5dd86ce) | [PostsService.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/ce312b4fc5b241efc7666eb733ea47d6d5dd86ce/UnderSociety/src/main/java/undersociety/services/PostsService.java) |
+   | #5	| Start implementation of post api rest	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/812d96cc5e13a5aa7f90957c5cd8ba3c70c187af) | [Post.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/812d96cc5e13a5aa7f90957c5cd8ba3c70c187af/UnderSociety/src/main/java/undersociety/models/Post.java) |
    
 ##### Antonio Jesus Pajuelo Chavez:
 Este miembro del equipo ha realizado las peticiones Postman, la apirest de los users y sus relaciones ademas de su dto, la generacion del docker-compose, el script y una configuracion basica de la seguridad que posteriormente seria mejorada por David.
