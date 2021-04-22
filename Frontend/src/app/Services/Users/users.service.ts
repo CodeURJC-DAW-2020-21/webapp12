@@ -53,7 +53,7 @@ export class UsersService {
   getUserCompanies() {
     return this.http.get("/api/users/companies/");
   }
-
+/*
   uploadImageProfile(id: String) {
     return this.http.post("/api/users/" + id + "/imageProfile");
   }
@@ -61,7 +61,7 @@ export class UsersService {
   uploadThemeProfile(id: String) {
     return this.http.post("/api/users/" + id + "/imageThemeProfile");
   }
-
+*/
   getPosts(id: String) {
     return this.http.get("/api/users/" + id + "/posts");
   }

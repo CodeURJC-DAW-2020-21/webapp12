@@ -35,7 +35,7 @@ export class ProductsService {
   replaceProducts(id: String,product: Product ) {
     return this.http.put("/api/products/"+id, product);
   }
-
+/*
   uploadImage0(id: String) {
     return this.http.post("/api/products/"+id+"/image0");
   }
@@ -48,6 +48,6 @@ export class ProductsService {
     return this.http.post("/api/products/"+id+"/image2");
   }
 
-
+*/
 
 }
