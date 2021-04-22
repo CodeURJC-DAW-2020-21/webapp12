@@ -1,1 +1,45 @@
-<p>messages works!</p>
+<section class="profile-account-setting">
+    <div class="container py-5 px-4" >
+  
+        <div class="row rounded-lg overflow-hidden shadow">
+          <!-- Users box-->
+          <div class="col-5 px-0">
+            <div class="bg-white">
+      
+              <div class="bg-gray px-4 py-2 bg-light">
+                <p class="h5 mb-0 py-1" id="userTo" >{{to}}</p>
+                <div class="d-flex justify-content-center">
+                    <a  class="previous round">&#8249;</a>
+                    <a  class="next round">&#8250;</a>		
+                </div>
+              </div>
+      
+              <div class="messages-box" style="height: 761px; max-height: 761px; overflow-y: scroll;">
+                <div class="list-group rounded-0" id="usersList">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Chat Box-->
+          <div class="col-7 px-0">
+            <div class="px-4 py-5 chat-box bg-white chat-history" id="messageList" style="max-width: 654.5px; max-height: 763px; width: 654.5px; height: 763px; overflow-y: scroll;">
+              <ul>
+
+              </ul>			  
+            </div>
+      
+            <!-- Typing area -->
+            <form class="bg-light">
+              <div class="input-group">
+                <textarea id="message-to-send" name="message-to-send" placeholder="Type your message" rows="3" style="width: 100%;"></textarea>
+                <div class="input-group-append">
+                  <button id="sendBtn" type="button" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+                </div>
+              </div>
+            </form>
+      
+          </div>
+        </div>
+      </div>
+</section>
