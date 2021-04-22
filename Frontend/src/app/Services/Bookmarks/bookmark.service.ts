@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class BookmarkService {
     return this.http.get("/api/bookmarks/");
   }
 
-  registerBookmark() {
-    return this.http.post("/api/bookmarks/");
+  registerBookmark(bookmark: Bookmarks) {
+    return this.http.post("/api/bookmarks/", bookmark);
   }
 
   getBookmark(id: String) {
