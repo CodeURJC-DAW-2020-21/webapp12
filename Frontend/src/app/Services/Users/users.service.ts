@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Users } from 'src/app/Class/Users/users';
 
 
 @Injectable({
@@ -25,8 +26,8 @@ export class UsersService {
     return this.http.get("/api/users/");
   }
 
-  registerUser() {
-    return this.http.post("/api/users/");
+  registerUser(user: Users) {
+    return this.http.post("/api/users/", user);
   }
 
   getUsersPage(page: String) {
@@ -37,8 +38,8 @@ export class UsersService {
     return this.http.get("/api/users/" + id);
   }
 
-  replaceUser(id: String) {
-    return this.http.put("/api/users/" + id);
+  replaceUser(id: String, user: Users) {
+    return this.http.put("/api/users/" + id, user);
   }
 
   deleteUser(id: String) {

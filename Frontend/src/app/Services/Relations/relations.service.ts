@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Relations } from 'src/app/Class/Relations/relations';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class RelationsService {
     return this.http.get("/api/relations/");
   }
 
-  registerRelation() {
-    return this.http.post("/api/relations/");
+  registerRelation(relation: Relations) {
+    return this.http.post("/api/relations/", relation);
   }
 
   deleteRelations(id: String) {

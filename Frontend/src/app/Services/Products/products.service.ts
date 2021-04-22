@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Product } from 'src/app/Class/Product/product';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class ProductsService {
     return this.http.get("/api/products/?page="+page);
   }
 
-  registerProduct() {
-    return this.http.post("/api/products/");
+  registerProduct(product: Product) {
+    return this.http.post("/api/products/", product);
   }
 
 
@@ -31,8 +32,8 @@ export class ProductsService {
     return this.http.delete("/api/products/"+id);
   }
 
-  replaceProducts(id: String) {
-    return this.http.put("/api/products/"+id);
+  replaceProducts(id: String,product: Product ) {
+    return this.http.put("/api/products/"+id, product);
   }
 
   uploadImage0(id: String) {
