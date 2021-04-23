@@ -20,12 +20,12 @@
                                 <div class="user-profile">
                                     <div class="username-dt">
                                         <div class="usr-pic">
-                                            <img src="https://localhost:8443/api/users/{{iduser}}/imageProfile" alt="">
+                                            <img src="https://localhost:8443/api/users/{{userInfo.idusers}}/imageProfile" alt="">
                                         </div>
                                     </div>
                                     <!--username-dt end-->
                                     <div class="user-specs">
-                                        <h3>{{username}}</h3>
+                                        <h3>{{userInfo.username}}</h3>
                                     </div>
                                 </div>
                                 <!--user-profile end-->
@@ -39,7 +39,7 @@
                                         <span>{{followers}}</span>
                                     </li>
                                     <li>
-                                        <a [routerLink]="['/new/userpage','{{iduser}}']" routerLinkActive="router-link-active" title="">View Profile</a>
+                                        <a [routerLink]="['/new/userpage','{{userInfo.idusers}}']" routerLinkActive="router-link-active" title="">View Profile</a>
                                     </li>
                                 </ul>
                             </div>
@@ -124,7 +124,7 @@
                         <div class="main-ws-sec">
                             <div class="post-topbar">
                                 <div class="user-picy">
-                                    <img src="https://localhost:8443/api/users/{{iduser}}/imageProfile" alt="">
+                                    <img src="https://localhost:8443/api/users/{{userInfo.idusers}}/imageProfile" alt="">
                                 </div>
                                 <div class="post-st">
                                     <ul>
@@ -226,9 +226,9 @@
                                 <div class="suggestions-list">
                                     <div class="suggestion-usd">
                                         <div class="sgt-text">
-                                            <h4>{{username}}</h4>
+                                            <h4>{{userInfo.username}}</h4>
                                         </div>
-                                        <span><a href="/messages?to={{username}}"><i class="la la-envelope"></i></a></span>
+                                        <span><a href="/messages?to={{userInfo.username}}"><i class="la la-envelope"></i></a></span>
                                     </div>
                                     <div class="view-more">
                                         <a onclick="viewMoreSuggestion()" title="">View More</a>

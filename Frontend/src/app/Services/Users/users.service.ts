@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Relations } from 'src/app/Class/Relations/relations';
+import { Roles } from 'src/app/Class/Roles/roles';
 import { Users } from 'src/app/Class/Users/users';
 
 
@@ -8,8 +10,8 @@ import { Users } from 'src/app/Class/Users/users';
 })
 export class UsersService {
 
-  username: String = "holo";
-  iduser: Number = 1;
+  user: Users = new Users("","","","",false,"","","","","");
+  roles: Roles[];
   admin: Boolean = false;
   loginIn: Boolean = false;
 
@@ -28,7 +30,7 @@ export class UsersService {
   }
 
   getAllUsers() {
-    return this.http.get("/api/users/");
+    return this.http.get<Users[]>("/api/users/");
   }
 
   registerUser(user: Users) {
@@ -40,7 +42,7 @@ export class UsersService {
   }
 
   getUser(id: String) {
-    return this.http.get("/api/users/" + id);
+    return this.http.get<Users>("/api/users/" + id);
   }
 
   replaceUser(id: String, user: Users) {
@@ -66,15 +68,15 @@ export class UsersService {
   getUserCompaniesPage(id : Number) {
     return this.http.get<Users[]>("/api/users/companies?page="+id);
   }
-/*
-  uploadImageProfile(id: String) {
-    return this.http.post("/api/users/" + id + "/imageProfile");
+
+  uploadImageProfile(id: String, image: FormData) {
+    return this.http.post("/api/users/" + id + "/imageProfile",image);
   }
 
-  uploadThemeProfile(id: String) {
-    return this.http.post("/api/users/" + id + "/imageThemeProfile");
+  uploadThemeProfile(id: String, image: FormData) {
+    return this.http.post("/api/users/" + id + "/imageThemeProfile",image);
   }
-*/
+
   getPosts(id: String) {
     return this.http.get("/api/users/" + id + "/posts");
   }
@@ -83,8 +85,12 @@ export class UsersService {
     return this.http.get("/api/users/" + id + "/products");
   }
 
-  getUserRelations(id: String) {
-    return this.http.get("/api/users/" + id + "/followings");
+  getUserFollowings(id: String) {
+    return this.http.get<Relations[]>("/api/users/" + id + "/followings");
+  }
+
+  getUserFollowers(id: String) {
+    return this.http.get<Relations[]>("/api/users/" + id + "/followers");
   }
 
   getBookmarks(id: String) {
@@ -95,12 +101,9 @@ export class UsersService {
     return this.http.get("/api/users/" + id + "/likes");
   }
 
-  setUsername(username: String){
-    this.username = username;
-  }
 
-  setId(id: Number){
-    this.iduser = id;
+  getRoles(id: Number) {
+    return this.http.get<Roles[]>("/api/users/" + id + "/rols");
   }
 
   setAdmin(admin: boolean){
@@ -111,19 +114,20 @@ export class UsersService {
     this.loginIn = login;
   }
 
-  getUsername(){
-    return this.username;
-  }
-
-  getId(){
-    return this.iduser;
-  }
-
-  getAdmin(){
+  getAdmin(): Boolean{
     return this.admin;
   }
 
-  getLogin(){
+  getLogin(): Boolean{
     return this.loginIn;
   }
+
+  setUserInfo(user : Users){
+    this.user = user;
+  }
+
+  getUserInfo(): Users{
+    return this.user;
+  }
+  
 }

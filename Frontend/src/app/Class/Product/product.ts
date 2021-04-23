@@ -6,6 +6,7 @@ export class Product {
     private iduser : Users;
     private title : String;
     private description : String;
+	private price : Number;
     private idtagone : Tags;
     private idtagtwo : Tags;
     private idtagthree : Tags;
@@ -16,11 +17,12 @@ export class Product {
     private img1 : Boolean;
     private img2 : Boolean;
 
-	constructor( idproduct: Number,  iduser: Users,  title: String,  description: String,  idtagone: Tags,  idtagtwo: Tags,  idtagthree: Tags,  idtagfour: Tags,  idtagfive: Tags,  status: String,  img0: Boolean,  img1: Boolean,  img2: Boolean) {
+	constructor( idproduct: Number,  iduser: Users,  title: String,  description: String, price : Number,  idtagone: Tags,  idtagtwo: Tags,  idtagthree: Tags,  idtagfour: Tags,  idtagfive: Tags,  status: String,  img0: Boolean,  img1: Boolean,  img2: Boolean) {
 		this.idproduct =  idproduct;
 		this.iduser =  iduser;
 		this.title =  title;
 		this.description =  description;
+		this.price =  price;
 		this.idtagone =  idtagone;
 		this.idtagtwo =  idtagtwo;
 		this.idtagthree =  idtagthree;
@@ -84,6 +86,10 @@ export class Product {
 		return this.img2;
 	}
 
+	public getPrice(): Number {
+		return this.price;
+	}
+
 	public setIdproduct(value: Number) {
 		this.idproduct = value;
 	}
@@ -134,6 +140,10 @@ export class Product {
 
 	public setImg2(value: Boolean) {
 		this.img2 = value;
+	}
+
+	public setPrice(value: Number) {
+		this.price = value;
 	}
 
 }

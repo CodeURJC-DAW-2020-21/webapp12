@@ -36,6 +36,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import undersociety.models.Product;
+import undersociety.models.Tags;
 import undersociety.services.ProductService;
 
 @RestController
@@ -416,4 +417,19 @@ public class ProductsRestController {
 		}
 	}	
 
+	@Operation(summary = "Get a all Tags")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Tags", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
+	})
+	@JsonView(Tags.Simple.class)
+	@GetMapping("/tags")
+	public List<Tags> getTags(){
+		return productService.getTags();
+	}
 }

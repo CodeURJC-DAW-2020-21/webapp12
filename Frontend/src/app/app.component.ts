@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'protractor';
+import { Users } from './Class/Users/users';
 import { StatisticsService } from './Services/Statistics/statistics.service';
 import { UsersService } from './Services/Users/users.service';
 
@@ -10,33 +12,29 @@ import { UsersService } from './Services/Users/users.service';
 })
 export class AppComponent {
   title = 'Frontend';
-  username: String = "Holo";
-  iduser: String = "1";
-  admin : boolean = true;
+  user : Users;
+  admin: boolean = true;
 
-  constructor(private userService: UsersService, private statiticsService: StatisticsService, private router: Router) {
-    this.userService.login("h", "h").subscribe(
-      response => {
-        console.log(response);
-        userService.setUsername("h");
-        userService.setId(1);
-        userService.setLogin(true);
-      },
-      error => console.error(error)
-    );
+  constructor(private userService: UsersService, private router: Router) {
+    this.user = this.userService.getUserInfo();
   }
 
   ngOnInit(): void {
-    if(!this.userService.getLogin()){
-      this.router.navigate(['signIn']);
-    }  
-    
+    console.log(this.userService.getLogin());
+    if(this.userService.getLogin() == false){
+      this.router.navigate(['new/signIn']);
+    }else{
+      this.user = this.userService.getUserInfo();
+    } 
   }
 
-  get() {
-    this.statiticsService.getStatistics().subscribe(
-      response => console.log(response),
-      error => console.error(error)
+  logout(){
+    this.userService.logout().subscribe(
+      response =>{ 
+        this.router.navigate(['new/signIn']); 
+        this.userService.setLogin(false)
+      },
+      error => console.log(error)
     );
   }
 
