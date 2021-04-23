@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-forgot-pass',
@@ -10,6 +12,7 @@ export class ForgotPassComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    $("header").hide();
   }
 
 }

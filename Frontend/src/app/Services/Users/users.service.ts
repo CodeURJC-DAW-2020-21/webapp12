@@ -11,6 +11,7 @@ export class UsersService {
   username: String = "holo";
   iduser: Number = 1;
   admin: Boolean = false;
+  loginIn: Boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -106,6 +107,10 @@ export class UsersService {
     this.admin =admin;
   }
 
+  setLogin(login: boolean){
+    this.loginIn = login;
+  }
+
   getUsername(){
     return this.username;
   }
@@ -116,5 +121,9 @@ export class UsersService {
 
   getAdmin(){
     return this.admin;
+  }
+
+  getLogin(){
+    return this.loginIn;
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { StatisticsService } from './Services/Statistics/statistics.service';
 import { UsersService } from './Services/Users/users.service';
 
@@ -13,15 +14,23 @@ export class AppComponent {
   iduser: String = "1";
   admin : boolean = true;
 
-  constructor(private userService: UsersService, private statiticsService: StatisticsService) {
+  constructor(private userService: UsersService, private statiticsService: StatisticsService, private router: Router) {
     this.userService.login("h", "h").subscribe(
       response => {
         console.log(response);
         userService.setUsername("h");
         userService.setId(1);
+        userService.setLogin(true);
       },
       error => console.error(error)
     );
+  }
+
+  ngOnInit(): void {
+    if(!this.userService.getLogin()){
+      this.router.navigate(['signIn']);
+    }  
+    
   }
 
   get() {
