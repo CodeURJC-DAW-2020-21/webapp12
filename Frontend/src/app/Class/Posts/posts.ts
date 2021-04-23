@@ -2,10 +2,10 @@ import { Users } from "../Users/users";
 
 export class Posts {
 
-    private idpost : Number;
-    private iduser : Users;
-    private title : String;
-    private description : String;
+     idpost : Number;
+     iduser : Users;
+     title : String;
+     description : String;
 
 	constructor( idpost: Number,  iduser: Users,  title: String,  description: String) {
 		this.idpost =  idpost;

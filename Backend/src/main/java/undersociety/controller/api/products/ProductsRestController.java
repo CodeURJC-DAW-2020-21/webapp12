@@ -62,7 +62,7 @@ public class ProductsRestController {
 	@GetMapping("/")
 	public List<Product> getAllProducts( @Parameter(description="page") @RequestParam(required = false) String page ){
 		if(page != null) {
-			return productService.getProductsPage(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+			return productService.getProductsPage(PageRequest.of(Integer.parseInt(page), 10)).getContent();
 		}else {
 			return productService.getAll();
 		}

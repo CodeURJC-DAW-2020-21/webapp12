@@ -62,7 +62,7 @@ public class PostRestController {
 	@GetMapping("/")
 	public List<Post> getAllPosts( @Parameter(description="page") @RequestParam(required = false) String page ){
 		if(page != null) {
-			return postService.getPosts(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+			return postService.getPosts(PageRequest.of(Integer.parseInt(page), 10)).getContent();
 		}else {
 			return postService.getAll();
 		}

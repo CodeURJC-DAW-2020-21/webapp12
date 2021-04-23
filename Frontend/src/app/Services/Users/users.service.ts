@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Posts } from 'src/app/Class/Posts/posts';
 import { Relations } from 'src/app/Class/Relations/relations';
 import { Roles } from 'src/app/Class/Roles/roles';
 import { Users } from 'src/app/Class/Users/users';
+import { Likes } from 'src/app/Class/Likes/likes';
 
 
 @Injectable({
@@ -98,7 +100,7 @@ export class UsersService {
   }
 
   getLikes(id: String) {
-    return this.http.get("/api/users/" + id + "/likes");
+    return this.http.get<Likes[]>("/api/users/" + id + "/likes");
   }
 
 

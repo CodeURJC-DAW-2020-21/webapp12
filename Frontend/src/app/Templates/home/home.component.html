@@ -136,48 +136,48 @@
                             </div>
                             <!--post-topbar end-->
                             <div class="posts-section" id="myUL">
-                                    <div class="post-bar" *ngFor="let post of posts">
+                                    <div class="post-bar" *ngFor="let post of index">
                                         <div class="post_topbar">
                                             <div class="row usy-dt">
                                                 <div class="user-post-icon">
-                                                    <img src="https://localhost:8443/api/users/{{post.iduser.idusers}}/imageProfile"
+                                                    <img src="https://localhost:8443/api/users/{{post.post.iduser.idusers}}/imageProfile"
                                                         alt="">
                                                 </div>
                                                 <div class="usy-name">
-                                                    <h3>{{post.iduser.username}}</h3>
+                                                    <h3>{{post.post.iduser.username}}</h3>
                                                 </div>
                                             </div>
 
                                         </div>
                                         <div class="epi-sec">
                                             <ul class="descp">
-                                                <li><img src="../../../assets/images/icon8.png" alt=""><span>{{post.iduser.city}}</span></li>
-                                                <li><img src="../../../assets/images/icon9.png" alt=""><span>{{post.iduser.city}}</span></li>
+                                                <li><img src="../../../assets/images/icon8.png" alt=""><span>{{post.typeUser}}</span></li>
+                                                <li><img src="../../../assets/images/icon9.png" alt=""><span>{{post.post.iduser.city}}</span></li>
                                             </ul>
                                             <ul class="bk-links">
-                                                <li><a id="{{post.idpost}}" title=""><i
-                                                            onclick="like('{{post.idpost}}')"
-                                                            class="{{like}}"></i></a></li>
-                                                <li><a href="/messages?to={{post.iduser.username}}" title=""><i class="la la-envelope"></i></a></li>
+                                                <li><a id="{{post.post.idpost}}" title=""><i
+                                                            (click)="like('{{post.post.idpost}}')"
+                                                            class="{{post.like}}"></i></a></li>
+                                                <li><a href="/messages?to={{post.post.iduser.username}}" title=""><i class="la la-envelope"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="job_descp">
                                             <h3>{{post.title}}</h3>
                                             <div class="row">
                                                 <ul class="image-store">
-                                                    <li><img src="https://localhost:8443/api/posts/{{post.idpost}}/image" alt=""></li>
+                                                    <li><img src="https://localhost:8443/api/posts/{{post.post.idpost}}/image" alt=""></li>
                                                 </ul>
                                             </div>
                                             <div class="row">
                                                 <ul class="description-store">
                                                     <li>
-                                                        <p>{{post.description}}</p>
+                                                        <p>{{post.post.description}}</p>
                                                     </li>
                                                 </ul>
                                             </div><br>
-                                            <a id="readmore{{post.idpost}}"
+                                            <a id="readmore{{post.post.idpost}}"
                                                 class="btn btn-primary stretched-link"
-                                                onclick="readmore('{{post.idpost}}')" title="">view more</a>
+                                                (click)="readmore('{{post.post.idpost}}')" title="">view more</a>
                                         </div>
                                     </div>
                             </div>
