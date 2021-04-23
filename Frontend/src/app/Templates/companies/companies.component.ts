@@ -13,7 +13,7 @@ export class CompaniesComponent implements OnInit {
   constructor(private userservice: UsersService) { }
 
   ngOnInit(): void {
-    this.userservice.getUserCompanies().subscribe(
+    this.userservice.getUserCompaniesPage(0).subscribe(
       response => this.companies = response,
       error => console.error(error)
     );

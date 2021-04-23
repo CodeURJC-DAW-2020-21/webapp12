@@ -4,18 +4,18 @@
             <h3>All Users</h3>
         </div><!--company-title end-->
         <div class="companies-list">
-            <div class="row" id="myUL" *ngFor="let customer of customers">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="row" id="myUL">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let customer of customers">
                     <div class="company_profile_info">
                         <div class="company-up-info">
-                            <img src="https://localhost:8443/api/users/{{customers.idusers}}/imageProfile" alt="">
+                            <img src="https://localhost:8443/api/users/{{customer.idusers}}/imageProfile" alt="">
                             <h3>{{username}}</h3>
                             
                             <ul>
                                 
                             </ul>
                         </div>
-                        <a [routerLink]="['/new/userpage','{{customers.idusers}}']" routerLinkActive="router-link-active" title="" class="view-more-pro">View Profile</a>
+                        <a [routerLink]="['/new/userpage','{{customer.idusers}}']" routerLinkActive="router-link-active" title="" class="view-more-pro">View Profile</a>
                     </div><!--company_profile_info end-->
                 </div>
             </div>

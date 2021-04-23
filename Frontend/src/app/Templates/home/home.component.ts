@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
 import { Posts } from 'src/app/Class/Posts/posts';
+import { BookmarkService } from 'src/app/Services/Bookmarks/bookmark.service';
+import { PostsService } from 'src/app/Services/Posts/posts.service';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +17,14 @@ export class HomeComponent implements OnInit {
   iduser : String = "1";
   bookmarks : Bookmarks[];
   posts : Posts[];
-  constructor() { }
+  
+  constructor(private postsService: PostsService, private bookmarksService: BookmarkService) { }
 
   ngOnInit(): void {
+    this.postsService.getPostPage("0").subscribe(
+      response => this.posts = response,
+      error => console.error(error)
+    );
   }
 
 }

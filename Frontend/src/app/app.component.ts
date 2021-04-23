@@ -15,7 +15,11 @@ export class AppComponent {
 
   constructor(private userService: UsersService, private statiticsService: StatisticsService) {
     this.userService.login("h", "h").subscribe(
-      response => console.log(response),
+      response => {
+        console.log(response);
+        userService.setUsername("h");
+        userService.setId(1);
+      },
       error => console.error(error)
     );
   }
