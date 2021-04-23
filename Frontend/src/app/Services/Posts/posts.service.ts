@@ -10,7 +10,7 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getAllPosts() {
-    return this.http.get("/api/posts/");
+    return this.http.get<Posts[]>("/api/posts/");
   }
 
   registerPost(post: Posts) {

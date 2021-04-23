@@ -35,27 +35,25 @@
                             aria-labelledby="nav-acc-tab">
                             <div class="acc-setting">
                                 <h3>Bookmark Products</h3>
-                                <div class="requests-list">
-                                    {{#productsList}}
-                                    <div class="request-details" id="product{{idproduct.idproduct}}">
+                                <div class="requests-list" *ngFor="let bookmark of bookmarks">
+                                    <div class="request-details" id="product{{bookmark.idproduct.idproduct}}">
                                         <div class="noty-user-img">
-                                            <img src="https://localhost:8443/imageProduct0/{{idproduct.idproduct}}"
+                                            <img src="https://localhost:8443/imageProduct0/{{bookmark.idproduct.idproduct}}"
                                                 alt="">
                                         </div>
                                         <div class="request-info">
-                                            <h3>{{idproduct.title}}</h3>
+                                            <h3>{{bookmark.idproduct.title}}</h3>
                                         </div>
                                         <div class="accept-feat">
                                             <ul>
                                                 <li><button type="submit" class="close-req"><i
-                                                            onclick="dropProduct({{idproduct.idproduct}})"
+                                                            onclick="dropProduct('{{bookmark.idproduct.idproduct}}')"
                                                             class="la la-close"></i></button></li>
                                             </ul>
                                         </div>
                                         <!--accept-feat end-->
                                     </div>
                                     <!--request-detailse end-->
-                                    {{/productsList}}
                                 </div>
                                 <!--requests-list end-->
                             </div>
@@ -171,8 +169,7 @@
                                     </div>
                                     <div class="save-stngs pd2">
                                         <ul>
-                                            <li><button type="submit">Save Setting</button><input type="hidden"
-                                                    name="_csrf" value="{{token}}" /></li>
+                                            <li><button type="submit">Save Setting</button></li>
                                             <li><button type="submit">Restore Setting</button></li>
                                         </ul>
                                     </div>
@@ -292,26 +289,7 @@
                             <div class="acc-setting">
                                 <h3>Follows</h3>
                                 <div class="requests-list">
-                                    {{#followersList}}
-                                    <div class="request-details" id="follower{{iduserrelation}}">
-                                        <div class="noty-user-img">
-                                            <img src="https://localhost:8443/imageprofile/{{usertwo.username}}"
-                                                alt="">
-                                        </div>
-                                        <div class="request-info">
-                                            <h3>{{usertwo.username}}</h3>
-                                        </div>
-                                        <div class="accept-feat">
-                                            <ul>
-                                                <li><button type="submit" class="close-req"><i
-                                                            onclick="unfollow({{iduserrelation}})"
-                                                            class="la la-close"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <!--accept-feat end-->
-                                    </div>
-                                    <!--request-detailse end-->
-                                    {{/followersList}}
+                                    
                                 </div>
                                 <!--requests-list end-->
                             </div>
@@ -342,8 +320,7 @@
                                     </div>
                                     <div class="save-stngs pd3">
                                         <ul>
-                                            <li><button type="submit">Save Setting</button><input type="hidden"
-                                                    name="_csrf" value="{{token}}" /></li>
+                                            <li><button type="submit">Save Setting</button></li>
                                             <li><button type="reset">Restore Setting</button></li>
                                         </ul>
                                     </div>
@@ -364,7 +341,7 @@
                                                 <div class="row">
                                                     <div class="col-md-3 imgUp">
                                                         <div class="imagePreview"
-                                                            style="background-image: url(https://localhost:8443/imageprofile);">
+                                                            style="background-image: url(https://localhost:8443/api/users/{{iduser}}/imageProfile);">
                                                         </div>
                                                         <label class="btn btn-primary">Upload<input
                                                                 name="image" type="file" class="uploadFile img"
@@ -425,8 +402,7 @@
                                     </div>
                                     <div class="save-stngs pd3">
                                         <ul>
-                                            <li><button type="submit">Save Setting</button><input type="hidden"
-                                                    name="_csrf" value="{{token}}" /></li>
+                                            <li><button type="submit">Save Setting</button></li>
                                             <li><button type="reset">Restore Setting</button></li>
                                         </ul>
                                     </div>

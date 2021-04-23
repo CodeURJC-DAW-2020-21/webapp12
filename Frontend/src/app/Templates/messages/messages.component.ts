@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessagesComponent implements OnInit {
 
+  to: String = "H";
   constructor() { }
 
   ngOnInit(): void {

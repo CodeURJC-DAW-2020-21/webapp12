@@ -48,6 +48,7 @@ public class Product {
 	@Lob
 	@JsonIgnore
 	private Blob image2;
+	@JsonView(Simple.class)
 	@Column
 	private int price;
 	@JsonView(Multiple.class)

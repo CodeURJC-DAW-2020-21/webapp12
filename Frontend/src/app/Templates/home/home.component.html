@@ -9,7 +9,7 @@
                                 <div class="user-profile">
                                     <div class="username-dt">
                                         <div class="usr-pic">
-                                            <img src="https://localhost:8443/imageprofile" alt="">
+                                            <img src="https://localhost:8443/api/users/{{iduser}}/imageProfile" alt="">
                                         </div>
                                     </div>
                                     <!--username-dt end-->
@@ -28,7 +28,7 @@
                                         <span>{{followers}}</span>
                                     </li>
                                     <li>
-                                        <a href="{{url}}" title="">View Profile</a>
+                                        <a [routerLink]="['/new/userpage','{{iduser}}']" routerLinkActive="router-link-active" title="">View Profile</a>
                                     </li>
                                 </ul>
                             </div>
@@ -113,7 +113,7 @@
                         <div class="main-ws-sec">
                             <div class="post-topbar">
                                 <div class="user-picy">
-                                    <img src="https://localhost:8443/imageprofile" alt="">
+                                    <img src="https://localhost:8443/api/users/{{iduser}}/imageProfile" alt="">
                                 </div>
                                 <div class="post-st">
                                     <ul>
@@ -124,13 +124,12 @@
                                 <!--post-st end-->
                             </div>
                             <!--post-topbar end-->
-                            <div class="posts-section" id="myUL">
-                                {{#posts}}
+                            <div class="posts-section" id="myUL" *ngFor="let post of posts">
                                     <div class="post-bar">
                                         <div class="post_topbar">
                                             <div class="row usy-dt">
                                                 <div class="user-post-icon">
-                                                    <img src="https://localhost:8443/imageprofile/{{post.iduser.username}}"
+                                                    <img src="https://localhost:8443/api/users/{{post.iduser.idusers}}/imageProfile"
                                                         alt="">
                                                 </div>
                                                 <div class="usy-name">
@@ -141,7 +140,7 @@
                                         </div>
                                         <div class="epi-sec">
                                             <ul class="descp">
-                                                <li><img src="images/icon8.png" alt=""><span>{{typeUser}}</span></li>
+                                                <li><img src="images/icon8.png" alt=""><span>{{post.iduser.city}}</span></li>
                                                 <li><img src="images/icon9.png" alt=""><span>{{post.iduser.city}}</span></li>
                                             </ul>
                                             <ul class="bk-links">
@@ -155,7 +154,7 @@
                                             <h3>{{post.title}}</h3>
                                             <div class="row">
                                                 <ul class="image-store">
-                                                    <li><img src="https://localhost:8443/imagepost/{{post.idpost}}"
+                                                    <li><img src="https://localhost:8443/api/posts/{{post.idpost}}/image"
                                                             alt=""></li>
                                                 </ul>
                                             </div>
@@ -171,7 +170,6 @@
                                                 onclick="readmore('{{post.idpost}}')" title="">view more</a>
                                         </div>
                                     </div>
-                                    {{/posts}}
                             </div>
                             <div class="process-comm">
                                 <div class="spinner posts">
@@ -192,20 +190,18 @@
                                     <h3>Store</h3>
                                     <i class="la la-ellipsis-v"></i>
                                 </div>
-                                <div class="jobs-list">
-                                    {{#storeList}}
+                                <div class="jobs-list" *ngFor="let bookmark of bookmarks">
                                     <div class="job-info">
-                                        <a href="./messages?to={{idproduct.iduser.username}}" title="" >
+                                        <a href="./messages?to={{bookmark.iduser.username}}" title="" >
                                             <div class="job-details">
-                                                <h3>{{idproduct.title}}</h3>
+                                                <h3>{{bookmark.idproduct.title}}</h3>
                                                 <p></p>
                                             </div>
                                             <div class="hr-rate">
-                                                <span>${{idproduct.price}}</span>
+                                                <span>${{bookmark.idproduct.title}}</span>
                                             </div>
                                         </a>
                                     </div>
-                                    {{/storeList}}
                                 </div>
                                 <!--jobs-list end-->
                             </div>
@@ -218,14 +214,12 @@
                                 </div>
                                 <!--sd-title end-->
                                 <div class="suggestions-list">
-                                    {{#mostFollow}}
                                     <div class="suggestion-usd">
                                         <div class="sgt-text">
                                             <h4>{{username}}</h4>
                                         </div>
                                         <span><a href="/messages?to={{username}}"><i class="la la-envelope"></i></a></span>
                                     </div>
-                                    {{/mostFollow}}
                                     <div class="view-more">
                                         <a onclick="viewMoreSuggestion()" title="">View More</a>
                                     </div>
@@ -271,7 +265,7 @@
                     </div>
                     <div class="col-lg-12">
                         <ul>
-                            <li><button class="active" type="submit" value="post"><input type="hidden" name="_csrf" value="{{token}}"/>Post</button></li>
+                            <li><button class="active" type="submit" value="post">Post</button></li>
                             <li><a href="#" title="">Cancel</a></li>
                         </ul>
                     </div>
@@ -341,16 +335,16 @@
                     </div>
                     <div class="col-lg-12">
                         <ul>
-                            <li><input name="tag" type="checkbox" id="one" />Electronics</label></li>
-                            <li><input name="tagtwo" type="checkbox" id="two" />Furnitures</label></li>
-                            <li><input name="tagthree" type="checkbox" id="three" />Appliance</label></li>
-                            <li><input name="tagfour" type="checkbox" id="four" />Books</label></li>
-                            <li><input name="tagfive" type="checkbox" id="five" />Clothes</label></li>
+                            <li><input name="tag" type="checkbox" id="one" />Electronics</li>
+                            <li><input name="tagtwo" type="checkbox" id="two" />Furnitures</li>
+                            <li><input name="tagthree" type="checkbox" id="three" />Appliance</li>
+                            <li><input name="tagfour" type="checkbox" id="four" />Books</li>
+                            <li><input name="tagfive" type="checkbox" id="five" />Clothes</li>
                         </ul>
                     </div>
                     <div class="col-lg-12">
                         <ul>
-                            <li><button class="active" type="submit" value="post"><input type="hidden" name="_csrf" value="{{token}}"/>Post</button></li>
+                            <li><button class="active" type="submit" value="post">Post</button></li>
                             <li><a href="#" title="">Cancel</a></li>
                         </ul>
                     </div>
