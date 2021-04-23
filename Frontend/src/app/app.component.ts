@@ -9,6 +9,9 @@ import { UsersService } from './Services/Users/users.service';
 })
 export class AppComponent {
   title = 'Frontend';
+  username: String = "Holo";
+  iduser: String = "1";
+  admin : boolean = true;
 
   constructor(private userService: UsersService, private statiticsService: StatisticsService) {
     this.userService.login("h", "h").subscribe(

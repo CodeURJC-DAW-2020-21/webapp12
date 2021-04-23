@@ -51,7 +51,7 @@ export class UsersService {
   }
 
   getUserCompanies() {
-    return this.http.get("/api/users/companies/");
+    return this.http.get<Users[]>("/api/users/companies/");
   }
 /*
   uploadImageProfile(id: String) {

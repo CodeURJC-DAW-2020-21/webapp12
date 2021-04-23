@@ -1,12 +1,12 @@
 <section class="cover-sec">
     <form class="cover-sec" method="POST" action="/changeImageProfile" enctype="multipart/form-data">
-        <img src="{{imageProfile}}" alt="">
+        <img src="https://localhost:8443/api/users/{{iduser}}/imageThemeProfile" alt="">
         <a>
             <i class="fa fa-camera"></i>
             <label for="files" class="btn">Changed Image</label>
             <input id="files" style="visibility:hidden; width: 7px; height: 5px;" type="file" name="imageFile"
                 accept=".jpg">
-            <input type="submit" value="Save"><input type="hidden" name="_csrf" value="{{token}}"/>
+            <input type="submit" value="Save">
         </a>
     </form>
 </section>
@@ -20,7 +20,7 @@
                             <div class="user_profile">
                                 <div class="user-pro-img">
                                     
-                                    <img src="https://localhost:8443/imageprofile" alt="">
+                                    <img src="https://localhost:8443/api/users/{{iduser}}/imageProfile" alt="">
                                     <section class="cover-sec">
                                         <form class="cover-sec" method="POST" action="/changeUserImage" enctype="multipart/form-data">
                                             <a>
@@ -28,7 +28,7 @@
                                                 <label for="imgPro" class="btn">Changed Image</label>
                                                 <input id="imgPro" style="visibility:hidden; width: 7px; height: 5px;" type="file" name="imageUserFile"
                                                     accept=".jpg">
-                                                <input type="submit" value="Save"><input type="hidden" name="_csrf" value="{{token}}"/>
+                                                <input type="submit" value="Save">
                                             </a>
                                         </form>
                                     </section>
@@ -51,18 +51,10 @@
                                 </div>
                                 <!--user_pro_status end-->
                                 <ul class="social_links">
-                                    {{#userfacebook}}
-                                    <li><a href="#" title=""><i class="fa fa-facebook-square"></i>
-                                            {{userfacebook}} </a></li>
-                                    {{/userfacebook}}
-                                    {{#userTwitter}}
-                                    <li><a href="#" title=""><i class="fa fa-twitter"></i>
-                                            {{userTwitter}} </a></li>
-                                    {{/userTwitter}}
-                                    {{#userinstagram}}
-                                    <li><a href="#" title=""><i class="fa fa-instagram"></i>
-                                            {{userinstagram}} </a></li>
-                                    {{/userinstagram}}
+                                    {{userFacebook}}
+                                    {{userTwitter}}
+                                    {{userInstagram}}
+                                    
                                 </ul>
                             </div>
                             <!--user_profile end-->
@@ -144,7 +136,7 @@
     <span>5000 caracteres máximo</span>
     <form method="POST" action="/changeUserInfo">
         <textarea name="userInfo"></textarea>
-        <button type="submit" class="save">Guardar</button><input type="hidden" name="_csrf" value="{{token}}"/>
+        <button type="submit" class="save">Guardar</button>
         <button type="reset" class="cancel">Cancelar</button>
     </form>
     <a href="#" title="" class="close-box"><i class="la la-close"></i></a>
@@ -167,7 +159,7 @@
         <div class="datefm">
             <textarea name="userCity"></textarea>
         </div>
-        <button type="submit" class="save">Guardar</button><input type="hidden" name="_csrf" value="{{token}}"/>
+        <button type="submit" class="save">Guardar</button>
         <button type="reset" class="cancel">Cancelar</button>
     </form>
     <a href="#" title="" class="close-box"><i class="la la-close"></i></a>
