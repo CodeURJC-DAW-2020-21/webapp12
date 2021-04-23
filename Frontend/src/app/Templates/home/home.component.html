@@ -101,8 +101,8 @@
                                     <li><a href="#" title="">Copyright Policy</a></li>
                                 </ul>
                                 <div class="cp-sec">
-                                    <img src="images/logo2.png" alt="">
-                                    <p><img src="images/cp.png" alt="">Copyright 2018</p>
+                                    <img src="../../../assets/images/logo2.png" alt="">
+                                    <p><img src="../../../assets/images/cp.png" alt="">Copyright 2018</p>
                                 </div>
                             </div>
                             <!--tags-sec end-->
@@ -124,8 +124,8 @@
                                 <!--post-st end-->
                             </div>
                             <!--post-topbar end-->
-                            <div class="posts-section" id="myUL" *ngFor="let post of posts">
-                                    <div class="post-bar">
+                            <div class="posts-section" id="myUL">
+                                    <div class="post-bar" *ngFor="let post of posts">
                                         <div class="post_topbar">
                                             <div class="row usy-dt">
                                                 <div class="user-post-icon">
@@ -140,8 +140,8 @@
                                         </div>
                                         <div class="epi-sec">
                                             <ul class="descp">
-                                                <li><img src="images/icon8.png" alt=""><span>{{post.iduser.city}}</span></li>
-                                                <li><img src="images/icon9.png" alt=""><span>{{post.iduser.city}}</span></li>
+                                                <li><img src="../../../assets/images/icon8.png" alt=""><span>{{post.iduser.city}}</span></li>
+                                                <li><img src="../../../assets/images/icon9.png" alt=""><span>{{post.iduser.city}}</span></li>
                                             </ul>
                                             <ul class="bk-links">
                                                 <li><a id="{{post.idpost}}" title=""><i
@@ -154,8 +154,7 @@
                                             <h3>{{post.title}}</h3>
                                             <div class="row">
                                                 <ul class="image-store">
-                                                    <li><img src="https://localhost:8443/api/posts/{{post.idpost}}/image"
-                                                            alt=""></li>
+                                                    <li><img src="https://localhost:8443/api/posts/{{post.idpost}}/image" alt=""></li>
                                                 </ul>
                                             </div>
                                             <div class="row">

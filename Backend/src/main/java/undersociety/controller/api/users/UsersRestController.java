@@ -240,7 +240,7 @@ public class UsersRestController {
 	@GetMapping("/customers")
 	public List<Users> getUsers( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
-			return userService.getCustomers(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+			return userService.getCustomers(PageRequest.of(Integer.parseInt(page), 10)).getContent();
 		}else {
 			return userService.getAllUsers();
 		}
@@ -260,7 +260,7 @@ public class UsersRestController {
 	@GetMapping("/companies")
 	public List<Users> getCompanies( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
-			return userService.getCompanies(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+			return userService.getCompanies(PageRequest.of(Integer.parseInt(page), 10)).getContent();
 		}else {
 			return userService.getAllCompanies();
 		}

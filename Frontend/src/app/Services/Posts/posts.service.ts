@@ -17,12 +17,12 @@ export class PostsService {
     return this.http.post("/api/posts/", post);
   }
 
-  getProductPage(page: String) {
-    return this.http.get("/api/posts/?page=" + page);
+  getPostPage(page: String) {
+    return this.http.get<Posts[]>("/api/posts/?page=" + page);
   }
 
   getPosts(id: String) {
-    return this.http.get("/api/posts/" + id);
+    return this.http.get<Posts>("/api/posts/" + id);
   }
 
   deletePosts(id: String) {

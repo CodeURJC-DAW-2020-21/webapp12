@@ -8,6 +8,10 @@ import { Users } from 'src/app/Class/Users/users';
 })
 export class UsersService {
 
+  username: String = "holo";
+  iduser: Number = 1;
+  admin: Boolean = false;
+
   constructor(private http: HttpClient) { }
 
   login(username:String, password: String){
@@ -47,11 +51,19 @@ export class UsersService {
   }
 
   getUserCustomers() {
-    return this.http.get("/api/users/customers/");
+    return this.http.get<Users[]>("/api/users/customers/");
   }
 
   getUserCompanies() {
     return this.http.get<Users[]>("/api/users/companies/");
+  }
+
+  getUserCustomersPage(id : Number) {
+    return this.http.get<Users[]>("/api/users/customers?page="+id);
+  }
+
+  getUserCompaniesPage(id : Number) {
+    return this.http.get<Users[]>("/api/users/companies?page="+id);
   }
 /*
   uploadImageProfile(id: String) {
@@ -80,5 +92,29 @@ export class UsersService {
 
   getLikes(id: String) {
     return this.http.get("/api/users/" + id + "/likes");
+  }
+
+  setUsername(username: String){
+    this.username = username;
+  }
+
+  setId(id: Number){
+    this.iduser = id;
+  }
+
+  setAdmin(admin: boolean){
+    this.admin =admin;
+  }
+
+  getUsername(){
+    return this.username;
+  }
+
+  getId(){
+    return this.iduser;
+  }
+
+  getAdmin(){
+    return this.admin;
   }
 }
