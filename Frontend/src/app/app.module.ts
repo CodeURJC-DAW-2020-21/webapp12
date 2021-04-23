@@ -16,6 +16,7 @@ import { ProfilesComponent } from './Templates/profiles/profiles.component';
 import { StoreComponent } from './Templates/store/store.component';
 import { UserpageComponent } from './Templates/userpage/userpage.component';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from './Templates/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     ProfileaccountsettingsComponent,
     ProfilesComponent,
     StoreComponent,
-    UserpageComponent
+    UserpageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

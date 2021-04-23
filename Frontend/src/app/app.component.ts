@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { error } from 'protractor';
 import { Users } from './Class/Users/users';
-import { StatisticsService } from './Services/Statistics/statistics.service';
 import { UsersService } from './Services/Users/users.service';
 
 @Component({
@@ -16,7 +14,6 @@ export class AppComponent {
   admin: boolean = true;
 
   constructor(private userService: UsersService, private router: Router) {
-    this.user = this.userService.getUserInfo();
   }
 
   ngOnInit(): void {
