@@ -66,6 +66,10 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
+	public Optional<Users> getUserUsername(String username){
+		return userRepository.findByusername(username);
+	}
+	
 	public Users getUser(String username) {
 		return (userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found")));
 	}
@@ -368,5 +372,9 @@ public class UserService {
 	public boolean existsUserById(Users iduser) {
 		Optional<Users> user = userRepository.findById(iduser.getIdusers());
 		return user.isPresent();
+	}
+
+	public List<Roles> getRoles(Users users) {
+		return rolesRepository.findByiduser(users);
 	}
 }

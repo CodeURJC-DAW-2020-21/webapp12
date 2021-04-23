@@ -62,16 +62,16 @@
                 </div>
                 <!--menu-btn end-->
                 <div class="user-account">
-                    <div class="user-info">
-                        <img src="https://localhost:8443/api/users/{{iduser}}/imageProfile" alt="">
+                    <div class="user-info" *ngIf="user.idusers">
+                        <img src="https://localhost:8443/api/users/{{user.idusers}}/imageProfile" alt="">
                         <a href="#" title=""></a>
                         <i class="la la-sort-down"></i>
                     </div>
                     <div class="user-account-settingss">
                         <h3>Username</h3>
                         <div class="search_form">
-                            <form>
-                                <input type="text" name="search" placeholder="{{username}}" readonly>
+                            <form *ngIf="user.username">
+                                <input type="text" name="search" placeholder="{{user.username}}" readonly>
                             </form>
                         </div>							
                         <!--search_form end-->

@@ -2,38 +2,17 @@ import { Users } from "../Users/users";
 
 export class Roles {
 
-    private idroles : Number;
-    private rol : String;
-    private iduser : Users;
+    rol : String;
 
-    constructor( idroles: Number,  rol: String,  iduser: Users) {
-		this.idroles =  idroles;
+    constructor( rol: String) {
 		this.rol =  rol;
-		this.iduser =  iduser;
 	}
 
-	public getIdroles(): Number {
-		return this.idroles;
-	}
-
-	public getRol(): String {
+	getRol(): String {
 		return this.rol;
 	}
-
-	public getIduser(): Users {
-		return this.iduser;
-	}
-
-	public setIdroles(value: Number) {
-		this.idroles = value;
-	}
-
-	public setRol(value: String) {
+	
+	setRol(value: String) {
 		this.rol = value;
 	}
-
-	public setIduser(value: Users) {
-		this.iduser = value;
-	}
-
 }

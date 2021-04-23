@@ -15,6 +15,7 @@ import { ProfileaccountsettingsComponent } from './Templates/profileaccountsetti
 import { ProfilesComponent } from './Templates/profiles/profiles.component';
 import { StoreComponent } from './Templates/store/store.component';
 import { UserpageComponent } from './Templates/userpage/userpage.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { UserpageComponent } from './Templates/userpage/userpage.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

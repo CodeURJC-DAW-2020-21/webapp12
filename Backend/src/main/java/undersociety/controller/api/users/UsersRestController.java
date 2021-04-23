@@ -41,6 +41,7 @@ import undersociety.models.LikeAPost;
 import undersociety.models.ListProducts;
 import undersociety.models.Post;
 import undersociety.models.Product;
+import undersociety.models.Roles;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
 import undersociety.services.PostsService;
@@ -102,7 +103,7 @@ public class UsersRestController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-
+	
 	@Operation(summary = "Create a user")
 	@ApiResponses(value = { 
 			@ApiResponse(
@@ -574,5 +575,29 @@ public class UsersRestController {
 		return ResponseEntity.ok(postsService.getLikesByUser(id));
 	}
 
+	@Operation(summary = "Get a Roles by id users")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Roles", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)
+	})
+	@JsonView(Roles.Basic.class)
+	@GetMapping("/{id}/rols")
+	public ResponseEntity<List<Roles>> getRoles(@Parameter(description="id of user to be searched") @PathVariable int id){
+		Optional<Users> user = userService.getUserId(id);
+		if(!user.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(userService.getRoles(user.get()));
+	}
 
 }
