@@ -40,7 +40,9 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 import undersociety.models.LikeAPost;
 import undersociety.models.ListProducts;
 import undersociety.models.Post;
+import undersociety.models.PostModel;
 import undersociety.models.Product;
+import undersociety.models.ProductModel;
 import undersociety.models.Roles;
 import undersociety.models.Users;
 import undersociety.models.UsersRelations;
@@ -600,4 +602,21 @@ public class UsersRestController {
 		return ResponseEntity.ok(userService.getRoles(user.get()));
 	}
 
+	@GetMapping("/{id}/models/posts")
+	public ResponseEntity<List<PostModel>> getPostsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
+		Optional<Users> user = userService.getUserId(id);
+		if(!user.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(postsService.getPostIndex(user.get().getUsername()));
+	}
+	
+	@GetMapping("/{id}/models/products")
+	public ResponseEntity<List<ProductModel>> getProductsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
+		Optional<Users> user = userService.getUserId(id);
+		if(!user.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(productsService.getPorductIndex(user.get().getUsername()));
+	}
 }

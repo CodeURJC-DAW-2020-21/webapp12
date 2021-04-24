@@ -11,11 +11,9 @@ import { UsersService } from 'src/app/Services/Users/users.service';
 })
 export class SignInComponent implements OnInit {
 
-  @Input()
-  admin : Boolean;
   /*Login*/ 
-  username: String;
-  password: String;
+  username: string;
+  password: string;
   /*Register User*/
   formDataUser: FormData;
   emailUser : String;
@@ -173,40 +171,49 @@ export class SignInComponent implements OnInit {
     this.formDataCompany = formData;
   }
 
-  changeImage(id: String, formdata: FormData){
-    this.userService.uploadImageProfile(id,formdata).subscribe(
-      response => console.log(response),
-      error => console.log(error)
-    );
+  deleteImageUser(){
+    this.formDataUser = undefined;
+  }
+
+  deleteImageCompany(){
+    this.formDataCompany = undefined;
   }
 
   registerUser(){
     let user : Users = new Users(this.emailUser,this.usernameUser,this.passUser,this.nameUser,false,"","","","","");
     this.userService.registerUser(user).subscribe(
       response =>  {
-        let data:any = response;
-        this.userService.uploadImageProfile(data.idusers,this.formDataUser).subscribe(
-          response => console.log(response),
-          error => console.error(error)
-        );
+        if(this.formDataUser != undefined){
+          this.userService.uploadImageProfile(""+response.idusers,this.formDataUser).subscribe(
+            response =>{ 
+              this.router.navigate(['new/index']);
+            },
+            error => console.error(error)
+          );
+        }else{
+          this.router.navigate(['new/index']);
+        }
       },
       error => console.error(error)
     );
-    this.router.navigate(['new/signIn']);
   }
 
   registerCompany(){
     let user : Users = new Users(this.emailCom,this.usernameCom,this.passCom,this.nameCom,true,"","","","","");
     this.userService.registerUser(user).subscribe(
       response => {
-        let data:any = response;
-        this.userService.uploadImageProfile(data.idusers,this.formDataCompany).subscribe(
-          response => console.log(response),
-          error => console.error(error)
-        );
+        if(this.formDataCompany != undefined){
+          this.userService.uploadImageProfile(""+response.idusers,this.formDataCompany).subscribe(
+            response =>{ 
+              this.router.navigate(['new/index']);
+            },
+            error => console.error(error)
+          );
+        }else{
+          this.router.navigate(['new/index']);
+        }
       },
       error => console.error(error)
     );
-    this.router.navigate(['new/signIn']);
   }
 }

@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { Tags } from 'src/app/Class/Tags/tags';
 import { ProductsService } from 'src/app/Services/Products/products.service';
 import { Product } from 'src/app/Class/Product/product';
+import { post } from 'jquery';
+import { ProductsModel } from 'src/app/Class/Models/products-model';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +43,7 @@ export class HomeComponent implements OnInit {
   tag3: Boolean;
   tag4: Boolean;
 
-  constructor(private user: UsersService, private postsService: PostsService, private productService: ProductsService, private bookmarksService: BookmarkService,  private router: Router) { }
+  constructor(private user: UsersService, private postsService: PostsService, private productService: ProductsService, private bookmarksService: BookmarkService, private router: Router) { }
 
   ngOnInit(): void {
     this.page = 0;
@@ -62,30 +64,8 @@ export class HomeComponent implements OnInit {
       response => this.tags = response,
       error => console.error(error)
     );
-    this.user.getLikes("" + this.userInfo.idusers).subscribe(
-      response => {
-        let likes: Number[] = [];
-        response.forEach(element => {
-          likes.push(element.idpost.idpost);
-        });
-        this.postsService.getPostPage("" + this.page).subscribe(
-          response => {
-            response.forEach(element => {
-              let like = "la la-heart-o";
-              let typeUser = "Customer";
-              if (likes.includes(element.idpost)) {
-                like = "la la-heart";
-              }
-              if (element.iduser.companyprofile) {
-                typeUser = "Company";
-              }
-              let post: PostsModel = new PostsModel(typeUser, like, element);
-              this.index.push(post);
-            });
-          },
-          error => console.error(error)
-        );
-      },
+    this.user.getPostModels(this.userInfo.idusers, 0).subscribe(
+      response => this.index = response,
       error => console.error(error)
     );
     //  ============= POST PROJECT POPUP FUNCTION =========
@@ -163,8 +143,8 @@ export class HomeComponent implements OnInit {
       error => console.error(error)
     );
 
-     //==================== Upload Image =========================
-     $(document).on("click", "i.del", function () {
+    //==================== Upload Image =========================
+    $(document).on("click", "i.del", function () {
       var input = $(this).parent().children('label').children();
       var imagepreview = $(this).parent().children('div');
       input.val('');
@@ -213,62 +193,71 @@ export class HomeComponent implements OnInit {
 
   }
 
-  imagePost(event){
+  imagePost(event) {
     let formData = new FormData();
     formData.append("image", event.target.files[0]);
     this.imagePosts = formData;
   }
 
-  deleteImagePosts(){
+  deleteImagePosts() {
     this.imagePost = undefined;
   }
 
-  setimageProduct0(event){
+  setimageProduct0(event) {
     let formData = new FormData();
     formData.append("image", event.target.files[0]);
     this.imageProduct0 = formData;
   }
 
-  deleteImageProduct0(){
+  deleteImageProduct0() {
     this.imageProduct0 = undefined;
   }
 
-  setimageProduct1(event){
+  setimageProduct1(event) {
     let formData = new FormData();
     formData.append("image", event.target.files[0]);
     this.imageProduct1 = formData;
   }
-  deleteImageProduct1(){
+  deleteImageProduct1() {
     this.imageProduct1 = undefined;
   }
 
-  setimageProduct2(event){
+  setimageProduct2(event) {
     let formData = new FormData();
     formData.append("image", event.target.files[0]);
     this.imageProduct2 = formData;
   }
 
-  deleteImageProduct2(){
+  deleteImageProduct2() {
     this.imageProduct2 = undefined;
   }
 
-  uploadPosts(){
-    let post:Posts = new Posts(this.user.getUserInfo(),this.titlePost,this.descriptionPost);
-    console.log(post);
+  uploadPosts() {
+    let post: Posts = new Posts(this.user.getUserInfo(), this.titlePost, this.descriptionPost);
     this.postsService.registerPost(post).subscribe(
-      response =>{
-        let data:any = response;
+      response => {
+        let data: any = response;
         this.postsService.getPosts(data.idpost).subscribe(
-          response =>{ 
+          response => {
             post = response;
             console.log(post);
-            if(this.imagePosts != undefined){
-              this.postsService.uploadPostImage(""+post.idpost,this.imagePosts).subscribe(
-                response => console.log(response),
+            if (this.imagePosts != undefined) {
+              this.postsService.uploadPostImage("" + post.idpost, this.imagePosts).subscribe(
+                response => {
+                  let type: String = "Customer";
+                  if (this.userInfo.companyprofile) {
+                    type = "Company";
+                  }
+                  let newposts: PostsModel = new PostsModel(type, "la la-heart-o", post);
+                  this.index.unshift(newposts);
+                  $(".post-popup.pst-pj").removeClass("active");
+                  $(".wrapper").removeClass("overlay");
+                },
                 error => console.error(error)
               );
+            } else {
+              alert("Nesesario la imagen");
             }
-            this.router.navigate(['new/home']);
           },
           error => console.log(error)
         );
@@ -277,49 +266,66 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  uploadProduct(){
-    let tagone:Tags;
-    let tagtwo:Tags;
-    let tagthree:Tags;
-    let tagfour:Tags;
-    let tagfive:Tags;
-    let image0 : Boolean = false;
-    let image1 : Boolean = false;
-    let image2 : Boolean = false;
-    if(this.tag){
+  uploadProduct() {
+    let tagone: Tags;
+    let tagtwo: Tags;
+    let tagthree: Tags;
+    let tagfour: Tags;
+    let tagfive: Tags;
+    let image0: Boolean = false;
+    let image1: Boolean = false;
+    let image2: Boolean = false;
+    if (this.tag) {
       tagone = this.tags[0];
     }
 
-    if(this.tag1){
+    if (this.tag1) {
       tagone = this.tags[1];
     }
 
-    if(this.tag2){
+    if (this.tag2) {
       tagone = this.tags[2];
     }
 
-    if(this.tag3){
+    if (this.tag3) {
       tagone = this.tags[3];
     }
 
-    if(this.tag4){
+    if (this.tag4) {
       tagone = this.tags[4];
     }
-    
-    if(this.imageProduct0 != undefined){
+
+    if (this.imageProduct0 != undefined) {
       image0 = true;
     }
 
-    if(this.imageProduct1 != undefined){
+    if (this.imageProduct1 != undefined) {
       image1 = true;
     }
 
-    if(this.imageProduct2 != undefined){
+    if (this.imageProduct2 != undefined) {
       image2 = true;
     }
-    let product: Product = new Product(this.user.getUserInfo(),this.titleProduct,this.descriptionProduct,this.priceProduct,tagone,tagtwo,tagthree,tagfour,tagfive,"In Stock",image0,image1,image2);
+    let product: Product = new Product(this.user.getUserInfo(), this.titleProduct, this.descriptionProduct, this.priceProduct, tagone, tagtwo, tagthree, tagfour, tagfive, "in stock", image0, image1, image2);
     console.log(product);
-    /*this.router.navigate(['new/home']);*/
+    this.productService.registerProduct(product).subscribe(
+      response => {
+        if (this.imageProduct0 != undefined) {
+          this.productService.uploadImage0("" + response.idproduct, this.imageProduct0).subscribe();
+        }
+
+        if (this.imageProduct1 != undefined) {
+          this.productService.uploadImage1("" + response.idproduct, this.imageProduct1).subscribe();
+        }
+
+        if (this.imageProduct2 != undefined) {
+          this.productService.uploadImage2("" + response.idproduct, this.imageProduct2).subscribe();
+        }
+        $(".post-popup.job_post").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+      },
+      error => console.error(error)
+    );
   }
 
 }

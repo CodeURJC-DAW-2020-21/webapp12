@@ -24,7 +24,7 @@ export class ProductsService {
   }
 
   registerProduct(product: Product) {
-    return this.http.post("/api/products/", product);
+    return this.http.post<Product>("/api/products/", product);
   }
 
 
@@ -40,19 +40,16 @@ export class ProductsService {
   replaceProducts(id: String,product: Product ) {
     return this.http.put("/api/products/"+id, product);
   }
-/*
-  uploadImage0(id: String) {
-    return this.http.post("/api/products/"+id+"/image0");
+
+  uploadImage0(id: String,image: FormData) {
+    return this.http.post("/api/products/"+id+"/image0",image);
   }
 
-  uploadImage1(id: String) {
-    return this.http.post("/api/products/"+id+"/image1");
+  uploadImage1(id: String,image: FormData) {
+    return this.http.post("/api/products/"+id+"/image1",image);
   }
 
-  uploadImage2(id: String) {
-    return this.http.post("/api/products/"+id+"/image2");
+  uploadImage2(id: String,image: FormData) {
+    return this.http.post("/api/products/"+id+"/image2",image);
   }
-
-*/
-
 }
