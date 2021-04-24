@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,7 +63,7 @@ public class ProductsRestController {
 	@GetMapping("/")
 	public List<Product> getAllProducts( @Parameter(description="page") @RequestParam(required = false) String page ){
 		if(page != null) {
-			return productService.getProductsPage(PageRequest.of(Integer.parseInt(page), 10)).getContent();
+			return productService.getProductsPage(PageRequest.of(Integer.parseInt(page), 10,Sort.by("idproduct").descending())).getContent();
 		}else {
 			return productService.getAll();
 		}

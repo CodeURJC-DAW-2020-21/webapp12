@@ -32,9 +32,7 @@ export class PostsService {
   replacePosts(id: String, post: Posts) {
     return this.http.put("/api/posts/" + id, post);
   }
-/*
-  uploadPostImage(id: String) {
-    return this.http.post("/api/posts/" + id + "/image");
+  uploadPostImage(id: String,image:FormData) {
+    return this.http.post("/api/posts/" + id + "/image",image);
   }
-*/
 }

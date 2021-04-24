@@ -7,6 +7,12 @@ import { BookmarkService } from 'src/app/Services/Bookmarks/bookmark.service';
 import { PostsService } from 'src/app/Services/Posts/posts.service';
 import { UsersService } from 'src/app/Services/Users/users.service';
 import * as $ from 'jquery';
+import { Router } from '@angular/router';
+import { Tags } from 'src/app/Class/Tags/tags';
+import { ProductsService } from 'src/app/Services/Products/products.service';
+import { Product } from 'src/app/Class/Product/product';
+import { post } from 'jquery';
+import { ProductsModel } from 'src/app/Class/Models/products-model';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +26,25 @@ export class HomeComponent implements OnInit {
   followers: Number;
   bookmarks: Bookmarks[] = [];
   index: PostsModel[] = [];
+  tags: Tags[] = [];
+  mostFollow : Users[] = [];
   page: number = 0;
+  imagePosts: FormData;
+  imageProduct0: FormData;
+  imageProduct1: FormData;
+  imageProduct2: FormData;
+  titlePost: String;
+  descriptionPost: String;
+  titleProduct: String;
+  priceProduct: Number;
+  descriptionProduct: String;
+  tag: Boolean;
+  tag1: Boolean;
+  tag2: Boolean;
+  tag3: Boolean;
+  tag4: Boolean;
 
-  constructor(private user: UsersService, private postsService: PostsService, private bookmarksService: BookmarkService) { }
+  constructor(private user: UsersService, private postsService: PostsService, private productService: ProductsService, private bookmarksService: BookmarkService, private router: Router) { }
 
   ngOnInit(): void {
     this.page = 0;
@@ -35,32 +57,20 @@ export class HomeComponent implements OnInit {
       response => this.followers = response.length,
       error => console.error(error)
     );
-    this.user.getLikes("" + this.userInfo.idusers).subscribe(
-      response => {
-        let likes: Posts[] = [];
-        response.forEach(element => {
-          likes.push(element.idpost);
-        });
-        console.log(likes);
-        this.postsService.getPostPage("" + this.page).subscribe(
-          response => {
-            response.forEach(element => {
-              let like = "la la-heart-o";
-              let typeUser = "Customer";
-              if (likes.includes(element)) {
-                like = "la la-heart";
-              }
-              if (element.iduser.companyprofile) {
-                typeUser = "Company";
-              }
-              let post: PostsModel = new PostsModel(typeUser, like, element);
-              this.index.push(post);
-            });
-            console.log(this.index);
-          },
-          error => console.error(error)
-        );
-      },
+    this.user.getBookmarks("" + this.userInfo.idusers).subscribe(
+      response => this.bookmarks = response,
+      error => console.error(error)
+    );
+    this.productService.getTags().subscribe(
+      response => this.tags = response,
+      error => console.error(error)
+    );
+    this.user.getRanking().subscribe(
+      response => this.mostFollow = response,
+      error => console.error(error)
+    );
+    this.user.getPostModels(this.userInfo.idusers, 0).subscribe(
+      response => this.index = response,
       error => console.error(error)
     );
     //  ============= POST PROJECT POPUP FUNCTION =========
@@ -112,17 +122,17 @@ export class HomeComponent implements OnInit {
     this.page++;
     this.user.getLikes("" + this.userInfo.idusers).subscribe(
       response => {
-        let likes: Posts[] = [];
+        let likes: Number[] = [];
         response.forEach(element => {
-          likes.push(element.idpost);
+          likes.push(element.idpost.idpost);
+          console.log(element.idpost.idpost);
         });
-        console.log(likes);
         this.postsService.getPostPage("" + this.page).subscribe(
           response => {
             response.forEach(element => {
               let like = "la la-heart-o";
               let typeUser = "Customer";
-              if (likes.includes(element)) {
+              if (likes.includes(element.idpost)) {
                 like = "la la-heart";
               }
               if (element.iduser.companyprofile) {
@@ -131,22 +141,196 @@ export class HomeComponent implements OnInit {
               let post: PostsModel = new PostsModel(typeUser, like, element);
               this.index.push(post);
             });
-            console.log(this.index);
           },
           error => console.error(error)
         );
       },
       error => console.error(error)
     );
+
+    //==================== Upload Image =========================
+    $(document).on("click", "i.del", function () {
+      var input = $(this).parent().children('label').children();
+      var imagepreview = $(this).parent().children('div');
+      input.val('');
+      imagepreview.css("background-image", "url()");
+    });
+
+
+    $(function () {
+      $(document).on("change", ".uploadFile", function () {
+        var uploadFile = $(this);
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test(files[0].type)) { // only image file
+          var reader = new FileReader(); // instance of the FileReader
+          reader.readAsDataURL(files[0]); // read the local file
+
+          reader.onloadend = function () { // set image data as background of div
+            uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(" + this.result + ")");
+          }
+        }
+
+      });
+    });
+
+
+    $(document).ready(function () {
+      var readURL = function (input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.readAsDataURL(input.files[0]);
+        }
+        console.log(readURL);
+      }
+
+
+      $(".file-upload").on('change', function () {
+        readURL(this);
+      });
+
+      $(".upload-button").on('click', function () {
+        $(".file-upload").click();
+      });
+    });
+
+
   }
 
-
-  uploadPosts(){
-
+  imagePost(event) {
+    let formData = new FormData();
+    formData.append("image", event.target.files[0]);
+    this.imagePosts = formData;
   }
 
-  uploadProduct(){
-    
+  deleteImagePosts() {
+    this.imagePost = undefined;
+  }
+
+  setimageProduct0(event) {
+    let formData = new FormData();
+    formData.append("image", event.target.files[0]);
+    this.imageProduct0 = formData;
+  }
+
+  deleteImageProduct0() {
+    this.imageProduct0 = undefined;
+  }
+
+  setimageProduct1(event) {
+    let formData = new FormData();
+    formData.append("image", event.target.files[0]);
+    this.imageProduct1 = formData;
+  }
+  deleteImageProduct1() {
+    this.imageProduct1 = undefined;
+  }
+
+  setimageProduct2(event) {
+    let formData = new FormData();
+    formData.append("image", event.target.files[0]);
+    this.imageProduct2 = formData;
+  }
+
+  deleteImageProduct2() {
+    this.imageProduct2 = undefined;
+  }
+
+  uploadPosts() {
+    let post: Posts = new Posts(this.user.getUserInfo(), this.titlePost, this.descriptionPost);
+    this.postsService.registerPost(post).subscribe(
+      response => {
+        let data: any = response;
+        this.postsService.getPosts(data.idpost).subscribe(
+          response => {
+            post = response;
+            console.log(post);
+            if (this.imagePosts != undefined) {
+              this.postsService.uploadPostImage("" + post.idpost, this.imagePosts).subscribe(
+                response => {
+                  let type: String = "Customer";
+                  if (this.userInfo.companyprofile) {
+                    type = "Company";
+                  }
+                  let newposts: PostsModel = new PostsModel(type, "la la-heart-o", post);
+                  this.index.unshift(newposts);
+                  $(".post-popup.pst-pj").removeClass("active");
+                  $(".wrapper").removeClass("overlay");
+                },
+                error => console.error(error)
+              );
+            } else {
+              alert("Nesesario la imagen");
+            }
+          },
+          error => console.log(error)
+        );
+      },
+      error => console.error(error)
+    );
+  }
+
+  uploadProduct() {
+    let tagone: Tags;
+    let tagtwo: Tags;
+    let tagthree: Tags;
+    let tagfour: Tags;
+    let tagfive: Tags;
+    let image0: Boolean = false;
+    let image1: Boolean = false;
+    let image2: Boolean = false;
+    if (this.tag) {
+      tagone = this.tags[0];
+    }
+
+    if (this.tag1) {
+      tagone = this.tags[1];
+    }
+
+    if (this.tag2) {
+      tagone = this.tags[2];
+    }
+
+    if (this.tag3) {
+      tagone = this.tags[3];
+    }
+
+    if (this.tag4) {
+      tagone = this.tags[4];
+    }
+
+    if (this.imageProduct0 != undefined) {
+      image0 = true;
+    }
+
+    if (this.imageProduct1 != undefined) {
+      image1 = true;
+    }
+
+    if (this.imageProduct2 != undefined) {
+      image2 = true;
+    }
+    let product: Product = new Product(this.user.getUserInfo(), this.titleProduct, this.descriptionProduct, this.priceProduct, tagone, tagtwo, tagthree, tagfour, tagfive, "in stock", image0, image1, image2);
+    console.log(product);
+    this.productService.registerProduct(product).subscribe(
+      response => {
+        if (this.imageProduct0 != undefined) {
+          this.productService.uploadImage0("" + response.idproduct, this.imageProduct0).subscribe();
+        }
+
+        if (this.imageProduct1 != undefined) {
+          this.productService.uploadImage1("" + response.idproduct, this.imageProduct1).subscribe();
+        }
+
+        if (this.imageProduct2 != undefined) {
+          this.productService.uploadImage2("" + response.idproduct, this.imageProduct2).subscribe();
+        }
+        $(".post-popup.job_post").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+      },
+      error => console.error(error)
+    );
   }
 
 }

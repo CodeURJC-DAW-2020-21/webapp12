@@ -12,16 +12,18 @@ export class AppComponent {
   title = 'Frontend';
   user : Users;
   admin: boolean = true;
+  loginUser : Boolean = false;
 
   constructor(private userService: UsersService, private router: Router) {
   }
 
   ngOnInit(): void {
-    console.log(this.userService.getLogin());
-    if(this.userService.getLogin() == false){
+    console.log(this.loginUser);
+    if(this.loginUser == false){
       this.router.navigate(['new/signIn']);
     }else{
       this.user = this.userService.getUserInfo();
+      this.router.navigate(['new/home']);
     } 
   }
 
