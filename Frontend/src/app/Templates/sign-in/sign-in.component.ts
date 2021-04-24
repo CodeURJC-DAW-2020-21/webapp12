@@ -122,11 +122,8 @@ export class SignInComponent implements OnInit {
 
 
   login() {
-    console.log(this.username);
-    console.log(this.password);
     this.userService.login(this.username, this.password).subscribe(
       response => {
-        console.log(response);
         this.userService.getAllUsers().subscribe(
           response => {
             response.forEach(element => {

@@ -8,6 +8,7 @@ import { Likes } from 'src/app/Class/Likes/likes';
 import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
 import { ProductsModel } from 'src/app/Class/Models/products-model';
 import { PostsModel } from 'src/app/Class/Models/posts-model';
+import { Message } from 'src/app/Class/Messages/message';
 
 
 @Injectable({
@@ -73,11 +74,11 @@ export class UsersService {
   }
 
   getUserCustomersPage(id : Number) {
-    return this.http.get<Users[]>("/api/users/customers?page="+id);
+    return this.http.get<Users[]>("/api/users/customers?page="+id+"&size=10&sort=username&direction=asc");
   }
 
   getUserCompaniesPage(id : Number) {
-    return this.http.get<Users[]>("/api/users/companies?page="+id);
+    return this.http.get<Users[]>("/api/users/companies?page="+id+"&size=10&sort=username&direction=asc");
   }
 
   uploadImageProfile(id: String, image: FormData) {
@@ -89,7 +90,7 @@ export class UsersService {
   }
 
   getPosts(id: String) {
-    return this.http.get("/api/users/" + id + "/posts");
+    return this.http.get<Posts[]>("/api/users/" + id + "/posts");
   }
 
   getProducts(id: String) {
@@ -121,13 +122,26 @@ export class UsersService {
     return this.http.get<ProductsModel[]>("/api/users/" + id + "/models/products?page="+page);
   }
 
+  getProductModelsUserPage(id: Number, page:Number, username:String) {
+    return this.http.get<ProductsModel[]>("/api/users/" + id + "/models/products?page="+page+"&username="+username);
+  }
+
   getPostModels(id: Number, page:Number) {
     return this.http.get<PostsModel[]>("/api/users/" + id + "/models/posts?page="+page);
+  }
+
+  getPostModelsUserPage(id: Number, page:Number, username:String) {
+    return this.http.get<PostsModel[]>("/api/users/" + id + "/models/posts?page="+page+"&username="+username);
   }
 
   getRanking() {
     return this.http.get<Users[]>("/api/users/ranking");
   }
+
+  getChats(id: Number,username:String) {
+    return this.http.get<Message[]>("/api/users/"+id+"/chat?username="+username);
+  }
+
   setAdmin(admin: boolean){
     this.admin =admin;
   }

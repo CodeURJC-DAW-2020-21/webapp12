@@ -11,7 +11,7 @@ export class RelationsService {
   
   
   getRelations() {
-    return this.http.get("/api/relations/");
+    return this.http.get<Relations[]>("/api/relations/");
   }
 
   registerRelation(relation: Relations) {

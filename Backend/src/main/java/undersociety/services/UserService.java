@@ -377,4 +377,8 @@ public class UserService {
 	public List<Roles> getRoles(Users users) {
 		return rolesRepository.findByiduser(users);
 	}
+
+	public UsersRelations getRelation(Users users, Users users2) {
+		return relationrepo.findByuseroneAndUsertwo(users, users2);
+	}
 }

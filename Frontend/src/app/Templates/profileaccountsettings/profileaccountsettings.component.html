@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <section class="profile-account-setting">
     <div class="container">
         <div class="account-tabs-setting">
@@ -16,8 +17,7 @@
 
                             <a class="nav-item nav-link" id="nav-modify-tab" data-toggle="tab"
                                 href="#nav-modify" role="tab" aria-controls="nav-modify"
-                                aria-selected="false"><i class="fa fa-address-card-o"></i>Modify Information
-                                User</a>
+                                aria-selected="false"><i class="fa fa-address-card-o"></i>Modify Information</a>
 
                             <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab"
                                 href="#nav-password" role="tab" aria-controls="nav-password"
@@ -289,7 +289,23 @@
                             <div class="acc-setting">
                                 <h3>Follows</h3>
                                 <div class="requests-list">
-                                    
+                                    <div *ngFor="let follow of followers" class="request-details" id="follower{{follow.iduserrelation}}">
+                                        <div class="noty-user-img">
+                                            <img src="https://localhost:8443/imageprofile/{{follow.usertwo.username}}"
+                                                alt="">
+                                        </div>
+                                        <div class="request-info">
+                                            <h3>{{follow.usertwo.username}}</h3>
+                                        </div>
+                                        <div class="accept-feat">
+                                            <ul>
+                                                <li><button type="submit" class="close-req"><i
+                                                            onclick="unfollow(follow.iduserrelation)"
+                                                            class="la la-close"></i></button></li>
+                                            </ul>
+                                        </div>
+                                        <!--accept-feat end-->
+                                    </div> 
                                 </div>
                                 <!--requests-list end-->
                             </div>
@@ -341,7 +357,7 @@
                                                 <div class="row">
                                                     <div class="col-md-3 imgUp">
                                                         <div class="imagePreview"
-                                                            style="background-image: url(https://localhost:8443/api/users/{{iduser}}/imageProfile);">
+                                                            style="background-image: url(https://localhost:8443/api/users/{{userpage.idusers}}/imageProfile);">
                                                         </div>
                                                         <label class="btn btn-primary">Upload<input
                                                                 name="image" type="file" class="uploadFile img"
@@ -358,28 +374,28 @@
                                     <div class="cp-field">
                                         <h5>Username</h5>
                                         <div class="cpp-fiel">
-                                            <input type="text" name="username" placeholder="{{username}}">
+                                            <input type="text" name="username" placeholder="{{userpage.username}}">
                                             <i class="fa fa-user"></i>
                                         </div>
                                     </div>
                                     <div class="cp-field">
                                         <h5>Email</h5>
                                         <div class="cpp-fiel">
-                                            <input type="text" name="email" placeholder="{{email}}">
+                                            <input type="text" name="email" placeholder="{{userpage.email}}">
                                             <i class="fa fa-envelope"></i>
                                         </div>
                                     </div>
                                     <div class="cp-field">
                                         <h5>Name</h5>
                                         <div class="cpp-fiel">
-                                            <input type="text" name="name" placeholder="{{name}}">
+                                            <input type="text" name="name" placeholder="{{userpage.name}}">
                                             <i class="fa fa-bars"></i>
                                         </div>
                                     </div>
                                     <div class="cp-field">
                                         <h5>City</h5>
                                         <div class="cpp-fiel">
-                                            <input type="text" name="city" placeholder="{{city}}">
+                                            <input type="text" name="city" placeholder="{{userpage.city}}">
                                             <i class="fa fa-map-marker"></i>
                                         </div>
                                     </div>
@@ -387,16 +403,16 @@
                                         <h5>Links</h5>
                                         <div class="cpp-fiel">
                                             <input type="text" name="linkfacebook"
-                                                placeholder="{{linkfacebook}}">
+                                                placeholder="{{userpage.linkfacebook}}">
                                             <i class="fa fa-facebook-official"></i>
                                         </div><br>
                                         <div class="cpp-fiel">
                                             <input type="text" name="linkinstagram"
-                                                placeholder="{{linkinstagram}}">
+                                                placeholder="{{userpage.linkinstagram}}">
                                             <i class="fa fa-instagram"></i>
                                         </div><br>
                                         <div class="cpp-fiel">
-                                            <input type="text" name="linktwitter" placeholder="{{linktwitter}}">
+                                            <input type="text" name="linktwitter" placeholder="{{userpage.linktwitter}}">
                                             <i class="fa fa-twitter"></i>
                                         </div>
                                     </div>

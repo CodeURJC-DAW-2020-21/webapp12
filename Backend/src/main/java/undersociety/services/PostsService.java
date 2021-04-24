@@ -133,6 +133,58 @@ public class PostsService {
 			return null;
 		}
 	}
+	
+	public List<PostModel> getPostIndexApi(String username, int page){
+		Page<Post> p = postsrepo.findAll(PageRequest.of(page, 10,Sort.by("idpost").descending()));
+		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found")));
+		List<PostModel> postsmodels = new ArrayList<>();
+		List<Integer> likes = new ArrayList<>();
+		for (LikeAPost like : lp) {
+			likes.add(like.getIdpost().getIdpost());
+		}
+		for (Post post : p) {
+			PostModel postmodel = new PostModel();
+			if(post.getIduser().getUserprofile()) {
+				postmodel.setTypeUser("user");
+			}else {
+				postmodel.setTypeUser("company");
+			}
+			if(likes.contains(post.getIdpost())) {
+				postmodel.setLike("la la-heart");
+			}else {
+				postmodel.setLike("la la-heart-o");
+			}
+			postmodel.setPost(post);
+			postsmodels.add(postmodel);
+		}
+		return postsmodels;
+	}
+	
+	public List<PostModel> getPostUserPageApi(Users actual, Users follow, int page){
+		Page<Post> p = postsrepo.findByiduser(follow,PageRequest.of(page, 10,Sort.by("idpost").descending()));		
+		List<LikeAPost> lp = likerepo.findByiduser(userRepository.findByusername(actual.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
+		List<PostModel> postsmodels = new ArrayList<>();
+		List<Integer> likes = new ArrayList<>();
+		for (LikeAPost like : lp) {
+			likes.add(like.getIdpost().getIdpost());
+		}
+		for (Post post : p) {
+			PostModel postmodel = new PostModel();
+			if(post.getIduser().getUserprofile()) {
+				postmodel.setTypeUser("user");
+			}else {
+				postmodel.setTypeUser("company");
+			}
+			if(likes.contains(post.getIdpost())) {
+				postmodel.setLike("la la-heart");
+			}else {
+				postmodel.setLike("la la-heart-o");
+			}
+			postmodel.setPost(post);
+			postsmodels.add(postmodel);
+		}
+		return postsmodels;
+	}
 //////////////////////////////////////////////////////NORMAL METHODS/////////////////////////////////////////////////////////////////////
 	
 	public Post getPost(int idpost) {

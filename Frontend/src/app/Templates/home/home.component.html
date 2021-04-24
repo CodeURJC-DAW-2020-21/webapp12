@@ -41,7 +41,7 @@
                                         <span>{{followers}}</span>
                                     </li>
                                     <li>
-                                        <a [routerLink]="['/new/userpage','{{userInfo.idusers}}']" routerLinkActive="router-link-active" title="">View Profile</a>
+                                        <a (click)="userpage(userInfo.idusers)" title="">View Profile</a>
                                     </li>
                                 </ul>
                             </div>
