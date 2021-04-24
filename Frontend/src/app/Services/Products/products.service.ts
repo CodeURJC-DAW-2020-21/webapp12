@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from 'src/app/Class/Product/product';
+import { Tags } from 'src/app/Class/Tags/tags';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class ProductsService {
 
   getAllProducts() {
     return this.http.get("/api/products/");
+  }
+
+  getTags() {
+    return this.http.get<Tags[]>("/api/products/tags");
   }
 
   getProductPage(page : String) {

@@ -17,6 +17,7 @@ import { StoreComponent } from './Templates/store/store.component';
 import { UserpageComponent } from './Templates/userpage/userpage.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './Templates/navbar/navbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NavbarComponent } from './Templates/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

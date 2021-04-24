@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { Users } from 'src/app/Class/Users/users';
@@ -11,6 +11,8 @@ import { UsersService } from 'src/app/Services/Users/users.service';
 })
 export class SignInComponent implements OnInit {
 
+  @Input()
+  admin : Boolean;
   /*Login*/ 
   username: String;
   password: String;
@@ -36,6 +38,8 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    //==================== Upload Image =========================
     $(document).on("click", "i.del", function () {
       var input = $(this).parent().children('label').children();
       var imagepreview = $(this).parent().children('div');

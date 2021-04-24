@@ -5,6 +5,7 @@ import { Relations } from 'src/app/Class/Relations/relations';
 import { Roles } from 'src/app/Class/Roles/roles';
 import { Users } from 'src/app/Class/Users/users';
 import { Likes } from 'src/app/Class/Likes/likes';
+import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
 
 
 @Injectable({
@@ -96,7 +97,7 @@ export class UsersService {
   }
 
   getBookmarks(id: String) {
-    return this.http.get("/api/users/" + id + "/bookmarks");
+    return this.http.get<Bookmarks[]>("/api/users/" + id + "/bookmarks");
   }
 
   getLikes(id: String) {
