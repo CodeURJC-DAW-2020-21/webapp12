@@ -18,7 +18,6 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    console.log(this.loginUser);
     if(this.loginUser == false){
       this.router.navigate(['new/signIn']);
     }else{

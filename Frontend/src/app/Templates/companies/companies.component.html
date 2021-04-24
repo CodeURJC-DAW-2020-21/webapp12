@@ -27,7 +27,7 @@
                                 
                             </ul>
                         </div>
-                        <a [routerLink]="['/new/userpage','{{companie.idusers}}']" routerLinkActive="router-link-active" title="" class="view-more-pro">View
+                        <a (click)="goUserpage(companie.idusers)" title="" class="view-more-pro">View
                             Profile</a>
                     </div>
                     <!--company_profile_info end-->
@@ -35,7 +35,7 @@
             </div>
         </div>
         <!--companies-list end-->
-        <div class="process-comm">
+        <div class="process-comm" (click)="load()">
             <div class="spinner company">
                 <div class="bounce1"></div>
                 <div class="bounce2"></div>

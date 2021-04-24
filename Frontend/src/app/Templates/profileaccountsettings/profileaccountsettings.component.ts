@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
+import { Relations } from 'src/app/Class/Relations/relations';
 import { Users } from 'src/app/Class/Users/users';
+import { UsersService } from 'src/app/Services/Users/users.service';
 
 @Component({
   selector: 'app-profileaccountsettings',
@@ -8,19 +10,21 @@ import { Users } from 'src/app/Class/Users/users';
   styleUrls: ['./profileaccountsettings.component.css']
 })
 export class ProfileaccountsettingsComponent implements OnInit {
-  iduser: String = "h";
-  username: String = "h";
-  email: String = "h";
-  name: String = "h";
-  city: String = "h";
-  linkfacebook : String = "<li><a href='#' title=''><i class='fa fa-facebook-square'></i>userfacebook</a></li>";
-  linktwitter : String = "<li><a href='#' title=''><i class='fa fa-twitter'></i>userTwitter</a></li>";
-  linkinstagram : String = "<li><a href='#' title=''><i class='fa fa-instagram'></i>userInstagram</a></li>";
-  bookmarks : Bookmarks[];
-  followers : Users[];
-  constructor() { }
+  userpage: Users;
+  bookmarks : Bookmarks[] = [];
+  followers : Relations[] = [];
+  constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
+    this.userpage = this.userService.getUserInfo();
+    this.userService.getBookmarks(""+this.userpage.idusers).subscribe(
+      response => this.bookmarks = response,
+      error => console.log(error)
+    );
+    this.userService.getUserFollowers(""+this.userpage.idusers).subscribe(
+      response => this.followers = response,
+      error => console.log(error)
+    );
   }
 
 }

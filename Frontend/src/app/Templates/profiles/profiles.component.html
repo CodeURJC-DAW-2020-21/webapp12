@@ -21,18 +21,18 @@
                     <div class="company_profile_info">
                         <div class="company-up-info">
                             <img src="https://localhost:8443/api/users/{{customer.idusers}}/imageProfile" alt="">
-                            <h3>{{username}}</h3>
+                            <h3>{{customer.username}}</h3>
                             
                             <ul>
                                 
                             </ul>
                         </div>
-                        <a [routerLink]="['/new/userpage','{{customer.idusers}}']" routerLinkActive="router-link-active" title="" class="view-more-pro">View Profile</a>
+                        <a (click)="goUserpage(customer.idusers)" title="" class="view-more-pro">View Profile</a>
                     </div><!--company_profile_info end-->
                 </div>
             </div>
         </div><!--companies-list end-->
-        <div class="process-comm">
+        <div class="process-comm" (click)="load()">
             <div class="spinner profile">
                 <div class="bounce1"></div>
                 <div class="bounce2"></div>

@@ -12,6 +12,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 import undersociety.models.LikeAPost;
 import undersociety.models.ListProducts;
+import undersociety.models.Message;
 import undersociety.models.Post;
 import undersociety.models.PostModel;
 import undersociety.models.Product;
@@ -134,6 +136,8 @@ public class UsersRestController {
 		if(!userService.existsUser(user.getUsername())) {
 			Resource imagedefault = new ClassPathResource("/static/images/avatar.png");
 			user.setUserimg(BlobProxy.generateProxy(imagedefault.getInputStream(), imagedefault.contentLength()));
+			Resource imageThemedefault = new ClassPathResource("/static/images/1600x400.png");
+			user.setImageprofile(BlobProxy.generateProxy(imageThemedefault.getInputStream(), imageThemedefault.contentLength()));
 			userService.saveUser(user);
 			user = userService.getUser(user.getUsername());
 			URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getIdusers()).toUri();
@@ -243,7 +247,7 @@ public class UsersRestController {
 	@GetMapping("/customers")
 	public List<Users> getUsers( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
-			return userService.getCustomers(PageRequest.of(Integer.parseInt(page), 10)).getContent();
+			return userService.getCustomers(PageRequest.of(Integer.parseInt(page), 10,Sort.by("username").ascending())).getContent();
 		}else {
 			return userService.getAllUsers();
 		}
@@ -263,7 +267,7 @@ public class UsersRestController {
 	@GetMapping("/companies")
 	public List<Users> getCompanies( @Parameter(description="page") @RequestParam(required = false) String page){
 		if(page != null) {
-			return userService.getCompanies(PageRequest.of(Integer.parseInt(page), 10)).getContent();
+			return userService.getCompanies(PageRequest.of(Integer.parseInt(page), 10,Sort.by("username").ascending())).getContent();
 		}else {
 			return userService.getAllCompanies();
 		}
@@ -442,7 +446,7 @@ public class UsersRestController {
 			return ResponseEntity.notFound().build();
 		}
 		if(page != null) {
-			return ResponseEntity.ok(postsService.getPostsByUser(id,page,5).getContent());
+			return ResponseEntity.ok(postsService.getPostsByUser(id,page,10).getContent());
 		}else {
 			return ResponseEntity.ok(postsService.getAllPostsByUser(id));
 		}
@@ -471,7 +475,7 @@ public class UsersRestController {
 			return ResponseEntity.notFound().build();
 		}
 		if(page != null) {
-			return ResponseEntity.ok( productsService.getProductsByUser(id,page,5).getContent() );
+			return ResponseEntity.ok( productsService.getProductsByUser(id,page,10).getContent() );
 		}else {
 			return ResponseEntity.ok(productsService.getAllProductsByUser(id));
 		}
@@ -618,12 +622,20 @@ public class UsersRestController {
 					)
 	})
 	@GetMapping("/{id}/models/posts")
-	public ResponseEntity<List<PostModel>> getPostsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
+	public ResponseEntity<List<PostModel>> getPostsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = true) int page, @Parameter(description="username") @RequestParam(required = false) String username){
 		Optional<Users> user = userService.getUserId(id);
 		if(!user.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(postsService.getPostIndex(user.get().getUsername()));
+		if(username != null) {
+			Optional<Users> follow = userService.getUserUsername(username);
+			if(!follow.isPresent()) {
+				return ResponseEntity.notFound().build();
+			}
+			return ResponseEntity.ok(postsService.getPostUserPageApi(user.get(), follow.get(), page));
+		}else {
+			return ResponseEntity.ok(postsService.getPostIndexApi(user.get().getUsername(),page));
+		}
 	}
 	
 	@Operation(summary = "Get a products model by id users")
@@ -642,12 +654,44 @@ public class UsersRestController {
 					)
 	})
 	@GetMapping("/{id}/models/products")
-	public ResponseEntity<List<ProductModel>> getProductsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
+	public ResponseEntity<List<ProductModel>> getProductsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = true) int page, @Parameter(description="username") @RequestParam(required = false) String username){
 		Optional<Users> user = userService.getUserId(id);
 		if(!user.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(productsService.getPorductIndex(user.get().getUsername()));
+		if(username != null) {
+			Optional<Users> follow = userService.getUserUsername(username);
+			if(!follow.isPresent()) {
+				return ResponseEntity.notFound().build();
+			}
+			return ResponseEntity.ok(productsService.getProductUserPageApi(user.get(), follow.get(), page));
+		}else {
+			return ResponseEntity.ok(productsService.getPorductIndexApi(user.get().getUsername(),page));
+		}
+	}
+	
+	@Operation(summary = "Get a chat users")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the chat Users", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)
+	})
+	@GetMapping("/{id}/chat")
+	public ResponseEntity<List<Message>> getChats(@Parameter(description="id of user to be searched") @PathVariable int id,  @Parameter(description="username") @RequestParam(required = true) String username){
+		Optional<Users> user = userService.getUserId(id);
+		if(!user.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(userService.getChat(user.get().getUsername(), username));
 	}
 	
 	@Operation(summary = "Get a most followed users")

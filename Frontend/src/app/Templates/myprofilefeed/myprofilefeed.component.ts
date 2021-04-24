@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Users } from 'src/app/Class/Users/users';
+import { UsersService } from 'src/app/Services/Users/users.service';
 
 @Component({
   selector: 'app-myprofilefeed',
@@ -7,19 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyprofilefeedComponent implements OnInit {
 
-  iduser: String = "0";
-  userFullName : String ="Holo";
-  userInfo : String ="info";
-  userCity : String ="city";
-  following : String = "21";
-  followers : String = "21";
-  userFacebook : String = "<li><a href='#' title=''><i class='fa fa-facebook-square'></i>userfacebook</a></li>";
-  userTwitter : String = "<li><a href='#' title=''><i class='fa fa-twitter'></i>userTwitter</a></li>";
-  userInstagram : String = "<li><a href='#' title=''><i class='fa fa-instagram'></i>userInstagram</a></li>";
-
-  constructor() { }
+  userpage: Users;
+  following: Number;
+  followers: Number;
+  constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
+    this.userpage = this.userService.getUserInfo();
+    this.userService.getUserFollowings("" + this.userService.getUserInfo().idusers).subscribe(
+      response => this.following = response.length,
+      error => console.error(error)
+    );
+    this.userService.getUserFollowers("" + this.userService.getUserInfo().idusers).subscribe(
+      response => this.followers = response.length,
+      error => console.error(error)
+    );
   }
 
 }

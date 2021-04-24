@@ -11,12 +11,27 @@ import { UsersService } from 'src/app/Services/Users/users.service';
 export class StoreComponent implements OnInit {
 
   products: ProductsModel[] = [];
+  page: number = 0;
+
   constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
+    this.page = 0;
     this.userService.getProductModels(this.userService.getUserInfo().idusers,0).subscribe(
       response => this.products = response,
       error => console.log(error)
+    );
+  }
+
+  load() {
+    this.page++;
+    this.userService.getProductModels(this.userService.getUserInfo().idusers, this.page).subscribe(
+      response => {
+        response.forEach(element => {
+          this.products.push(element);
+        });
+      },
+      error => console.error(error)
     );
   }
 

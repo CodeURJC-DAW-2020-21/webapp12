@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <section class="cover-sec">
     <form class="cover-sec" method="POST" action="/changeImageProfile" enctype="multipart/form-data">
-        <img src="https://localhost:8443/api/users/{{iduser}}/imageThemeProfile" alt="">
+        <img src="https://localhost:8443/api/users/{{userpage.idusers}}/imageThemeProfile" alt="">
         <a>
             <i class="fa fa-camera"></i>
             <label for="files" class="btn">Changed Image</label>
@@ -21,7 +21,7 @@
                             <div class="user_profile">
                                 <div class="user-pro-img">
                                     
-                                    <img src="https://localhost:8443/api/users/{{iduser}}/imageProfile" alt="">
+                                    <img src="https://localhost:8443/api/users/{{userpage.idusers}}/imageProfile" alt="">
                                     <section class="cover-sec">
                                         <form class="cover-sec" method="POST" action="/changeUserImage" enctype="multipart/form-data">
                                             <a>
@@ -52,9 +52,9 @@
                                 </div>
                                 <!--user_pro_status end-->
                                 <ul class="social_links">
-                                    {{userFacebook}}
-                                    {{userTwitter}}
-                                    {{userInstagram}}
+                                    <li *ngIf="userpage.linkfacebook"><a href='#' title=''><i class='fa fa-facebook-square'></i>{{userpage.linkfacebook}}</a></li>
+                                    <li *ngIf="userpage.linktwitter"><a href='#' title=''><i class='fa fa-twitter'></i>{{userpage.linktwitter}}</a></li>
+                                    <li *ngIf="userpage.linkinstagram"><a href='#' title=''><i class='fa fa-instagram'></i>{{userpage.linkinstagram}}</a></li>
                                     
                                 </ul>
                             </div>
@@ -70,7 +70,7 @@
                     <div class="col-lg-6">
                         <div class="main-ws-sec">
                             <div class="user-tab-sec">
-                                <h3>{{userFullName}}</h3>
+                                <h3>{{userpage.name}}</h3>
                             </div>
                             <!--star-descp end-->
                             <div class="tab-feed st2">
@@ -95,7 +95,7 @@
                             <div class="user-profile-ov">
                                 <h3><a href="#" title="" class="overview-open">Resumen</a> <a href="#" title=""
                                         class="overview-open"><i class="fa fa-pencil"></i></a></h3>
-                                <p>{{userInfo}}</p>
+                                <p>{{userpage.userinfo}}</p>
                             </div>
                             <!--user-profile-ov end-->
 
@@ -103,7 +103,7 @@
                             <div class="user-profile-ov">
                                 <h3><a href="#" title="" class="lct-box-open">City</a> <a href="#"
                                         title="" class="lct-box-open"><i class="fa fa-pencil"></i></a></h3>
-                                <h4>{{userCity}}</h4>
+                                <h4>{{userpage.city}}</h4>
                                 
                             </div>
                             <!--user-profile-ov end-->

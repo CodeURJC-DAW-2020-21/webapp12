@@ -118,7 +118,7 @@
                                             <li><img src="../../../assets/images/icon9.png" alt=""><span>{{product.product.iduser.city}}</span></li>
                                         </ul>
                                         <ul class="bk-links">
-                                            <li><a id="product{{product.product.idproduct}}" title=""><i (click)="mark('{{product.product.idproduct}}')" class="{{bookamark}}"></i></a></li>
+                                            <li><a id="product{{product.product.idproduct}}" title=""><i (click)="mark('{{product.product.idproduct}}')" class="{{product.bookamark}}"></i></a></li>
                                             <li><a href="./messages?to={{product.product.iduser.username}}" title=""><i
                                                         class="la la-envelope"></i></a></li>
                                         </ul>
@@ -128,7 +128,7 @@
                                         <div class="row">
                                             <div id="carouselExampleControls-{{product.product.idproduct}}" class="carousel slide" data-ride="carousel">
                                                 <div class="carousel-inner">
-                                                  <div class="carousel-item active">
+                                                  <div class="carousel-item active" *ngIf="product.product.img0">
                                                     <img class="img-thumbnail" src="https://localhost:8443/api/products/{{product.product.idproduct}}/image0" alt="First slide">
                                                   </div>
                                                   <div class="carousel-item" *ngIf="product.product.img1">
@@ -199,7 +199,7 @@
                                 <!--post-bar end-->
                             </div>
                             <!--posts-section end-->
-                            <div class="process-comm">
+                            <div class="process-comm" (click)="load()">
                                 <div class="spinner products">
                                     <div class="bounce1"></div>
                                     <div class="bounce2"></div>

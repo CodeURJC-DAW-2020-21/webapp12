@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
       response => this.mostFollow = response,
       error => console.error(error)
     );
-    this.user.getPostModels(this.userInfo.idusers, 0).subscribe(
+    this.user.getPostModels(this.userInfo.idusers, this.page).subscribe(
       response => this.index = response,
       error => console.error(error)
     );
@@ -108,48 +108,8 @@ export class HomeComponent implements OnInit {
       $(".wrapper").removeClass("overlay");
       return false;
     });
-  }
-
-  like(idpost: Number) {
-
-  }
-
-  readmore(idpost: Number) {
-
-  }
-
-  load() {
-    this.page++;
-    this.user.getLikes("" + this.userInfo.idusers).subscribe(
-      response => {
-        let likes: Number[] = [];
-        response.forEach(element => {
-          likes.push(element.idpost.idpost);
-          console.log(element.idpost.idpost);
-        });
-        this.postsService.getPostPage("" + this.page).subscribe(
-          response => {
-            response.forEach(element => {
-              let like = "la la-heart-o";
-              let typeUser = "Customer";
-              if (likes.includes(element.idpost)) {
-                like = "la la-heart";
-              }
-              if (element.iduser.companyprofile) {
-                typeUser = "Company";
-              }
-              let post: PostsModel = new PostsModel(typeUser, like, element);
-              this.index.push(post);
-            });
-          },
-          error => console.error(error)
-        );
-      },
-      error => console.error(error)
-    );
-
-    //==================== Upload Image =========================
-    $(document).on("click", "i.del", function () {
+     //==================== Upload Image =========================
+     $(document).on("click", "i.del", function () {
       var input = $(this).parent().children('label').children();
       var imagepreview = $(this).parent().children('div');
       input.val('');
@@ -194,8 +154,26 @@ export class HomeComponent implements OnInit {
         $(".file-upload").click();
       });
     });
+  }
 
+  like(idpost: Number) {
 
+  }
+
+  readmore(idpost: Number) {
+
+  }
+
+  load() {
+    this.page++;
+    this.user.getPostModels(this.userInfo.idusers, this.page).subscribe(
+      response => {
+        response.forEach(element => {
+          this.index.push(element);
+        });
+      },
+      error => console.error(error)
+    );
   }
 
   imagePost(event) {
@@ -249,9 +227,9 @@ export class HomeComponent implements OnInit {
             if (this.imagePosts != undefined) {
               this.postsService.uploadPostImage("" + post.idpost, this.imagePosts).subscribe(
                 response => {
-                  let type: String = "Customer";
+                  let type: String = "user";
                   if (this.userInfo.companyprofile) {
-                    type = "Company";
+                    type = "company";
                   }
                   let newposts: PostsModel = new PostsModel(type, "la la-heart-o", post);
                   this.index.unshift(newposts);
@@ -333,4 +311,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  userpage(id: Number){
+    this.router.navigate(['/new/userpage', { id: id }]);
+  }
 }
