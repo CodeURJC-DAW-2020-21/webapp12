@@ -125,6 +125,9 @@ export class UsersService {
     return this.http.get<PostsModel[]>("/api/users/" + id + "/models/posts?page="+page);
   }
 
+  getRanking() {
+    return this.http.get<Users[]>("/api/users/ranking");
+  }
   setAdmin(admin: boolean){
     this.admin =admin;
   }

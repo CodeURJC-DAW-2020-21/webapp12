@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   bookmarks: Bookmarks[] = [];
   index: PostsModel[] = [];
   tags: Tags[] = [];
+  mostFollow : Users[] = [];
   page: number = 0;
   imagePosts: FormData;
   imageProduct0: FormData;
@@ -62,6 +63,10 @@ export class HomeComponent implements OnInit {
     );
     this.productService.getTags().subscribe(
       response => this.tags = response,
+      error => console.error(error)
+    );
+    this.user.getRanking().subscribe(
+      response => this.mostFollow = response,
       error => console.error(error)
     );
     this.user.getPostModels(this.userInfo.idusers, 0).subscribe(

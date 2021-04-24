@@ -602,6 +602,21 @@ public class UsersRestController {
 		return ResponseEntity.ok(userService.getRoles(user.get()));
 	}
 
+	@Operation(summary = "Get a posts model by id users")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the posts model", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)
+	})
 	@GetMapping("/{id}/models/posts")
 	public ResponseEntity<List<PostModel>> getPostsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
 		Optional<Users> user = userService.getUserId(id);
@@ -611,6 +626,21 @@ public class UsersRestController {
 		return ResponseEntity.ok(postsService.getPostIndex(user.get().getUsername()));
 	}
 	
+	@Operation(summary = "Get a products model by id users")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the products model", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					),
+			@ApiResponse(
+					responseCode = "404", 
+					description = "User not found", 
+					content = @Content
+					)
+	})
 	@GetMapping("/{id}/models/products")
 	public ResponseEntity<List<ProductModel>> getProductsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = false) String page){
 		Optional<Users> user = userService.getUserId(id);
@@ -618,5 +648,20 @@ public class UsersRestController {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(productsService.getPorductIndex(user.get().getUsername()));
+	}
+	
+	@Operation(summary = "Get a most followed users")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the most followed Users", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					)
+	})
+	@GetMapping("/ranking")
+	public ResponseEntity<List<Users>> getRanking(){
+		return ResponseEntity.ok(userService.getListMostFollowed());
 	}
 }
