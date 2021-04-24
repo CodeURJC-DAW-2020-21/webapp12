@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="search-sec">
     <div class="container">
         <div class="search-box">
@@ -97,7 +98,117 @@
                         </div>
                         <!--filter-secs end-->
                     </div>
-                    
+                    <div class="col-lg-8">
+                        <div class="main-ws-sec">
+                            <div class="posts-section" id="myULS">
+                                <div class="post-bar" *ngFor="let product of products">
+                                    <div class="post_topbar">
+                                        <div class="usy-dt">
+                                            <img src="https://localhost:8443/api/users/{{product.product.iduser.idusers}}/imageProfile"
+                                                alt="">
+                                            <div class="usy-name">
+                                                <h3>{{product.product.iduser.username}}</h3>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="epi-sec">
+                                        <ul class="descp">
+                                            <li><img src="../../../assets/images/icon8.png" alt=""><span>{{product.typeUser}}</span></li>
+                                            <li><img src="../../../assets/images/icon9.png" alt=""><span>{{product.product.iduser.city}}</span></li>
+                                        </ul>
+                                        <ul class="bk-links">
+                                            <li><a id="product{{product.product.idproduct}}" title=""><i (click)="mark('{{product.product.idproduct}}')" class="{{bookamark}}"></i></a></li>
+                                            <li><a href="./messages?to={{product.product.iduser.username}}" title=""><i
+                                                        class="la la-envelope"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="job_descp">
+                                        <h3>{{product.product.title}}</h3>
+                                        <div class="row">
+                                            <div id="carouselExampleControls-{{product.product.idproduct}}" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel-inner">
+                                                  <div class="carousel-item active">
+                                                    <img class="img-thumbnail" src="https://localhost:8443/api/products/{{product.product.idproduct}}/image0" alt="First slide">
+                                                  </div>
+                                                  <div class="carousel-item" *ngIf="product.product.img1">
+                                                    <img class="img-thumbnail " src="https://localhost:8443/api/products/{{product.product.idproduct}}/image1" alt="Second slide">
+                                                  </div>
+                                                  <div class="carousel-item" *ngIf="product.product.img2">
+                                                    <img class="img-thumbnail " src="https://localhost:8443/api/products/{{product.product.idproduct}}/image2" alt="Third slide">
+                                                  </div>
+                                                </div>
+                                                <a class="carousel-control-prev" href="#carouselExampleControls-{{product.product.idproduct}}" role="button" data-slide="prev">
+                                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                  <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#carouselExampleControls-{{product.product.idproduct}}" role="button" data-slide="next">
+                                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                  <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <ul class="description-store">
+                                                <li>
+                                                    <p>{{product.product.description}}
+                                                        
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div><br>
+                                        <a id="readmore{{product.product.idproduct}}"
+                                                class="btn btn-primary "
+                                                (click)="readmore('{{product.product.idproduct}}')" title="">view more</a>
+                                        <ul class="skill-tags">
+                                            <li *ngIf="product.product.idtagone"><a href="#" title="">
+                                                    <p style="color:#040500" >{{product.product.idtagone.description}}
+                                                    </p>
+                                                </a></li>
+                                            <li *ngIf="product.product.idtagtwo"><a href="#" title="">
+                                                    <p style="color:#040500" >{{product.product.idtagtwo.description}}
+                                                    </p>
+                                                </a></li>
+                                            <li *ngIf="product.product.idtagthree"><a href="#" title="">
+                                                    <p style="color:#040500" >
+                                                        {{product.product.idtagthree.description}}
+                                                    </p>
+                                                </a></li>
+                                            <li *ngIf="product.product.idtagfour"><a href="#" title="">
+                                                    <p style="color:#040500" >
+                                                        {{product.product.idtagfour.description}}
+                                                    </p>
+                                                </a></li>
+                                            <li *ngIf="product.product.idtagfive"><a href="#" title="">
+                                                    <p style="color:#040500" >
+                                                        {{product.product.idtagfive.description}}
+                                                    </p>
+                                                </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="job-status-bar" style="background-color:{{product.color}}">
+                                        <div class="col-lg-3">
+                                            <h3>{{product.product.status}}</h3>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <h3> {{product.product.price}} $ </h3>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <!--post-bar end-->
+                            </div>
+                            <!--posts-section end-->
+                            <div class="process-comm">
+                                <div class="spinner products">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--main-ws-sec end-->
+                    </div>
 
                 </div>
             </div><!-- main-section-data end-->
