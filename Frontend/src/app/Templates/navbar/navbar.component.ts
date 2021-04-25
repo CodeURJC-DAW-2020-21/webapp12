@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Users } from 'src/app/Class/Users/users';
+import { ChatServiceService } from 'src/app/Services/Chat/chat-service.service';
 import { UsersService } from 'src/app/Services/Users/users.service';
 
 @Component({
@@ -12,8 +13,8 @@ export class NavbarComponent implements OnInit {
 
   user: Users;
   admin: boolean = true;
-
-  constructor(private userService: UsersService, private router: Router) { }
+  
+  constructor(private userService: UsersService, private router: Router, private chat: ChatServiceService) { }
 
   ngOnInit(): void {
     if (this.userService.getLogin() == false) {
@@ -83,5 +84,8 @@ export class NavbarComponent implements OnInit {
       error => console.log(error)
     );
   }
+
+  
+  
 
 }
