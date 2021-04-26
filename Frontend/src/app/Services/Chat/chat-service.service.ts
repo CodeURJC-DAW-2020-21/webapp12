@@ -9,7 +9,6 @@ export class ChatServiceService {
 
   
   constructor() { 
-    SockJS('https://localhost:8443/chat');
   }
 
   

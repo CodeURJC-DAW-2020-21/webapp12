@@ -29,8 +29,8 @@ export class HomeComponent implements OnInit {
   tags: Tags[] = [];
   mostFollow : Users[] = [];
   page: number = 0;
-  product: Product = new Product;
-  post: Posts = new Posts;
+  product: Product = new Product();
+  post: Posts = new Posts();
   imagePosts: FormData;
   imageProduct0: FormData;
   imageProduct1: FormData;
@@ -214,6 +214,8 @@ export class HomeComponent implements OnInit {
   }
 
   uploadPosts() {
+    this.post.iduser = this.user.getUserInfo();
+    console.log(this.post);
     this.postsService.registerPost(this.post).subscribe(
       response => {
         let data: any = response;
@@ -224,13 +226,12 @@ export class HomeComponent implements OnInit {
             if (this.imagePosts != undefined) {
               this.postsService.uploadPostImage("" + this.post.idpost, this.imagePosts).subscribe(
                 response => {
-                  let type: String = "user";
+                  let newposts: PostsModel = new PostsModel();
+                  newposts.typeUser = "user";
                   if (this.userInfo.companyprofile) {
-                    type = "company";
+                    newposts.typeUser = "company";
                   }
-                  let newposts: PostsModel = new PostsModel;
                   newposts.like = "la la-heart-o";
-                  newposts.typeUser = type;
                   newposts.post =  this.post;
                   this.index.unshift(newposts);
                   $(".post-popup.pst-pj").removeClass("active");
@@ -250,6 +251,8 @@ export class HomeComponent implements OnInit {
   }
 
   uploadProduct() {
+    this.product.iduser = this.user.getUserInfo();
+    console.log(this.product);
     let tagone: Tags;
     let tagtwo: Tags;
     let tagthree: Tags;

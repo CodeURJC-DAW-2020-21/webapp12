@@ -16,13 +16,13 @@ import { Message } from 'src/app/Class/Messages/message';
 })
 export class UsersService {
 
-  private user: Users = new Users("","","","",false,"","","","","");
+  private user: Users = new Users;
   private admin: Boolean = false;
   private loginIn: Boolean = false;
 
   constructor(private http: HttpClient) { }
 
-  login(username:string, password: string){
+  login(username:String, password: String){
       return this.http.post("/api/auth/login",{"username": username, "password": password});
   }
 
@@ -39,13 +39,6 @@ export class UsersService {
   }
 
   registerUser(user: Users) {
-    let userinfo = {
-      "username": user.username, 
-      "password": user.pass,
-      "email": user.email,
-      "name": user.name,
-      "companyprofile": user.companyprofile
-    }
     return this.http.post<Users>("/api/users/", user);
   }
 

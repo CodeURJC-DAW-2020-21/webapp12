@@ -16,12 +16,12 @@ export class SignInComponent implements OnInit {
   password: string;
   /*Register User*/
   formDataUser: FormData;
-  customer: Users = new Users;
+  customer: Users = new Users();
   passrepcustomer: String;
   ccUser : Boolean;
   /*Register Company*/
   formDataCompany: FormData;
-  company: Users = new Users;
+  company: Users = new Users();
   passrepCom: String;
   ccCom : Boolean;
 
@@ -118,6 +118,7 @@ export class SignInComponent implements OnInit {
   login() {
     this.userService.login(this.username, this.password).subscribe(
       response => {
+        console.log();
         this.userService.getAllUsers().subscribe(
           response => {
             response.forEach(element => {
@@ -171,36 +172,22 @@ export class SignInComponent implements OnInit {
   }
 
   registerUser(){
+    this.customer.companyprofile = false;
     this.userService.registerUser(this.customer).subscribe(
       response =>  {
-        if(this.formDataUser != undefined){
-          this.userService.uploadImageProfile(""+response.idusers,this.formDataUser).subscribe(
-            response =>{ 
-              this.router.navigate(['new/index']);
-            },
-            error => console.error(error)
-          );
-        }else{
-          this.router.navigate(['new/index']);
-        }
+        console.log(response);
+        this.router.navigate(['new/index']);
       },
       error => console.error(error)
     );
   }
 
   registerCompany(){
+    this.company.companyprofile = true;
     this.userService.registerUser(this.company).subscribe(
-      response => {
-        if(this.formDataCompany != undefined){
-          this.userService.uploadImageProfile(""+response.idusers,this.formDataCompany).subscribe(
-            response =>{ 
-              this.router.navigate(['new/index']);
-            },
-            error => console.error(error)
-          );
-        }else{
-          this.router.navigate(['new/index']);
-        }
+      response =>  {
+        console.log(response);
+        this.router.navigate(['new/index']);
       },
       error => console.error(error)
     );
