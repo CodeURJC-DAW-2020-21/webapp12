@@ -6,10 +6,4 @@ export class Posts {
      iduser : Users;
      title : String;
      description : String;
-
-	constructor(  iduser: Users,  title: String,  description: String) {
-		this.iduser =  iduser;
-		this.title =  title;
-		this.description =  description;
-	}
 }

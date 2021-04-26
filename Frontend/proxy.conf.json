@@ -5,24 +5,16 @@
         "logLevel": "debug",
         "changeOrigin": true
     },
-    "/chat/**": {
-        "target": "wss://localhost:8443/",
-        "secure": false,
-        "logLevel": "debug",
-        "changeOrigin": true,
-        "ws":true
-    },
-    "/chat/*": {
-        "target": "https://localhost:8443/",
-        "secure": false,
-        "logLevel": "debug",
-        "changeOrigin": true
-    },
     "/message/**": {
         "target": "https://localhost:8443/",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
-    }
+    },
+    "/chat/*": {
+        "target": "https://localhost:8443/socket.io/",
+        "ws": true,
+        "logLevel": "debug"
+      }
     
 }
