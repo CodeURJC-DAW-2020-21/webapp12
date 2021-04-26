@@ -29,15 +29,13 @@ export class HomeComponent implements OnInit {
   tags: Tags[] = [];
   mostFollow : Users[] = [];
   page: number = 0;
+  product: Product = new Product;
+  post: Posts = new Posts;
   imagePosts: FormData;
   imageProduct0: FormData;
   imageProduct1: FormData;
   imageProduct2: FormData;
-  titlePost: String;
-  descriptionPost: String;
-  titleProduct: String;
-  priceProduct: Number;
-  descriptionProduct: String;
+  
   tag: Boolean;
   tag1: Boolean;
   tag2: Boolean;
@@ -216,22 +214,24 @@ export class HomeComponent implements OnInit {
   }
 
   uploadPosts() {
-    let post: Posts = new Posts(this.user.getUserInfo(), this.titlePost, this.descriptionPost);
-    this.postsService.registerPost(post).subscribe(
+    this.postsService.registerPost(this.post).subscribe(
       response => {
         let data: any = response;
         this.postsService.getPosts(data.idpost).subscribe(
           response => {
-            post = response;
+            this.post = response;
             console.log(post);
             if (this.imagePosts != undefined) {
-              this.postsService.uploadPostImage("" + post.idpost, this.imagePosts).subscribe(
+              this.postsService.uploadPostImage("" + this.post.idpost, this.imagePosts).subscribe(
                 response => {
                   let type: String = "user";
                   if (this.userInfo.companyprofile) {
                     type = "company";
                   }
-                  let newposts: PostsModel = new PostsModel(type, "la la-heart-o", post);
+                  let newposts: PostsModel = new PostsModel;
+                  newposts.like = "la la-heart-o";
+                  newposts.typeUser = type;
+                  newposts.post =  this.post;
                   this.index.unshift(newposts);
                   $(".post-popup.pst-pj").removeClass("active");
                   $(".wrapper").removeClass("overlay");
@@ -289,9 +289,7 @@ export class HomeComponent implements OnInit {
     if (this.imageProduct2 != undefined) {
       image2 = true;
     }
-    let product: Product = new Product(this.user.getUserInfo(), this.titleProduct, this.descriptionProduct, this.priceProduct, tagone, tagtwo, tagthree, tagfour, tagfive, "in stock", image0, image1, image2);
-    console.log(product);
-    this.productService.registerProduct(product).subscribe(
+    this.productService.registerProduct(this.product).subscribe(
       response => {
         if (this.imageProduct0 != undefined) {
           this.productService.uploadImage0("" + response.idproduct, this.imageProduct0).subscribe();

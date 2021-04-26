@@ -16,19 +16,13 @@ export class SignInComponent implements OnInit {
   password: string;
   /*Register User*/
   formDataUser: FormData;
-  emailUser : String;
-  usernameUser : String;
-  nameUser : String;
-  passUser : String;
-  passrepUser : String;
+  customer: Users = new Users;
+  passrepcustomer: String;
   ccUser : Boolean;
   /*Register Company*/
   formDataCompany: FormData;
-  emailCom : String;
-  usernameCom : String;
-  nameCom : String;
-  passCom : String;
-  passrepCom : String;
+  company: Users = new Users;
+  passrepCom: String;
   ccCom : Boolean;
 
   constructor(private userService: UsersService, private router: Router) {
@@ -177,8 +171,7 @@ export class SignInComponent implements OnInit {
   }
 
   registerUser(){
-    let user : Users = new Users(this.emailUser,this.usernameUser,this.passUser,this.nameUser,false,"","","","","");
-    this.userService.registerUser(user).subscribe(
+    this.userService.registerUser(this.customer).subscribe(
       response =>  {
         if(this.formDataUser != undefined){
           this.userService.uploadImageProfile(""+response.idusers,this.formDataUser).subscribe(
@@ -196,8 +189,7 @@ export class SignInComponent implements OnInit {
   }
 
   registerCompany(){
-    let user : Users = new Users(this.emailCom,this.usernameCom,this.passCom,this.nameCom,true,"","","","","");
-    this.userService.registerUser(user).subscribe(
+    this.userService.registerUser(this.company).subscribe(
       response => {
         if(this.formDataCompany != undefined){
           this.userService.uploadImageProfile(""+response.idusers,this.formDataCompany).subscribe(
