@@ -119,243 +119,253 @@
                                 </div>
                                 <!--star-descp end-->
                                 <div class="tab-feed">
-                                    <ul>
-                                        <li data-tab="feed-dd" class="active">
-                                            <a href="#"  title="">
-                                                <img src="../../../assets/images/ic1.png" alt="">
-                                                <span>Posts</span>
-                                            </a>
-                                        </li>
-                                        <li data-tab="info-dd">
-                                            <a href="#"  title="">
-                                                <img src="../../../assets/images/ic2.png" alt="">
-                                                <span>Products</span>
-                                            </a>
-                                        </li>
-                                        <li data-tab="portfolio-dd">
-                                            <a href="#"  title="">
-                                                <img src="../../../assets/images/ic3.png" alt="">
-                                                <span>Portfolio</span>
-                                            </a>
-                                        </li>
-                                        <li data-tab="info-user">
-                                            <a href="#" title="">
-                                                <img src="../../../assets/images/ic2.png" alt="">
-                                                <span>Info</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <mat-tab-group>
+                                        <mat-tab id="feed-dd" class="product-feed-tab current" >
+                                            <ng-template mat-tab-label>
+                                                <mat-icon class="example-tab-icon">list</mat-icon>
+                                                Posts
+                                              </ng-template>
+                                            <div class="posts-section" id="myUL">
+                                                <div class="post-bar" *ngFor="let post of posts">
+                                                    <div class="post_topbar">
+                                                        <div class="row usy-dt">
+                                                            <div class="user-post-icon">
+                                                                <img src="https://localhost:8443/api/users/{{post.post.iduser.idusers}}/imageProfile"
+                                                                    alt="">
+                                                            </div>
+                                                            <div class="usy-name">
+                                                                <h3>{{post.post.iduser.username}}</h3>
+                                                            </div>
+                                                        </div>
+            
+                                                    </div>
+                                                    <div class="epi-sec">
+                                                        <ul class="descp">
+                                                            <li><img src="../../../assets/images/icon8.png"
+                                                                    alt=""><span>{{post.typeUser}}</span></li>
+                                                            <li><img src="../../../assets/images/icon9.png"
+                                                                    alt=""><span>{{post.post.iduser.city}}</span></li>
+                                                        </ul>
+                                                        <ul class="bk-links">
+                                                            <li><a id="{{post.post.idpost}}" title=""><i
+                                                                        (click)="like(post.post.idpost, post.post)"
+                                                                        class="{{post.like}}"></i></a></li>
+                                                            <li><a [routerLink]="['/new/messages', { id: post.post.iduser.idusers }]"
+                                                                    routerLinkActive="router-link-active" title=""><i
+                                                                        class="la la-envelope"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="job_descp">
+                                                        <h3>{{post.title}}</h3>
+                                                        <div class="row">
+                                                            <ul class="image-store">
+                                                                <li><img src="https://localhost:8443/api/posts/{{post.post.idpost}}/image"
+                                                                        alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="row">
+                                                            <ul class="description-store">
+                                                                <li>
+                                                                    <p>{{post.post.description}}</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div><br>
+                                                        <a id="readmore{{post.post.idpost}}" class="btn btn-primary"
+                                                            (click)="readmore(post.post.idpost)" title="">view more</a>
+                                                    </div>
+                                                </div>
+            
+                                                <!--process-comm end-->
+                                            </div>
+                                            <div class="process-comm postSpinner" (click)="loadPosts()">
+                                                <div class="spinner postsUser">
+                                                    <div class="bounce1"></div>
+                                                    <div class="bounce2"></div>
+                                                    <div class="bounce3"></div>
+                                                </div>
+                                            </div> 
+                                        </mat-tab>
+                                        <mat-tab class="product-feed-tab current" >
+                                            <ng-template mat-tab-label>
+                                                <mat-icon class="example-tab-icon">shopping_cart</mat-icon>
+                                                Product
+                                              </ng-template>
+                                            <div class="col-lg-20">
+                                                <div class="main-ws-sec">
+                                                    <div class="posts-section" id="myULS">
+                                                        <div class="post-bar" *ngFor="let product of products">
+                                                            <div class="post_topbar">
+                                                                <div class="usy-dt">
+                                                                    <img src="https://localhost:8443/api/users/{{product.product.iduser.idusers}}/imageProfile"
+                                                                        alt="">
+                                                                    <div class="usy-name">
+                                                                        <h3>{{product.product.iduser.username}}</h3>
+                                                                    </div>
+                                                                </div>
+            
+                                                            </div>
+                                                            <div class="epi-sec">
+                                                                <ul class="descp">
+                                                                    <li><img src="../../../assets/images/icon8.png"
+                                                                            alt=""><span>{{product.typeUser}}</span></li>
+                                                                    <li><img src="../../../assets/images/icon9.png"
+                                                                            alt=""><span>{{product.product.iduser.city}}</span></li>
+                                                                </ul>
+                                                                <ul class="bk-links">
+                                                                    <li><a id="product{{product.product.idproduct}}" title=""><i
+                                                                                (click)="mark(product.product.idproduct, product.product)"
+                                                                                class="{{product.bookamark}}"></i></a></li>
+                                                                    <li><a [routerLink]="['/new/messages', { id: product.product.iduser.idusers }]"
+                                                                            routerLinkActive="router-link-active" title=""><i
+                                                                                class="la la-envelope"></i></a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="job_descp">
+                                                                <h4>{{product.product.title}}</h4>
+                                                                <div class="row">
+                                                                    <div id="carouselExampleControls-{{product.product.idproduct}}"
+                                                                        class="carousel slide" data-ride="carousel">
+                                                                        <div class="carousel-inner">
+                                                                            <div class="carousel-item active"
+                                                                                *ngIf="product.product.img0">
+                                                                                <img class="img-thumbnail"
+                                                                                    src="https://localhost:8443/api/products/{{product.product.idproduct}}/image0"
+                                                                                    alt="First slide">
+                                                                            </div>
+                                                                            <div class="carousel-item" *ngIf="product.product.img1">
+                                                                                <img class="img-thumbnail "
+                                                                                    src="https://localhost:8443/api/products/{{product.product.idproduct}}/image1"
+                                                                                    alt="Second slide">
+                                                                            </div>
+                                                                            <div class="carousel-item" *ngIf="product.product.img2">
+                                                                                <img class="img-thumbnail "
+                                                                                    src="https://localhost:8443/api/products/{{product.product.idproduct}}/image2"
+                                                                                    alt="Third slide">
+                                                                            </div>
+                                                                        </div>
+                                                                        <a class="carousel-control-prev"
+                                                                            href="#carouselExampleControls-{{product.product.idproduct}}"
+                                                                            role="button" data-slide="prev">
+                                                                            <span class="carousel-control-prev-icon"
+                                                                                aria-hidden="true"></span>
+                                                                            <span class="sr-only">Previous</span>
+                                                                        </a>
+                                                                        <a class="carousel-control-next"
+                                                                            href="#carouselExampleControls-{{product.product.idproduct}}"
+                                                                            role="button" data-slide="next">
+                                                                            <span class="carousel-control-next-icon"
+                                                                                aria-hidden="true"></span>
+                                                                            <span class="sr-only">Next</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <ul class="description-store">
+                                                                        <li>
+                                                                            <p>{{product.product.description}}
+            
+                                                                            </p>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div><br>
+                                                                <a id="readmore{{product.product.idproduct}}"
+                                                                    class="btn btn-primary "
+                                                                    (click)="readmore(product.product.idproduct)" title="">view
+                                                                    more</a>
+                                                                <ul class="skill-tags">
+                                                                    <li *ngIf="product.product.idtagone"><a href="#" title="">
+                                                                            <p style="color:#040500">
+                                                                                {{product.product.idtagone.description}}
+                                                                            </p>
+                                                                        </a></li>
+                                                                    <li *ngIf="product.product.idtagtwo"><a href="#" title="">
+                                                                            <p style="color:#040500">
+                                                                                {{product.product.idtagtwo.description}}
+                                                                            </p>
+                                                                        </a></li>
+                                                                    <li *ngIf="product.product.idtagthree"><a href="#" title="">
+                                                                            <p style="color:#040500">
+                                                                                {{product.product.idtagthree.description}}
+                                                                            </p>
+                                                                        </a></li>
+                                                                    <li *ngIf="product.product.idtagfour"><a href="#" title="">
+                                                                            <p style="color:#040500">
+                                                                                {{product.product.idtagfour.description}}
+                                                                            </p>
+                                                                        </a></li>
+                                                                    <li *ngIf="product.product.idtagfive"><a href="#" title="">
+                                                                            <p style="color:#040500">
+                                                                                {{product.product.idtagfive.description}}
+                                                                            </p>
+                                                                        </a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="job-status-bar" style="background-color:{{product.color}}">
+                                                                <div class="col-lg-3">
+                                                                    <h3>{{product.product.status}}</h3>
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                    <h3> {{product.product.price}} $ </h3>
+                                                                </div>
+                                                            </div>
+            
+                                                        </div>
+                                                    </div>
+                                                    <div class="process-comm productSpinner" (click)="loadProducts()">
+                                                        <div class="spinner productsUser">
+                                                            <div class="bounce1"></div>
+                                                            <div class="bounce2"></div>
+                                                            <div class="bounce3"></div>
+                                                        </div>
+                                                    </div>
+                                                    <!--posts-section end-->
+                                                </div>
+                                                <!--main-ws-sec end-->
+                                            </div>
+                                        </mat-tab>
+                                        <mat-tab class="product-feed-tab current">
+                                            <ng-template mat-tab-label>
+                                                <mat-icon class="example-tab-icon">info</mat-icon>
+                                                Info
+                                              </ng-template>
+                                            <div class="user-profile-ov">
+                                                <h3><a>Resumen</a></h3>
+                                                <p>{{userpage.userinfo}}</p>
+                                            </div>
+                                            <!--user-profile-ov end-->
+            
+            
+                                            <div class="user-profile-ov">
+                                                <h3><a>City</a></h3>
+                                                <h4>{{userpage.city}}</h4>
+            
+                                            </div>
+                                        </mat-tab>
+                                        <mat-tab class="product-feed-tab current">
+                                            <ng-template mat-tab-label>
+                                                <mat-icon class="example-tab-icon">add_to_photos</mat-icon>
+                                                Portfolio
+                                              </ng-template>
+                                            <div class="portfolio-gallery-sec">
+                                                <h3>Portfolio</h3>
+                                                <div class="gallery_pf">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4 col-sm-6 col-6"
+                                                            *ngFor="let images of postsImages">
+                                                            <div class="gallery_pt">
+                                                                <img src="https://localhost:8443/api/posts/{{images.idpost}}/image"
+                                                                    alt="">
+                                                            </div>
+                                                            <!--gallery_pt end-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--gallery_pf end-->
+                                            </div>
+                                        </mat-tab>
+                                    </mat-tab-group>
                                 </div><!-- tab-feed end-->
                             </div>
-                            <!--user-tab-sec end-->
-                            <div class="product-feed-tab current" id="feed-dd">
-                                <div class="posts-section" id="myUL">
-                                    <div class="post-bar" *ngFor="let post of posts">
-                                        <div class="post_topbar">
-                                            <div class="row usy-dt">
-                                                <div class="user-post-icon">
-                                                    <img src="https://localhost:8443/api/users/{{post.post.iduser.idusers}}/imageProfile"
-                                                        alt="">
-                                                </div>
-                                                <div class="usy-name">
-                                                    <h3>{{post.post.iduser.username}}</h3>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="epi-sec">
-                                            <ul class="descp">
-                                                <li><img src="../../../assets/images/icon8.png" alt=""><span>{{post.typeUser}}</span></li>
-                                                <li><img src="../../../assets/images/icon9.png" alt=""><span>{{post.post.iduser.city}}</span></li>
-                                            </ul>
-                                            <ul class="bk-links">
-                                                <li><a id="{{post.post.idpost}}" title=""><i
-                                                            (click)="like('{{post.post.idpost}}')"
-                                                            class="{{post.like}}"></i></a></li>
-                                                <li><a [routerLink]="['/new/messages', { id: post.post.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i class="la la-envelope"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="job_descp">
-                                            <h3>{{post.title}}</h3>
-                                            <div class="row">
-                                                <ul class="image-store">
-                                                    <li><img src="https://localhost:8443/api/posts/{{post.post.idpost}}/image" alt=""></li>
-                                                </ul>
-                                            </div>
-                                            <div class="row">
-                                                <ul class="description-store">
-                                                    <li>
-                                                        <p>{{post.post.description}}</p>
-                                                    </li>
-                                                </ul>
-                                            </div><br>
-                                            <a id="readmore{{post.post.idpost}}"
-                                                class="btn btn-primary"
-                                                (click)="readmore('{{post.post.idpost}}')" title="">view more</a>
-                                        </div>
-                                    </div>
-
-                                    <!--process-comm end-->
-                                </div>
-                                <div class="process-comm postSpinner" (click)="loadPosts()">
-                                    <div class="spinner postsUser">
-                                        <div class="bounce1"></div>
-                                        <div class="bounce2"></div>
-                                        <div class="bounce3"></div>
-                                    </div>
-                                </div>
-                                <!--posts-section end-->
-                            </div>
-                            <!--product-feed-tab end-->
-                            <div class="product-feed-tab" id="info-dd">
-                                <div class="col-lg-20">
-                                    <div class="main-ws-sec">
-                                        <div class="posts-section" id="myULS">
-                                            <div class="post-bar" *ngFor="let product of products">
-                                                <div class="post_topbar">
-                                                    <div class="usy-dt">
-                                                        <img src="https://localhost:8443/api/users/{{product.product.iduser.idusers}}/imageProfile"
-                                                            alt="">
-                                                        <div class="usy-name">
-                                                            <h3>{{product.product.iduser.username}}</h3>
-                                                        </div>
-                                                    </div>
-            
-                                                </div>
-                                                <div class="epi-sec">
-                                                    <ul class="descp">
-                                                        <li><img src="../../../assets/images/icon8.png" alt=""><span>{{product.typeUser}}</span></li>
-                                                        <li><img src="../../../assets/images/icon9.png" alt=""><span>{{product.product.iduser.city}}</span></li>
-                                                    </ul>
-                                                    <ul class="bk-links">
-                                                        <li><a id="product{{product.product.idproduct}}" title=""><i (click)="mark('{{product.product.idproduct}}')" class="{{product.bookamark}}"></i></a></li>
-                                                        <li><a [routerLink]="['/new/messages', { id: product.product.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i
-                                                                    class="la la-envelope"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="job_descp">
-                                                    <h3>{{product.product.title}}</h3>
-                                                    <div class="row">
-                                                        <div id="carouselExampleControls-{{product.product.idproduct}}" class="carousel slide" data-ride="carousel">
-                                                            <div class="carousel-inner">
-                                                              <div class="carousel-item active" *ngIf="product.product.img0">
-                                                                <img class="img-thumbnail" src="https://localhost:8443/api/products/{{product.product.idproduct}}/image0" alt="First slide">
-                                                              </div>
-                                                              <div class="carousel-item" *ngIf="product.product.img1">
-                                                                <img class="img-thumbnail " src="https://localhost:8443/api/products/{{product.product.idproduct}}/image1" alt="Second slide">
-                                                              </div>
-                                                              <div class="carousel-item" *ngIf="product.product.img2">
-                                                                <img class="img-thumbnail " src="https://localhost:8443/api/products/{{product.product.idproduct}}/image2" alt="Third slide">
-                                                              </div>
-                                                            </div>
-                                                            <a class="carousel-control-prev" href="#carouselExampleControls-{{product.product.idproduct}}" role="button" data-slide="prev">
-                                                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                              <span class="sr-only">Previous</span>
-                                                            </a>
-                                                            <a class="carousel-control-next" href="#carouselExampleControls-{{product.product.idproduct}}" role="button" data-slide="next">
-                                                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                              <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <ul class="description-store">
-                                                            <li>
-                                                                <p>{{product.product.description}}
-                                                                    
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </div><br>
-                                                    <a id="readmore{{product.product.idproduct}}"
-                                                            class="btn btn-primary "
-                                                            (click)="readmore('{{product.product.idproduct}}')" title="">view more</a>
-                                                    <ul class="skill-tags">
-                                                        <li *ngIf="product.product.idtagone"><a href="#" title="">
-                                                                <p style="color:#040500" >{{product.product.idtagone.description}}
-                                                                </p>
-                                                            </a></li>
-                                                        <li *ngIf="product.product.idtagtwo"><a href="#" title="">
-                                                                <p style="color:#040500" >{{product.product.idtagtwo.description}}
-                                                                </p>
-                                                            </a></li>
-                                                        <li *ngIf="product.product.idtagthree"><a href="#" title="">
-                                                                <p style="color:#040500" >
-                                                                    {{product.product.idtagthree.description}}
-                                                                </p>
-                                                            </a></li>
-                                                        <li *ngIf="product.product.idtagfour"><a href="#" title="">
-                                                                <p style="color:#040500" >
-                                                                    {{product.product.idtagfour.description}}
-                                                                </p>
-                                                            </a></li>
-                                                        <li *ngIf="product.product.idtagfive"><a href="#" title="">
-                                                                <p style="color:#040500" >
-                                                                    {{product.product.idtagfive.description}}
-                                                                </p>
-                                                            </a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="job-status-bar" style="background-color:{{product.color}}">
-                                                    <div class="col-lg-3">
-                                                        <h3>{{product.product.status}}</h3>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <h3> {{product.product.price}} $ </h3>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="process-comm productSpinner" (click)="loadProducts()">
-                                            <div class="spinner productsUser">
-                                                <div class="bounce1"></div>
-                                                <div class="bounce2"></div>
-                                                <div class="bounce3"></div>
-                                            </div>
-                                        </div>
-                                        <!--posts-section end-->
-                                    </div>
-                                    <!--main-ws-sec end-->
-                                </div>
-                            </div>
-                            <!--product-feed-tab end-->
-                            <div class="product-feed-tab" id="portfolio-dd">
-                                <div class="portfolio-gallery-sec">
-                                    <h3>Portfolio</h3>
-                                    <div class="gallery_pf">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-6 col-6" *ngFor="let images of postsImages">
-                                                <div class="gallery_pt">
-                                                    <img src="https://localhost:8443/api/posts/{{images.idpost}}/image"
-                                                        alt="">
-                                                </div>
-                                                <!--gallery_pt end-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--gallery_pf end-->
-                                </div>
-                                <!--portfolio-gallery-sec end-->
-                            </div>
-                            <!--product-feed-tab end-->
-                            <div class="product-feed-tab" id="info-user">
-                            <div class="user-profile-ov">
-                                <h3><a>Resumen</a></h3>
-                                <p>{{userpage.userinfo}}</p>
-                            </div>
-                            <!--user-profile-ov end-->
-
-
-                            <div class="user-profile-ov">
-                                <h3><a>City</a></h3>
-                                <h4>{{userpage.city}}</h4>
-                                
-                            </div>
-                            <!--user-profile-ov end-->
-
-                        </div>
-                        <!--product-feed-tab end-->
                         </div>
                         <!--main-ws-sec end-->
                     </div>

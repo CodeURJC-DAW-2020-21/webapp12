@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
+import { Likes } from 'src/app/Class/Likes/likes';
 import { PostsModel } from 'src/app/Class/Models/posts-model';
 import { ProductsModel } from 'src/app/Class/Models/products-model';
 import { Posts } from 'src/app/Class/Posts/posts';
 import { Product } from 'src/app/Class/Product/product';
 import { Relations } from 'src/app/Class/Relations/relations';
 import { Users } from 'src/app/Class/Users/users';
+import { BookmarkService } from 'src/app/Services/Bookmarks/bookmark.service';
+import { LikesService } from 'src/app/Services/Likes/likes.service';
 import { PostsService } from 'src/app/Services/Posts/posts.service';
 import { ProductsService } from 'src/app/Services/Products/products.service';
 import { RelationsService } from 'src/app/Services/Relations/relations.service';
@@ -30,7 +34,7 @@ export class UserpageComponent implements OnInit {
   products: ProductsModel[] = [];
   postsImages: Posts[] = [];
 
-  constructor(private userService: UsersService, private postsService: PostsService, private productService: ProductsService, private relationService: RelationsService, private router: ActivatedRoute) { }
+  constructor(private userService: UsersService, private postsService: PostsService, private productService: ProductsService, private relationService: RelationsService, private likeService: LikesService, private bookmarkService: BookmarkService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.router.params.subscribe(
@@ -120,6 +124,57 @@ export class UserpageComponent implements OnInit {
         error => console.error(error)
       );
       $(".flww").css("background-color", "#e44d3a");
+    }
+  }
+
+  like(idpost: Number, post: Posts) {
+    var s = $("#" + idpost);
+    if (s.children().attr("class") == "la la-heart") {
+      this.likeService.deleteLike("" + idpost).subscribe(
+        response => {
+          console.log(response);
+          s.children().attr("class", "la la-heart-o");
+        },
+        error => console.error(error)
+      );
+    } else {
+      let like = new Likes();
+      like.iduser = this.userService.getUserInfo();
+      like.idpost = post
+      this.likeService.registerLike(like).subscribe(
+        response => {
+          console.log(response);
+          s.children().attr("class", "la la-heart");
+        },
+        error => console.error(error)
+      );
+    }
+  }
+
+  readmore(idpost: Number) {
+    $("#readmore" + idpost).parent().children(".row").children(".description-store").toggleClass("show");
+  }
+
+  mark(idproduct: Number, product: Product) {
+    if ($("#product" + idproduct).children().attr("class") == "la la-bookmark") {
+      let mark: Bookmarks = new Bookmarks();
+      mark.idproduct = product;
+      mark.iduser = this.userService.getUserInfo();
+      this.bookmarkService.registerBookmark(mark).subscribe(
+        response => {
+          console.log(response);
+          $("#product" + idproduct).children().attr("class", "la la-check-circle");
+        },
+        error => console.error(error)
+      ); 
+    } else {
+      this.bookmarkService.deleteBookmark(""+idproduct).subscribe(
+        response => {
+          console.log(response);
+          $("#product" + idproduct).children().attr("class", "la la-bookmark");
+        },
+        error => console.error(error)
+      );
     }
   }
 
