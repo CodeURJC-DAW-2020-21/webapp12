@@ -78,7 +78,10 @@ public class UsersRestController {
 	})
 	@JsonView(Users.Detailed.class)
 	@GetMapping("/")
-	public List<Users> getAllUsers(){
+	public List<Users> getAllUsers(@RequestParam(required = false) String page){
+		if(page != null) {
+			return userService.getUsersPage(PageRequest.of(Integer.parseInt(page), 10 , Sort.by("username").ascending())).getContent();
+		}
 		return userService.getAll();
 	}
 

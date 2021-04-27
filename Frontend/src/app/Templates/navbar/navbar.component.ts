@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Message } from 'src/app/Class/Messages/message';
 import { Users } from 'src/app/Class/Users/users';
 import { ChatServiceService } from 'src/app/Services/Chat/chat-service.service';
 import { UsersService } from 'src/app/Services/Users/users.service';
+declare var SockJS;
+declare var Stomp;
 
 @Component({
   selector: 'app-navbar',
@@ -13,8 +16,12 @@ export class NavbarComponent implements OnInit {
 
   user: Users;
   admin: boolean = true;
-  
-  constructor(private userService: UsersService, private router: Router, private chat: ChatServiceService) { }
+  page: number = 0;
+  public notifys: Message[] = [];
+
+  constructor(private userService: UsersService, private router: Router) { 
+    this.connect(userService.getUserInfo().username);
+  }
 
   ngOnInit(): void {
     if (this.userService.getLogin() == false) {
@@ -85,7 +92,33 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  
-  
+  connect(user: String){
+    let that = this;
+    let sokect = new SockJS('/chat');
+    let stompClient = Stomp.over(sokect);
+    stompClient.connect({}, function(frame) {
+      console.log(frame);
+      stompClient.subscribe('/message/'+user, (message) => {
+        if (message.body) {
+          that.page++;
+          let data = JSON.parse(message.body);
+          let messag = new Message();
+          messag.fromLogin = data.fromLogin;
+          messag.time = data.time;
+          messag.message = data.message;
+          if(that.page <= 3){
+            that.notifys.push(messag);
+          }else{
+            that.notifys.shift();
+            that.notifys.push(messag);
+          }
+        }
+      });
+    });
+  }
+
+  clearNotify(){
+    this.notifys = [];
+  }
 
 }

@@ -9,6 +9,7 @@ import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
 import { ProductsModel } from 'src/app/Class/Models/products-model';
 import { PostsModel } from 'src/app/Class/Models/posts-model';
 import { Message } from 'src/app/Class/Messages/message';
+import { Messages } from 'src/app/Class/Models/messages';
 
 
 @Injectable({
@@ -43,7 +44,7 @@ export class UsersService {
   }
 
   getUsersPage(page: String) {
-    return this.http.get("/api/users/?page=" + page);
+    return this.http.get<Users[]>("/api/users/?page=" + page);
   }
 
   getUser(id: String) {
@@ -132,7 +133,7 @@ export class UsersService {
   }
 
   getChats(id: Number,username:String) {
-    return this.http.get<Message[]>("/api/users/"+id+"/chat?username="+username);
+    return this.http.get<Messages[]>("/api/users/"+id+"/chat?username="+username);
   }
 
   setAdmin(admin: boolean){
