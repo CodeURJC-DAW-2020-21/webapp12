@@ -18,6 +18,7 @@ import { UserpageComponent } from './Templates/userpage/userpage.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './Templates/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
