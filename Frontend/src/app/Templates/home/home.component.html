@@ -158,7 +158,7 @@
                                             </ul>
                                             <ul class="bk-links">
                                                 <li><a id="{{post.post.idpost}}" title=""><i
-                                                            (click)="like('{{post.post.idpost}}')"
+                                                            (click)="like(post.post.idpost,post.post)"
                                                             class="{{post.like}}"></i></a></li>
                                                 <li><a [routerLink]="['/new/messages', { id: post.post.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i class="la la-envelope"></i></a></li>
                                             </ul>
@@ -179,7 +179,7 @@
                                             </div><br>
                                             <a id="readmore{{post.post.idpost}}"
                                                 class="btn btn-primary"
-                                                (click)="readmore('{{post.post.idpost}}')" title="">view more</a>
+                                                (click)="readmore(post.post.idpost)" title="">view more</a>
                                         </div>
                                     </div>
                             </div>

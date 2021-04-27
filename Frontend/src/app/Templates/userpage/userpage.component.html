@@ -170,7 +170,7 @@
                                             </ul>
                                             <ul class="bk-links">
                                                 <li><a id="{{post.post.idpost}}" title=""><i
-                                                            (click)="like('{{post.post.idpost}}')"
+                                                            (click)="like(post.post.idpost, post.post)"
                                                             class="{{post.like}}"></i></a></li>
                                                 <li><a [routerLink]="['/new/messages', { id: post.post.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i class="la la-envelope"></i></a></li>
                                             </ul>
@@ -191,7 +191,7 @@
                                             </div><br>
                                             <a id="readmore{{post.post.idpost}}"
                                                 class="btn btn-primary"
-                                                (click)="readmore('{{post.post.idpost}}')" title="">view more</a>
+                                                (click)="readmore(post.post.idpost)" title="">view more</a>
                                         </div>
                                     </div>
 
@@ -228,7 +228,7 @@
                                                         <li><img src="../../../assets/images/icon9.png" alt=""><span>{{product.product.iduser.city}}</span></li>
                                                     </ul>
                                                     <ul class="bk-links">
-                                                        <li><a id="product{{product.product.idproduct}}" title=""><i (click)="mark('{{product.product.idproduct}}')" class="{{product.bookamark}}"></i></a></li>
+                                                        <li><a id="product{{product.product.idproduct}}" title=""><i (click)="mark(product.product.idproduct, product.product)" class="{{product.bookamark}}"></i></a></li>
                                                         <li><a [routerLink]="['/new/messages', { id: product.product.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i
                                                                     class="la la-envelope"></i></a></li>
                                                     </ul>
@@ -269,7 +269,7 @@
                                                     </div><br>
                                                     <a id="readmore{{product.product.idproduct}}"
                                                             class="btn btn-primary "
-                                                            (click)="readmore('{{product.product.idproduct}}')" title="">view more</a>
+                                                            (click)="readmore(product.product.idproduct)" title="">view more</a>
                                                     <ul class="skill-tags">
                                                         <li *ngIf="product.product.idtagone"><a href="#" title="">
                                                                 <p style="color:#040500" >{{product.product.idtagone.description}}

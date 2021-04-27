@@ -10,19 +10,18 @@ export class LikesService {
   constructor(private http: HttpClient) { }
 
   getAllLikes() {
-    return this.http.get("/api/likes/");
+    return this.http.get<Likes[]>("/api/likes/");
   }
 
   registerLike(like: Likes) {
-    return this.http.post("/api/likes/", like);
+    return this.http.post<Likes>("/api/likes/", like);
   }
 
   getLike(id: String) {
-    return this.http.get("/api/likes/" + id);
+    return this.http.get<Likes>("/api/likes/" + id);
   }
 
   deleteLike(id: String) {
-    return this.http.delete("/api/likes/" + id);
+    return this.http.delete<Likes>("/api/likes/" + id);
   }
-
 }

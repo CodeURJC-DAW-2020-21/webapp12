@@ -13,6 +13,8 @@ import { ProductsService } from 'src/app/Services/Products/products.service';
 import { Product } from 'src/app/Class/Product/product';
 import { post } from 'jquery';
 import { ProductsModel } from 'src/app/Class/Models/products-model';
+import { LikesService } from 'src/app/Services/Likes/likes.service';
+import { Likes } from 'src/app/Class/Likes/likes';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +29,7 @@ export class HomeComponent implements OnInit {
   bookmarks: Bookmarks[] = [];
   index: PostsModel[] = [];
   tags: Tags[] = [];
-  mostFollow : Users[] = [];
+  mostFollow: Users[] = [];
   page: number = 0;
   product: Product = new Product();
   post: Posts = new Posts();
@@ -35,27 +37,27 @@ export class HomeComponent implements OnInit {
   imageProduct0: FormData;
   imageProduct1: FormData;
   imageProduct2: FormData;
-  
+
   tag: Boolean;
   tag1: Boolean;
   tag2: Boolean;
   tag3: Boolean;
   tag4: Boolean;
 
-  constructor(private user: UsersService, private postsService: PostsService, private productService: ProductsService, private bookmarksService: BookmarkService, private router: Router) { }
+  constructor(private userService: UsersService, private postsService: PostsService, private productService: ProductsService, private bookmarksService: BookmarkService, private likeService: LikesService, private router: Router) { }
 
   ngOnInit(): void {
     this.page = 0;
-    this.userInfo = this.user.getUserInfo();
-    this.user.getUserFollowings("" + this.userInfo.idusers).subscribe(
+    this.userInfo = this.userService.getUserInfo();
+    this.userService.getUserFollowings("" + this.userInfo.idusers).subscribe(
       response => this.following = response.length,
       error => console.error(error)
     );
-    this.user.getUserFollowers("" + this.userInfo.idusers).subscribe(
+    this.userService.getUserFollowers("" + this.userInfo.idusers).subscribe(
       response => this.followers = response.length,
       error => console.error(error)
     );
-    this.user.getBookmarks("" + this.userInfo.idusers).subscribe(
+    this.userService.getBookmarks("" + this.userInfo.idusers).subscribe(
       response => this.bookmarks = response,
       error => console.error(error)
     );
@@ -63,11 +65,11 @@ export class HomeComponent implements OnInit {
       response => this.tags = response,
       error => console.error(error)
     );
-    this.user.getRanking().subscribe(
+    this.userService.getRanking().subscribe(
       response => this.mostFollow = response,
       error => console.error(error)
     );
-    this.user.getPostModels(this.userInfo.idusers, this.page).subscribe(
+    this.userService.getPostModels(this.userInfo.idusers, this.page).subscribe(
       response => this.index = response,
       error => console.error(error)
     );
@@ -108,17 +110,37 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  like(idpost: Number) {
-
+  like(idpost: Number, post: Posts) {
+    var s = $("#" + idpost);
+    if (s.children().attr("class") == "la la-heart") {
+      this.likeService.deleteLike("" + idpost).subscribe(
+        response => {
+          console.log(response);
+          s.children().attr("class", "la la-heart-o");
+        },
+        error => console.error(error)
+      );
+    } else {
+      let like = new Likes();
+      like.iduser = this.userService.getUserInfo();
+      like.idpost = post
+      this.likeService.registerLike(like).subscribe(
+        response => {
+          console.log(response);
+          s.children().attr("class", "la la-heart");
+        },
+        error => console.error(error)
+      );
+    }
   }
 
   readmore(idpost: Number) {
-
+    $("#readmore" + idpost).parent().children(".row").children(".description-store").toggleClass("show");
   }
 
   load() {
     this.page++;
-    this.user.getPostModels(this.userInfo.idusers, this.page).subscribe(
+    this.userService.getPostModels(this.userInfo.idusers, this.page).subscribe(
       response => {
         response.forEach(element => {
           this.index.push(element);
@@ -168,7 +190,7 @@ export class HomeComponent implements OnInit {
   }
 
   uploadPosts() {
-    this.post.iduser = this.user.getUserInfo();
+    this.post.iduser = this.userService.getUserInfo();
     console.log(this.post);
     this.postsService.registerPost(this.post).subscribe(
       response => {
@@ -186,7 +208,7 @@ export class HomeComponent implements OnInit {
                     newposts.typeUser = "company";
                   }
                   newposts.like = "la la-heart-o";
-                  newposts.post =  this.post;
+                  newposts.post = this.post;
                   this.index.unshift(newposts);
                   $(".post-popup.pst-pj").removeClass("active");
                   $(".wrapper").removeClass("overlay");
@@ -205,7 +227,7 @@ export class HomeComponent implements OnInit {
   }
 
   uploadProduct() {
-    this.product.iduser = this.user.getUserInfo();
+    this.product.iduser = this.userService.getUserInfo();
     console.log(this.product);
     let tagone: Tags;
     let tagtwo: Tags;
@@ -266,7 +288,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  userpage(id: Number){
+  userpage(id: Number) {
     this.router.navigate(['/new/userpage', { id: id }]);
   }
 }
