@@ -12,7 +12,8 @@
         "changeOrigin": true
     },
     "/chat/*": {
-        "target": "https://localhost:8443/socket.io/",
+        "target": "https://localhost:8443/",
+        "secure": false,
         "ws": true,
         "logLevel": "debug"
       }
