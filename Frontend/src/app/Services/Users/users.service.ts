@@ -52,7 +52,7 @@ export class UsersService {
   }
 
   replaceUser(id: String, user: Users) {
-    return this.http.put("/api/users/" + id, user);
+    return this.http.put<Users>("/api/users/" + id, user);
   }
 
   deleteUser(id: String) {
