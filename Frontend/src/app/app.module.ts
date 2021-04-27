@@ -47,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     MatTabsModule,
     MatIconModule,
+    ChartModule,
     BrowserAnimationsModule
   ],
   providers: [],
