@@ -19,8 +19,8 @@
                                 <!--user-pro-img end-->
                                 <div class="user_pro_status">
                                     <ul class="flw-hr">
-                                        <li><a id="follow" title="" class="flww"
-                                                style="background-color: {{follow}};"><i class="la la-plus"></i>
+                                        <li><a (click)="followFunction()" title="" class="flww"
+                                                style="background-color: {{follow}}"><i class="la la-plus"></i>
                                                 Follow</a></li>
                                     </ul>
                                     <ul class="flw-status">
@@ -172,7 +172,7 @@
                                                 <li><a id="{{post.post.idpost}}" title=""><i
                                                             (click)="like('{{post.post.idpost}}')"
                                                             class="{{post.like}}"></i></a></li>
-                                                <li><a href="/messages?to={{post.post.iduser.username}}" title=""><i class="la la-envelope"></i></a></li>
+                                                <li><a [routerLink]="['/new/messages', { id: post.post.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i class="la la-envelope"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="job_descp">
@@ -229,7 +229,7 @@
                                                     </ul>
                                                     <ul class="bk-links">
                                                         <li><a id="product{{product.product.idproduct}}" title=""><i (click)="mark('{{product.product.idproduct}}')" class="{{product.bookamark}}"></i></a></li>
-                                                        <li><a href="./messages?to={{product.product.iduser.username}}" title=""><i
+                                                        <li><a [routerLink]="['/new/messages', { id: product.product.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i
                                                                     class="la la-envelope"></i></a></li>
                                                     </ul>
                                                 </div>
@@ -362,7 +362,7 @@
                     <div class="col-lg-3">
                         <div class="right-sidebar">
                             <div class="message-btn">
-                                <a href="./messages?to={{userpage.username}}" title=""><i class="fa fa-envelope"></i>
+                                <a [routerLink]="['/new/messages', { id:userpage.idusers}]" routerLinkActive="router-link-active" title=""><i class="fa fa-envelope"></i>
                                     Message</a>
                             </div>
                             <div class="widget widget-portfolio">

@@ -4,6 +4,7 @@ import { PostsModel } from 'src/app/Class/Models/posts-model';
 import { ProductsModel } from 'src/app/Class/Models/products-model';
 import { Posts } from 'src/app/Class/Posts/posts';
 import { Product } from 'src/app/Class/Product/product';
+import { Relations } from 'src/app/Class/Relations/relations';
 import { Users } from 'src/app/Class/Users/users';
 import { PostsService } from 'src/app/Services/Posts/posts.service';
 import { ProductsService } from 'src/app/Services/Products/products.service';
@@ -17,18 +18,19 @@ import { UsersService } from 'src/app/Services/Users/users.service';
 })
 export class UserpageComponent implements OnInit {
 
-  pagePosts : number = 0;
-  pageProducts : number = 0;
+  pagePosts: number = 0;
+  pageProducts: number = 0;
   userpage: Users;
   idFollow: Number = 1;
   follow: String = "#53D690";
   following: Number;
   followers: Number;
+  relationId: Number;
   posts: PostsModel[] = [];
   products: ProductsModel[] = [];
   postsImages: Posts[] = [];
 
-  constructor(private userService: UsersService, private postsService: PostsService, private productService: ProductsService, private relationService: RelationsService,private router: ActivatedRoute) { }
+  constructor(private userService: UsersService, private postsService: PostsService, private productService: ProductsService, private relationService: RelationsService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.router.params.subscribe(
@@ -42,45 +44,46 @@ export class UserpageComponent implements OnInit {
       response => this.followers = response.length,
       error => console.error(error)
     );
-    this.userService.getUser(""+this.idFollow).subscribe(
-      response =>{ 
-        this.userpage= response;
-        this.userService.getPostModelsUserPage(this.userService.getUserInfo().idusers,this.pagePosts,this.userpage.username).subscribe(
+    this.userService.getUser("" + this.idFollow).subscribe(
+      response => {
+        this.userpage = response;
+        this.userService.getPostModelsUserPage(this.userService.getUserInfo().idusers, this.pagePosts, this.userpage.username).subscribe(
           response => this.posts = response,
           error => console.error(error)
         );
-        this.userService.getProductModelsUserPage(this.userService.getUserInfo().idusers,this.pageProducts,this.userpage.username).subscribe(
+        this.userService.getProductModelsUserPage(this.userService.getUserInfo().idusers, this.pageProducts, this.userpage.username).subscribe(
           response => this.products = response,
           error => console.error(error)
         );
-        this.userService.getPosts(""+this.idFollow).subscribe(
+        this.userService.getPosts("" + this.idFollow).subscribe(
           response => this.postsImages = response,
           error => console.error(error)
         );
         this.relationService.getRelations().subscribe(
-          response =>{
+          response => {
             response.forEach(element => {
-              if( (element.userone.idusers == this.userService.getUserInfo().idusers)&&(element.usertwo.idusers == this.idFollow) ){
+              if ((element.userone.idusers == this.userService.getUserInfo().idusers) && (element.usertwo.idusers == this.idFollow)) {
                 this.follow = "#e44d3a";
+                this.relationId = element.iduserrelation;
               }
             });
           },
           error => console.error(error)
         );
-    
+
       },
-       error => console.error(error)
+      error => console.error(error)
     );
 
-    
-    
-    
+
+
+
   }
 
-  loadPosts(){
+  loadPosts() {
     this.pagePosts++;
-    this.userService.getPostModelsUserPage(this.userService.getUserInfo().idusers,this.pagePosts,this.userpage.username).subscribe(
-      response =>{
+    this.userService.getPostModelsUserPage(this.userService.getUserInfo().idusers, this.pagePosts, this.userpage.username).subscribe(
+      response => {
         response.forEach(element => {
           this.posts.push(element);
         });
@@ -89,16 +92,35 @@ export class UserpageComponent implements OnInit {
     );
   }
 
-  loadProducts(){
+  loadProducts() {
     this.pageProducts++;
-    this.userService.getProductModelsUserPage(this.userService.getUserInfo().idusers,this.pageProducts,this.userpage.username).subscribe(
-      response =>{
+    this.userService.getProductModelsUserPage(this.userService.getUserInfo().idusers, this.pageProducts, this.userpage.username).subscribe(
+      response => {
         response.forEach(element => {
           this.products.push(element);
         });
       },
       error => console.error(error)
     );
+  }
+
+  followFunction() {
+    let relation: Relations = new Relations();
+    relation.userone = this.userService.getUserInfo();
+    relation.usertwo = this.userpage;
+    if (this.follow == "#e44d3a") {
+      this.relationService.deleteRelations("" + this.relationId).subscribe(
+        response => console.log(response),
+        error => console.error(error)
+      );
+      $(".flww").css("background-color", "#53D690");
+    } else {
+      this.relationService.registerRelation(relation).subscribe(
+        response => console.log(response),
+        error => console.error(error)
+      );
+      $(".flww").css("background-color", "#e44d3a");
+    }
   }
 
 }

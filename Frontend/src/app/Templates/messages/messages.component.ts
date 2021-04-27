@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Messages } from 'src/app/Class/Models/messages';
 import { Users } from 'src/app/Class/Users/users';
 import { UsersService } from 'src/app/Services/Users/users.service';
@@ -21,7 +22,20 @@ export class MessagesComponent implements OnInit {
   stompClient;
   page: number = 0;
 
-  constructor(private userService: UsersService) {
+  constructor(private userService: UsersService, private router: ActivatedRoute) {
+    this.router.params.subscribe(
+      params => this.userService.getUser(params['id']).subscribe(
+        response => {
+          this.to = response.username;
+          this.select = response.username
+          this.userService.getChats(this.userService.getUserInfo().idusers,response.username).subscribe(
+            response => this.messages = response,
+            error => console.error(error)
+          );
+        },
+        error => console.error(error)
+      )
+    );
     this.username = userService.getUserInfo().username;
     this.userService.getUsersPage(""+this.page).subscribe(
       response => this.users = response,
