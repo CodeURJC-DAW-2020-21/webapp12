@@ -160,7 +160,7 @@
                                                 <li><a id="{{post.post.idpost}}" title=""><i
                                                             (click)="like('{{post.post.idpost}}')"
                                                             class="{{post.like}}"></i></a></li>
-                                                <li><a href="/messages?to={{post.post.iduser.username}}" title=""><i class="la la-envelope"></i></a></li>
+                                                <li><a [routerLink]="['/new/messages', { id: post.post.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i class="la la-envelope"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="job_descp">
@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="jobs-list" *ngFor="let bookmark of bookmarks">
                                     <div class="job-info">
-                                        <a href="./messages?to={{bookmark.iduser.username}}" title="" >
+                                        <a [routerLink]="['/new/messages', { id: bookmark.idproduct.idusers }]" routerLinkActive="router-link-active"  title="" >
                                             <div class="job-details">
                                                 <h3>{{bookmark.idproduct.title}}</h3>
                                                 <p></p>
@@ -230,7 +230,7 @@
                                         <div class="sgt-text">
                                             <h4>{{user.username}}</h4>
                                         </div>
-                                        <span><a href="/messages?to={{user.username}}"><i class="la la-envelope"></i></a></span>
+                                        <span><a [routerLink]="['/new/messages', { id: user.idusers }]" routerLinkActive="router-link-active"><i class="la la-envelope"></i></a></span>
                                     </div>
                                     <div class="view-more">
                                         <a onclick="viewMoreSuggestion()" title="">View More</a>

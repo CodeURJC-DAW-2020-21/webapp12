@@ -15,7 +15,7 @@ export class RelationsService {
   }
 
   registerRelation(relation: Relations) {
-    return this.http.post("/api/relations/", relation);
+    return this.http.post<Relations>("/api/relations/", relation);
   }
 
   deleteRelations(id: String) {
@@ -23,7 +23,7 @@ export class RelationsService {
   }
 
   getRelationsByID(id: String) {
-    return this.http.get("/api/relations/" + id);
+    return this.http.get<Relations>("/api/relations/" + id);
   }
 
 }
