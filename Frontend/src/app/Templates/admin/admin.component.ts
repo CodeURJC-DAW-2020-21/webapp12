@@ -10,12 +10,49 @@ import { StatisticsService } from 'src/app/Services/Statistics/statistics.servic
 export class AdminComponent implements OnInit {
 
   statitics: Statistics = new Statistics();
-
-  constructor(private statiticService: StatisticsService) { }
+  
+  
+  data: any;
+  data2: any;
+  constructor(private statiticService: StatisticsService) { 
+    
+  }
 
   ngOnInit(): void {
     this.statiticService.getStatistics().subscribe(
-      response => this.statitics = response,
+      response => {
+         this.statitics = response;
+         this.data = {
+          labels: ['USER','COMPANIES'],
+          datasets: [
+              {
+                  data: [this.statitics.customers, this.statitics.companies],
+                  backgroundColor: [
+                      "#E74C3C",
+                      "#007bff"
+                  ],
+                  hoverBackgroundColor: [
+                      "#E74C3C",
+                      "#007bff"
+                  ]
+              }]    
+          };
+          this.data2 = {
+            labels: ['POSTS','PRODUCTS'],
+            datasets: [
+                {
+                    data: [this.statitics.posts, this.statitics.products],
+                    backgroundColor: [
+                        "#E74C3C",
+                        "#007bff"
+                    ],
+                    hoverBackgroundColor: [
+                        "#E74C3C",
+                        "#007bff"
+                    ]
+                }]    
+            };
+        },
       error => console.error(error)
     );
 
