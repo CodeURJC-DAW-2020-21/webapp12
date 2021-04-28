@@ -113,13 +113,23 @@ export class HomeComponent implements OnInit {
   like(idpost: Number, post: Posts) {
     var s = $("#" + idpost);
     if (s.children().attr("class") == "la la-heart") {
-      this.likeService.deleteLike("" + idpost).subscribe(
+      this.likeService.getAllLikes().subscribe(
         response => {
-          console.log(response);
-          s.children().attr("class", "la la-heart-o");
+          response.forEach(element => {
+            if ((element.iduser.idusers == this.userService.getUserInfo().idusers) && (element.idpost.idpost == post.idpost)) {
+              this.likeService.deleteLike("" + element.idlike).subscribe(
+                response => {
+                  console.log(response);
+                  s.children().attr("class", "la la-heart-o");
+                },
+                error => console.error(error)
+              );
+            }
+          });
         },
         error => console.error(error)
       );
+
     } else {
       let like = new Likes();
       like.iduser = this.userService.getUserInfo();

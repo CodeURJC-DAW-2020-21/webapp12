@@ -10,7 +10,7 @@ export class BookmarkService {
   constructor(private http: HttpClient) { }
 
   getAllBookmarks() {
-    return this.http.get("/api/bookmarks/");
+    return this.http.get<Bookmarks[]>("/api/bookmarks/");
   }
 
   registerBookmark(bookmark: Bookmarks) {
