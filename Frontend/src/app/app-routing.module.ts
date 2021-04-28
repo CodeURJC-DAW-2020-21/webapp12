@@ -4,7 +4,6 @@ import { HomeComponent } from './Templates/home/home.component';
 import { AdminComponent } from './Templates/admin/admin.component';
 import { CompaniesComponent } from './Templates/companies/companies.component';
 import { MessagesComponent } from './Templates/messages/messages.component';
-import { MyprofilefeedComponent } from './Templates/myprofilefeed/myprofilefeed.component';
 import { ProfileaccountsettingsComponent } from './Templates/profileaccountsettings/profileaccountsettings.component';
 import { ProfilesComponent } from './Templates/profiles/profiles.component';
 import { StoreComponent } from './Templates/store/store.component';
@@ -18,7 +17,6 @@ const routes: Routes = [
   {path:'new/home',component: HomeComponent},
   {path:'new/companies',component: CompaniesComponent},
   {path:'new/messages',component: MessagesComponent},
-  {path:'new/myprofilefeed',component: MyprofilefeedComponent},
   {path:'new/settings',component: ProfileaccountsettingsComponent},
   {path:'new/profiles',component: ProfilesComponent},
   {path:'new/store',component: StoreComponent},

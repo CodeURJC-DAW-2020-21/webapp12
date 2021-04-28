@@ -10,7 +10,6 @@ import { ForgotPassComponent } from './Templates/forgot-pass/forgot-pass.compone
 import { AdminComponent } from './Templates/admin/admin.component';
 import { CompaniesComponent } from './Templates/companies/companies.component';
 import { MessagesComponent } from './Templates/messages/messages.component';
-import { MyprofilefeedComponent } from './Templates/myprofilefeed/myprofilefeed.component';
 import { ProfileaccountsettingsComponent } from './Templates/profileaccountsettings/profileaccountsettings.component';
 import { ProfilesComponent } from './Templates/profiles/profiles.component';
 import { StoreComponent } from './Templates/store/store.component';
@@ -32,7 +31,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminComponent,
     CompaniesComponent,
     MessagesComponent,
-    MyprofilefeedComponent,
     ProfileaccountsettingsComponent,
     ProfilesComponent,
     StoreComponent,

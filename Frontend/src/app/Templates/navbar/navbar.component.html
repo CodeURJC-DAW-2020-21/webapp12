@@ -47,13 +47,13 @@
                                 <a id="clearbutton" (click)="clearNotify()" title="">Clear all</a>
                             </div>
                             <div class="nott-list">
-                                <a *ngFor="let notify of notifys"  href="/messages?to={{ notify.fromLogin}}" title="">
+                                <a *ngFor="let notify of notifys"  title="">
                                     <div id="new' + data.fromLogin + '" class="notfication-details">
                                         <div class="noty-user-img"><img
                                                 src="https://localhost:8443/imageprofile/{{ notify.fromLogin}}" alt="">
                                         </div>
                                         <div class="notification-info">
-                                            <h3><a href="messages" title="">{{ notify.fromLogin}}</a> </h3>
+                                            <h3><a  title="">{{ notify.fromLogin}}</a> </h3>
                                             <p>{{notify.message}}</p><span>{{notify.time}}</span>
                                         </div>
                                         <!--notification-info -->
@@ -93,13 +93,7 @@
                     <ul class="us-links">
                         <li *ngIf="admin"><a [routerLink]="['/new/admin']" routerLinkActive="router-link-active">Admin
                                 Page</a></li>
-                        <li><a [routerLink]="['/new/myprofilefeed']" routerLinkActive="router-link-active"
-                                title="">Profile Setting</a></li>
-                        <li><a [routerLink]="['/new/settings']" routerLinkActive="router-link-active" title="">Account
-                                Setting</a></li>
-                        <li><a href="#" title="">Privacy</a></li>
-                        <li><a href="#" title="">Faqs</a></li>
-                        <li><a href="#" title="">Terms & Conditions</a></li>
+                        <li><a [routerLink]="['/new/settings']" routerLinkActive="router-link-active" title="">Settings</a></li>
                     </ul>
                     <form action="/logout" method="POST">
                         <h3 class="tc"><input (click)="logout()" id="uploadImage" type="button" value="Logout" /></h3>
