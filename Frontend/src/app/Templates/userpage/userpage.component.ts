@@ -130,10 +130,19 @@ export class UserpageComponent implements OnInit {
   like(idpost: Number, post: Posts) {
     var s = $("#" + idpost);
     if (s.children().attr("class") == "la la-heart") {
-      this.likeService.deleteLike("" + idpost).subscribe(
+      this.likeService.getAllLikes().subscribe(
         response => {
-          console.log(response);
-          s.children().attr("class", "la la-heart-o");
+          response.forEach(element => {
+            if ((element.iduser.idusers == this.userService.getUserInfo().idusers) && (element.idpost.idpost == post.idpost)) {
+              this.likeService.deleteLike("" + element.idlike).subscribe(
+                response => {
+                  console.log(response);
+                  s.children().attr("class", "la la-heart-o");
+                },
+                error => console.error(error)
+              );
+            }
+          });
         },
         error => console.error(error)
       );
@@ -168,10 +177,19 @@ export class UserpageComponent implements OnInit {
         error => console.error(error)
       ); 
     } else {
-      this.bookmarkService.deleteBookmark(""+idproduct).subscribe(
+      this.bookmarkService.getAllBookmarks().subscribe(
         response => {
-          console.log(response);
-          $("#product" + idproduct).children().attr("class", "la la-bookmark");
+          response.forEach(element => {
+            if( (element.iduser.idusers == this.userService.getUserInfo().idusers)&&(element.idproduct.idproduct == product.idproduct) ){
+              this.bookmarkService.deleteBookmark(""+element.idproductlist).subscribe(
+                response => {
+                  console.log(response);
+                  $("#product" + idproduct).children().attr("class", "la la-bookmark");
+                },
+                error => console.error(error)
+              );
+            }
+          });
         },
         error => console.error(error)
       );
