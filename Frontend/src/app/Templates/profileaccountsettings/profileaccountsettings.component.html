@@ -19,9 +19,9 @@
                                 role="tab" aria-controls="nav-modify" aria-selected="false"><i
                                     class="fa fa-address-card-o"></i>Modify Information</a>
 
-                            <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate"
-                                role="tab" aria-controls="nav-deactivate" aria-selected="false"><i
-                                    class="fa fa-ban"></i>Deactivate Account</a>
+                            <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
+                                href="#nav-deactivate" role="tab" aria-controls="nav-deactivate"
+                                aria-selected="false"><i class="fa fa-ban"></i>Deactivate Account</a>
 
 
 
@@ -59,6 +59,7 @@
                             </div>
                             <!--acc-setting end-->
                         </div>
+
                         <div class="tab-pane fade" id="nav-requests" role="tabpanel" aria-labelledby="nav-requests-tab">
                             <div class="acc-setting">
                                 <h3>Follows</h3>
@@ -86,6 +87,7 @@
                             </div>
                             <!--acc-setting end-->
                         </div>
+
                         <div class="tab-pane fade" id="nav-deactivate" role="tabpanel"
                             aria-labelledby="nav-deactivate-tab">
                             <div class="acc-setting">
@@ -94,14 +96,16 @@
                                     <div class="cp-field">
                                         <h5>Email</h5>
                                         <div class="cpp-fiel">
-                                            <input [(ngModel)]="email" type="text" name="email" placeholder="Email" required>
+                                            <input [(ngModel)]="email" type="text" name="email" placeholder="Email"
+                                                required>
                                             <i class="fa fa-envelope"></i>
                                         </div>
                                     </div>
                                     <div class="cp-field">
                                         <h5>Password</h5>
                                         <div class="cpp-fiel">
-                                            <input [(ngModel)]="password" type="password" name="pass" placeholder="Password" required>
+                                            <input [(ngModel)]="password" type="password" name="pass"
+                                                placeholder="Password" required>
                                             <i class="fa fa-lock"></i>
                                         </div>
                                     </div>
@@ -111,7 +115,8 @@
                                     </div>
                                     <div class="save-stngs pd3">
                                         <ul>
-                                            <li><button (click)="deleteAccount(userpage.idusers)" type="button">Save Setting</button></li>
+                                            <li><button (click)="deleteAccount(userpage.idusers)" type="button">Save
+                                                    Setting</button></li>
                                             <li><button type="reset">Restore Setting</button></li>
                                         </ul>
                                     </div>
@@ -120,29 +125,53 @@
                             </div>
                             <!--acc-setting end-->
                         </div>
+
                         <div class="tab-pane fade" id="nav-modify" role="tabpanel" aria-labelledby="nav-modify-tab">
                             <div class="acc-setting">
                                 <h3>Information User</h3>
                                 <form action="/modifyUser" method="POST" enctype="multipart/form-data">
                                     <div class="cp-field">
-                                        <h5>Image Profile</h5>
-                                        <div class="cpp-fiel">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-3 imgUp">
-                                                        <div class="imagePreview"
-                                                            style="background-image: url(https://localhost:8443/api/users/{{userpage.idusers}}/imageProfile);">
-                                                        </div>
-                                                        <label class="btn btn-primary">Upload<input
-                                                                (change)="imageSelectedUser($event)" name="image"
-                                                                type="file" class="uploadFile img" value="Upload Photo"
-                                                                style="width: 0px;height: 0px;overflow: hidden;"
-                                                                accept="image/*">
-                                                        </label>
-                                                        <i class="fa fa-times del" (click)="deleteImageProfile()"></i>
-                                                    </div><!-- col-2 -->
-                                                </div><!-- row -->
-                                            </div><!-- container -->
+                                        <div class="cp-field">
+                                            <h5>Image Profile</h5>
+                                            <div class="cpp-fiel">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-3 imgUp">
+                                                            <div class="imagePreview"
+                                                                style="background-image: url(https://localhost:8443/api/users/{{userpage.idusers}}/imageProfile);">
+                                                            </div>
+                                                            <label class="btn btn-primary">Upload<input
+                                                                    (change)="imageSelectedUser($event)" name="image"
+                                                                    type="file" class="uploadFile img" value="Upload Photo"
+                                                                    style="width: 0px;height: 0px;overflow: hidden;"
+                                                                    accept="image/*">
+                                                            </label>
+                                                            <i class="fa fa-times del" (click)="deleteImageProfile()"></i>
+                                                        </div><!-- col-2 -->
+                                                    </div><!-- row -->
+                                                </div><!-- container -->
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>Theme Profile</h5>
+                                            <div class="cpp-fiel">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-3 imgUp">
+                                                            <div class="imagePreview"
+                                                                style="background-image: url(https://localhost:8443/api/users/{{userpage.idusers}}/imageThemeProfile);">
+                                                            </div>
+                                                            <label class="btn btn-primary">Upload<input
+                                                                    (change)="imageThemeSelectedUser($event)" name="image"
+                                                                    type="file" class="uploadFile img" value="Upload Photo"
+                                                                    style="width: 0px;height: 0px;overflow: hidden;"
+                                                                    accept="image/*">
+                                                            </label>
+                                                            <i class="fa fa-times del" (click)="deleteImageThemeProfile()"></i>
+                                                        </div><!-- col-2 -->
+                                                    </div><!-- row -->
+                                                </div><!-- container -->
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="cp-field">
@@ -186,6 +215,14 @@
                                         </div>
                                     </div>
                                     <div class="cp-field">
+                                        <h5>User Info</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.userinfo" type="text" name="userinfo"
+                                                placeholder="{{userpage.userinfo}}">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
                                         <h5>Links</h5>
                                         <div class="cpp-fiel">
                                             <input [(ngModel)]="newUser.linkfacebook" type="text" name="linkfacebook"
@@ -214,6 +251,7 @@
                             </div>
                             <!--acc-setting end-->
                         </div>
+
                     </div>
                 </div>
             </div>

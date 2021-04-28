@@ -17,6 +17,7 @@ export class ProfileaccountsettingsComponent implements OnInit {
   bookmarks: Bookmarks[] = [];
   followers: Relations[] = [];
   imageProfile: FormData;
+  imageThemeProfile: FormData;
   newUser: Users = new Users();
   email: String;
   password: String;
@@ -88,7 +89,10 @@ export class ProfileaccountsettingsComponent implements OnInit {
     let formData = new FormData();
     formData.append("image", event.target.files[0]);
     this.imageProfile = formData;
-    console.log(this.imageProfile);
+    this.userService.uploadImageProfile("" + this.userService.getUserInfo().idusers, this.imageProfile).subscribe(
+      response =>  console.log(response),
+      error => console.error(error)
+    );
   }
 
   deleteImageProfile() {
@@ -96,32 +100,32 @@ export class ProfileaccountsettingsComponent implements OnInit {
     console.log(this.imageProfile);
   }
 
+  imageThemeSelectedUser(event) {
+    let formData = new FormData();
+    formData.append("image", event.target.files[0]);
+    this.imageThemeProfile = formData;
+    this.userService.uploadThemeProfile("" + this.userService.getUserInfo().idusers, this.imageThemeProfile).subscribe(
+      response =>  console.log(response),
+      error => console.error(error)
+    );
+  }
+
+  deleteImageThemeProfile() {
+    this.imageThemeProfile = undefined;
+    console.log(this.imageThemeProfile);
+  }
+
   modify() {
     this.userService.replaceUser("" + this.userService.getUserInfo().idusers, this.newUser).subscribe(
       response => {
         this.userService.setUserInfo(response);
-        if (this.imageProfile != undefined) {
-          this.userService.uploadImageProfile("" + response.idusers, this.imageProfile).subscribe(
-            response => {
-              this.userService.logout().subscribe(
-                response => {
-                  console.log(response);
-                  this.router.navigate(['new/signIn']);
-                },
-                error => console.error(error)
-              );  
-            },
-            error => console.error(error)
-          );   
-        }else{
-          this.userService.logout().subscribe(
-            response => {
-              console.log(response);
-              this.router.navigate(['new/signIn']);
-            },
-            error => console.error(error)
-          ); 
-        }
+        this.userService.logout().subscribe(
+          response => {
+            console.log(response);
+            this.router.navigate(['new/signIn']);
+          },
+          error => console.error(error)
+        ); 
       },
       error => console.error(error)
     );

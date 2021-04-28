@@ -226,6 +226,12 @@ public class UserService {
 			}
 		}
 		
+		if(user.getUserinfo() != null) {
+			if(!user.getUserinfo().isEmpty()) {
+				prev.setUserinfo(user.getUserinfo());
+			}
+		}
+		
 		if(user.getLinkfacebook() != null) {
 			if(!user.getLinkfacebook().isEmpty()) {
 				prev.setLinkfacebook(user.getLinkfacebook());
