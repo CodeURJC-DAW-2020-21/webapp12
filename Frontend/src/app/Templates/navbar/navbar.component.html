@@ -71,36 +71,25 @@
                 </ul>
             </nav>
             <!--nav end-->
-            <div class="menu-btn">
-                <a title=""><i class="fa fa-bars"></i></a>
-            </div>
+            <button mat-button [matMenuTriggerFor]="menu" class="user-info"><img src="https://localhost:8443/api/users/{{user.idusers}}/imageProfile" alt=""></button>
+            <mat-menu #menu="matMenu">
+             <button mat-menu-item>
+                <h3>Username: {{user.username}}</h3>               
+             </button>
+             <button mat-menu-item *ngIf="admin" [routerLink]="['/admin']" routerLinkActive="router-link-active">
+                <h3>Admin Page</h3>
+            </button>
+             <button mat-menu-item [routerLink]="['/settings']" routerLinkActive="router-link-active">
+                <h3>Settings</h3>
+             </button>
+             <button mat-menu-item (click)="logout()">
+                <h3>Log Out</h3>
+             </button>
+            </mat-menu>
+            
+
             <!--menu-btn end-->
-            <div class="user-account">
-                <div class="user-info">
-                    <img src="https://localhost:8443/api/users/{{user.idusers}}/imageProfile" alt="">
-                    <a href="#" title=""></a>
-                    <i class="la la-sort-down"></i>
-                </div>
-                <div class="user-account-settingss">
-                    <h3>Username</h3>
-                    <div class="search_form">
-                        <form *ngIf="user.username">
-                            <input type="text" name="search" placeholder="{{user.username}}" readonly>
-                        </form>
-                    </div>
-                    <!--search_form end-->
-                    <h3>Setting</h3>
-                    <ul class="us-links">
-                        <li *ngIf="admin"><a [routerLink]="['/admin']" routerLinkActive="router-link-active">Admin
-                                Page</a></li>
-                        <li><a [routerLink]="['/settings']" routerLinkActive="router-link-active" title="">Settings</a></li>
-                    </ul>
-                    <form action="/logout" method="POST">
-                        <h3 class="tc"><input (click)="logout()" id="uploadImage" type="button" value="Logout" /></h3>
-                    </form>
-                </div>
-                <!--user-account-settingss end-->
-            </div>
+           
         </div>
         <!--header-data end-->
     </div>
