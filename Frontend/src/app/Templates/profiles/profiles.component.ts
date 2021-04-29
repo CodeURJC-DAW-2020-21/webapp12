@@ -35,7 +35,7 @@ export class ProfilesComponent implements OnInit {
   }
 
   goUserpage(id: Number){
-    this.router.navigate(['/new/userpage', { id: id }]);
+    this.router.navigate(['/userpage', { id: id }]);
   }
 
 }

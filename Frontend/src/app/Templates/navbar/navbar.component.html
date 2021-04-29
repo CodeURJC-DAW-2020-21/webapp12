@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header-data">
             <div class="logo">
-                <a [routerLink]="['/new/home']" routerLinkActive="router-link-active" title=""><img
+                <a [routerLink]="['/home']" routerLinkActive="router-link-active" title=""><img
                         src="../assets/images/logo.png" alt=""></a>
             </div>
             <!--logo end-->
@@ -13,25 +13,25 @@
             <nav>
                 <ul>
                     <li>
-                        <a [routerLink]="['/new/home']" routerLinkActive="router-link-active" title="">
+                        <a [routerLink]="['/home']" routerLinkActive="router-link-active" title="">
                             <span><img src="../assets/images/icon1.png" alt=""></span>
                             Home
                         </a>
                     </li>
                     <li>
-                        <a [routerLink]="['/new/profiles']" routerLinkActive="router-link-active" title="">
+                        <a [routerLink]="['/profiles']" routerLinkActive="router-link-active" title="">
                             <span><img src="../assets/images/icon4.png" alt=""></span>
                             Profiles
                         </a>
                         <ul>
-                            <li><a [routerLink]="['/new/profiles']" routerLinkActive="router-link-active" title="">User
+                            <li><a [routerLink]="['/profiles']" routerLinkActive="router-link-active" title="">User
                                     Profile</a></li>
-                            <li><a [routerLink]="['/new/companies']" routerLinkActive="router-link-active"
+                            <li><a [routerLink]="['/companies']" routerLinkActive="router-link-active"
                                     title="">Company Profile</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a [routerLink]="['/new/store']" routerLinkActive="router-link-active" title="">
+                        <a [routerLink]="['/store']" routerLinkActive="router-link-active" title="">
                             <span><img src="../assets/images/icon5.png" alt=""></span>
                             Store
                         </a>
@@ -60,7 +60,7 @@
                                     </div>
                                 </a>
                                 <div class="view-all-nots">
-                                    <a [routerLink]="['/new/messages']" routerLinkActive="router-link-active"
+                                    <a [routerLink]="['/messages']" routerLinkActive="router-link-active"
                                         title="">View All Messsages</a>
                                 </div>
                             </div>
@@ -91,9 +91,9 @@
                     <!--search_form end-->
                     <h3>Setting</h3>
                     <ul class="us-links">
-                        <li *ngIf="admin"><a [routerLink]="['/new/admin']" routerLinkActive="router-link-active">Admin
+                        <li *ngIf="admin"><a [routerLink]="['/admin']" routerLinkActive="router-link-active">Admin
                                 Page</a></li>
-                        <li><a [routerLink]="['/new/settings']" routerLinkActive="router-link-active" title="">Settings</a></li>
+                        <li><a [routerLink]="['/settings']" routerLinkActive="router-link-active" title="">Settings</a></li>
                     </ul>
                     <form action="/logout" method="POST">
                         <h3 class="tc"><input (click)="logout()" id="uploadImage" type="button" value="Logout" /></h3>

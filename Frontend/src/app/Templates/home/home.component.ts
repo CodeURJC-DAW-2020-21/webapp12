@@ -299,6 +299,6 @@ export class HomeComponent implements OnInit {
   }
 
   userpage(id: Number) {
-    this.router.navigate(['/new/userpage', { id: id }]);
+    this.router.navigate(['/userpage', { id: id }]);
   }
 }

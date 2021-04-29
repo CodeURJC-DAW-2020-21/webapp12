@@ -12,16 +12,16 @@ import { SignInComponent } from './Templates/sign-in/sign-in.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {path:'new/admin',component: AdminComponent},
-  {path:'new/home',component: HomeComponent},
-  {path:'new/companies',component: CompaniesComponent},
-  {path:'new/messages',component: MessagesComponent},
-  {path:'new/settings',component: ProfileaccountsettingsComponent},
-  {path:'new/profiles',component: ProfilesComponent},
-  {path:'new/store',component: StoreComponent},
-  {path:'new/userpage',component: UserpageComponent},
-  {path:'new/signIn',component: SignInComponent},
-  {path:'new/index',component: AppComponent}
+  {path:'admin',component: AdminComponent},
+  {path:'home',component: HomeComponent},
+  {path:'companies',component: CompaniesComponent},
+  {path:'messages',component: MessagesComponent},
+  {path:'settings',component: ProfileaccountsettingsComponent},
+  {path:'profiles',component: ProfilesComponent},
+  {path:'store',component: StoreComponent},
+  {path:'userpage',component: UserpageComponent},
+  {path:'signIn',component: SignInComponent},
+  {path:'index',component: AppComponent}
 ];
 
 @NgModule({

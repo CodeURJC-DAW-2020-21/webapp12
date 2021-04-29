@@ -119,7 +119,7 @@
                                         </ul>
                                         <ul class="bk-links">
                                             <li><a id="product{{product.product.idproduct}}" title=""><i (click)="mark(product.product.idproduct,product.product)" class="{{product.bookamark}}"></i></a></li>
-                                            <li><a href="./messages?to={{product.product.iduser.username}}" title=""><i
+                                            <li><a [routerLink]="['/messages', { id: product.product.iduser.idusers }]" routerLinkActive="router-link-active" title=""><i
                                                         class="la la-envelope"></i></a></li>
                                         </ul>
                                     </div>

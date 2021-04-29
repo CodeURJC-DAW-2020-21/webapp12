@@ -135,7 +135,7 @@ export class SignInComponent implements OnInit {
                           }
                         });
                         this.userService.setLogin(true);
-                        this.router.navigate(['new/home']);
+                        this.router.navigate(['/home']);
                       },
                       error => console.error(error)
                     );
@@ -177,7 +177,7 @@ export class SignInComponent implements OnInit {
     this.userService.registerUser(this.customer).subscribe(
       response =>  {
         console.log(response);
-        this.router.navigate(['new/index']);
+        this.router.navigate(['/index']);
       },
       error => console.error(error)
     );
@@ -188,7 +188,7 @@ export class SignInComponent implements OnInit {
     this.userService.registerUser(this.company).subscribe(
       response =>  {
         console.log(response);
-        this.router.navigate(['new/index']);
+        this.router.navigate(['/index']);
       },
       error => console.error(error)
     );

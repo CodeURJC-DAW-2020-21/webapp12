@@ -19,17 +19,17 @@ export class AppComponent {
 
   ngOnInit(): void {
     if(this.loginUser == false){
-      this.router.navigate(['new/signIn']);
+      this.router.navigate(['/signIn']);
     }else{
       this.user = this.userService.getUserInfo();
-      this.router.navigate(['new/home']);
+      this.router.navigate(['/home']);
     } 
   }
 
   logout(){
     this.userService.logout().subscribe(
       response =>{ 
-        this.router.navigate(['new/signIn']); 
+        this.router.navigate(['/signIn']); 
         this.userService.setLogin(false)
       },
       error => console.log(error)
