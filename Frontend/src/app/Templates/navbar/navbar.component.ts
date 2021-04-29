@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
     console.log(this.userService.getAdmin());
     this.admin = this.userService.getAdmin();
     if (this.userService.getLogin() == false) {
-      this.router.navigate(['new/signIn']);
+      this.router.navigate(['/signIn']);
     } else {
       this.user = this.userService.getUserInfo();
     }

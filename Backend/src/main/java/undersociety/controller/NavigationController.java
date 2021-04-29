@@ -82,7 +82,7 @@ public class NavigationController{
 		Users follow = userService.getUser(username);
 		Users actual = userService.getUser(request.getUserPrincipal().getName());
 		if(follow.getImageprofile()!=null) {
-			model.addAttribute("imageProfile","https://localhost:8443/api/imageThemeProfile");
+			model.addAttribute("imageProfile","https://localhost:8443/imageThemeProfile");
 			
 		}else {
 			model.addAttribute("imageProfile","images/1600x400.png");
@@ -139,7 +139,7 @@ public class NavigationController{
 		model.addAttribute("token", token.getToken());
 		Users s = userService.getUser(request.getUserPrincipal().getName());
 		if(s.getImageprofile() != null) {
-			model.addAttribute("imageProfile","https://localhost:8443/api/imageThemeProfile");
+			model.addAttribute("imageProfile","https://localhost:8443/imageThemeProfile");
 			
 		}else {
 			model.addAttribute("imageProfile","http://via.placeholder.com/1600x400");
