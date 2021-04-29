@@ -90,7 +90,7 @@ export class NavbarComponent implements OnInit {
         console.log(response);
         this.userService.setLogin(false);
         this.userService.setAdmin(false);
-        this.router.navigate(['new/signIn']);
+        this.router.navigate(['/signIn']);
       },
       error => console.log(error)
     );

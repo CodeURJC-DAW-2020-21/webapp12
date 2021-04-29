@@ -141,7 +141,7 @@ public class UsersRestController {
 			user.setUserimg(BlobProxy.generateProxy(imagedefault.getInputStream(), imagedefault.contentLength()));
 			Resource imageThemedefault = new ClassPathResource("/static/images/1600x400.png");
 			user.setImageprofile(BlobProxy.generateProxy(imageThemedefault.getInputStream(), imageThemedefault.contentLength()));
-			userService.saveUser(user);
+			userService.regsiterUser(user);
 			user = userService.getUser(user.getUsername());
 			URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getIdusers()).toUri();
 			return ResponseEntity.created(location).body(user);
