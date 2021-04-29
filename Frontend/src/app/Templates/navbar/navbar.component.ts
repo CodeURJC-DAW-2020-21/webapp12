@@ -15,15 +15,18 @@ declare var Stomp;
 export class NavbarComponent implements OnInit {
 
   user: Users;
-  admin: boolean = true;
+  admin: Boolean = false;
   page: number = 0;
   public notifys: Message[] = [];
 
   constructor(private userService: UsersService, private router: Router) { 
+    this.admin = this.userService.getAdmin();
     this.connect(userService.getUserInfo().username);
   }
 
   ngOnInit(): void {
+    console.log(this.userService.getAdmin());
+    this.admin = this.userService.getAdmin();
     if (this.userService.getLogin() == false) {
       this.router.navigate(['new/signIn']);
     } else {
@@ -86,6 +89,7 @@ export class NavbarComponent implements OnInit {
       response => {
         console.log(response);
         this.userService.setLogin(false);
+        this.userService.setAdmin(false);
         this.router.navigate(['new/signIn']);
       },
       error => console.log(error)

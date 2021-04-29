@@ -9,7 +9,6 @@ import { ProfilesComponent } from './Templates/profiles/profiles.component';
 import { StoreComponent } from './Templates/store/store.component';
 import { UserpageComponent } from './Templates/userpage/userpage.component';
 import { SignInComponent } from './Templates/sign-in/sign-in.component';
-import { ForgotPassComponent } from './Templates/forgot-pass/forgot-pass.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
   {path:'new/store',component: StoreComponent},
   {path:'new/userpage',component: UserpageComponent},
   {path:'new/signIn',component: SignInComponent},
-  {path:'new/forgotpass',component: ForgotPassComponent},
   {path:'new/index',component: AppComponent}
 ];
 

@@ -122,6 +122,8 @@ export class ProfileaccountsettingsComponent implements OnInit {
         this.userService.logout().subscribe(
           response => {
             console.log(response);
+            this.userService.setLogin(false);
+            this.userService.setAdmin(false);
             this.router.navigate(['new/signIn']);
           },
           error => console.error(error)

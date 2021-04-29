@@ -118,7 +118,6 @@ export class SignInComponent implements OnInit {
   login() {
     this.userService.login(this.username, this.password).subscribe(
       response => {
-        console.log();
         this.userService.getAllUsers().subscribe(
           response => {
             response.forEach(element => {
@@ -128,8 +127,10 @@ export class SignInComponent implements OnInit {
                     this.userService.setUserInfo(response);
                     this.userService.getRoles(element.idusers).subscribe(
                       response => {
+                        this.userService.setAdmin(false);
                         response.forEach(element => {
                           if (element.rol == "ADMIN") {
+                            console.log(element.rol);
                             this.userService.setAdmin(true);
                           }
                         });
