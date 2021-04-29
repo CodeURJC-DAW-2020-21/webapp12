@@ -341,8 +341,12 @@ public class UserService {
 		relationrepo.delete(usersRelations);
 	}
 
-	public void saveUser(Users user) {
+	public void regsiterUser(Users user) {
 		user.setPass(encoder.encode(user.getPass()));
+		userRepository.save(user);
+	}
+
+	public void saveUser(Users user) {
 		userRepository.save(user);
 	}
 
