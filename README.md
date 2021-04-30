@@ -5,6 +5,8 @@
 
 UnderSociety
 
+# Video de la aplicación Angular
+
 ### Descripción
 
 Es una aplicación red social en la que se puede comprar y vender todo tipo de servicios y productos dentro de la legalidad vigente. Esta aplicación permitira a los usuarios y empresas ponerse en contacto entre si, nos dará pie a comprar y vender todo tipo de servicios y productos.
@@ -356,4 +358,60 @@ Este miembro del equipo ha realizado las peticiones Postman, la apirest de los u
    | #5	| Implement Pageable Methods	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3bd151a7fe8dfa1ee0d2b32c79b5e1aeac327e80) | [UserService.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Backend/src/main/java/undersociety/services/UserService.java) |
    
 # Fase 4
+### Preparación del entorno de desarrollo:
 
+
+
+
+
+
+### Diagrama de clases y templates de la SPA:
+
+
+
+
+### Diagrama de clases y templates de la SPA:
+##### David Montero Garcia:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+
+##### Enrique Martín Santorcaz:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+
+
+##### Guillermo Martín García:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
+
+##### Antonio Jesus Pajuelo Chavez:
+
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | 	|  |  |
+   | #2	| 	|  |  |
+   | #3	| 	|  |  |
+   | #4	| 	|  |  |
+   | #5	| 	|  |  |
