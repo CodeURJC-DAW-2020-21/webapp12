@@ -371,7 +371,7 @@ Este miembro del equipo ha realizado las peticiones Postman, la apirest de los u
 
 
 
-### Diagrama de clases y templates de la SPA:
+### Participación de miembros:
 ##### David Montero Garcia:
 
    
