@@ -367,7 +367,13 @@ Este miembro del equipo ha realizado las peticiones Postman, la apirest de los u
 
 
 ### Diagrama de clases y templates de la SPA:
+Leyenda del diagrama:
 
+- Rojo: Servicios
+- Azul: Componentes
+- Morado: Vista de los componentes
+- 
+![uml](https://user-images.githubusercontent.com/63242688/116736789-a32fdc00-a9f0-11eb-920b-46567257a141.JPG)
 
 
 
