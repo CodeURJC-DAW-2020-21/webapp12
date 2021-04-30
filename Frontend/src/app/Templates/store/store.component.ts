@@ -14,14 +14,19 @@ import { UsersService } from 'src/app/Services/Users/users.service';
 export class StoreComponent implements OnInit {
 
   products: ProductsModel[] = [];
+  productscopy: ProductsModel[] = [];
   page: number = 0;
+  value: string;
 
   constructor(private userService: UsersService, private bookmarkService: BookmarkService) { }
 
   ngOnInit(): void {
     this.page = 0;
     this.userService.getProductModels(this.userService.getUserInfo().idusers, 0).subscribe(
-      response => this.products = response,
+      response => {
+        this.products = response;
+        this.productscopy = response;
+      },
       error => console.log(error)
     );
   }
@@ -75,4 +80,17 @@ export class StoreComponent implements OnInit {
     }
   }
 
+  search(){
+    let search: ProductsModel[] = [];
+    this.products.forEach(element => {
+      if(element.product.title.includes(this.value)){
+          search.push(element);
+      }      
+    });
+    if(this.value.length == 0){
+      this.products = this.productscopy;
+    }else{
+      this.products = search;
+    }
+  }
 }

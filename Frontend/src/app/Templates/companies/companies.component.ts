@@ -10,14 +10,20 @@ import { UsersService } from 'src/app/Services/Users/users.service';
 })
 export class CompaniesComponent implements OnInit {
 
+  copy : Users[];
   companies: Users[];
   page: number = 0;
+  value: string;
+
   constructor(private userservice: UsersService, private router: Router) { }
 
   ngOnInit(): void {
     this.page = 0;
     this.userservice.getUserCompaniesPage(this.page).subscribe(
-      response => this.companies = response,
+      response => {
+        this.companies = response;
+        this.copy = response;
+      },
       error => console.error(error)
     );
     
@@ -37,5 +43,19 @@ export class CompaniesComponent implements OnInit {
 
   goUserpage(id: Number){
     this.router.navigate(['/userpage', { id: id }]);
+  }
+
+  search(){
+    let search: Users[] = [];
+    this.companies.forEach(element => {
+      if(element.username.includes(this.value)){
+          search.push(element);
+      }      
+    });
+    if(this.value.length == 0){
+      this.companies = this.copy;
+    }else{
+      this.companies = search;
+    }
   }
 }

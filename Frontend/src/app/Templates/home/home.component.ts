@@ -315,7 +315,6 @@ export class HomeComponent implements OnInit {
           search.push(element);
       }      
     });
-    console.log(this.value.length);
     if(this.value.length == 0){
       this.index = this.posts;
     }else{

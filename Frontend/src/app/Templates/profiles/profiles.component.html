@@ -3,8 +3,8 @@
     <div class="container">
         <div class="search-box">
             <form>
-                <input type="text" name="search" placeholder="Search keywords">
-                <button type="submit">Search</button>
+                <input [(ngModel)]="value" type="text" name="search" placeholder="Search keywords">
+                <button (click)="search()" type="submit">Search</button>
             </form>
         </div><!--search-box end-->
     </div>
