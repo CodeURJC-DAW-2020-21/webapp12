@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   following: Number;
   followers: Number;
   bookmarks: Bookmarks[] = [];
+  posts: PostsModel[] = [];
   index: PostsModel[] = [];
   tags: Tags[] = [];
   mostFollow: Users[] = [];
@@ -43,6 +44,8 @@ export class HomeComponent implements OnInit {
   tag2: Boolean;
   tag3: Boolean;
   tag4: Boolean;
+
+  value: string;
 
   constructor(private userService: UsersService, private postsService: PostsService, private productService: ProductsService, private bookmarksService: BookmarkService, private likeService: LikesService, private router: Router) { }
 
@@ -70,7 +73,10 @@ export class HomeComponent implements OnInit {
       error => console.error(error)
     );
     this.userService.getPostModels(this.userInfo.idusers, this.page).subscribe(
-      response => this.index = response,
+      response => {
+        this.index = response;
+        this.posts = response;
+      },
       error => console.error(error)
     );
     //  ============= POST PROJECT POPUP FUNCTION =========
@@ -300,5 +306,20 @@ export class HomeComponent implements OnInit {
 
   userpage(id: Number) {
     this.router.navigate(['/userpage', { id: id }]);
+  }
+
+  search(){
+    let search: PostsModel[] = [];
+    this.index.forEach(element => {
+      if(element.post.title.includes(this.value)){
+          search.push(element);
+      }      
+    });
+    console.log(this.value.length);
+    if(this.value.length == 0){
+      this.index = this.posts;
+    }else{
+      this.index = search;
+    }
   }
 }

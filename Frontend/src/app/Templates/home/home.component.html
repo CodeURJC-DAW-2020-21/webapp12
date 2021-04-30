@@ -4,8 +4,8 @@
     <div class="container">
         <div class="search-box">
             <form>
-                <input type="text" name="search" placeholder="Search keywords">
-                <button type="submit">Search</button>
+                <input [(ngModel)]="value" type="text" name="search" placeholder="Search keywords">
+                <button (click)="search()" type="submit">Search</button>
             </form>
         </div><!--search-box end-->
     </div>
@@ -164,7 +164,7 @@
                                             </ul>
                                         </div>
                                         <div class="job_descp">
-                                            <h3>{{post.title}}</h3>
+                                            <h3>{{post.post.title}}</h3>
                                             <div class="row">
                                                 <ul class="image-store">
                                                     <li><img src="https://localhost:8443/api/posts/{{post.post.idpost}}/image" alt=""></li>
