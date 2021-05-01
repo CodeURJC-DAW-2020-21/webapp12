@@ -110,16 +110,30 @@ export class StoreComponent implements OnInit {
     console.log(this.tagFilter);
     let search: ProductsModel[] = [];
     this.products.forEach(element => {
-      if (element.product.idtagone.description.includes(this.tagFilter)) {
-        search.push(element);
-      }else if (element.product.idtagtwo.description.includes(this.tagFilter)) {
-        search.push(element);
-      }else if (element.product.idtagthree.description.includes(this.tagFilter)) {
-        search.push(element);
-      }else if (element.product.idtagfour.description.includes(this.tagFilter)) {
-        search.push(element);
-      }else if (element.product.idtagfive.description.includes(this.tagFilter)) {
-        search.push(element);
+      if (element.product.idtagone != null) {
+        if (element.product.idtagone.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+      if (element.product.idtagtwo != null) {
+        if (element.product.idtagtwo.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+      if (element.product.idtagthree != null) {
+        if (element.product.idtagthree.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+      if (element.product.idtagfour != null) {
+        if (element.product.idtagfour.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+      if (element.product.idtagfive != null) {
+        if (element.product.idtagfive.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
       }
     });
     this.products = search;
