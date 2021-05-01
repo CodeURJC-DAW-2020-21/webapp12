@@ -117,4 +117,10 @@ export class StoreComponent implements OnInit {
   searchCity(){
     console.log(this.cityFilter);
   }
+
+  clear(){
+    this.tagFilter = "Select tag";
+    this.statusFilter = "Select status";
+    this.cityFilter = "Select city";
+  }
 }
