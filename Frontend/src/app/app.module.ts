@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio'
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MatSelectModule } from '@angular/material/select';
     ChartModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

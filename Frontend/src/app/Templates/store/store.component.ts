@@ -20,7 +20,11 @@ export class StoreComponent implements OnInit {
   page: number = 0;
   value: string;
   tags: Tags [] = [];
-  tagFilter = 'Select tag';
+  tagFilter = "Select tag";
+  status: String [] = ["sold","reserved","in stock"];
+  statusFilter = "Select status";
+  cities: String [] = ["Madrid","Barcelona","Oviedo"];
+  cityFilter = "Select city";
 
   constructor(private userService: UsersService, private bookmarkService: BookmarkService, private productService: ProductsService) { }
 
@@ -104,5 +108,13 @@ export class StoreComponent implements OnInit {
   
   searchTags(){
     console.log(this.tagFilter);
+  }
+
+  searchStatus(){
+    console.log(this.statusFilter);
+  }
+
+  searchCity(){
+    console.log(this.cityFilter);
   }
 }
