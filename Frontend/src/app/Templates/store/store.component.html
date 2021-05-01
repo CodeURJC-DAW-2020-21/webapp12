@@ -25,13 +25,18 @@
                             <div class="paddy">
                                 <div class="filter-dd">
                                     <div class="filter-ttl">
-                                        <h3>Tags Words</h3>
-                                        <a onclick="document.getElementById('word').value = ''"
-                                            title="">Clear</a>
+                                        <h3>Tags words</h3>
+                                        <mat-form-field appearance="fill">
+                                          <mat-label>Select tag</mat-label>
+                                          <mat-select [(value)]="tagFilter" >
+                                            <mat-option *ngFor="let tag of tags"  [value]="tag.description">
+                                              {{tag.description}}
+                                            </mat-option>
+                                          </mat-select>                                          
+                                        </mat-form-field>                                      
+                                        <a title="" (click)="searchTags()">Search</a>
                                     </div>
-                                    <form>
-                                        <input id="word" onkeyup="SearchKeyWords()" type="text" name="search-skills" placeholder="">
-                                    </form>
+                                   
                                 </div>
                                 <div class="filter-dd">
                                     <div class="filter-ttl">
@@ -63,21 +68,7 @@
                                     </ul>
                                 </div>
 
-                                <div class="filter-dd">
-                                    <div class="filter-ttl">
-                                        <h3>Price</h3>
-                                        <a onclick="clearSlider()" title="">Clear</a>
-                                    </div>
-                                    <div class="rg-slider">
-                                        <input id="sliderInput" class="rn-slider slider-input" type="hidden" value="5,50" onchange="searchSlider()" />
-                                    </div>
-                                    <div class="rg-limit">
-                                        <h4>1</h4>
-                                        <h4>100+</h4>
-                                    </div>
-                                    <!--rg-limit end-->
-                                </div>
-
+                               
                                 <div class="filter-dd">
                                     <div class="filter-ttl">
                                         <h3>City</h3>

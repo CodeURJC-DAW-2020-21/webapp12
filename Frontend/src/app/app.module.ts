@@ -17,12 +17,13 @@ import { UserpageComponent } from './Templates/userpage/userpage.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './Templates/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {ChartModule} from 'primeng/chart';
+import { ChartModule } from 'primeng/chart';
 
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatIconModule} from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatIconModule,
     ChartModule,
     BrowserAnimationsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

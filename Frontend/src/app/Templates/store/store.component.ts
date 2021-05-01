@@ -3,7 +3,9 @@ import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
 import { ProductsModel } from 'src/app/Class/Models/products-model';
 import { Product } from 'src/app/Class/Product/product';
 import { Relations } from 'src/app/Class/Relations/relations';
+import { Tags } from 'src/app/Class/Tags/tags';
 import { BookmarkService } from 'src/app/Services/Bookmarks/bookmark.service';
+import { ProductsService } from 'src/app/Services/Products/products.service';
 import { UsersService } from 'src/app/Services/Users/users.service';
 
 @Component({
@@ -17,8 +19,10 @@ export class StoreComponent implements OnInit {
   productscopy: ProductsModel[] = [];
   page: number = 0;
   value: string;
+  tags: Tags [] = [];
+  tagFilter = 'Select tag';
 
-  constructor(private userService: UsersService, private bookmarkService: BookmarkService) { }
+  constructor(private userService: UsersService, private bookmarkService: BookmarkService, private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.page = 0;
@@ -27,7 +31,11 @@ export class StoreComponent implements OnInit {
         this.products = response;
         this.productscopy = response;
       },
-      error => console.log(error)
+      error => console.error(error)
+    );
+    this.productService.getTags().subscribe(
+      response => this.tags = response, 
+      error => console.error(error)
     );
   }
 
@@ -92,5 +100,9 @@ export class StoreComponent implements OnInit {
     }else{
       this.products = search;
     }
+  }
+  
+  searchTags(){
+    console.log(this.tagFilter);
   }
 }
