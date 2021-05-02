@@ -3,7 +3,9 @@ import { Bookmarks } from 'src/app/Class/Bookmarks/bookmarks';
 import { ProductsModel } from 'src/app/Class/Models/products-model';
 import { Product } from 'src/app/Class/Product/product';
 import { Relations } from 'src/app/Class/Relations/relations';
+import { Tags } from 'src/app/Class/Tags/tags';
 import { BookmarkService } from 'src/app/Services/Bookmarks/bookmark.service';
+import { ProductsService } from 'src/app/Services/Products/products.service';
 import { UsersService } from 'src/app/Services/Users/users.service';
 
 @Component({
@@ -17,8 +19,14 @@ export class StoreComponent implements OnInit {
   productscopy: ProductsModel[] = [];
   page: number = 0;
   value: string;
+  tags: Tags[] = [];
+  tagFilter = "Select tag";
+  status: String[] = ["sold", "reserved", "in stock"];
+  statusFilter = "Select status";
+  cities: String[] = ["Madrid", "Barcelona", "Oviedo"];
+  cityFilter = "Select city";
 
-  constructor(private userService: UsersService, private bookmarkService: BookmarkService) { }
+  constructor(private userService: UsersService, private bookmarkService: BookmarkService, private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.page = 0;
@@ -27,7 +35,11 @@ export class StoreComponent implements OnInit {
         this.products = response;
         this.productscopy = response;
       },
-      error => console.log(error)
+      error => console.error(error)
+    );
+    this.productService.getTags().subscribe(
+      response => this.tags = response,
+      error => console.error(error)
     );
   }
 
@@ -59,13 +71,13 @@ export class StoreComponent implements OnInit {
           $("#product" + idproduct).children().attr("class", "la la-check-circle");
         },
         error => console.error(error)
-      ); 
+      );
     } else {
       this.bookmarkService.getAllBookmarks().subscribe(
         response => {
           response.forEach(element => {
-            if( (element.iduser.idusers == this.userService.getUserInfo().idusers)&&(element.idproduct.idproduct == product.idproduct) ){
-              this.bookmarkService.deleteBookmark(""+element.idproductlist).subscribe(
+            if ((element.iduser.idusers == this.userService.getUserInfo().idusers) && (element.idproduct.idproduct == product.idproduct)) {
+              this.bookmarkService.deleteBookmark("" + element.idproductlist).subscribe(
                 response => {
                   console.log(response);
                   $("#product" + idproduct).children().attr("class", "la la-bookmark");
@@ -80,17 +92,79 @@ export class StoreComponent implements OnInit {
     }
   }
 
-  search(){
+  search() {
     let search: ProductsModel[] = [];
     this.products.forEach(element => {
-      if(element.product.title.includes(this.value)){
-          search.push(element);
-      }      
+      if (element.product.title.includes(this.value)) {
+        search.push(element);
+      }
     });
-    if(this.value.length == 0){
+    if (this.value.length == 0) {
       this.products = this.productscopy;
-    }else{
+    } else {
       this.products = search;
     }
+  }
+
+  searchTags() {
+    console.log(this.tagFilter);
+    let search: ProductsModel[] = [];
+    this.products.forEach(element => {
+      if (element.product.idtagone != null) {
+        if (element.product.idtagone.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+      if (element.product.idtagtwo != null) {
+        if (element.product.idtagtwo.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+      if (element.product.idtagthree != null) {
+        if (element.product.idtagthree.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+      if (element.product.idtagfour != null) {
+        if (element.product.idtagfour.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+      if (element.product.idtagfive != null) {
+        if (element.product.idtagfive.description.includes(this.tagFilter)) {
+          search.push(element);
+        }
+      }
+    });
+    this.products = search;
+  }
+
+  searchStatus() {
+    console.log(this.statusFilter);
+    let search: ProductsModel[] = [];
+    this.products.forEach(element => {
+      if (element.product.status.includes(this.statusFilter)) {
+        search.push(element);
+      }
+    });
+    this.products = search;
+  }
+
+  searchCity() {
+    console.log(this.cityFilter);
+    let search: ProductsModel[] = [];
+    this.products.forEach(element => {
+      if (element.product.iduser.city.includes(this.cityFilter)) {
+        search.push(element);
+      }
+    });
+    this.products = search;
+  }
+
+  clear() {
+    this.tagFilter = "Select tag";
+    this.statusFilter = "Select status";
+    this.cityFilter = "Select city";
+    this.products = this.productscopy;
   }
 }
