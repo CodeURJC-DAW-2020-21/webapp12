@@ -1,9 +1,20 @@
 package undersociety.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import undersociety.models.PostModel.Basic;
+
 public class ProductModel {
+	
+	public interface Basic extends Product.ProductDetails{}
+	
+	@JsonView(Basic.class)
 	private String typeUser;
+	@JsonView(Basic.class)
 	private String color;
+	@JsonView(Basic.class)
 	private String bookamark;
+	@JsonView(Basic.class)
 	private Product product;
 	
 	

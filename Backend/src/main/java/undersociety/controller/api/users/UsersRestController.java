@@ -624,6 +624,7 @@ public class UsersRestController {
 					content = @Content
 					)
 	})
+	@JsonView(PostModel.Basic.class)
 	@GetMapping("/{id}/models/posts")
 	public ResponseEntity<List<PostModel>> getPostsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = true) int page, @Parameter(description="username") @RequestParam(required = false) String username){
 		Optional<Users> user = userService.getUserId(id);
@@ -657,6 +658,7 @@ public class UsersRestController {
 					)
 	})
 	@GetMapping("/{id}/models/products")
+	@JsonView(ProductModel.Basic.class)
 	public ResponseEntity<List<ProductModel>> getProductsModels(@Parameter(description="id of user to be searched") @PathVariable int id, @Parameter(description="page") @RequestParam(required = true) int page, @Parameter(description="username") @RequestParam(required = false) String username){
 		Optional<Users> user = userService.getUserId(id);
 		if(!user.isPresent()) {
