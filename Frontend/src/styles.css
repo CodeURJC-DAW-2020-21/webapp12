@@ -3040,13 +3040,7 @@ a:hover {
 .notfication-details:last-child {
 	border-bottom: 0;
 }
-.noty-user-img {
-	float: left;
-	width: 35px;
-}
-.noty-user-img img {
-	width: 100%;
-}
+
 .notification-info {
 	float: left;
 	width: auto;

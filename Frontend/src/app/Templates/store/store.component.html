@@ -108,38 +108,17 @@
                                     <div class="job_descp">
                                         <h3>{{product.product.title}}</h3>
                                         <div class="row">
-                                            <div id="carouselExampleControls-{{product.product.idproduct}}"
-                                                class="carousel slide" data-ride="carousel">
-                                                <div class="carousel-inner">
-                                                    <div class="carousel-item active" *ngIf="product.product.img0">
-                                                        <img class="img-thumbnail"
-                                                            src="https://localhost:8443/api/products/{{product.product.idproduct}}/image0"
-                                                            alt="First slide">
-                                                    </div>
-                                                    <div class="carousel-item" *ngIf="product.product.img1">
-                                                        <img class="img-thumbnail "
-                                                            src="https://localhost:8443/api/products/{{product.product.idproduct}}/image1"
-                                                            alt="Second slide">
-                                                    </div>
-                                                    <div class="carousel-item" *ngIf="product.product.img2">
-                                                        <img class="img-thumbnail "
-                                                            src="https://localhost:8443/api/products/{{product.product.idproduct}}/image2"
-                                                            alt="Third slide">
-                                                    </div>
-                                                </div>
-                                                <a class="carousel-control-prev"
-                                                    href="#carouselExampleControls-{{product.product.idproduct}}"
-                                                    role="button" data-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                                <a class="carousel-control-next"
-                                                    href="#carouselExampleControls-{{product.product.idproduct}}"
-                                                    role="button" data-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </div>
+                                            <ngb-carousel>  
+                                                <ng-template ngbSlide *ngIf="product.product.img0" >  
+                                                    <img src="https://localhost:8443/api/products/{{product.product.idproduct}}/image0">  
+                                                </ng-template>  
+                                                <ng-template ngbSlide *ngIf="product.product.img1">  
+                                                    <img src="https://localhost:8443/api/products/{{product.product.idproduct}}/image1">  
+                                                </ng-template>  
+                                                <ng-template ngbSlide *ngIf="product.product.img2">  
+                                                    <img src="https://localhost:8443/api/products/{{product.product.idproduct}}/image2">  
+                                                </ng-template>   
+                                            </ngb-carousel>  
                                         </div>
                                         <div class="row">
                                             <ul class="description-store">

@@ -7,6 +7,7 @@ import { Tags } from 'src/app/Class/Tags/tags';
 import { BookmarkService } from 'src/app/Services/Bookmarks/bookmark.service';
 import { ProductsService } from 'src/app/Services/Products/products.service';
 import { UsersService } from 'src/app/Services/Users/users.service';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';  
 
 @Component({
   selector: 'app-store',
@@ -26,7 +27,8 @@ export class StoreComponent implements OnInit {
   cities: String[] = ["Madrid", "Barcelona", "Oviedo"];
   cityFilter = "Select city";
 
-  constructor(private userService: UsersService, private bookmarkService: BookmarkService, private productService: ProductsService) { }
+  constructor(private userService: UsersService, private bookmarkService: BookmarkService, private productService: ProductsService) {
+   }
 
   ngOnInit(): void {
     this.page = 0;
@@ -34,6 +36,7 @@ export class StoreComponent implements OnInit {
       response => {
         this.products = response;
         this.productscopy = response;
+        console.log(response);
       },
       error => console.error(error)
     );

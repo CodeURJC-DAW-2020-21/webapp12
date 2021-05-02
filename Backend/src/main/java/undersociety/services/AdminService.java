@@ -473,7 +473,7 @@ public class AdminService {
 		Product product19 = new Product(user6,"Anduril & Ranger Sword of Aragorn", "We are offering Replica Sword of Isildur and Aragorn Ranger Sword,It reforged again and turned into many pieces. Another sword that Aragorn has was Ranger Sword. You will be pleased that we have both blades at an affordable price. "
 				, imgproduct28, null, null, 95, tag1, tag2, null, null, null, "in stock", true, false, false);
 		Product product20 = new Product(company10,"sneakers HARDCOURT", "The classic basketball court style is updated with an eye-catching print. This high top sneaker features an oversized adidas logo and a leather upper that enhances its vintage essence."
-				, imgproduct29, imgproduct30, null, 145, tag1, null,null, tag4, null, "reserved", true, false, false);
+				, imgproduct29, imgproduct30, null, 145, tag1, null,null, tag4, null, "reserved", true, true, false);
 		
 		
 		
