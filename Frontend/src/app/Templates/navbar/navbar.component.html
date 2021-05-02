@@ -71,7 +71,7 @@
                 </ul>
             </nav>
             <!--nav end-->
-            <button mat-button [matMenuTriggerFor]="menu" class="user-info"><img src="https://localhost:8443/api/users/{{user.idusers}}/imageProfile" alt=""></button>
+            <button mat-button [matMenuTriggerFor]="menu"  class="user-account"><img src="https://localhost:8443/api/users/{{user.idusers}}/imageProfile" alt=""></button>
             <mat-menu #menu="matMenu">
              <button mat-menu-item>
                 <h3>Username: {{user.username}}</h3>               
