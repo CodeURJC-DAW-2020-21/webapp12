@@ -50,6 +50,9 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UsersService, private postsService: PostsService, private productService: ProductsService, private bookmarksService: BookmarkService, private likeService: LikesService, private router: Router) { }
 
   ngOnInit(): void {
+    this.product.img0 = false;
+    this.product.img1 = false;
+    this.product.img2 = false;
     this.page = 0;
     this.userInfo = this.userService.getUserInfo();
     this.userService.getUserFollowings("" + this.userInfo.idusers).subscribe(
@@ -76,6 +79,13 @@ export class HomeComponent implements OnInit {
       response => {
         this.index = response;
         this.posts = response;
+      },
+      error => console.error(error)
+    );
+    this.userService.getUser(""+this.userInfo.idusers).subscribe(
+      response =>{
+        this.post.iduser = response;
+        this.product.iduser = response;
       },
       error => console.error(error)
     );
@@ -206,8 +216,6 @@ export class HomeComponent implements OnInit {
   }
 
   uploadPosts() {
-    this.post.iduser = this.userService.getUserInfo();
-    console.log(this.post);
     this.postsService.registerPost(this.post).subscribe(
       response => {
         let data: any = response;
@@ -243,46 +251,25 @@ export class HomeComponent implements OnInit {
   }
 
   uploadProduct() {
-    this.product.iduser = this.userService.getUserInfo();
-    console.log(this.product);
-    let tagone: Tags;
-    let tagtwo: Tags;
-    let tagthree: Tags;
-    let tagfour: Tags;
-    let tagfive: Tags;
-    let image0: Boolean = false;
-    let image1: Boolean = false;
-    let image2: Boolean = false;
+    this.product.status = "in stock";
     if (this.tag) {
-      tagone = this.tags[0];
+      this.product.idtagone = this.tags[0];
     }
 
     if (this.tag1) {
-      tagone = this.tags[1];
+      this.product.idtagtwo = this.tags[1];
     }
 
     if (this.tag2) {
-      tagone = this.tags[2];
+      this.product.idtagthree = this.tags[2];
     }
 
     if (this.tag3) {
-      tagone = this.tags[3];
+      this.product.idtagfour = this.tags[3];
     }
 
     if (this.tag4) {
-      tagone = this.tags[4];
-    }
-
-    if (this.imageProduct0 != undefined) {
-      image0 = true;
-    }
-
-    if (this.imageProduct1 != undefined) {
-      image1 = true;
-    }
-
-    if (this.imageProduct2 != undefined) {
-      image2 = true;
+      this.product.idtagfive = this.tags[4];
     }
     this.productService.registerProduct(this.product).subscribe(
       response => {

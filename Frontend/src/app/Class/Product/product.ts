@@ -6,7 +6,7 @@ export class Product {
      iduser : Users;
      title : String;
      description : String;
-	 price : Number;
+	price : Number;
      idtagone : Tags;
      idtagtwo : Tags;
      idtagthree : Tags;
