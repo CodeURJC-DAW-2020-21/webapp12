@@ -380,7 +380,8 @@ Leyenda del diagrama:
 
 ### Participación de miembros:
 ##### David Montero Garcia:
-
+Este miembro ha realizado: Ha pasado los archivos html a fronted necesarios, ha aplicado el Angular Material, sobre las diferentes imagenes/iconos,
+filtros de busqueda.. etc.
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
@@ -395,11 +396,11 @@ Leyenda del diagrama:
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1 | Templates Fronted	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/26bba19076eaea654d824ed224cdc604f19a2c87) |  [store.component.html] |
+   | #2	| Iconos con Angular material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/b4e5292829ab5c0877e36daed38c7d20ad351d7a) |  |
+   | #3	| Menu usuario Angular Material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/29326771ddce5d8a8778effcb45881616501f76d)  |  |
+   | #4	| Filtro Angular Material y borrar uno	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/297cf1edc5defde4b70f16ad9c0ae8cdece14d5a)  |  |
+   | #5	| Resto de filtros Angular Material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/0d2b1a3cd8965fbe7833073cd52309dde5bed8ab)  |  |
 
 
 ##### Guillermo Martín García:
