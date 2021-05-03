@@ -79,6 +79,11 @@ export class MessagesComponent implements OnInit {
       message: this.message,
       time: "" + new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
     }));
+    let message: Messages = new Messages();
+    message.iduser = this.userService.getUserInfo();
+    message.message = this.message;
+    message.time = "" + new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
+    this.messages.push(message);
   }
 
   prev(){
