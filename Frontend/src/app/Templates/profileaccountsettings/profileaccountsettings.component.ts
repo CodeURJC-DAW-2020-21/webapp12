@@ -31,7 +31,7 @@ export class ProfileaccountsettingsComponent implements OnInit {
       response => this.bookmarks = response,
       error => console.error(error)
     );
-    this.userService.getUserFollowers("" + this.userpage.idusers).subscribe(
+    this.userService.getUserFollowings("" + this.userpage.idusers).subscribe(
       response => this.followers = response,
       error => console.error(error)
     );
