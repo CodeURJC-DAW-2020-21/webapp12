@@ -359,7 +359,16 @@ Este miembro del equipo ha realizado las peticiones Postman, la apirest de los u
    | #5	| Implement Pageable Methods	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3bd151a7fe8dfa1ee0d2b32c79b5e1aeac327e80) | [UserService.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Backend/src/main/java/undersociety/services/UserService.java) |
    
 # Fase 4
-### Preparación del entorno de desarrollo:
+### Preparación del entorno de desarrollo Linux:
+
+0. Navegar hasta la carpeta Docker.
+
+1. Ejecutaremos en el terminal de comandos el script llamado: "Entorno_de_desarrollo.sh".
+
+2. Ejecutaremos en el terminal de comando el script llamado: "create_image.sh".
+
+3. Ejecutamos el comando: "sudo docker-compose up".
+
 
 
 
@@ -380,9 +389,19 @@ Leyenda del diagrama:
 
 ### Participación de miembros:
 ##### David Montero Garcia:
-Este miembro ha realizado: Ha pasado los archivos html a fronted necesarios, ha aplicado el Angular Material, sobre las diferentes imagenes/iconos,
-filtros de busqueda.. etc.
-   
+Este miembro ha realizado: Ha pasado los archivos html a fronted, ha aplicado el Angular Material sobre: las diferentes imagenes/iconos que en su mayoria han sido cambiadas pero siguen compartiendo similitud con las anteriores, filtros de busqueda que han sido modificados y adaptados, tambien se ha borrado el filtro slider sobre el precio del producto.   
+    
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | Templates Fronted	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/26bba19076eaea654d824ed224cdc604f19a2c87) |  [store.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/store/store.component.html)|
+   | #2	| Iconos con Angular material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/b4e5292829ab5c0877e36daed38c7d20ad351d7a) | [navbar.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/navbar/navbar.component.html) |
+   | #3	| Menu usuario Angular Material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/29326771ddce5d8a8778effcb45881616501f76d)  | [home.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/home/home.component.html) |
+   | #4	| Filtro Angular Material y borrar uno	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/297cf1edc5defde4b70f16ad9c0ae8cdece14d5a)  | [sign-in.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/sign-in/sign-in.component.html) |
+   | #5	| Resto de filtros Angular Material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/0d2b1a3cd8965fbe7833073cd52309dde5bed8ab)  | [profiles.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/profiles/profiles.component.html) |
+
+
+##### Enrique Martín Santorcaz:
+
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
    | #1 | 	|  |  |
@@ -390,18 +409,6 @@ filtros de busqueda.. etc.
    | #3	| 	|  |  |
    | #4	| 	|  |  |
    | #5	| 	|  |  |
-
-##### Enrique Martín Santorcaz:
-
-   
-   | Número	| Descripción	| Commit | Archivos |
-   | --- | :---: | :---: | :---: |
-   | #1 | Templates Fronted	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/26bba19076eaea654d824ed224cdc604f19a2c87) |  [store.component.html] |
-   | #2	| Iconos con Angular material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/b4e5292829ab5c0877e36daed38c7d20ad351d7a) |  |
-   | #3	| Menu usuario Angular Material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/29326771ddce5d8a8778effcb45881616501f76d)  |  |
-   | #4	| Filtro Angular Material y borrar uno	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/297cf1edc5defde4b70f16ad9c0ae8cdece14d5a)  |  |
-   | #5	| Resto de filtros Angular Material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/0d2b1a3cd8965fbe7833073cd52309dde5bed8ab)  |  |
-
 
 ##### Guillermo Martín García:
 
