@@ -179,7 +179,10 @@ export class SignInComponent implements OnInit {
         console.log(response);
         this.router.navigate(['/index']);
       },
-      error => console.error(error)
+      error => {
+        console.error(error);
+        alert("Username is token");
+      }
     );
   }
 

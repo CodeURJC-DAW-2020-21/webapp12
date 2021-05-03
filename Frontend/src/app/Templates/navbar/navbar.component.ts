@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Message } from 'src/app/Class/Messages/message';
 import { Users } from 'src/app/Class/Users/users';
-import { ChatServiceService } from 'src/app/Services/Chat/chat-service.service';
 import { UsersService } from 'src/app/Services/Users/users.service';
 declare var SockJS;
 declare var Stomp;

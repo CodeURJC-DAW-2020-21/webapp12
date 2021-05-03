@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Templates/home/home.component';
 import { SignInComponent } from './Templates/sign-in/sign-in.component';
-import { ForgotPassComponent } from './Templates/forgot-pass/forgot-pass.component';
 import { AdminComponent } from './Templates/admin/admin.component';
 import { CompaniesComponent } from './Templates/companies/companies.component';
 import { MessagesComponent } from './Templates/messages/messages.component';
@@ -32,7 +31,6 @@ import { MatRadioModule } from '@angular/material/radio';
     AppComponent,
     HomeComponent,
     SignInComponent,
-    ForgotPassComponent,
     AdminComponent,
     CompaniesComponent,
     MessagesComponent,
