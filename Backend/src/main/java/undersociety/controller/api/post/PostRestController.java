@@ -39,9 +39,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import undersociety.models.Post;
-import undersociety.models.Users;
 import undersociety.services.PostsService;
-import undersociety.services.UserService;
 
 @RestController
 @CrossOrigin
@@ -50,8 +48,6 @@ public class PostRestController {
 
 	@Autowired
 	private PostsService postService;
-	@Autowired
-	private UserService userService;
 
 	@Operation(summary = "Get a all Post")
 	@ApiResponses(value = { 
@@ -91,11 +87,9 @@ public class PostRestController {
 	@JsonView(Post.PostDetails.class)
 	@PostMapping("/")
 	public ResponseEntity<Post> registerPost( @Parameter(description="Object Type Post") @RequestBody Post post) throws IOException{
-		Optional<Users> user = userService.getUserId(post.getIduser().getIdusers()); 
 		if(postService.existsPost(post.getTitle())) {
 			return new ResponseEntity<Post>(post,HttpStatus.NOT_ACCEPTABLE);
 		}
-		post.setIduser(user.get());
 		postService.savePost(post); 
 		post = postService.getPostByTitle(post.getTitle());
 		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(post.getIdpost()).toUri();
