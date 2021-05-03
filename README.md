@@ -361,7 +361,7 @@ Este miembro del equipo ha realizado las peticiones Postman, la apirest de los u
 # Fase 4
 ### Preparación del entorno de desarrollo Linux:
 
-0. Navegar hasta la carpeta Docker.
+0. Navegar hasta la carpeta Docker y ejecutar "chmod 777" a los scripts de la carpeta de Docker.
 
 1. Ejecutaremos en el terminal de comandos el script llamado: "Entorno_de_desarrollo.sh".
 
