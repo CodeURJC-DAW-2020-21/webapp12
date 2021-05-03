@@ -389,7 +389,7 @@ Leyenda del diagrama:
 
 ### Participación de miembros:
 ##### David Montero Garcia:
-Este miembro ha realizado: Ha pasado los archivos html a fronted, ha aplicado el Angular Material sobre: las diferentes imagenes/iconos que en su mayoria han sido cambiadas pero siguen compartiendo similitud con las anteriores, filtros de busqueda que han sido modificados y adaptados, tambien se ha borrado el filtro slider sobre el precio del producto.   
+Este miembro ha realizado: Ha pasado los archivos html a fronted, ha aplicado el Angular Material sobre: las diferentes imagenes/iconos que en su mayoria han sido cambiadas pero siguen compartiendo similitud con las anteriores, filtros de busqueda que han sido modificados y adaptados, tambien se ha borrado el filtro slider sobre el precio del producto. 
     
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
@@ -402,6 +402,7 @@ Este miembro ha realizado: Ha pasado los archivos html a fronted, ha aplicado el
 
 ##### Enrique Martín Santorcaz:
 Este miembro ha realizado: La creacion de los servicios dedicados a la parte de la aplicación angular asi como la preparación del front para la correcta visualizacion de algunos iconos piechart y correcta implementación actualizando el package.json para arreglar una serie de errores que acontecian debido a un problema de versión y su incompatibilidad con algunas implementaciones realizadas.
+
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
    | #1 | Implements PieCharts Function | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/197c35fab10b1b64d519fd8dc2384ba352db9f01) | [admin.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/admin/admin.component.html) |
@@ -411,15 +412,15 @@ Este miembro ha realizado: La creacion de los servicios dedicados a la parte de 
    | #5	| Created Services methods get | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/adca33e15cc4e61ba108057b33a8fbe9c2ccbbb7) | [index.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/index.html) |
 
 ##### Guillermo Martín García:
-
+Este miembro del equipo se ha dedicado a la implementacion del stilo de los componentes de angular y estuvo revisando la implementación de angular y el funcionamiento de de los componentes.
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1  | Home styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/b3545dcec7317ef3ecdfbf3538f0585c900f77a9) | [home.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/home/home.component.css) |
+   | #2	| companies styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/cf9bdcd3748c1a9695b1b7dfc77f0ebb0deb7314) | [companies.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/companies/companies.component.css) |
+   | #3	| Profiles styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/ffa5d5eca1384dfd5c88a0f18d21e9b1d44df2ec) | [profiles.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/profiles/profiles.component.css) |
+   | #4	| Store styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/fd3166b26f1169407876036a4a5a0d945fe763eb) | [store.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/store/store.component.css) |
+   | #5	| UserPage Styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/ce2a420138881a190da9163fddd4ad8bbcec3f02) | [userpage.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/userpage/userpage.component.css) |
 
 ##### Antonio Jesus Pajuelo Chavez:
 Este miembro del equipo se ha dedicado a la implementacion de scripts de la fase 2 a Angular asi como la carga, modificacion y creacion de usuarios, post y productos. 
