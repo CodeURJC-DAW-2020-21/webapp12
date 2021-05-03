@@ -404,11 +404,11 @@ Este miembro ha realizado: Ha pasado los archivos html a fronted, ha aplicado el
 
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1 | Implements PieCharts Function | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/197c35fab10b1b64d519fd8dc2384ba352db9f01) |  |
+   | #2	| Implements function statitics	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/e6320a93f44ba24ae80ee5866fa33eb1e343d6d3) |  |
+   | #3	| HTML AdminPage	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/29e9767196b91b4d642cc7ccf2e011983c810a27) |  |
+   | #4	| Fix Put and Post methods	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3dc578c92c4265e8e8e285d22737942607fbb2b7) |  |
+   | #5	| Created Services methods get | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/adca33e15cc4e61ba108057b33a8fbe9c2ccbbb7) |  |
 
 ##### Guillermo Martín García:
 
