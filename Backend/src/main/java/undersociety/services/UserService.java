@@ -344,6 +344,11 @@ public class UserService {
 	public void regsiterUser(Users user) {
 		user.setPass(encoder.encode(user.getPass()));
 		userRepository.save(user);
+		Users use =  (userRepository.findByusername(user.getUsername()).orElseThrow(() -> new NoSuchElementException("User not found")));
+		Roles r = new Roles();
+		r.setIduser(use);
+		r.setRol("USER");
+		rolesRepository.save(r);
 	}
 
 	public void saveUser(Users user) {
