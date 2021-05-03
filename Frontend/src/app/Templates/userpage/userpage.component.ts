@@ -110,8 +110,8 @@ export class UserpageComponent implements OnInit {
 
   followFunction() {
     let relation: Relations = new Relations();
-    relation.userone = this.userService.getUserInfo();
-    relation.usertwo = this.userpage;
+    relation.usertwo = this.userService.getUserInfo();
+    relation.userone = this.userpage;
     if (this.follow == "#e44d3a") {
       this.relationService.deleteRelations("" + this.relationId).subscribe(
         response => console.log(response),

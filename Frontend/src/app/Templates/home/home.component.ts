@@ -84,6 +84,8 @@ export class HomeComponent implements OnInit {
     );
     this.userService.getUser(""+this.userInfo.idusers).subscribe(
       response =>{
+        console.log(response);
+        this.userInfo = response;
         this.post.iduser = response;
         this.product.iduser = response;
       },
@@ -132,7 +134,7 @@ export class HomeComponent implements OnInit {
       this.likeService.getAllLikes().subscribe(
         response => {
           response.forEach(element => {
-            if ((element.iduser.idusers == this.userService.getUserInfo().idusers) && (element.idpost.idpost == post.idpost)) {
+            if ((element.iduser.idusers == this.userInfo.idusers) && (element.idpost.idpost == post.idpost)) {
               this.likeService.deleteLike("" + element.idlike).subscribe(
                 response => {
                   console.log(response);
@@ -148,7 +150,7 @@ export class HomeComponent implements OnInit {
 
     } else {
       let like = new Likes();
-      like.iduser = this.userService.getUserInfo();
+      like.iduser = this.userInfo;
       like.idpost = post
       this.likeService.registerLike(like).subscribe(
         response => {
@@ -216,6 +218,7 @@ export class HomeComponent implements OnInit {
   }
 
   uploadPosts() {
+    console.log(this.post);
     this.postsService.registerPost(this.post).subscribe(
       response => {
         let data: any = response;
