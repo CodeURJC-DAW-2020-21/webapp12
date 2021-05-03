@@ -422,12 +422,12 @@ Este miembro ha realizado: La creacion de los servicios dedicados a la parte de 
    | #5	| 	|  |  |
 
 ##### Antonio Jesus Pajuelo Chavez:
-
+Este miembro del equipo se ha dedicado a la implementacion de scripts de la fase 2 a Angular asi como la carga, modificacion y creacion de usuarios, post y productos. 
    
    | Número	| Descripción	| Commit | Archivos |
    | --- | :---: | :---: | :---: |
-   | #1 | 	|  |  |
-   | #2	| 	|  |  |
-   | #3	| 	|  |  |
-   | #4	| 	|  |  |
-   | #5	| 	|  |  |
+   | #1 | Fixe Carrusel	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/657edb536174bba715f1a76430660e6b3303a386) | [home.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/home/home.component.ts) |
+   | #2	| Implement create bookmarks and likes	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/32cc7dd5c2fb71e43ba90a27f0bea720f76e35cb) | [messages.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/messages/messages.component.ts) |
+   | #3	| implements delete functions bookmarks and likes	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/a8d3e7f1e29cd9502b38c26e76b20a94c3c8f3a1) | [navbar.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/navbar/navbar.component.ts) |
+   | #4	| Implements Functions follow	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/4f10116fc0aa1d022ada7b87304745c903914776) | [profileaccountsettings.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/profileaccountsettings/profileaccountsettings.component.ts) |
+   | #5	| websocket	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/e4f77aabfaced8c186f3762b5a21c7b4d8981365) | [store.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/store/store.component.ts) |
