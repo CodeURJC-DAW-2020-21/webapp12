@@ -32,7 +32,7 @@ public class MessageController {
        simpMessagingTemplate.convertAndSend("/message/"+to, message);
     }
     
-    @GetMapping("/api/getChad")
+    @GetMapping("/getChad")
     public List<Message> getChat(@RequestParam String from, @RequestParam String to) {
     	return userService.getChat(from, to);
     }

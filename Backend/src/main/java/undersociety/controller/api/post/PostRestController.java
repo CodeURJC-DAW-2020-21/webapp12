@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,7 +63,7 @@ public class PostRestController {
 	@GetMapping("/")
 	public List<Post> getAllPosts( @Parameter(description="page") @RequestParam(required = false) String page ){
 		if(page != null) {
-			return postService.getPosts(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+			return postService.getPosts(PageRequest.of(Integer.parseInt(page), 10,Sort.by("idpost").descending())).getContent();
 		}else {
 			return postService.getAll();
 		}

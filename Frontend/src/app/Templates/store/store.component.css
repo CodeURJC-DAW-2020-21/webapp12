@@ -1,0 +1,392 @@
+
+/* =============== filter-secs ============== */
+
+.filter-secs {
+  float: left;
+  width: 100%;
+  background-color: #fff;
+}
+.filter-heading {
+  float: left;
+  width: 100%;
+  padding: 23px 20px;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 27px;
+}
+.filter-heading h3 {
+  float: left;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 600;
+}
+.filter-heading a {
+  float: right;
+  color: #686868;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.paddy {
+  float: left;
+  width: 100%;
+  padding: 0 20px;
+}
+.filter-ttl {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid  #e5e5e5;
+  padding: 0 0 8px 0;
+  margin-bottom: 10px;
+}
+.filter-ttl h3 {
+  float: left;
+  font-size: 16px;
+  color: #000000;
+  font-weight: 600;
+}
+.filter-ttl a {
+  float: right;
+  font-size: 14px;
+  color: #686868;
+}
+.filter-dd {
+  float: left;
+  width: 100%;
+  margin-bottom: 27px;
+}
+.filter-dd form {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+.filter-dd form input,
+.filter-dd form select {
+  width: 100%;
+  height: 30px;
+  background-color: #f2f2f2;
+  padding: 0 10px;
+  color: #b2b2b2;
+  font-size: 12px;
+  font-weight: 600;
+  border: 0;
+  border: 1px solid #e5e5e5;
+}
+.job-tp i {
+  color: #000000;
+  position: absolute;
+  top: 7px;
+  right: 15px;
+  font-size: 18px;
+}
+.avail-checks {
+  float: left;
+  width: 100%;
+  margin-top: 7px;
+}
+.avail-checks li {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.avail-checks li:last-child {
+  margin-bottom: 0;
+}
+.avail-checks li input[type="radio"] {
+  display: none;
+}
+.avail-checks li label {
+  float: left;
+}
+.avail-checks li input[type="radio"] + label span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  position: relative;
+  margin-top: 3px;
+  border: 1px solid #e6e6e6;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  border-radius: 100px;
+}
+.avail-checks li input[type="radio"] + label span:before {
+  content: '';
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  border-radius: 100px;
+  background-color: #e44d3a;
+  top: 3px;
+  left: 3px;
+}
+.avail-checks li input[type="radio"]:checked + label span:before {
+  opacity: 1;
+  visibility: visible;
+}
+.avail-checks li small {
+  color: #909090;
+  font-size: 14px;
+  padding-left: 10px;
+  font-weight: 500;
+}
+
+
+/* =========== Range Slider ========== */
+
+.rg-slider {
+  float: left;
+  width: 100%;
+}
+.slider-container {
+  width: 100% !important;
+  padding-top: 50px;
+  position: relative;
+}
+.theme-green .back-bar {
+  height: 5px;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+}
+.theme-green .back-bar .pointer {
+  width: 17px;
+  height: 17px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  border-radius: 100px;
+  background-color: #e44d3a;
+  border: 2px solid #e3e3e3;
+  -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,0.43);
+  -moz-box-shadow: 1px 2px 3px rgba(0,0,0,0.43);
+  -ms-box-shadow: 1px 2px 3px rgba(0,0,0,0.43);
+  -o-box-shadow: 1px 2px 3px rgba(0,0,0,0.43);
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.43);
+}
+.theme-green .back-bar .pointer {
+  top: -7px;
+}
+.slider-container .back-bar .pointer-label {
+  top: -50px;
+  height: 26px;
+  background-color: #e5e5e5;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+  line-height: 26px;
+  width: 50px;
+}
+.pointer-label.low {
+  left: 0 !important;
+}
+.pointer-label.high {
+  left: 70px !important;
+}
+.pointer-label.low:before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  right: -14px;
+  width: 8px;
+  height: 1px;
+  background-color: #e5e5e5;
+}
+.rg-limit {
+  float: left;
+  width: 100%;
+  margin-top: 16px;
+}
+.rg-limit h4 {
+  color: #686868;
+  font-size: 15px;
+  font-weight: 600;
+  float: left;
+}
+.rg-limit h4:last-child {
+  float: right;
+}
+
+
+/* ================ post-project-popup =============== */
+
+
+.post-popup {
+  width: 570px;
+  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%) scale(0.65);
+  -moz-transform: translateX(-50%) translateY(-50%) scale(0.65);
+  -ms-transform: translateX(-50%) translateY(-50%) scale(0.65);
+  -o-transform: translateX(-50%) translateY(-50%) scale(0.65);
+  transform: translateX(-50%) translateY(-50%) scale(0.65);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 0;
+}
+.post-popup.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+  -webkit-transform: scale(1) translateX(-50%) translateY(-50%);
+}
+.post-project > a {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+.post-project > a:hover {
+  color: #fff;
+}
+.post-project {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+.post-project h3 {
+  float: left;
+  width: 100%;
+  background-color: #e44d3a;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 20px 0;
+}
+.post-project-fields {
+  float: left;
+  width: 100%;
+  padding: 30px 20px;
+  background-color: #fff;
+}
+.post-project-fields form {
+  float: left;
+  width: 100%;
+}
+.post-project-fields form input {
+  padding: 0 15px;
+  height: 40px;
+}
+.post-project-fields form textarea {
+  padding: 15px;
+  height: 130px;
+}
+.post-project-fields form input,
+.post-project-fields form textarea,
+.post-project-fields form select {
+  width: 100%;
+  color: #b2b2b2;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.post-project-fields form select {
+  height: 40px;
+  padding: 0 10px;
+}
+.post-project-fields form ul {
+  float: left;
+  margin-top: 10px;
+  width: 100%;
+}
+.post-project-fields form ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.post-project-fields form ul li button.active {
+  background-color: #e44d3a;
+  color: #fff;
+}
+.post-project-fields form ul li button,
+.post-project-fields form ul li a {
+  color: #000000;
+  font-size: 16px;
+  border: 1px solid #e5e5e5;
+  padding: 10px 25px;
+  display: inline-block;
+  background-color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.post-project-fields form ul li button:hover,
+.post-project-fields form ul li a:hover {
+  background-color: #e44d3a;
+  color: #fff;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #b2b2b2;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #b2b2b2;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #b2b2b2;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #b2b2b2;
+}
+
+.price-sec {
+  float: left;
+  width: 100%;
+}
+.price-br {
+  float: left;
+  width: 225px !important;
+  position: relative;
+}
+.price-br > i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #b2b2b2;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-left: 1px solid #e5e5e5;
+  text-align: center;
+}
+.price-sec span {
+  color: #b2b2b2;
+  font-size: 14px;
+  float: left;
+  padding: 12px 17px 0 17px;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.inp-field {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+.inp-field:before {
+  content: '\f107';
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  color: #717171;
+  font-family: fontawesome;
+}
+.post-popup.job_post .price-br {
+  width: 100% !important;
+}

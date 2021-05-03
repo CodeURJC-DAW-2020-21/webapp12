@@ -1,0 +1,259 @@
+<app-navbar></app-navbar>
+<section class="profile-account-setting">
+    <div class="container">
+        <div class="account-tabs-setting">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="acc-leftbar">
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                            <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc"
+                                role="tab" aria-controls="nav-acc" aria-selected="true"><i
+                                    class="fa fa-cart-arrow-down"></i>Bookmark Products</a>
+
+                            <a class="nav-item nav-link" id="nav-requests-tab" data-toggle="tab" href="#nav-requests"
+                                role="tab" aria-controls="nav-requests" aria-selected="false"><i
+                                    class="fa fa-group"></i>Follows</a>
+
+                            <a class="nav-item nav-link" id="nav-modify-tab" data-toggle="tab" href="#nav-modify"
+                                role="tab" aria-controls="nav-modify" aria-selected="false"><i
+                                    class="fa fa-address-card-o"></i>Modify Information</a>
+
+                            
+
+
+
+                        </div>
+                    </div>
+                    <!--acc-leftbar end-->
+                </div>
+                <div class="col-lg-9">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-acc" role="tabpanel"
+                            aria-labelledby="nav-acc-tab">
+                            <div class="acc-setting">
+                                <h3>Bookmark Products</h3>
+                                <div class="requests-list" *ngFor="let bookmark of bookmarks">
+                                    <div class="request-details" id="product{{bookmark.idproduct.idproduct}}">
+                                        <div class="noty-user-img">
+                                            <img src="https://localhost:8443/imageProduct0/{{bookmark.idproduct.idproduct}}"
+                                                alt="">
+                                        </div>
+                                        <div class="request-info">
+                                            <h3>{{bookmark.idproduct.title}}</h3>
+                                        </div>
+                                        <div class="accept-feat">
+                                            <ul>
+                                                <li><button type="submit" class="close-req"><i
+                                                            (click)="dropProduct(bookmark.idproductlist,bookmark)"
+                                                            class="la la-close"></i></button></li>
+                                            </ul>
+                                        </div>
+                                        <!--accept-feat end-->
+                                    </div>
+                                    <!--request-detailse end-->
+                                </div>
+                                <!--requests-list end-->
+                            </div>
+                            <!--acc-setting end-->
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-requests" role="tabpanel" aria-labelledby="nav-requests-tab">
+                            <div class="acc-setting">
+                                <h3>Follows</h3>
+                                <div class="requests-list">
+                                    <div *ngFor="let follow of followers" class="request-details"
+                                        id="follower{{follow.iduserrelation}}">
+                                        <div class="noty-user-img">
+                                            <img src="https://localhost:8443/imageprofile/{{follow.usertwo.username}}"
+                                                alt="">
+                                        </div>
+                                        <div class="request-info">
+                                            <h3>{{follow.usertwo.username}}</h3>
+                                        </div>
+                                        <div class="accept-feat">
+                                            <ul>
+                                                <li><button type="submit" class="close-req"><i
+                                                            (click)="unfollow(follow.iduserrelation, follow)"
+                                                            class="la la-close"></i></button></li>
+                                            </ul>
+                                        </div>
+                                        <!--accept-feat end-->
+                                    </div>
+                                </div>
+                                <!--requests-list end-->
+                            </div>
+                            <!--acc-setting end-->
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-deactivate" role="tabpanel"
+                            aria-labelledby="nav-deactivate-tab">
+                            <div class="acc-setting">
+                                <h3>Deactivate Account</h3>
+                                <form action="/deleteUser" method="POST">
+                                    <div class="cp-field">
+                                        <h5>Email</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="email" type="text" name="email" placeholder="Email"
+                                                required>
+                                            <i class="fa fa-envelope"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>Password</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="password" type="password" name="pass"
+                                                placeholder="Password" required>
+                                            <i class="fa fa-lock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>Please Explain Further</h5>
+                                        <textarea name="explication"></textarea>
+                                    </div>
+                                    <div class="save-stngs pd3">
+                                        <ul>
+                                            <li><button (click)="deleteAccount(userpage.idusers)" type="button">Save
+                                                    Setting</button></li>
+                                            <li><button type="reset">Restore Setting</button></li>
+                                        </ul>
+                                    </div>
+                                    <!--save-stngs end-->
+                                </form>
+                            </div>
+                            <!--acc-setting end-->
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-modify" role="tabpanel" aria-labelledby="nav-modify-tab">
+                            <div class="acc-setting">
+                                <h3>Information User</h3>
+                                <form action="/modifyUser" method="POST" enctype="multipart/form-data">
+                                    <div class="cp-field">
+                                        <div class="cp-field">
+                                            <h5>Image Profile</h5>
+                                            <div class="cpp-fiel">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-3 imgUp">
+                                                            <div class="imagePreview"
+                                                                style="background-image: url(https://localhost:8443/api/users/{{userpage.idusers}}/imageProfile);">
+                                                            </div>
+                                                            <label class="btn btn-primary">Upload<input
+                                                                    (change)="imageSelectedUser($event)" name="image"
+                                                                    type="file" class="uploadFile img" value="Upload Photo"
+                                                                    style="width: 0px;height: 0px;overflow: hidden;"
+                                                                    accept="image/*">
+                                                            </label>
+                                                            <i class="fa fa-times del" (click)="deleteImageProfile()"></i>
+                                                        </div><!-- col-2 -->
+                                                    </div><!-- row -->
+                                                </div><!-- container -->
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>Theme Profile</h5>
+                                            <div class="cpp-fiel">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-3 imgUp">
+                                                            <div class="imagePreview"
+                                                                style="background-image: url(https://localhost:8443/api/users/{{userpage.idusers}}/imageThemeProfile);">
+                                                            </div>
+                                                            <label class="btn btn-primary">Upload<input
+                                                                    (change)="imageThemeSelectedUser($event)" name="image"
+                                                                    type="file" class="uploadFile img" value="Upload Photo"
+                                                                    style="width: 0px;height: 0px;overflow: hidden;"
+                                                                    accept="image/*">
+                                                            </label>
+                                                            <i class="fa fa-times del" (click)="deleteImageThemeProfile()"></i>
+                                                        </div><!-- col-2 -->
+                                                    </div><!-- row -->
+                                                </div><!-- container -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>Username</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.username" type="text" name="username"
+                                                placeholder="{{userpage.username}}">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>Password</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.pass" type="text" name="username"
+                                                placeholder="****">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>Email</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.email" type="text" name="email"
+                                                placeholder="{{userpage.email}}">
+                                            <i class="fa fa-envelope"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>Name</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.name" type="text" name="name"
+                                                placeholder="{{userpage.name}}">
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>City</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.city" type="text" name="city"
+                                                placeholder="{{userpage.city}}">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>User Info</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.userinfo" type="text" name="userinfo"
+                                                placeholder="{{userpage.userinfo}}">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                    </div>
+                                    <div class="cp-field">
+                                        <h5>Links</h5>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.linkfacebook" type="text" name="linkfacebook"
+                                                placeholder="{{userpage.linkfacebook}}">
+                                            <i class="fa fa-facebook-official"></i>
+                                        </div><br>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.linkinstagram" type="text" name="linkinstagram"
+                                                placeholder="{{userpage.linkinstagram}}">
+                                            <i class="fa fa-instagram"></i>
+                                        </div><br>
+                                        <div class="cpp-fiel">
+                                            <input [(ngModel)]="newUser.linktwitter" type="text" name="linktwitter"
+                                                placeholder="{{userpage.linktwitter}}">
+                                            <i class="fa fa-twitter"></i>
+                                        </div>
+                                    </div>
+                                    <div class="save-stngs pd3">
+                                        <ul>
+                                            <li><button (click)="modify()" type="Accept">Save Setting</button></li>
+                                            <li><button type="reset">Restore Setting</button></li>
+                                        </ul>
+                                    </div>
+                                    <!--save-stngs end-->
+                                </form>
+                            </div>
+                            <!--acc-setting end-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--account-tabs-setting end-->
+    </div>
+</section>

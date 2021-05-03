@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div class="search-sec">
+    <div class="container">
+        <div class="search-box">
+            <form>
+                <input [(ngModel)]="value" type="text" name="search" placeholder="Search keywords">
+                <button (click)="search()" type="submit">Search</button>
+            </form>
+        </div><!--search-box end-->
+    </div>
+</div><!--search-sec end-->
+
+<section class="companies-info">
+    <div class="container">
+        <div class="company-title">
+            <h3>All Users</h3>
+        </div><!--company-title end-->
+        <div class="companies-list">
+            <div class="row" id="myUL">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let customer of customers">
+                    <div class="company_profile_info">
+                        <div class="company-up-info">
+                            <img src="https://localhost:8443/api/users/{{customer.idusers}}/imageProfile" alt="">
+                            <h3>{{customer.username}}</h3>
+                            
+                            <ul>
+                                
+                            </ul>
+                        </div>
+                        <a (click)="goUserpage(customer.idusers)" title="" class="view-more-pro">View Profile</a>
+                    </div><!--company_profile_info end-->
+                </div>
+            </div>
+        </div><!--companies-list end-->
+        <div class="process-comm" (click)="load()">
+            <div class="spinner profile">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+</section><!--companies-info end-->
+

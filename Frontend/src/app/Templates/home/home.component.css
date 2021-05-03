@@ -1,0 +1,461 @@
+/* ================ post-project-popup =============== */
+
+
+.post-popup {
+  width: 570px;
+  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%) scale(0.65);
+  -moz-transform: translateX(-50%) translateY(-50%) scale(0.65);
+  -ms-transform: translateX(-50%) translateY(-50%) scale(0.65);
+  -o-transform: translateX(-50%) translateY(-50%) scale(0.65);
+  transform: translateX(-50%) translateY(-50%) scale(0.65);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 0;
+}
+.post-popup.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+  -webkit-transform: scale(1) translateX(-50%) translateY(-50%);
+}
+.post-project > a {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+.post-project > a:hover {
+  color: #fff;
+}
+.post-project {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+.post-project h3 {
+  float: left;
+  width: 100%;
+  background-color: #e44d3a;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 20px 0;
+}
+.post-project-fields {
+  float: left;
+  width: 100%;
+  padding: 30px 20px;
+  background-color: #fff;
+}
+.post-project-fields form {
+  float: left;
+  width: 100%;
+}
+.post-project-fields form input {
+  padding: 0 15px;
+  height: 40px;
+}
+.post-project-fields form textarea {
+  padding: 15px;
+  height: 130px;
+}
+.post-project-fields form input,
+.post-project-fields form textarea,
+.post-project-fields form select {
+  width: 100%;
+  color: #b2b2b2;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.post-project-fields form select {
+  height: 40px;
+  padding: 0 10px;
+}
+.post-project-fields form ul {
+  float: left;
+  margin-top: 10px;
+  width: 100%;
+}
+.post-project-fields form ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.post-project-fields form ul li button.active {
+  background-color: #e44d3a;
+  color: #fff;
+}
+.post-project-fields form ul li button,
+.post-project-fields form ul li a {
+  color: #000000;
+  font-size: 16px;
+  border: 1px solid #e5e5e5;
+  padding: 10px 25px;
+  display: inline-block;
+  background-color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.post-project-fields form ul li button:hover,
+.post-project-fields form ul li a:hover {
+  background-color: #e44d3a;
+  color: #fff;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #b2b2b2;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #b2b2b2;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #b2b2b2;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #b2b2b2;
+}
+
+.price-sec {
+  float: left;
+  width: 100%;
+}
+.price-br {
+  float: left;
+  width: 225px !important;
+  position: relative;
+}
+.price-br > i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #b2b2b2;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-left: 1px solid #e5e5e5;
+  text-align: center;
+}
+.price-sec span {
+  color: #b2b2b2;
+  font-size: 14px;
+  float: left;
+  padding: 12px 17px 0 17px;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.inp-field {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+.inp-field:before {
+  content: '\f107';
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  color: #717171;
+  font-family: fontawesome;
+}
+.post-popup.job_post .price-br {
+  width: 100% !important;
+}
+
+/* ================== USER PROFILE =================== */
+
+.cover-sec img {
+  width: 100%;
+}
+.cover-sec > a {
+  display: inline-block;
+  color: #e44d3a;
+  font-size: 16px;
+  background-color: #fff;
+  border: 1px solid #e44d3a;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  padding: 10px 15px;
+  font-weight: 600;
+  margin-right: 15px;
+}
+.cover-sec > a i {
+  padding-right: 5px;
+}
+
+
+/* ============= user_profile ============= */
+
+.user_profile {
+  float: left;
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-top: -40px;
+}
+
+.user-post-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+
+}
+.user-post-icon > img {
+  float: none;
+  border: 5px solid #fff;
+  -webkit-border-radius: 80px;
+  -moz-border-radius: 80px;
+  -ms-border-radius: 80px;
+  -o-border-radius: 80px;
+  border-radius: 80px;
+  width: 100%;
+}
+
+.user-pro-img {
+  float: left;
+  width: 100%;
+  /*	text-align: center;
+   margin-bottom: 28px; */
+  margin-top: -95px;
+  /*	position: relative; */
+}
+.user-pro-img > a {
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  border-radius: 100px;
+  color: #fff;
+  line-height: 40px;
+  background-color: #e44d3a;
+  position: absolute;
+  top: 0;
+  left: 60%;
+}
+
+.user-pro-img img {
+  /* -webkit-border-radius: 100px;
+ -moz-border-radius: 100px;
+ -ms-border-radius: 100px;
+ -o-border-radius: 100px; */
+  border-radius: 100px;
+  /*float: none; */
+  border: 1px solid #ffffff;
+  width: 200px;
+  height: 200px;
+  float: none;
+  border: 2px solid #fff;
+}
+.user_pro_status {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 27px;
+}
+.flw-hr {
+  float: left;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.flw-hr li {
+  display: inline-block;
+  margin-right: 17px;
+}
+.flw-hr li:last-child {
+  margin-right: 0;
+}
+.flw-hr li a {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 11px 15px;
+}
+.flw-hr li a i {
+  padding-right: 5px;
+}
+.flww {
+  background-color: #53d690;
+}
+.hre {
+  background-color: #51a5fb;
+}
+
+
+/* =============== flw-status ============ */
+
+.flw-status {
+  float: left;
+  width: 100%;
+}
+.flw-status li {
+  display: inline-block;
+  margin-right: 50px;
+}
+.flw-status li:last-child {
+  margin-right: 0;
+}
+.flw-status li span {
+  color: #686868;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  display: block;
+}
+.flw-status li b {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ================== social_links ============= */
+
+.social_links {
+  float: left;
+  width: 100%;
+  text-align: left;
+}
+.social_links li {
+  float: left;
+  width: 100%;
+  padding: 15px 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.social_links li a {
+  float: left;
+  width: 100%;
+  color: #51a5fb;
+  font-size: 13px;
+  font-weight: 400;
+}
+.social_links li a i {
+  padding-right: 5px;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+}
+.la-globe {
+  color: #51a5fb;
+}
+.fa-facebook-square {
+  color: #3b5998;
+}
+.fa-google-plus-square {
+  color: #e2665c;
+}
+.fa-twitter {
+  color: #1da1f2;
+}
+.fa-behance-square {
+  color: #1769ff;
+}
+.fa-pinterest {
+  color: #bd081c;
+}
+.fa-instagram {
+  color: #833ab4;
+}
+.fa-youtube {
+  color: #cd201f;
+}
+
+
+/* ================= user-tab-sec ============== */
+
+.user-tab-sec {
+  float: left;
+  width: 100%;
+  padding-top: 4px;
+}
+.user-tab-sec h3 {
+  color: #000000;
+  font-size: 40px;
+  font-weight: 400;
+  text-transform: capitalize;
+  margin-bottom: 7px;
+}
+.star-descp {
+  float: left;
+  width: 100%;
+  margin-bottom: 50px;
+}
+.star-descp > a {
+  float: left;
+  color: #51a5fb;
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 20px;
+  text-decoration: underline;
+}
+.star-descp > a:hover {
+  color: #51a5fb;
+}
+.star-descp span {
+  float: left;
+  color: #686868;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 20px;
+}
+.star-descp > ul {
+  float: left;
+}
+.star-descp ul li {
+  display: inline-block;
+}
+.star-descp ul li i {
+  color: #b7ce1f;
+  font-size: 16px;
+}
+.tab-feed {
+  float: left;
+  width: 100%;
+  margin-bottom: 47px;
+}
+.tab-feed ul {
+  float: left;
+  width: 100%;
+}
+.tab-feed ul li {
+  display: inline-block;
+  margin-right: 35px;
+  text-align: center;
+}
+.tab-feed.st2 ul li {
+  margin-right: 30px;
+}
+.tab-feed ul li:last-child {
+  margin-right: 0;
+}
+.tab-feed ul li.active img {
+  filter: grayscale(0);
+}
+.tab-feed ul li.active span {
+  color: #e44d3a;
+}
+.tab-feed ul li img {
+  float: none;
+  margin-bottom: 5px;
+  filter: grayscale(100%);
+}
+.tab-feed ul li span {
+  display: block;
+  color: #b2b2b2;
+  font-weight: 400;
+  font-size: 18px;
+}
+.tab-feed ul li:last-child {
+  margin-right: 0;
+}

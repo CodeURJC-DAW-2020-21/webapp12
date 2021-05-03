@@ -48,6 +48,7 @@ public class Product {
 	@Lob
 	@JsonIgnore
 	private Blob image2;
+	@JsonView(Simple.class)
 	@Column
 	private int price;
 	@JsonView(Multiple.class)
@@ -73,10 +74,13 @@ public class Product {
 	@JsonView(Simple.class)
 	@Column
 	private String status;
+	@JsonView(Simple.class)
 	@Column
 	private Boolean img0;
+	@JsonView(Simple.class)
 	@Column
 	private Boolean img1;
+	@JsonView(Simple.class)
 	@Column
 	private Boolean img2;
 	

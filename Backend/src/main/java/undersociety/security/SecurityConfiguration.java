@@ -31,8 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		/*ANGULAR*/
+		http.authorizeRequests().antMatchers("/new/**").permitAll();
 		/*WEB*/
-
+		http.authorizeRequests().antMatchers("/chat/**").permitAll();
 		http.authorizeRequests().antMatchers( "/css/**").permitAll();
 		http.authorizeRequests().antMatchers( "/js/**").permitAll();
 		http.authorizeRequests().antMatchers( "/lib/**").permitAll();

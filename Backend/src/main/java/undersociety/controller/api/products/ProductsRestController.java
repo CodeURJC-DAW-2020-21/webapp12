@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import undersociety.models.Product;
+import undersociety.models.Tags;
 import undersociety.services.ProductService;
 
 @RestController
@@ -61,7 +63,7 @@ public class ProductsRestController {
 	@GetMapping("/")
 	public List<Product> getAllProducts( @Parameter(description="page") @RequestParam(required = false) String page ){
 		if(page != null) {
-			return productService.getProductsPage(PageRequest.of(Integer.parseInt(page), 5)).getContent();
+			return productService.getProductsPage(PageRequest.of(Integer.parseInt(page), 10,Sort.by("idproduct").descending())).getContent();
 		}else {
 			return productService.getAll();
 		}
@@ -416,4 +418,19 @@ public class ProductsRestController {
 		}
 	}	
 
+	@Operation(summary = "Get a all Tags")
+	@ApiResponses(value = { 
+			@ApiResponse(
+					responseCode = "200", 
+					description = "Found the Tags", 
+					content = {@Content(
+							mediaType = "application/json"
+							)}
+					) 
+	})
+	@JsonView(Tags.Simple.class)
+	@GetMapping("/tags")
+	public List<Tags> getTags(){
+		return productService.getTags();
+	}
 }

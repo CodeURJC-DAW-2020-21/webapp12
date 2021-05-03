@@ -1,0 +1,242 @@
+<app-navbar></app-navbar>
+<!-- Page Heading -->
+<h1 class="h3 mb-0 text-gray-800 justify-content-between mb-4">Dashboard</h1>
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            POSTS</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{statitics.posts}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-picture-o fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            TOTAL EARNINGS</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{statitics.earnings}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-usd fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">PRODUCTS
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    {{statitics.products}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-cart-arrow-down fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            TOTAL USERS</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{statitics.users}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+
+<div class="row">
+
+    <!-- Area Chart -->
+
+
+
+    <div class="col-xl-6 col-lg-6">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">USERS / COMPANY</h6>
+                <div class="dropdown no-arrow">
+
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <p-chart type="pie" [data]="data"></p-chart>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fa fa-user text-primary"></i> USERS
+                    </span>
+                    <span class="mr-2">
+                        <i class="fa fa-building text-success"></i> COMPANIES
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- Pie Chart -->
+    <div class="col-xl-6 col-lg-6">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">POSTS / PRODUCTS</h6>
+                <div class="dropdown no-arrow">
+
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <p-chart type="pie" [data]="data2"></p-chart>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fa fa-clipboard text-primary"></i> POSTS
+                    </span>
+                    <span class="mr-2">
+                        <i class="fa fa-product-hunt text-success"></i> PRODUCTS
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- Content Column -->
+    <div class="col-lg-6 mb-4">
+
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">STATUS PRODUCTS AND ACCOUNTS</h6>
+            </div>
+            <div class="card-body">
+                <h4 class="small font-weight-bold">IN STOCK <span class="float-right">{{statitics.instock}}%</span>
+                </h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{statitics.instock}}%" aria-valuenow="statitics.instock" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">SOLD <span class="float-right">{{statitics.sold}}%</span></h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{statitics.sold}}%" aria-valuenow="statitics.sold" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">RESERVED <span class="float-right">{{statitics.reserved}}%</span>
+                </h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar" role="progressbar" style="width: {{statitics.reserved}}%" aria-valuenow="statitics.reserved" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">ADMIN ACCOUNTS <span class="float-right">{{statitics.admins}}%</span>
+                </h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: {{statitics.admins}}%" aria-valuenow="statitics.admins" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">USERS ACCOUNTS <span class="float-right">{{statitics.users}}%</span>
+                </h4>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{statitics.users}}%" aria-valuenow="statitics.users" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color System -->
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">TAGS</h6>
+            </div>
+            <div class="card-body">
+                <h4 class="small font-weight-bold">ELECTRONICS <span class="float-right">{{statitics.electronics}}%</span></h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{statitics.electronics}}%" aria-valuenow="statitics.electronics" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">FURNITURES <span class="float-right">{{statitics.furnitures}}%</span>
+                </h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{statitics.furnitures}}%" aria-valuenow="statitics.furnitures" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">APPLIANCE <span class="float-right">{{statitics.appliances}}%</span>
+                </h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar" role="progressbar" style="width: {{statitics.appliances}}%" aria-valuenow="statitics.appliances" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">BOOKS <span class="float-right">{{statitics.books}}%</span></h4>
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: {{statitics.books}}%" aria-valuenow="statitics.books" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <h4 class="small font-weight-bold">CLOTHES <span class="float-right">{{statitics.clothes}}%</span>
+                </h4>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{statitics.clothes}}%" aria-valuenow="statitics.clothes" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
+        </div>
+    </div>
+</footer>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>

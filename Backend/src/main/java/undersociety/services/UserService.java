@@ -66,6 +66,10 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
+	public Optional<Users> getUserUsername(String username){
+		return userRepository.findByusername(username);
+	}
+	
 	public Users getUser(String username) {
 		return (userRepository.findByusername(username).orElseThrow(() -> new NoSuchElementException("User not found")));
 	}
@@ -222,6 +226,12 @@ public class UserService {
 			}
 		}
 		
+		if(user.getUserinfo() != null) {
+			if(!user.getUserinfo().isEmpty()) {
+				prev.setUserinfo(user.getUserinfo());
+			}
+		}
+		
 		if(user.getLinkfacebook() != null) {
 			if(!user.getLinkfacebook().isEmpty()) {
 				prev.setLinkfacebook(user.getLinkfacebook());
@@ -331,8 +341,12 @@ public class UserService {
 		relationrepo.delete(usersRelations);
 	}
 
-	public void saveUser(Users user) {
+	public void regsiterUser(Users user) {
 		user.setPass(encoder.encode(user.getPass()));
+		userRepository.save(user);
+	}
+
+	public void saveUser(Users user) {
 		userRepository.save(user);
 	}
 
@@ -368,5 +382,13 @@ public class UserService {
 	public boolean existsUserById(Users iduser) {
 		Optional<Users> user = userRepository.findById(iduser.getIdusers());
 		return user.isPresent();
+	}
+
+	public List<Roles> getRoles(Users users) {
+		return rolesRepository.findByiduser(users);
+	}
+
+	public UsersRelations getRelation(Users users, Users users2) {
+		return relationrepo.findByuseroneAndUsertwo(users, users2);
 	}
 }

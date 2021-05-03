@@ -51,7 +51,7 @@ public class RelationsRestController {
 	public List<UsersRelations> getRelations(){
 		return userService.getAllRelations();
 	}
-
+	
 	@Operation(summary = "Get a relations by id")
 	@ApiResponses(value = { 
 			@ApiResponse(

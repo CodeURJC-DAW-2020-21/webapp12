@@ -35,7 +35,6 @@ public class Users {
 	@JsonView(Basic.class)
 	@Column
 	private String username;
-	@JsonView(Detailed.class)
 	@Column
 	private String pass;
 	@JsonView(Detailed.class)
@@ -44,25 +43,26 @@ public class Users {
 	@Lob
 	@JsonIgnore
 	private Blob userimg;
+	@JsonView(Basic.class)
 	@Column
 	private boolean companyprofile;
 	@Column
 	private boolean userprofile;
-	@JsonView(Detailed.class)
+	@JsonView(Basic.class)
 	@Column
 	private String city;
 	@Column
 	private String userportimg;
-	@JsonView(Detailed.class)
+	@JsonView(Basic.class)
 	@Column
 	private String userinfo;
-	@JsonView(Detailed.class)
+	@JsonView(Basic.class)
 	@Column
 	private String linkfacebook;
-	@JsonView(Detailed.class)
+	@JsonView(Basic.class)
 	@Column
 	private String linktwitter;
-	@JsonView(Detailed.class)
+	@JsonView(Basic.class)
 	@Column
 	private String linkinstagram;
 	@Lob

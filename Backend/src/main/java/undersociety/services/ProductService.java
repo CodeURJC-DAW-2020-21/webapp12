@@ -136,7 +136,90 @@ public class ProductService {
 		
 	}
 
+	public List<Tags> getTags(){
+		return tagsrepo.findAll();
+	}
 	
+	public List<ProductModel> getPorductIndexApi(String username,int page) {
+		Page<Product> products = productrepo.findAll(PageRequest.of(page, 10, Sort.by("idproduct").descending()));
+		List<ListProducts> lp = listproductrepo.findByiduser(userRepository.findByusername(username)
+				.orElseThrow(() -> new NoSuchElementException("User not found")));
+		List<ProductModel> productmodels = new ArrayList<>();
+		List<Integer> bookmarks = new ArrayList<>();
+		for (ListProducts bookmark : lp) {
+			bookmarks.add(bookmark.getIdproduct().getIdproduct());
+		}
+		for (Product product : products) {
+			ProductModel productmodel = new ProductModel();
+			if (product.getIduser().getUserprofile()) {
+				productmodel.setTypeUser("user");
+			} else {
+				productmodel.setTypeUser("company");
+			}
+			if (product.getStatus().equalsIgnoreCase("in stock")) {
+				productmodel.setColor("#228B22");
+			}
+
+			if (product.getStatus().equalsIgnoreCase("sold")) {
+				productmodel.setColor("#DC143C");
+			}
+
+			if (product.getStatus().equalsIgnoreCase("reserved")) {
+				productmodel.setColor("#FFD700");
+			}
+
+			if (bookmarks.contains(product.getIdproduct())) {
+				productmodel.setBookamark("la la-check-circle");
+			} else {
+				productmodel.setBookamark("la la-bookmark");
+			}
+			productmodel.setProduct(product);
+			productmodels.add(productmodel);
+		}
+		return productmodels;
+	}
+	
+	
+	public List<ProductModel> getProductUserPageApi(Users actual, Users follow, int page) {
+		Page<Product> products = productrepo.findByiduser(follow,
+				PageRequest.of(page, 10, Sort.by("idproduct").descending()));
+		List<ListProducts> lproduct = listproductrepo.findByiduser(userRepository.findByusername(actual.getUsername())
+				.orElseThrow(() -> new NoSuchElementException("User not found")));
+		List<ProductModel> productmodels = new ArrayList<>();
+		List<Integer> bookmarks = new ArrayList<>();
+		for (ListProducts bookmark : lproduct) {
+			bookmarks.add(bookmark.getIdproduct().getIdproduct());
+		}
+		for (Product product : products) {
+			ProductModel productmodel = new ProductModel();
+			if (product.getIduser().getUserprofile()) {
+				productmodel.setTypeUser("user");
+			} else {
+				productmodel.setTypeUser("company");
+			}
+			if (product.getStatus().equalsIgnoreCase("in stock")) {
+				productmodel.setColor("#228B22");
+			}
+
+			if (product.getStatus().equalsIgnoreCase("sold")) {
+				productmodel.setColor("#DC143C");
+			}
+
+			if (product.getStatus().equalsIgnoreCase("reserved")) {
+				productmodel.setColor("#FFD700");
+			}
+
+			if (bookmarks.contains(product.getIdproduct())) {
+				productmodel.setBookamark("la la-check-circle");
+			} else {
+				productmodel.setBookamark("la la-bookmark");
+			}
+			productmodel.setProduct(product);
+			productmodels.add(productmodel);
+		}
+		return productmodels;
+	}
+
 	////////////////////////////////////////////////////// NORMAL
 	////////////////////////////////////////////////////// METHODS////////////////////////////////////////////////////////////////////////
 	public Page<Product> getProductsPage(Pageable page) {

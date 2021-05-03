@@ -1,8 +1,16 @@
 package undersociety.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 public class PostModel {
+	
+	public interface Basic extends Post.PostDetails{}
+	
+	@JsonView(Basic.class)
 	private String typeUser;
+	@JsonView(Basic.class)
 	private String like;
+	@JsonView(Basic.class)
 	private Post post;
 	
 	
