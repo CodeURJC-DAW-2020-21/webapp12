@@ -135,6 +135,7 @@ export class SignInComponent implements OnInit {
                           }
                         });
                         this.userService.setLogin(true);
+                        console.log(this.userService.getUserInfo());
                         this.router.navigate(['/home']);
                       },
                       error => console.error(error)

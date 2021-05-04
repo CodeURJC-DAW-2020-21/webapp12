@@ -164,7 +164,7 @@ public class NavigationController{
 		model.addAttribute("token", token.getToken());
 		Users actual = userService.getUser(request.getUserPrincipal().getName());
 		model.addAttribute("admin", request.isUserInRole("ADMIN"));
-		model.addAttribute("followersList", userService.getFollowers(request.getUserPrincipal().getName()));
+		model.addAttribute("followersList", userService.getFollowing(request.getUserPrincipal().getName()));
 		model.addAttribute("productsList", productService.getBookmarks(request.getUserPrincipal().getName()));
 		model.addAttribute("username",request.getUserPrincipal().getName());
 		

@@ -2,7 +2,6 @@ package undersociety.models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import undersociety.models.PostModel.Basic;
 
 public class ProductModel {
 	

@@ -1,9 +1,15 @@
 # webapp12
+# Video de la aplicación Angular
+
+https://youtu.be/k-bk23OIy_I
+
 # Fase 0
 
 ### Nombre de la aplicación web
 
 UnderSociety
+
+
 
 ### Descripción
 
@@ -356,4 +362,76 @@ Este miembro del equipo ha realizado las peticiones Postman, la apirest de los u
    | #5	| Implement Pageable Methods	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3bd151a7fe8dfa1ee0d2b32c79b5e1aeac327e80) | [UserService.java](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Backend/src/main/java/undersociety/services/UserService.java) |
    
 # Fase 4
+### Preparación del entorno de desarrollo Linux:
 
+0. Navegar hasta la carpeta Docker y ejecutar "chmod 777" a los scripts de la carpeta de Docker.
+
+1. Ejecutaremos en el terminal de comandos el script llamado: "Entorno_de_desarrollo.sh".
+
+2. Ejecutaremos en el terminal de comando el script llamado: "create_image.sh".
+
+3. Ejecutamos el comando: "sudo docker-compose up".
+
+
+
+
+
+
+
+### Diagrama de clases y templates de la SPA:
+Leyenda del diagrama:
+
+- Rojo: Servicios
+- Azul: Componentes
+- Morado: Vista de los componentes
+
+
+![uml](https://user-images.githubusercontent.com/63242688/116736789-a32fdc00-a9f0-11eb-920b-46567257a141.JPG)
+
+
+
+### Participación de miembros:
+##### David Montero Garcia:
+Este miembro ha realizado: Ha pasado los archivos html a fronted, ha aplicado el Angular Material sobre: las diferentes imagenes/iconos que en su mayoria han sido cambiadas pero siguen compartiendo similitud con las anteriores, filtros de busqueda que han sido modificados y adaptados, tambien se ha borrado el filtro slider sobre el precio del producto. 
+    
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | Templates Fronted	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/26bba19076eaea654d824ed224cdc604f19a2c87) |  [store.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/store/store.component.html)|
+   | #2	| Iconos con Angular material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/b4e5292829ab5c0877e36daed38c7d20ad351d7a) | [navbar.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/navbar/navbar.component.html) |
+   | #3	| Menu usuario Angular Material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/29326771ddce5d8a8778effcb45881616501f76d)  | [home.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/home/home.component.html) |
+   | #4	| Filtro Angular Material y borrar uno	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/297cf1edc5defde4b70f16ad9c0ae8cdece14d5a)  | [sign-in.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/sign-in/sign-in.component.html) |
+   | #5	| Resto de filtros Angular Material	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/0d2b1a3cd8965fbe7833073cd52309dde5bed8ab)  | [profiles.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blame/master/Frontend/src/app/Templates/profiles/profiles.component.html) |
+
+
+##### Enrique Martín Santorcaz:
+Este miembro ha realizado: La creacion de los servicios dedicados a la parte de la aplicación angular asi como la preparación del front para la correcta visualizacion de algunos iconos piechart y correcta implementación actualizando el package.json para arreglar una serie de errores que acontecian debido a un problema de versión y su incompatibilidad con algunas implementaciones realizadas.
+
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | Implements PieCharts Function | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/197c35fab10b1b64d519fd8dc2384ba352db9f01) | [admin.component.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/admin/admin.component.html) |
+   | #2	| Implements function statitics	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/e6320a93f44ba24ae80ee5866fa33eb1e343d6d3) | [posts.service.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Services/Posts/posts.service.ts) |
+   | #3	| HTML AdminPage	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/29e9767196b91b4d642cc7ccf2e011983c810a27) | [users.service.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Services/Users/users.service.ts) |
+   | #4	| Fix Put and Post methods	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/3dc578c92c4265e8e8e285d22737942607fbb2b7) | [products.service.ts ](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Services/Products/products.service.ts) |
+   | #5	| Created Services methods get | [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/adca33e15cc4e61ba108057b33a8fbe9c2ccbbb7) | [index.html](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/index.html) |
+
+##### Guillermo Martín García:
+Este miembro del equipo se ha dedicado a la implementacion del stilo de los componentes de angular y estuvo revisando la implementación de angular y el funcionamiento de de los componentes.
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1  | Home styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/b3545dcec7317ef3ecdfbf3538f0585c900f77a9) | [home.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/home/home.component.css) |
+   | #2	| companies styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/cf9bdcd3748c1a9695b1b7dfc77f0ebb0deb7314) | [companies.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/companies/companies.component.css) |
+   | #3	| Profiles styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/ffa5d5eca1384dfd5c88a0f18d21e9b1d44df2ec) | [profiles.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/profiles/profiles.component.css) |
+   | #4	| Store styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/fd3166b26f1169407876036a4a5a0d945fe763eb) | [store.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/store/store.component.css) |
+   | #5	| UserPage Styles	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/ce2a420138881a190da9163fddd4ad8bbcec3f02) | [userpage.component.css](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/userpage/userpage.component.css) |
+
+##### Antonio Jesus Pajuelo Chavez:
+Este miembro del equipo se ha dedicado a la implementacion de scripts de la fase 2 a Angular asi como la carga, modificacion y creacion de usuarios, post y productos. 
+   
+   | Número	| Descripción	| Commit | Archivos |
+   | --- | :---: | :---: | :---: |
+   | #1 | Fixe Carrusel	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/657edb536174bba715f1a76430660e6b3303a386) | [home.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/home/home.component.ts) |
+   | #2	| Implement create bookmarks and likes	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/32cc7dd5c2fb71e43ba90a27f0bea720f76e35cb) | [messages.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/messages/messages.component.ts) |
+   | #3	| implements delete functions bookmarks and likes	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/a8d3e7f1e29cd9502b38c26e76b20a94c3c8f3a1) | [navbar.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/navbar/navbar.component.ts) |
+   | #4	| Implements Functions follow	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/4f10116fc0aa1d022ada7b87304745c903914776) | [profileaccountsettings.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/profileaccountsettings/profileaccountsettings.component.ts) |
+   | #5	| websocket	| [Ver commit](https://github.com/CodeURJC-DAW-2020-21/webapp12/commit/e4f77aabfaced8c186f3762b5a21c7b4d8981365) | [store.component.ts](https://github.com/CodeURJC-DAW-2020-21/webapp12/blob/master/Frontend/src/app/Templates/store/store.component.ts) |
